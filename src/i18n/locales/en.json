@@ -1,0 +1,68 @@
+{
+  "app": {
+    "title": "Ottor Mastar",
+    "subtitle": "Plants of Yakutia",
+    "description": "Herbs and trees of Yakutia — wildflowers, medicinal plants, the beauty of the taiga"
+  },
+  "nav": {
+    "gallery": "Gallery",
+    "catalog": "Catalog",
+    "search": "Search",
+    "about": "About"
+  },
+  "gallery": {
+    "title": "Plant Gallery",
+    "allPlants": "All",
+    "photoCount": "{{count}} photos"
+  },
+  "catalog": {
+    "title": "Plant Catalog",
+    "searchPlaceholder": "Search plants...",
+    "noResults": "No plants found",
+    "sortByName": "Alphabetical",
+    "categories": "Categories"
+  },
+  "plant": {
+    "names": "Names",
+    "yakutName": "Yakut",
+    "russianName": "Russian",
+    "englishName": "English",
+    "latinName": "Latin",
+    "description": "Description",
+    "medicinalUses": "Medicinal Uses",
+    "habitat": "Habitat",
+    "bloomingSeason": "Blooming Season",
+    "categories": "Categories",
+    "backToGallery": "Back to Gallery"
+  },
+  "categories": {
+    "medicinal": "Medicinal",
+    "edible": "Edible",
+    "ornamental": "Ornamental",
+    "poisonous": "Poisonous"
+  },
+  "seasons": {
+    "spring": "Spring",
+    "summer": "Summer",
+    "autumn": "Autumn",
+    "may-june": "May — June",
+    "june-july": "June — July",
+    "june-august": "June — August",
+    "july-august": "July — August",
+    "may-july": "May — July"
+  },
+  "about": {
+    "title": "About Ottor Mastar",
+    "intro": "\"Ottor Mastar\" is a project dedicated to the wild herbs and trees of Yakutia (Sakha Republic).",
+    "mission": "Our mission is to introduce people to the remarkable plant world of Yakutia — its beauty and benefits.",
+    "contact": "Contact"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "viewAll": "View all"
+  }
+}
