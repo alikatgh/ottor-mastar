@@ -1,16 +1,91 @@
-# React + Vite
+# Ottor Mastar (Оттор Мастар) 🌿
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> A digital encyclopedia of Yakutian flora. Built for speed, beauty, and multilingual accessibility.
 
-Currently, two official plugins are available:
+**Ottor Mastar** ("Forest Trees/Plants" in Yakut) is a modern, highly optimized web application cataloging the plants of the Sakha Republic (Yakutia). It features a native iOS-like gallery experience, vintage botanical illustrations, and full trilingual support (Yakut, Russian, English).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Ottor Mastar Preview](./public/favicon.svg)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Tech Stack
 
-## Expanding the Oxlint configuration
+- **Framework:** React 19 + Vite
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4 + Vanilla CSS Variables
+- **Animations:** Framer Motion
+- **Internationalization:** `react-i18next`
+- **Routing:** React Router v7
+- **Image Processing:** Sharp (Node.js)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## 📦 Project Structure
+
+```text
+ottor_mastar/
+├── public/
+│   ├── _redirects         # Cloudflare Pages SPA configuration
+│   ├── images/            # Original raw JPEGs & generated illustrations
+│   └── plants/            # Auto-generated optimized WebP images (thumb/medium/full)
+├── scripts/
+│   ├── optimize-images.cjs        # Script to optimize raw JPEGs to WebP
+│   └── optimize-illustrations.cjs # Script to optimize generated illustrations
+├── src/
+│   ├── components/        # Reusable React components (Gallery, Layout, Common)
+│   ├── data/              # plants.ts (Central data store)
+│   ├── i18n/              # Translation files (sah.json, ru.json, en.json)
+│   ├── pages/             # Route components (HomePage, CatalogPage, etc.)
+│   └── types/             # TypeScript definitions
+└── index.html
+```
+
+## 🛠 Setup & Local Development
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:5173`.
+
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+## 🖼 Image Pipeline
+
+To achieve native-app performance, all images in the app are served as heavily optimized `WebP` files in three sizes: `thumb` (400px), `medium` (800px), and `full` (1600px).
+
+If you add new photos or illustrations to the `public/images/` directory, you must run the optimization scripts before starting the dev server:
+
+```bash
+# Optimize original photographs
+node scripts/optimize-images.cjs
+
+# Optimize vintage illustrations
+node scripts/optimize-illustrations.cjs
+```
+
+This will generate the required WebP files in `public/plants/`. **Do not manually add files to `public/plants/`** as it is an auto-generated directory.
+
+## 📝 Adding New Plants
+
+To add a new plant to the encyclopedia:
+
+1. **Add Photos:** Place the original high-resolution photo in `public/images/`. (If you have a vintage illustration, place it in `public/images/illustrations/`).
+2. **Update Image Map:** In `src/data/plants.ts`, update the `IMAGE_MAP` object to link a new `plant-XX` ID to your exact filename.
+3. **Add Data:** Add the plant object to the `plants` array in `src/data/plants.ts`. Ensure all trilingual fields (`names`, `description`, `medicinalUses`) are populated.
+4. **Run Optimization:** Run `node scripts/optimize-images.cjs`.
+
+## ☁️ Cloudflare Pages Deployment
+
+This project is configured for seamless deployment to Cloudflare Pages. 
+
+- **Build command:** `npm run build`
+- **Build output directory:** `dist`
+
+The repository includes a `public/_redirects` file that contains `/* /index.html 200`. This ensures that Cloudflare Pages correctly routes all traffic to the React SPA router, preventing 404 errors on direct links.

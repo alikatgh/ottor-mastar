@@ -7,6 +7,7 @@ export interface Plant {
   id: string;
   slug: string;
   imageId: string;
+  illustrationId?: string;
   names: LocalizedStringWithLatin;
   description: LocalizedString;
   medicinalUses: LocalizedString;

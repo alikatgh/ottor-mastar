@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "optimize": "node scripts/optimize-images.cjs && node scripts/optimize-illustrations.cjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

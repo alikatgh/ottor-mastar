@@ -61,6 +61,7 @@ export const plants: Plant[] = [
     id: 'yarrow',
     slug: 'yarrow',
     imageId: 'plant-01',
+    illustrationId: 'plant-01-ill',
     names: {
       sah: 'Күөрэгэй ото',
       ru: 'Тысячелистник обыкновенный',
@@ -90,6 +91,7 @@ export const plants: Plant[] = [
     id: 'flax',
     slug: 'flax',
     imageId: 'plant-02',
+    illustrationId: 'plant-02-ill',
     names: {
       sah: 'Кыһыл көмүс сибэкки',
       ru: 'Лён сибирский',
@@ -119,6 +121,7 @@ export const plants: Plant[] = [
     id: 'bedstraw',
     slug: 'bedstraw',
     imageId: 'plant-03',
+    illustrationId: 'plant-03-ill',
     names: {
       sah: 'Сарыбай от',
       ru: 'Подмаренник настоящий',
@@ -148,6 +151,7 @@ export const plants: Plant[] = [
     id: 'bellflower-clustered',
     slug: 'bellflower-clustered',
     imageId: 'plant-04',
+    illustrationId: 'plant-04-ill',
     names: {
       sah: 'Кулуоскай сибэкки',
       ru: 'Колокольчик скученный',
@@ -177,6 +181,7 @@ export const plants: Plant[] = [
     id: 'bellflower-deep',
     slug: 'bellflower-deep',
     imageId: 'plant-05',
+    illustrationId: 'plant-05-ill',
     names: {
       sah: 'Кулуоскай (күөх)',
       ru: 'Колокольчик скученный (тёмный)',
@@ -206,6 +211,7 @@ export const plants: Plant[] = [
     id: 'speedwell',
     slug: 'speedwell',
     imageId: 'plant-06',
+    illustrationId: 'plant-06-ill',
     names: {
       sah: 'Куобах тыллаах от',
       ru: 'Вероника длиннолистная',
@@ -235,6 +241,7 @@ export const plants: Plant[] = [
     id: 'wildflower-meadow',
     slug: 'wildflower-meadow',
     imageId: 'plant-07',
+    illustrationId: 'plant-07-ill',
     names: {
       sah: 'Саха хонуутун сибэккилэрэ',
       ru: 'Разнотравный луг',
@@ -264,6 +271,7 @@ export const plants: Plant[] = [
     id: 'buttercup',
     slug: 'buttercup',
     imageId: 'plant-08',
+    illustrationId: 'plant-08-ill',
     names: {
       sah: 'Күөх алтан от',
       ru: 'Лютик едкий',
@@ -293,6 +301,7 @@ export const plants: Plant[] = [
     id: 'anemone',
     slug: 'anemone',
     imageId: 'plant-09',
+    illustrationId: 'plant-09-ill',
     names: {
       sah: 'Тыал сибэккитэ',
       ru: 'Ветреница лесная',
@@ -322,6 +331,7 @@ export const plants: Plant[] = [
     id: 'filipendula',
     slug: 'filipendula',
     imageId: 'plant-10',
+    illustrationId: 'plant-10-ill',
     names: {
       sah: 'Таба тыытыга',
       ru: 'Лабазник вязолистный',
@@ -351,6 +361,7 @@ export const plants: Plant[] = [
     id: 'vetch',
     slug: 'vetch',
     imageId: 'plant-11',
+    illustrationId: 'plant-11-ill',
     names: {
       sah: 'Кулумах от',
       ru: 'Горошек мышиный',
@@ -380,6 +391,7 @@ export const plants: Plant[] = [
     id: 'chamomile',
     slug: 'chamomile',
     imageId: 'plant-12',
+    illustrationId: 'plant-12-ill',
     names: {
       sah: 'Поповник от',
       ru: 'Ромашка (нивяник обыкновенный)',
@@ -409,6 +421,7 @@ export const plants: Plant[] = [
     id: 'aconite',
     slug: 'aconite',
     imageId: 'plant-13',
+    illustrationId: 'plant-13-ill',
     names: {
       sah: 'Үөр ото',
       ru: 'Живокость высокая',
@@ -438,6 +451,7 @@ export const plants: Plant[] = [
     id: 'lupine',
     slug: 'lupine',
     imageId: 'plant-14',
+    illustrationId: 'plant-14-ill',
     names: {
       sah: 'Чыычаах тырыыта',
       ru: 'Люпин многолистный',
@@ -467,6 +481,7 @@ export const plants: Plant[] = [
     id: 'carnation',
     slug: 'carnation',
     imageId: 'plant-15',
+    illustrationId: 'plant-15-ill',
     names: {
       sah: 'Кыыл гвоздика',
       ru: 'Гвоздика травянка',
@@ -496,6 +511,7 @@ export const plants: Plant[] = [
     id: 'geranium-pratense',
     slug: 'geranium-pratense',
     imageId: 'plant-16',
+    illustrationId: 'plant-16-ill',
     names: {
       sah: 'Кытыылыкай',
       ru: 'Герань луговая',
@@ -525,6 +541,7 @@ export const plants: Plant[] = [
     id: 'wild-strawberry',
     slug: 'wild-strawberry',
     imageId: 'plant-17',
+    illustrationId: 'plant-17-ill',
     names: {
       sah: 'Дьэдьэн',
       ru: 'Земляника лесная',
@@ -554,6 +571,7 @@ export const plants: Plant[] = [
     id: 'vetch-pea',
     slug: 'vetch-pea',
     imageId: 'plant-18',
+    illustrationId: 'plant-18-ill',
     names: {
       sah: 'Чэмэр кулумах',
       ru: 'Чина луговая',
@@ -583,6 +601,7 @@ export const plants: Plant[] = [
     id: 'astragalus',
     slug: 'astragalus',
     imageId: 'plant-19',
+    illustrationId: 'plant-19-ill',
     names: {
       sah: 'Тэбиэн от',
       ru: 'Остролодочник якутский',
@@ -612,6 +631,7 @@ export const plants: Plant[] = [
     id: 'ranunculus',
     slug: 'ranunculus',
     imageId: 'plant-20',
+    illustrationId: 'plant-20-ill',
     names: {
       sah: 'Алтан от',
       ru: 'Лютик золотистый',
@@ -641,6 +661,7 @@ export const plants: Plant[] = [
     id: 'geranium-sibiricum',
     slug: 'geranium-sibiricum',
     imageId: 'plant-21',
+    illustrationId: 'plant-21-ill',
     names: {
       sah: 'Сибиир кытыылыкайа',
       ru: 'Герань сибирская',
@@ -670,6 +691,7 @@ export const plants: Plant[] = [
     id: 'valerian',
     slug: 'valerian',
     imageId: 'plant-22',
+    illustrationId: 'plant-22-ill',
     names: {
       sah: 'Кэтэх от',
       ru: 'Валериана лекарственная',
@@ -699,6 +721,7 @@ export const plants: Plant[] = [
     id: 'daylily',
     slug: 'daylily',
     imageId: 'plant-23',
+    illustrationId: 'plant-23-ill',
     names: {
       sah: 'Сардаана',
       ru: 'Саранка (лилия кудреватая)',

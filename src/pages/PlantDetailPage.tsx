@@ -1,5 +1,6 @@
 import { Language } from "../types";
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { ArrowLeft, MapPin, Calendar, Stethoscope, Globe } from 'lucide-react';
@@ -23,6 +24,19 @@ export default function PlantDetailPage() {
   }
 
   const imageSrc = getImagePath(plant, 'medium');
+  const illSrc = plant.illustrationId ? `/plants/medium/${plant.illustrationId}.webp` : null;
+
+  const [activeSlide, setActiveSlide] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const width = scrollRef.current.offsetWidth;
+      const index = Math.round(scrollLeft / width);
+      if (index !== activeSlide) setActiveSlide(index);
+    }
+  };
 
   const sections = [
     {
@@ -56,17 +70,47 @@ export default function PlantDetailPage() {
 
   return (
     <div className="min-h-screen bg-cream">
-      {/* Hero Image */}
+      {/* Hero Image Carousel */}
       <motion.div
-        className="relative h-[55vh] min-h-[350px] max-h-[550px] overflow-hidden"
+        className="relative h-[55vh] min-h-[350px] max-h-[550px]"
         layoutId={`plant-${plant.id}`}
       >
-        <img
-          src={imageSrc}
-          alt={plant.names[lang]}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-cream" />
+        <div 
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar w-full h-full"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+        >
+          {/* Photo */}
+          <div className="flex-none w-full h-full snap-center relative">
+            <img
+              src={imageSrc}
+              alt={plant.names[lang]}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-cream" />
+          </div>
+          
+          {/* Illustration */}
+          {illSrc && (
+            <div className="flex-none w-full h-full snap-center relative bg-[#F4F1EA]">
+              <img
+                src={illSrc}
+                alt={`${plant.names[lang]} illustration`}
+                className="w-full h-full object-contain p-4 mix-blend-multiply"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-cream" />
+            </div>
+          )}
+        </div>
+
+        {/* Pagination Dots */}
+        {illSrc && (
+          <div className="absolute bottom-16 left-0 right-0 flex justify-center gap-2 z-10">
+            <div className={`w-2 h-2 rounded-full transition-colors ${activeSlide === 0 ? 'bg-white' : 'bg-white/40'}`} />
+            <div className={`w-2 h-2 rounded-full transition-colors ${activeSlide === 1 ? 'bg-white' : 'bg-white/40'}`} />
+          </div>
+        )}
 
         {/* Back button */}
         <button
