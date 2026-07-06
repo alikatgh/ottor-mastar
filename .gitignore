@@ -25,3 +25,4 @@ dist-ssr
 
 # Large source photos — unused at runtime (only optimized /plants/*.webp ship)
 _src_originals/whatsapp/
+_src_originals/mongolia/
