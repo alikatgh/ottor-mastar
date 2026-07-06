@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Info } from 'lucide-react';
+import { Info, Leaf } from 'lucide-react';
 
 export default function Footer() {
   const { t } = useTranslation();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-hairline mt-8">
-      <div className="max-w-2xl mx-auto px-5 pt-8 pb-24 md:pb-10">
+    <footer className="border-t border-hairline mt-12">
+      <div className="max-w-3xl mx-auto px-5 pt-10 pb-28 md:pb-12">
         {/* Safety disclaimer — kept prominent near the content it applies to */}
-        <div className="flex items-start gap-2.5 rounded-xl bg-[#FFF7F2] border border-amber/25 p-4 mb-6">
+        <div className="flex items-start gap-2.5 rounded-xl bg-[#FFF7F2] border border-amber/25 p-4 mb-10">
           <Info className="w-4.5 h-4.5 text-amber-warm shrink-0 mt-0.5" />
           <p className="text-ink-light text-xs leading-relaxed">
             {t('common.disclaimerShort')}{' '}
@@ -20,19 +20,37 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-xs text-ink-muted">
-          <span>© {year} Ottor Mastar</span>
-          <nav className="flex items-center gap-4">
-            <Link to="/about" className="hover:text-forest no-underline transition-colors">
+        {/* Wordmark + nav, encyclopedia colophon style */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-8">
+          <div className="max-w-xs">
+            <Link to="/" className="inline-flex items-center gap-2 no-underline">
+              <Leaf className="w-5 h-5 text-forest" strokeWidth={1.75} />
+              <span className="font-heading text-lg font-semibold text-ink leading-none">
+                {t('app.title')}
+              </span>
+            </Link>
+            <p className="text-xs text-ink-muted mt-2.5 leading-relaxed">
+              {t('app.description')}
+            </p>
+          </div>
+
+          <nav className="flex flex-col gap-2.5 text-sm shrink-0">
+            <span className="overline-label !text-[10px] mb-0.5">{t('nav.about')}</span>
+            <Link to="/about" className="text-ink-light hover:text-forest no-underline transition-colors">
               {t('nav.about')}
             </Link>
-            <Link to="/settings" className="hover:text-forest no-underline transition-colors">
+            <Link to="/settings" className="text-ink-light hover:text-forest no-underline transition-colors">
               {t('settings.title')}
             </Link>
-            <Link to="/legal" className="hover:text-forest no-underline transition-colors">
+            <Link to="/legal" className="text-ink-light hover:text-forest no-underline transition-colors">
               {t('common.legal')}
             </Link>
           </nav>
+        </div>
+
+        <div className="mt-10 pt-6 border-t border-hairline flex flex-wrap items-center justify-between gap-2 text-xs text-ink-muted">
+          <span>© {year} Ottor Mastar</span>
+          <span className="tabular-nums">{t('app.subtitle')}</span>
         </div>
       </div>
     </footer>

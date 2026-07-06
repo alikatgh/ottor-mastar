@@ -3,7 +3,8 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useRef, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, ZoomIn, Info } from 'lucide-react';
+import { ArrowLeft, ZoomIn, Info, HelpCircle } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
 import { getImagePath, getIllustrationPath } from '../data/plants';
 import { findPlantBySlug } from '../data/countries';
 import { useSettings } from '../context/SettingsContext';
@@ -95,6 +96,7 @@ export default function PlantDetailPage() {
     },
     {
       title: t('plant.medicinalUses'),
+      hint: t('plant.medicinalDisclaimer'),
       content: <p className="text-[15px] text-ink-light leading-relaxed">{plant.medicinalUses[lang]}</p>,
     },
     {
@@ -238,10 +240,11 @@ export default function PlantDetailPage() {
 
           {/* Detail sections — encyclopedia style: letterspaced label over a hairline rule */}
           <div className="space-y-8">
-            {sections.map(({ title, content }) => (
+            {sections.map(({ title, content, hint }) => (
               <section key={title}>
-                <h2 className="overline-label !font-body border-t border-hairline pt-3 mb-3">
+                <h2 className="overline-label !font-body border-t border-hairline pt-3 mb-3 flex items-center gap-2">
                   {title}
+                  {hint && <InfoTip text={hint} label={t('plant.medicinalDisclaimerLabel')} />}
                 </h2>
                 {content}
               </section>
@@ -297,5 +300,56 @@ function NameRow({ label, value, italic = false }: { label: string, value: strin
       <span className="text-sm text-ink-muted flex-shrink-0">{label}</span>
       <span className={`text-sm text-ink font-medium text-right ${italic ? 'italic font-normal' : ''}`}>{value}</span>
     </div>
+  );
+}
+
+/**
+ * A (?) affordance that toggles a short legal note under a section heading.
+ * Used on "Medicinal uses" to make explicit that the content is informational,
+ * carries no instructions, and shifts all responsibility to the reader.
+ */
+function InfoTip({ text, label }: { text: string; label: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <span className="relative inline-flex">
+      <button
+        type="button"
+        aria-label={label}
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="text-ink-muted/70 hover:text-forest transition-colors"
+      >
+        <HelpCircle className="w-3.5 h-3.5" strokeWidth={2} />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* click-away layer */}
+            <button
+              aria-hidden
+              tabIndex={-1}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-20 cursor-default"
+            />
+            <motion.span
+              role="tooltip"
+              initial={{ opacity: 0, y: 4, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 4, scale: 0.98 }}
+              transition={{ duration: 0.16, ease: [0.32, 0.72, 0, 1] }}
+              style={{ transformOrigin: 'top right' }}
+              className="
+                absolute right-0 top-6 z-30 w-[min(19rem,calc(100vw-2.5rem))]
+                rounded-xl border border-hairline bg-white shadow-lg
+                p-3 text-[11px] leading-relaxed font-body normal-case tracking-normal
+                text-ink-light
+              "
+            >
+              {text}
+            </motion.span>
+          </>
+        )}
+      </AnimatePresence>
+    </span>
   );
 }

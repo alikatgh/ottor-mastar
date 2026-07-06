@@ -20,7 +20,8 @@
     "platesTitle": "Botanical plates",
     "plateCount_one": "{{count}} plate",
     "plateCount_other": "{{count}} plates",
-    "photosTitle": "Field photographs"
+    "photosTitle": "Field photographs",
+    "swipeHint": "Swipe"
   },
   "settings": {
     "title": "Settings",
@@ -75,7 +76,9 @@
     "backToGallery": "Back to Gallery",
     "details": "Details",
     "illustration": "Botanical illustration",
-    "photograph": "Photograph"
+    "photograph": "Photograph",
+    "medicinalDisclaimerLabel": "About this section",
+    "medicinalDisclaimer": "These are traditional and folk associations recorded for reference only — not instructions, dosages, or medical advice. Nothing here should be used to gather, prepare, or consume any plant; many are toxic and misidentification is easy. Treat every entry as a starting point for your own further research, and consult a qualified professional before acting. You use this information entirely at your own risk and assume full responsibility for any consequences."
   },
   "categories": {
     "medicinal": "Medicinal",

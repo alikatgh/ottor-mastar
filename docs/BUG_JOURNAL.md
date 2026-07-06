@@ -35,6 +35,18 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Plant detail page opened already scrolled past its hero image
+- Symptom: tapping a plant from a scrolled list opened the detail page mid-scroll (names section), hero image + back button overlapping the title; read as "must scroll up to see the image".
+- Cause: no scroll reset on route change — react-router keeps the window scroll position across navigations. `src/App.tsx`.
+- Fix: `<ScrollToTop/>` (useLocation + `window.scrollTo(0,0)` on pathname change) mounted inside the Router.
+- Lesson: an SPA needs an explicit scroll-restoration reset; a page "opening scrolled" is almost never the page's own layout — it's inherited scroll. Fix the cause, don't add a "scroll up" hint.
+
+### 2026-07-06 — Botanical-plate thumbnails looked tiny/floaty ("unfinished")
+- Symptom: plate thumbs in the home shelf + catalog showed a small drawing marooned in a big parchment margin.
+- Cause: plate scans are square with a wide aged-paper border baked in; plain `object-cover` on a square tile shows the whole thing, margins and all. `src/index.css .plate-thumb`.
+- Fix: `.plate-thumb { object-fit: cover; scale: 1.34; transform-origin: center 38% }` — zoom into the figure, bias up so the printed caption falls away. Used the CSS `scale` property (not `transform`) so Tailwind v4 `scale-*` hover overrides cleanly instead of stacking.
+- Lesson: Tailwind v4 `scale-*` sets the CSS `scale` property, independent of `transform` — mixing the two multiplies. Pick one channel.
+
 ### 2026-07-06 — Sakha blooming season rendered raw key ("seasons.june-july")
 - Symptom: detail page in Sakha showed the literal string `seasons.june-july` under СИБЭККИЛЭНЭР КЭМЭ.
 - Cause: in `sah.json` the `seasons` block was nested inside `plant` (en/ru have it top-level) AND lacked the 5 month-range keys the data uses; `fallbackLng: 'sah'` so no fallback.

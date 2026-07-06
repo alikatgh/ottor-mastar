@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronsRight } from 'lucide-react';
 import { getImagePath, getIllustrationPath, hasIllustration } from '../data/plants';
 import { usePlants, useSettings } from '../context/SettingsContext';
 import GalleryGrid from '../components/Gallery/GalleryGrid';
@@ -92,25 +92,32 @@ export default function HomePage() {
             <h2 className="font-heading text-xl sm:text-2xl font-semibold text-ink">
               {t('home.platesTitle')}
             </h2>
-            <span className="text-sm text-ink-muted shrink-0 pl-4 whitespace-nowrap">
-              {t('home.plateCount', { count: PLATED.length })}
-            </span>
+            <div className="flex items-baseline gap-3 shrink-0 pl-4">
+              {/* Mobile swipe cue — drifting chevrons say "this row scrolls" */}
+              <span className="md:hidden inline-flex items-center gap-1 text-xs text-forest whitespace-nowrap">
+                {t('home.swipeHint')}
+                <ChevronsRight className="w-3.5 h-3.5 swipe-drift" strokeWidth={2.2} />
+              </span>
+              <span className="text-sm text-ink-muted whitespace-nowrap">
+                {t('home.plateCount', { count: PLATED.length })}
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto overflow-x-auto hide-scrollbar snap-x px-4 mt-5">
-          <div className="flex gap-4 w-max pb-2">
+        <div className="max-w-7xl mx-auto overflow-x-auto hide-scrollbar snap-x scroll-fade-x px-4 mt-5">
+          <div className="flex gap-4 w-max pb-2 shelf-nudge">
             {PLATED.map((plant, index) => (
               <Link
                 key={plant.id}
                 to={`/plant/${plant.slug}`}
                 className="snap-start shrink-0 w-48 sm:w-56 no-underline group"
               >
-                <div className="border border-hairline rounded-lg overflow-hidden bg-parchment">
+                <div className="border border-hairline rounded-lg overflow-hidden bg-parchment aspect-square">
                   <img
                     src={getIllustrationPath(plant, 'thumb')!}
                     alt={`${plant.names[lang]} — ${t('plant.illustration')}`}
-                    className="w-full aspect-square object-cover"
+                    className="plate-thumb transition-[scale] duration-500 ease-[var(--ease-ios)] group-hover:scale-[1.42]"
                     loading={index < 6 ? 'eager' : 'lazy'}
                     draggable={false}
                   />
@@ -138,7 +145,9 @@ export default function HomePage() {
       )}
 
       {/* ============ FIELD PHOTOGRAPHS ============ */}
-      <section className="pb-20 md:pb-6">
+      {/* No bottom padding here — the Footer owns the bottom (incl. mobile
+          bottom-nav clearance), so the grid runs straight into it. */}
+      <section>
         <div className="px-4 py-6 max-w-7xl mx-auto">
           <div className="flex items-baseline justify-between border-b border-hairline pb-3">
             <h2 className="font-heading text-xl sm:text-2xl font-semibold text-ink">

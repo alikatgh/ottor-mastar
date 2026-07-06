@@ -58,7 +58,9 @@ export default function SearchPage() {
           ) : (
             <div className="divide-y divide-hairline border-t border-b border-hairline">
               {results.map((plant, index) => {
-                const imgSrc = getIllustrationPath(plant, 'thumb') ?? getImagePath(plant, 'thumb');
+                const platePath = getIllustrationPath(plant, 'thumb');
+                const hasPlate = !!platePath;
+                const imgSrc = platePath ?? getImagePath(plant, 'thumb');
 
                 return (
                   <motion.div
@@ -79,7 +81,7 @@ export default function SearchPage() {
                         <img
                           src={imgSrc}
                           alt={plant.names[lang]}
-                          className="w-full h-full object-cover"
+                          className={hasPlate ? 'plate-thumb' : 'w-full h-full object-cover'}
                         />
                       </div>
                       <div className="min-w-0">

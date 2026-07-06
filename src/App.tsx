@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Header from './components/Layout/Header';
 import BottomNav from './components/Layout/BottomNav';
 import HomePage from './pages/HomePage';
@@ -20,6 +21,54 @@ const OG_LOCALES: Record<string, string> = {
   ru: 'ru_RU',
   en: 'en_US',
 };
+
+/**
+ * Reset scroll to the top on every route change. Without this, opening a plant
+ * page inherits the previous page's scroll position — so the detail page could
+ * open already scrolled past its hero image. Runs before paint to avoid a flash.
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+/**
+ * Routed content + per-navigation enter transition. Keyed by pathname so each
+ * screen mounts fresh and eases in (opacity + a small rise), the iOS
+ * push-in feel. Enter-only: exits can't animate cleanly through Suspense, and
+ * a fade-out would only delay the next screen. Framer's MotionConfig (in
+ * SettingsProvider) neutralizes the transform under reduce-motion.
+ */
+function AppRoutes() {
+  const location = useLocation();
+  // The plant detail page owns the full viewport and runs its own entrance
+  // (image + sheet spring), so it opts out of the page-level rise.
+  const isDetail = location.pathname.startsWith('/plant/');
+
+  return (
+    <Suspense fallback={null}>
+      <motion.div
+        key={location.pathname}
+        initial={isDetail ? { opacity: 0 } : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.32, ease: [0.32, 0.72, 0, 1] }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
+          <Route path="/plant/:slug" element={<PlantDetailPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/legal" element={<LegalPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+        </Routes>
+      </motion.div>
+    </Suspense>
+  );
+}
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -45,22 +94,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <SettingsProvider>
+      <ScrollToTop />
       <div className="relative min-h-screen bg-cream">
         <Header />
         <main>
-          {/* Chunks load in well under a beat on repeat visits; a spinner for
-              that flash would be noisier than the blank canvas. */}
-          <Suspense fallback={null}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/catalog" element={<CatalogPage />} />
-              <Route path="/plant/:slug" element={<PlantDetailPage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/legal" element={<LegalPage />} />
-              <Route path="/settings" element={<SettingsPage />} />
-            </Routes>
-          </Suspense>
+          <AppRoutes />
         </main>
         <BottomNav />
       </div>

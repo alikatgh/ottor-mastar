@@ -129,7 +129,9 @@ export default function CatalogPage() {
             {filtered.map((plant, index) => {
               // Index entries show the plate, like an encyclopedia's plate list;
               // the field photo appears on the entry's own page.
-              const imgSrc = getIllustrationPath(plant, 'thumb') ?? getImagePath(plant, 'thumb');
+              const platePath = getIllustrationPath(plant, 'thumb');
+              const hasPlate = !!platePath;
+              const imgSrc = platePath ?? getImagePath(plant, 'thumb');
 
               return (
                 <motion.div
@@ -157,7 +159,7 @@ export default function CatalogPage() {
                       <img
                         src={imgSrc}
                         alt={plant.names[lang]}
-                        className="w-full h-full object-cover"
+                        className={hasPlate ? 'plate-thumb' : 'w-full h-full object-cover'}
                         loading="lazy"
                       />
                     </div>
