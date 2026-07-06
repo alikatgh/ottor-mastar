@@ -1,6 +1,6 @@
 import { Language } from "../types";
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useState, useRef, lazy, Suspense } from 'react';
+import { useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ZoomIn, Info, HelpCircle, ExternalLink, ArrowUpRight } from 'lucide-react';
@@ -24,6 +24,16 @@ export default function PlantDetailPage() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Reset carousel slide, open viewer, and scroll when the slug changes, so
+  // navigating plant→plant never inherits the previous entry's state. A local
+  // guarantee that doesn't depend on the route animation wrapper remounting
+  // this component (WEB-H01).
+  useEffect(() => {
+    setActiveSlide(0);
+    setViewerIndex(null);
+    scrollRef.current?.scrollTo({ left: 0 });
+  }, [slug]);
 
   const { settings } = useSettings();
   // Search every country so shared links resolve regardless of selection.

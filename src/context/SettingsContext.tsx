@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useMemo, useState, ReactNode } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { Plant } from '../types';
-import { COUNTRIES, DEFAULT_COUNTRY, isCountryAvailable, CountryId } from '../data/countries';
+import { COUNTRIES, COUNTRY_IDS, DEFAULT_COUNTRY, isCountryAvailable, CountryId } from '../data/countries';
 
 /**
  * All user settings live here as one typed object persisted to localStorage.
@@ -41,15 +41,50 @@ export const DEFAULT_SETTINGS: Settings = {
 
 const STORAGE_KEY = 'om_settings_v1';
 
+// Allowed values per enum setting — the single source the validator clamps to.
+const CATALOG_SORTS = ['name', 'season'] as const;
+const TEXT_SIZES = ['small', 'default', 'large'] as const;
+const LEAD_IMAGES = ['plate', 'photo'] as const;
+const TILE_TAPS = ['viewer', 'detail'] as const;
+
+function oneOf<T extends string>(value: unknown, allowed: readonly T[], fallback: T): T {
+  return typeof value === 'string' && (allowed as readonly string[]).includes(value)
+    ? (value as T)
+    : fallback;
+}
+
+function bool(value: unknown, fallback: boolean): boolean {
+  return typeof value === 'boolean' ? value : fallback;
+}
+
+/**
+ * Coerce any parsed/patched shape into a valid `Settings`. Never throws and
+ * never lets an invalid enum, non-boolean, or unknown/unavailable country
+ * through — a tampered `country: "france"` in localStorage otherwise makes
+ * `COUNTRIES[id]` undefined and crashes `usePlants()` (WEB-C01). Every field
+ * is validated, not just country (WEB-M12), and this same guard runs on
+ * `update()` so programmatic writes can't corrupt the store either.
+ */
+function validateSettings(input: unknown): Settings {
+  const raw = (input && typeof input === 'object' ? input : {}) as Record<string, unknown>;
+  const country = oneOf<CountryId>(raw.country, COUNTRY_IDS, DEFAULT_COUNTRY);
+  return {
+    country: isCountryAvailable(country) ? country : DEFAULT_COUNTRY,
+    showLatin: bool(raw.showLatin, DEFAULT_SETTINGS.showLatin),
+    catalogSort: oneOf(raw.catalogSort, CATALOG_SORTS, DEFAULT_SETTINGS.catalogSort),
+    textSize: oneOf(raw.textSize, TEXT_SIZES, DEFAULT_SETTINGS.textSize),
+    reduceMotion: bool(raw.reduceMotion, DEFAULT_SETTINGS.reduceMotion),
+    leadImage: oneOf(raw.leadImage, LEAD_IMAGES, DEFAULT_SETTINGS.leadImage),
+    tileLabels: bool(raw.tileLabels, DEFAULT_SETTINGS.tileLabels),
+    tileTap: oneOf(raw.tileTap, TILE_TAPS, DEFAULT_SETTINGS.tileTap),
+  };
+}
+
 function loadSettings(): Settings {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return DEFAULT_SETTINGS;
-    const parsed = { ...DEFAULT_SETTINGS, ...(JSON.parse(raw) as Partial<Settings>) };
-    // A persisted country whose dataset has since emptied must not strand the
-    // user on a blank app — fall back to the default collection.
-    if (!isCountryAvailable(parsed.country)) parsed.country = DEFAULT_COUNTRY;
-    return parsed;
+    return validateSettings(JSON.parse(raw));
   } catch {
     return DEFAULT_SETTINGS;
   }
@@ -84,7 +119,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const value = useMemo<SettingsContextValue>(
     () => ({
       settings,
-      update: (patch) => setSettings((s) => ({ ...s, ...patch })),
+      update: (patch) => setSettings((s) => validateSettings({ ...s, ...patch })),
       reset: () => setSettings(DEFAULT_SETTINGS),
     }),
     [settings]
@@ -109,5 +144,7 @@ export function useSettings(): SettingsContextValue {
 /** The active country's plant collection — the only way pages should get plants. */
 export function usePlants(): Plant[] {
   const { settings } = useSettings();
-  return COUNTRIES[settings.country].plants;
+  // Defence in depth: settings are validated on load/update, but never index
+  // COUNTRIES with an unchecked key — fall back to the default collection.
+  return (COUNTRIES[settings.country] ?? COUNTRIES[DEFAULT_COUNTRY]).plants;
 }

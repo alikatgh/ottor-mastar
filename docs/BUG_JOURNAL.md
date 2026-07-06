@@ -43,6 +43,24 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Phase 1 P0: invalid localStorage settings crashed the web app (WEB-C01/M12)
+- Symptom: a tampered/legacy `om_settings_v1` with `country:"france"` (or garbage enums) → `COUNTRIES[id]` undefined → `usePlants()` throws → white screen.
+- Cause: `loadSettings` only guarded `country` via `isCountryAvailable` (which itself throws on an unknown id) and validated no other field; `update()` wasn't validated at all. `src/context/SettingsContext.tsx`.
+- Fix: `validateSettings()` clamps every field to its union/boolean and country to `COUNTRY_IDS` ∩ available; runs on load AND `update()`; `usePlants()` falls back to `DEFAULT_COUNTRY`. Verified in preview: tampered value → home renders, storage re-sanitised to defaults, 0 console errors.
+- Lesson: persisted state is untrusted input — validate the whole schema per-field on read and on every write, and never index a lookup map with an unchecked key.
+
+### 2026-07-06 — Phase 1: `tsc -b` failed so the build shipped type errors unchecked (WEB-H02/L02/L19, DATA-B02)
+- Symptom: `npx tsc -b` failed (ImageViewer `onTransformed` not a prop; `main.tsx` couldn't resolve side-effect `./index.css`) yet Vite-only `npm run build` passed; `npm run lint` failed (`eslint: command not found`).
+- Cause: wrong react-zoom-pan-pinch API name; no ambient decl for CSS imports; build never ran tsc; lint script referenced uninstalled eslint. `ImageViewer.tsx:146`, missing `src/vite-env.d.ts`, `package.json`.
+- Fix: `onTransformed`→`onTransform` (correct v4 prop; params now contextually typed); added `src/vite-env.d.ts` (`/// <reference types="vite/client" />`); `build` → `tsc -b && vite build`; added `typecheck` script; `lint` → `oxlint src scripts`. All three gates now green.
+- Lesson: a green Vite build is not a typecheck — gate build on `tsc -b`, keep one `vite/client` ref so CSS/asset side-effect imports resolve.
+
+### 2026-07-06 — Phase 1: gallery viewer / detail carousel kept stale index state (WEB-C02/H01)
+- Symptom: viewer `selectedIndex` could point past a shorter list after a collection change (stuck invisible overlay); plant→plant nav could inherit the prior slide / open viewer.
+- Cause: `selectedIndex` not reset when `plants` changes; detail state relied on the route animation wrapper remounting rather than a local reset. `GalleryGrid.tsx`, `PlantDetailPage.tsx`.
+- Fix: `useEffect([plants]) → setSelectedIndex(null)`; `useEffect([slug])` resets slide/viewer/scroll locally. Verified the viewer opens and STAYS open — `plants` is a stable per-country ref so the effect only fires on a real change.
+- Lesson: reset index-into-list state when the list changes, and make route-param resets local — don't couple correctness to a distant animation `key`.
+
 ### 2026-07-06 — Touch-UX sweep: double-tap pushed detail twice; sub-44dp targets
 - Symptom: double-clicking a catalog row (mouse habit on emulator) stacked two identical detail screens — Back seemed broken; settings toggle (26dp), (?) tip (16dp) were fiddly to hit.
 - Cause: `nav.navigate` without `launchSingleTop`; visual-size == hit-size on custom controls. `android/.../MainActivity.kt`, `SettingsScreen.kt`, `DetailScreen.kt` (+ iOS mirrors).

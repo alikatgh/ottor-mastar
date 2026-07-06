@@ -143,7 +143,7 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
           wheel={{ step: 0.12 }}
           pinch={{ step: 6 }}
           panning={{ disabled: !zoomed, velocityDisabled: true }}
-          onTransformed={(_, state) => setZoomed(state.scale > 1.02)}
+          onTransform={(_ref, state) => setZoomed(state.scale > 1.02)}
         >
           <TransformComponent
             wrapperStyle={{ width: '100%', height: '100%' }}

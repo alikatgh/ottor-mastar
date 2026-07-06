@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, lazy, Suspense } from 'react';
+import { useState, useRef, useMemo, useEffect, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import PlantCard from './PlantCard';
@@ -18,6 +18,14 @@ export default function GalleryGrid({ plants }: { plants: Plant[] }) {
   const { settings } = useSettings();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const gridRef = useRef(null);
+
+  // Close the viewer whenever the collection changes (e.g. country switch):
+  // otherwise `selectedIndex` can point past the new, shorter list and the
+  // overlay renders nothing with no way to dismiss it (WEB-C02). `plants` is a
+  // stable per-country reference, so this only fires on an actual change.
+  useEffect(() => {
+    setSelectedIndex(null);
+  }, [plants]);
 
   const items: ViewerItem[] = useMemo(
     () =>
