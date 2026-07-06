@@ -18,5 +18,11 @@ export const AVAILABLE_ILLUSTRATIONS: string[] = [
   "plant-14-ill",
   "plant-15-ill",
   "plant-16-ill",
-  "plant-17-ill"
+  "plant-17-ill",
+  "plant-18-ill",
+  "plant-19-ill",
+  "plant-20-ill",
+  "plant-21-ill",
+  "plant-22-ill",
+  "plant-23-ill"
 ];
