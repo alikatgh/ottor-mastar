@@ -1,6 +1,6 @@
 import { Language } from "../types";
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useState, useRef, useEffect, lazy, Suspense } from 'react';
+import { useState, useRef, useEffect, useId, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ZoomIn, Info, HelpCircle, ExternalLink, ArrowUpRight } from 'lucide-react';
@@ -19,6 +19,19 @@ export default function PlantDetailPage() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const lang = i18n.language as Language;
+
+  // Back-navigate, but fall back to the catalog when this page was opened
+  // directly (shared link / new tab) with no in-app history to pop. React
+  // Router keeps its position in the stack at history.state.idx; idx 0 (or a
+  // missing state) means navigate(-1) would leave the app entirely (WEB-M09).
+  const goBack = () => {
+    const idx = (window.history.state as { idx?: number } | null)?.idx;
+    if (idx === undefined || idx <= 0) {
+      navigate('/catalog');
+    } else {
+      navigate(-1);
+    }
+  };
 
   // All hooks must run before the early return below (rules of hooks).
   const [activeSlide, setActiveSlide] = useState(0);
@@ -41,9 +54,41 @@ export default function PlantDetailPage() {
   const plant = findPlantBySlug(slug as string);
 
   if (!plant) {
+    // Unknown or missing slug (stale link, mistyped URL, or a plant that lives
+    // in a country that is not the active dataset). Offer a genuine way out
+    // rather than a bare "no results" line meant for empty search (WEB-H06).
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-ink-muted">{t('catalog.noResults')}</p>
+      <div className="min-h-screen bg-white flex items-center justify-center px-6">
+        <div className="max-w-md text-center">
+          <h1 className="font-heading text-2xl font-bold text-ink mb-2">
+            {t('plant.notFound')}
+          </h1>
+          <p className="text-ink-light text-[15px] leading-relaxed mb-8">
+            {t('plant.notFoundBody')}
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              to="/catalog"
+              className="
+                inline-flex items-center gap-2 rounded-full
+                bg-forest px-5 py-2.5 text-sm font-medium text-white
+                no-underline hover:bg-forest-dark transition-colors
+              "
+            >
+              {t('catalog.title')}
+            </Link>
+            <Link
+              to="/"
+              className="
+                inline-flex items-center gap-2 rounded-full
+                border border-hairline px-5 py-2.5 text-sm font-medium text-forest
+                no-underline hover:bg-cream-dark/40 transition-colors
+              "
+            >
+              {t('plant.backToGallery')}
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
@@ -93,6 +138,18 @@ export default function PlantDetailPage() {
     }
   };
 
+  // Scroll the carousel to a specific slide when its pagination dot is
+  // activated. onScroll keeps activeSlide in sync as the smooth scroll lands.
+  const scrollToSlide = (i: number) => {
+    const el = scrollRef.current;
+    if (el) el.scrollTo({ left: el.offsetWidth * i, behavior: 'smooth' });
+  };
+
+  // Human-readable label for a slide's pagination dot, mirroring the slide
+  // buttons ("<plant> — Botanical illustration" / "<plant> — Photograph").
+  const slideLabel = (kind: 'plate' | 'photo') =>
+    `${plant.names[lang]} — ${kind === 'plate' ? t('plant.illustration') : t('plant.photograph')}`;
+
   const sections = [
     {
       title: t('plant.names'),
@@ -124,7 +181,8 @@ export default function PlantDetailPage() {
     <div className="min-h-screen bg-white md:h-screen md:flex md:overflow-hidden">
       {/* Floating back button — mobile only (over the image, which is on top) */}
       <button
-        onClick={() => navigate(-1)}
+        type="button"
+        onClick={goBack}
         aria-label={t('plant.backToGallery')}
         className="
           md:hidden fixed top-4 left-4 z-30 safe-top
@@ -190,12 +248,25 @@ export default function PlantDetailPage() {
             On mobile the info sheet overlaps this panel by 24px, so the chip
             rides at bottom-12 to stay fully clear of the sheet edge. */}
         {slides.length > 1 && (
-          <div className="absolute bottom-12 md:bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2 px-2.5 py-1.5 rounded-full bg-white/70 backdrop-blur-sm shadow-sm">
-            {slides.map((_, i) => (
-              <div
-                key={i}
-                className={`w-2 h-2 rounded-full transition-colors ${activeSlide === i ? 'bg-forest' : 'bg-forest/25'}`}
-              />
+          <div className="absolute bottom-12 md:bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-1 px-1.5 py-1 rounded-full bg-white/70 backdrop-blur-sm shadow-sm">
+            {slides.map((slide, i) => (
+              /* Real controls: keyboard-focusable, labelled, and jump to the
+                 slide on activation (WEB-M07). The 32px hit target satisfies the
+                 touch-target rule; the visible dot stays 8px and never changes
+                 geometry on state — only color. */
+              <button
+                key={slide.kind}
+                type="button"
+                onClick={() => scrollToSlide(i)}
+                aria-label={slideLabel(slide.kind)}
+                aria-current={activeSlide === i ? 'true' : undefined}
+                className="w-8 h-8 flex items-center justify-center rounded-full"
+              >
+                <span
+                  aria-hidden
+                  className={`block w-2 h-2 rounded-full transition-colors ${activeSlide === i ? 'bg-forest' : 'bg-forest/25'}`}
+                />
+              </button>
             ))}
           </div>
         )}
@@ -218,7 +289,8 @@ export default function PlantDetailPage() {
         <div className="max-w-xl mx-auto px-6 pt-8 md:px-8 md:pt-12 lg:px-16 lg:pt-16">
           {/* Desktop back link */}
           <button
-            onClick={() => navigate(-1)}
+            type="button"
+            onClick={goBack}
             className="
               hidden md:inline-flex items-center gap-1.5 mb-8
               text-sm font-medium text-ink-muted hover:text-forest
@@ -348,12 +420,26 @@ function NameRow({ label, value, italic = false }: { label: string, value: strin
  */
 function InfoTip({ text, label }: { text: string; label: string }) {
   const [open, setOpen] = useState(false);
+  // Stable id tying the trigger to its tooltip for assistive tech (WEB-M14).
+  const tipId = useId();
+
+  // Close on Escape while open, so keyboard users can dismiss it (WEB-M14).
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open]);
+
   return (
     <span className="relative inline-flex">
       <button
         type="button"
         aria-label={label}
         aria-expanded={open}
+        aria-describedby={open ? tipId : undefined}
         onClick={() => setOpen((v) => !v)}
         className="text-ink-muted/70 hover:text-forest transition-colors"
       >
@@ -370,6 +456,7 @@ function InfoTip({ text, label }: { text: string; label: string }) {
               className="fixed inset-0 z-20 cursor-default"
             />
             <motion.span
+              id={tipId}
               role="tooltip"
               initial={{ opacity: 0, y: 4, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}

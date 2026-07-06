@@ -6,6 +6,7 @@ import { Search } from 'lucide-react';
 import { getImagePath, getIllustrationPath, CATEGORIES } from '../data/plants';
 import { usePlants, useSettings } from '../context/SettingsContext';
 import CategoryBadge from '../components/common/CategoryBadge';
+import { filterPlants } from '../utils/plantSearch';
 
 // Blooming-season sort: earliest start first, longest season breaking ties.
 const SEASON_ORDER = [
@@ -56,13 +57,7 @@ export default function CatalogPage() {
     }
 
     if (search.trim()) {
-      const q = search.toLowerCase().trim();
-      result = result.filter((p) =>
-        p.names.sah.toLowerCase().includes(q) ||
-        p.names.ru.toLowerCase().includes(q) ||
-        p.names.en.toLowerCase().includes(q) ||
-        p.names.latin.toLowerCase().includes(q)
-      );
+      result = filterPlants(result, search, lang, { deep: true });
     }
 
     return result;
@@ -87,6 +82,7 @@ export default function CatalogPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={t('catalog.searchPlaceholder')}
+            aria-label={t('catalog.searchPlaceholder')}
             className="
               w-full pl-10 pr-4 py-3
               bg-card rounded-xl
@@ -105,6 +101,7 @@ export default function CatalogPage() {
             <button
               key={key}
               onClick={() => setActiveCategory(key)}
+              aria-pressed={activeCategory === key}
               className={`
                 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap
                 border transition-colors duration-200

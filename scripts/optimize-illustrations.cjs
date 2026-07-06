@@ -37,24 +37,27 @@ async function optimizeIllustrations() {
       : path.join(__dirname, '../public/plants');
       
     try {
-      const image = sharp(inputPath);
-      
+      // A sharp pipeline is consumed by .toFile(), so a FRESH sharp(inputPath)
+      // is created per output size — reusing one instance silently drops every
+      // size after the first. Mirrors optimize-mongolia.cjs.
       for (const [sizeName, config] of Object.entries(SIZES)) {
         const sizeDir = path.join(outputBaseDir, sizeName);
         if (!fs.existsSync(sizeDir)) fs.mkdirSync(sizeDir, { recursive: true });
         const outputPath = path.join(sizeDir, `${basename}.webp`);
-        
+
         const resizeOptions = {
           width: config.width,
           fit: config.fit,
           withoutEnlargement: true
         };
-        
+
         if (config.height) {
           resizeOptions.height = config.height;
         }
 
-        await image
+        // .rotate() honours EXIF orientation for JPG sources; a no-op for PNG.
+        await sharp(inputPath)
+          .rotate()
           .resize(resizeOptions)
           .webp({ quality: 80 })
           .toFile(outputPath);

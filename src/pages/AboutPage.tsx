@@ -1,52 +1,38 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronRight } from 'lucide-react';
-import { Language } from '../types';
 import { CATEGORIES } from '../data/plants';
-import { usePlants } from '../context/SettingsContext';
+import { usePlants, useSettings } from '../context/SettingsContext';
+import { LANGUAGES } from '../i18n';
 import Footer from '../components/Layout/Footer';
 
 export default function AboutPage() {
-  const { t, i18n } = useTranslation();
-  const lang = i18n.language as Language;
+  const { t } = useTranslation();
+  const { settings } = useSettings();
   const plants = usePlants();
 
   const medicinalCount = plants.filter((p) =>
     p.categories.includes(CATEGORIES.MEDICINAL)
   ).length;
 
-  const STATS: { value: string; label: Record<Language, string> }[] = [
-    {
-      value: String(plants.length),
-      label: {
-        sah: 'Айылҕа үүнээйилэрэ',
-        ru: 'Дикорастущих растений',
-        en: 'Wild plants',
-      },
-    },
-    {
-      value: String(medicinalCount),
-      label: {
-        sah: 'Эмтээх оттор',
-        ru: 'Лекарственных трав',
-        en: 'Medicinal herbs',
-      },
-    },
-    {
-      value: '3',
-      label: {
-        sah: 'Тыллар: саха, нуучча, ангылычаан',
-        ru: 'Языка: якутский, русский, английский',
-        en: 'Languages: Yakut, Russian, English',
-      },
-    },
+  // Country-aware copy, falling back to the generic strings (WEB-M01/R-W03).
+  const subtitle = t([`app.subtitle_${settings.country}`, 'app.subtitle']);
+  const intro = t([`about.intro_${settings.country}`, 'about.intro']);
+
+  // Numbers stay computed from the live data; only the labels are localized
+  // (WEB-M03). The language count is derived from the actual LANGUAGES list so
+  // it can never drift from what the app really ships.
+  const STATS: { value: string; label: string }[] = [
+    { value: String(plants.length), label: t('about.statPlants') },
+    { value: String(medicinalCount), label: t('about.statMedicinal') },
+    { value: String(LANGUAGES.length), label: t('about.statLanguages') },
   ];
 
   return (
     <div className="min-h-screen pt-16 pb-20 md:pb-6">
       <div className="max-w-2xl mx-auto px-5 py-8">
         {/* Title */}
-        <p className="overline-label mb-2">{t('app.subtitle')}</p>
+        <p className="overline-label mb-2">{subtitle}</p>
         <h1 className="font-heading text-4xl font-bold text-ink mb-8">
           {t('about.title')}
         </h1>
@@ -54,7 +40,7 @@ export default function AboutPage() {
         {/* Mission — lead text, no card chrome */}
         <div className="space-y-4 mb-10">
           <p className="text-ink text-lg leading-relaxed font-heading">
-            {t('about.intro')}
+            {intro}
           </p>
           <p className="text-ink-light text-[15px] leading-relaxed">
             {t('about.mission')}
@@ -64,12 +50,12 @@ export default function AboutPage() {
         {/* Stats — the numbers carry the page; hairline card, no shadows */}
         <div className="grid grid-cols-3 divide-x divide-hairline border border-hairline rounded-2xl bg-card mb-10">
           {STATS.map(({ value, label }) => (
-            <div key={value + label.en} className="px-4 py-5 text-center">
+            <div key={label} className="px-4 py-5 text-center">
               <div className="font-heading text-3xl sm:text-4xl font-semibold text-forest leading-none mb-2">
                 {value}
               </div>
               <div className="text-[11px] sm:text-xs text-ink-muted leading-snug">
-                {label[lang]}
+                {label}
               </div>
             </div>
           ))}

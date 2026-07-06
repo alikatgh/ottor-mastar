@@ -6,17 +6,21 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="lang-switcher">
-      {LANGUAGES.map((lang) => (
-        <button
-          key={lang.code}
-          className={i18n.language === lang.code ? 'active' : ''}
-          onClick={() => i18n.changeLanguage(lang.code)}
-          aria-label={`Switch to ${lang.label}`}
-          title={lang.label}
-        >
-          {lang.shortLabel}
-        </button>
-      ))}
+      {LANGUAGES.map((lang) => {
+        const active = i18n.language === lang.code;
+        return (
+          <button
+            key={lang.code}
+            className={active ? 'active' : ''}
+            aria-pressed={active}
+            onClick={() => i18n.changeLanguage(lang.code)}
+            aria-label={`Switch to ${lang.label}`}
+            title={lang.label}
+          >
+            {lang.shortLabel}
+          </button>
+        );
+      })}
     </div>
   );
 }

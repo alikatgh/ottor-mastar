@@ -4,17 +4,20 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from './components/Layout/Header';
 import BottomNav from './components/Layout/BottomNav';
-import HomePage from './pages/HomePage';
-import { SettingsProvider } from './context/SettingsContext';
+import { SettingsProvider, useSettings } from './context/SettingsContext';
+import { findPlantBySlug } from './data/countries';
+import { Language } from './types';
 
-// Route-level code-splitting: only the gallery ships in the initial bundle;
-// every other screen loads on first navigation.
+// Route-level code-splitting: nothing but the shell ships in the initial
+// bundle; every screen — including the home page — loads on first navigation.
+const HomePage = lazy(() => import('./pages/HomePage'));
 const CatalogPage = lazy(() => import('./pages/CatalogPage'));
 const PlantDetailPage = lazy(() => import('./pages/PlantDetailPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const LegalPage = lazy(() => import('./pages/LegalPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 const OG_LOCALES: Record<string, string> = {
   sah: 'sah_RU',
@@ -64,37 +67,78 @@ function AppRoutes() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/legal" element={<LegalPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </motion.div>
     </Suspense>
   );
 }
 
-export default function App() {
+/**
+ * Keep the document metadata in sync with the chosen language, the active
+ * country, and the current route: <html lang> (screen readers, hyphenation),
+ * <title>, and the description/OG tags so a shared or bookmarked page carries
+ * the reader's language and — on a plant route — that plant's name.
+ *
+ * Lives inside BrowserRouter + SettingsProvider so it can read the location and
+ * the selected country. Depends on [language, country, pathname] rather than the
+ * unstable `t` identity (WEB-M21): `t` changes reference on every render, so
+ * depending on it re-ran this effect far more than needed; the tuple captures
+ * every input that actually changes the output.
+ */
+function DocumentMeta() {
   const { t, i18n } = useTranslation();
+  const { settings } = useSettings();
+  const { pathname } = useLocation();
+  const lang = i18n.language as Language;
+  const country = settings.country;
 
-  // Keep the document metadata in sync with the chosen language: <html lang>
-  // (screen readers, hyphenation), <title>, and the description/OG tags so a
-  // shared or bookmarked page carries the reader's language.
   useEffect(() => {
-    document.documentElement.lang = i18n.language;
+    document.documentElement.lang = lang;
 
-    const title = `${t('app.title')} — ${t('app.subtitle')}`;
+    // Country-aware subtitle, falling back to the generic one (WEB-M01/R-W03).
+    const subtitle = t([`app.subtitle_${country}`, 'app.subtitle']);
+    const siteTitle = `${t('app.title')} — ${subtitle}`;
+    const siteDescription = t('app.description');
+
+    // On a plant route, lead the shared/bookmarked card with the plant itself
+    // (WEB-M11); everywhere else use the site title/description. Best-effort —
+    // an unknown slug just falls back to the site metadata.
+    let title = siteTitle;
+    let ogTitle = siteTitle;
+    let description = siteDescription;
+    const plantMatch = pathname.match(/^\/plant\/([^/]+)/);
+    if (plantMatch) {
+      const plant = findPlantBySlug(decodeURIComponent(plantMatch[1]));
+      if (plant) {
+        const name = plant.names[lang];
+        title = `${name} — ${t('app.title')}`;
+        ogTitle = `${name} · ${plant.names.latin}`;
+        description = plant.description[lang] || siteDescription;
+      }
+    }
+
     document.title = title;
 
     const setMeta = (selector: string, content: string) => {
       document.querySelector(selector)?.setAttribute('content', content);
     };
-    setMeta('meta[name="description"]', t('app.description'));
-    setMeta('meta[property="og:title"]', title);
-    setMeta('meta[property="og:description"]', t('app.description'));
-    setMeta('meta[property="og:locale"]', OG_LOCALES[i18n.language] ?? OG_LOCALES.sah);
-  }, [i18n.language, t]);
+    setMeta('meta[name="description"]', description);
+    setMeta('meta[property="og:title"]', ogTitle);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[property="og:locale"]', OG_LOCALES[lang] ?? OG_LOCALES.sah);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang, country, pathname]);
 
+  return null;
+}
+
+export default function App() {
   return (
     <BrowserRouter>
       <SettingsProvider>
       <ScrollToTop />
+      <DocumentMeta />
       <div className="relative min-h-screen bg-cream">
         <Header />
         <main>

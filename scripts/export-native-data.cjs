@@ -21,7 +21,9 @@ const os = require('node:os');
 const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
-const IMAGE_HOST = 'https://ottormastar.aulenor.com';
+// IMAGE_HOST overrides the CDN origin baked into the export (e.g. a staging
+// deploy); defaults to the production host so an unset env is a no-op.
+const IMAGE_HOST = process.env.IMAGE_HOST ?? 'https://ottormastar.aulenor.com';
 
 // 1. Transpile the data modules (they are plain TS, no React) to CJS.
 const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ottor-data-'));

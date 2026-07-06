@@ -48,6 +48,12 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
   // While zoomed in, vertical drags belong to pan — dismiss is scale-1 only.
   const [zoomed, setZoomed] = useState(false);
   const closingRef = useRef(false);
+  // Guards animate().then(onClose) against firing after unmount.
+  const mountedRef = useRef(true);
+  // a11y: close button gets focus on open; restore to the opener on close.
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   // Swipe-down state: image follows the finger; backdrop & chrome fade with it.
   const y = useMotionValue(0);
@@ -62,6 +68,12 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Track mount so a deferred close never calls onClose after unmount.
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => { mountedRef.current = false; };
+  }, []);
+
   const requestClose = useCallback((flungDown = false) => {
     if (closingRef.current) return;
     closingRef.current = true;
@@ -72,13 +84,25 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
     if (flungDown) {
       animate(y, y.get() + window.innerHeight * 0.4, { duration: 0.24, ease: [0.32, 0.72, 0, 1] });
     }
-    animate(fade, 0, { duration: 0.22, ease: 'easeOut' }).then(() => onClose());
+    animate(fade, 0, { duration: 0.22, ease: 'easeOut' }).then(() => {
+      if (mountedRef.current) onClose();
+    });
   }, [settings.reduceMotion, onClose, y, fade]);
 
   const go = useCallback((dir: number) => {
     const next = index + dir;
     if (next >= 0 && next < items.length) onIndexChange(next);
   }, [index, items.length, onIndexChange]);
+
+  // Nothing to show — dismiss on the next tick (effect, not during render).
+  useEffect(() => {
+    if (items.length === 0) requestClose();
+  }, [items.length, requestClose]);
+
+  // A new photo starts un-zoomed; keeps the swipe-down dismiss enabled.
+  useEffect(() => {
+    setZoomed(false);
+  }, [index]);
 
   // Lock body scroll while open.
   useEffect(() => {
@@ -87,21 +111,49 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
     return () => { document.body.style.overflow = original; };
   }, []);
 
-  // Keyboard: Esc closes, arrows navigate.
+  // a11y: focus the close button on open, restore focus to the opener on close.
+  useEffect(() => {
+    openerRef.current = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    return () => { openerRef.current?.focus?.(); };
+  }, []);
+
+  // Keyboard: Esc closes, arrows navigate (only while not zoomed so they
+  // don't fight pan), Tab is trapped within the overlay.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') requestClose();
-      else if (e.key === 'ArrowLeft') go(-1);
-      else if (e.key === 'ArrowRight') go(1);
+      if (e.key === 'Escape') { requestClose(); return; }
+      if (e.key === 'ArrowLeft') { if (!zoomed) go(-1); return; }
+      if (e.key === 'ArrowRight') { if (!zoomed) go(1); return; }
+      if (e.key === 'Tab') {
+        const root = overlayRef.current;
+        if (!root) return;
+        const focusable = root.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey) {
+          if (active === first || !root.contains(active)) { e.preventDefault(); last.focus(); }
+        } else {
+          if (active === last || !root.contains(active)) { e.preventDefault(); first.focus(); }
+        }
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [go, requestClose]);
+  }, [go, requestClose, zoomed]);
 
   if (!item) return null;
 
   return createPortal(
     <motion.div
+      ref={overlayRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label={item.title}
       className="fixed inset-0 z-[300] select-none"
       style={{ touchAction: 'none', opacity: fade }}
     >
@@ -177,6 +229,7 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
           {index + 1} / {items.length}
         </span>
         <button
+          ref={closeButtonRef}
           onClick={() => requestClose()}
           aria-label={t('common.close')}
           className="pointer-events-auto w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"

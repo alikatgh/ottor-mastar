@@ -2,6 +2,7 @@
   "app": {
     "title": "Ottor Mastar",
     "subtitle": "Plants of Yakutia",
+    "subtitle_mongolia": "Plants of Mongolia",
     "description": "Herbs and trees of Yakutia — wildflowers, medicinal plants, the beauty of the taiga"
   },
   "nav": {
@@ -13,7 +14,8 @@
   "gallery": {
     "title": "Plant Gallery",
     "allPlants": "All",
-    "photoCount": "{{count}} photos"
+    "photoCount_one": "{{count}} photo",
+    "photoCount_other": "{{count}} photos"
   },
   "home": {
     "cta": "Browse the catalog",
@@ -27,6 +29,8 @@
     "title": "Settings",
     "storageNote": "Settings are stored on this device only.",
     "sectionRegion": "Country & language",
+    "sectionLanguage": "Language",
+    "sectionCountry": "Country",
     "language": "Language",
     "country": "Country",
     "countryNote": "Defaults to Yakutia. New regions unlock as their collections are added.",
@@ -72,7 +76,6 @@
     "medicinalUses": "Medicinal Uses",
     "habitat": "Habitat",
     "bloomingSeason": "Blooming Season",
-    "categories": "Categories",
     "backToGallery": "Back to Gallery",
     "details": "Details",
     "illustration": "Botanical illustration",
@@ -80,7 +83,9 @@
     "medicinalDisclaimerLabel": "About this section",
     "medicinalDisclaimer": "These are traditional and folk associations recorded for reference only — not instructions, dosages, or medical advice. Nothing here should be used to gather, prepare, or consume any plant; many are toxic and misidentification is easy. Treat every entry as a starting point for your own further research, and consult a qualified professional before acting. You use this information entirely at your own risk and assume full responsibility for any consequences.",
     "furtherReading": "Further reading",
-    "readOnWikipedia": "Read on Wikipedia"
+    "readOnWikipedia": "Read on Wikipedia",
+    "notFound": "Plant not found",
+    "notFoundBody": "This plant could not be found. It may have been removed, or the link may be incorrect."
   },
   "categories": {
     "medicinal": "Medicinal",
@@ -100,9 +105,18 @@
   },
   "about": {
     "title": "About Ottor Mastar",
+    "statPlants": "Wild plants",
+    "statMedicinal": "Medicinal herbs",
+    "statLanguages": "Languages: Yakut, Russian, English",
     "intro": "\"Ottor Mastar\" is a project dedicated to the wild herbs and trees of Yakutia (Sakha Republic).",
-    "mission": "Our mission is to introduce people to the remarkable plant world of Yakutia — its beauty and benefits.",
-    "contact": "Contact"
+    "intro_mongolia": "\"Ottor Mastar\" is a project dedicated to the wild herbs and trees of Mongolia.",
+    "mission": "Our mission is to introduce people to the remarkable plant world of Yakutia — its beauty and benefits."
+  },
+  "notFound": {
+    "home": "Home",
+    "catalog": "Browse the catalog",
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist. Return to the gallery to browse plants."
   },
   "common": {
     "loading": "Loading...",

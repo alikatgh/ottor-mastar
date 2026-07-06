@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Search as SearchIcon } from 'lucide-react';
 import { getImagePath, getIllustrationPath } from '../data/plants';
 import { usePlants, useSettings } from '../context/SettingsContext';
+import { filterPlants } from '../utils/plantSearch';
 
 export default function SearchPage() {
   const { t, i18n } = useTranslation();
@@ -16,15 +17,7 @@ export default function SearchPage() {
 
   const results = useMemo(() => {
     if (!query.trim()) return [];
-    const q = query.toLowerCase().trim();
-    return plants.filter((p) =>
-      p.names.sah.toLowerCase().includes(q) ||
-      p.names.ru.toLowerCase().includes(q) ||
-      p.names.en.toLowerCase().includes(q) ||
-      p.names.latin.toLowerCase().includes(q) ||
-      p.description[lang]?.toLowerCase().includes(q) ||
-      p.medicinalUses[lang]?.toLowerCase().includes(q)
-    );
+    return filterPlants(plants, query, lang, { deep: true });
   }, [plants, query, lang]);
 
   return (
@@ -38,7 +31,7 @@ export default function SearchPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t('catalog.searchPlaceholder')}
-            autoFocus
+            aria-label={t('catalog.searchPlaceholder')}
             className="
               w-full pl-12 pr-5 py-4
               bg-card rounded-2xl

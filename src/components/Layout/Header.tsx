@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Leaf, SlidersHorizontal } from 'lucide-react';
 import LanguageSwitcher from '../common/LanguageSwitcher';
+import { useSettings } from '../../context/SettingsContext';
 
 const NAV_ITEMS = [
   { path: '/', labelKey: 'nav.gallery' },
@@ -13,6 +14,7 @@ const NAV_ITEMS = [
 
 export default function Header() {
   const { t } = useTranslation();
+  const { settings } = useSettings();
   const location = useLocation();
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
@@ -55,7 +57,7 @@ export default function Header() {
               {t('app.title')}
             </span>
             <span className="overline-label !text-[9px] leading-tight whitespace-nowrap">
-              {t('app.subtitle')}
+              {t([`app.subtitle_${settings.country}`, 'app.subtitle'])}
             </span>
           </div>
         </Link>

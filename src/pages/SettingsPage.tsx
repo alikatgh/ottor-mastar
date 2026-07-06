@@ -27,85 +27,121 @@ type ToggleSetting = {
 
 type SettingDef = EnumSetting | ToggleSetting;
 
-function buildSections(): { titleKey: string; items: SettingDef[] }[] {
-  return [
+type SectionDef = { titleKey: string; items: SettingDef[] };
+
+/**
+ * The one Country row lives in its own section so Language (owned by i18next,
+ * rendered separately) and Country read as two distinct groups rather than one
+ * combined "region" block. Hoisted to a module constant — computed once, not
+ * on every render.
+ */
+const COUNTRY_SECTION: SectionDef = {
+  titleKey: 'settings.sectionCountry',
+  items: [
     {
-      titleKey: 'settings.sectionRegion',
-      items: [
-        {
-          kind: 'enum',
-          key: 'country',
-          labelKey: 'settings.country',
-          noteKey: 'settings.countryNote',
-          options: COUNTRY_IDS.map((id) => ({
-            value: id,
-            labelKey: `settings.country_${id}`,
-            disabled: !isCountryAvailable(id),
-          })),
-        },
-      ],
+      kind: 'enum',
+      key: 'country',
+      labelKey: 'settings.country',
+      noteKey: 'settings.countryNote',
+      options: COUNTRY_IDS.map((id) => ({
+        value: id,
+        labelKey: `settings.country_${id}`,
+        disabled: !isCountryAvailable(id),
+      })),
     },
-    {
-      titleKey: 'settings.sectionContent',
-      items: [
-        { kind: 'toggle', key: 'showLatin', labelKey: 'settings.showLatin' },
-        {
-          kind: 'enum',
-          key: 'catalogSort',
-          labelKey: 'settings.catalogSort',
-          options: [
-            { value: 'name', labelKey: 'settings.sortName' },
-            { value: 'season', labelKey: 'settings.sortSeason' },
-          ],
-        },
-        {
-          kind: 'enum',
-          key: 'leadImage',
-          labelKey: 'settings.leadImage',
-          options: [
-            { value: 'plate', labelKey: 'settings.leadPlate' },
-            { value: 'photo', labelKey: 'settings.leadPhoto' },
-          ],
-        },
-      ],
-    },
-    {
-      titleKey: 'settings.sectionDisplay',
-      items: [
-        {
-          kind: 'enum',
-          key: 'textSize',
-          labelKey: 'settings.textSize',
-          options: [
-            { value: 'small', labelKey: 'settings.textSmall' },
-            { value: 'default', labelKey: 'settings.textDefault' },
-            { value: 'large', labelKey: 'settings.textLarge' },
-          ],
-        },
-        { kind: 'toggle', key: 'reduceMotion', labelKey: 'settings.reduceMotion' },
-      ],
-    },
-    {
-      titleKey: 'settings.sectionGallery',
-      items: [
-        { kind: 'toggle', key: 'tileLabels', labelKey: 'settings.tileLabels' },
-        {
-          kind: 'enum',
-          key: 'tileTap',
-          labelKey: 'settings.tileTap',
-          options: [
-            { value: 'viewer', labelKey: 'settings.tapViewer' },
-            { value: 'detail', labelKey: 'settings.tapDetail' },
-          ],
-        },
-      ],
-    },
-  ];
+  ],
+};
+
+/** Generic (i18next-independent) settings sections, rendered from data. */
+const SECTIONS: SectionDef[] = [
+  {
+    titleKey: 'settings.sectionContent',
+    items: [
+      { kind: 'toggle', key: 'showLatin', labelKey: 'settings.showLatin' },
+      {
+        kind: 'enum',
+        key: 'catalogSort',
+        labelKey: 'settings.catalogSort',
+        options: [
+          { value: 'name', labelKey: 'settings.sortName' },
+          { value: 'season', labelKey: 'settings.sortSeason' },
+        ],
+      },
+      {
+        kind: 'enum',
+        key: 'leadImage',
+        labelKey: 'settings.leadImage',
+        options: [
+          { value: 'plate', labelKey: 'settings.leadPlate' },
+          { value: 'photo', labelKey: 'settings.leadPhoto' },
+        ],
+      },
+    ],
+  },
+  {
+    titleKey: 'settings.sectionDisplay',
+    items: [
+      {
+        kind: 'enum',
+        key: 'textSize',
+        labelKey: 'settings.textSize',
+        options: [
+          { value: 'small', labelKey: 'settings.textSmall' },
+          { value: 'default', labelKey: 'settings.textDefault' },
+          { value: 'large', labelKey: 'settings.textLarge' },
+        ],
+      },
+      { kind: 'toggle', key: 'reduceMotion', labelKey: 'settings.reduceMotion' },
+    ],
+  },
+  {
+    titleKey: 'settings.sectionGallery',
+    items: [
+      { kind: 'toggle', key: 'tileLabels', labelKey: 'settings.tileLabels' },
+      {
+        kind: 'enum',
+        key: 'tileTap',
+        labelKey: 'settings.tileTap',
+        options: [
+          { value: 'viewer', labelKey: 'settings.tapViewer' },
+          { value: 'detail', labelKey: 'settings.tapDetail' },
+        ],
+      },
+    ],
+  },
+];
+
+/**
+ * The detected browser default language, clamped to a supported code — the same
+ * region-strip + supported-list logic i18n uses at init. Reset returns the app
+ * to this rather than leaving the user's last manual pick in place (WEB-L16).
+ */
+const SUPPORTED_LANGS = LANGUAGES.map((l) => l.code);
+const FALLBACK_LANG = 'sah';
+
+function detectedDefaultLanguage(): string {
+  const candidates =
+    typeof navigator !== 'undefined'
+      ? [...(navigator.languages ?? []), navigator.language]
+      : [];
+  for (const raw of candidates) {
+    if (!raw) continue;
+    const code = raw.split('-')[0];
+    if (SUPPORTED_LANGS.includes(code)) return code;
+  }
+  return FALLBACK_LANG;
 }
 
 export default function SettingsPage() {
   const { t, i18n } = useTranslation();
   const { settings, update, reset } = useSettings();
+
+  // Reset the stored settings AND return the language to the detected browser
+  // default, so a full reset leaves nothing of the previous session behind.
+  const resetAll = () => {
+    reset();
+    i18n.changeLanguage(detectedDefaultLanguage());
+  };
 
   return (
     <div className="min-h-screen pt-16 pb-20 md:pb-6">
@@ -116,8 +152,8 @@ export default function SettingsPage() {
         <p className="text-sm text-ink-muted mb-10">{t('settings.storageNote')}</p>
 
         <div className="space-y-10">
-          {/* Language — owned by i18next, so it renders outside the generic rows */}
-          <Section titleKey="settings.sectionRegion" t={t}>
+          {/* Language — owned by i18next, so it renders as its own group */}
+          <Section titleKey="settings.sectionLanguage" t={t}>
             <Row label={t('settings.language')}>
               <Segmented
                 value={i18n.language}
@@ -125,12 +161,16 @@ export default function SettingsPage() {
                 onChange={(code) => i18n.changeLanguage(code)}
               />
             </Row>
-            {buildSections()[0].items.map((item) => (
+          </Section>
+
+          {/* Country — a distinct group from Language */}
+          <Section titleKey={COUNTRY_SECTION.titleKey} t={t}>
+            {COUNTRY_SECTION.items.map((item) => (
               <SettingRow key={item.key} item={item} settings={settings} update={update} t={t} />
             ))}
           </Section>
 
-          {buildSections().slice(1).map((section) => (
+          {SECTIONS.map((section) => (
             <Section key={section.titleKey} titleKey={section.titleKey} t={t}>
               {section.items.map((item) => (
                 <SettingRow key={item.key} item={item} settings={settings} update={update} t={t} />
@@ -141,7 +181,7 @@ export default function SettingsPage() {
           <Section titleKey="settings.sectionData" t={t}>
             <div className="py-3.5">
               <button
-                onClick={reset}
+                onClick={resetAll}
                 className="
                   text-sm font-medium text-ink-light
                   border border-hairline-strong rounded-full px-4 py-2
@@ -205,7 +245,15 @@ function SettingRow({
             disabled: o.disabled,
             disabledHint: o.disabled ? t('settings.comingSoon') : undefined,
           }))}
-          onChange={(v) => update({ [item.key]: v } as Partial<Settings>)}
+          onChange={(v) => {
+            // Only accept a value the control actually offers, so a stray/stale
+            // click can never write an out-of-enum value for this key. update()
+            // re-validates too, but this keeps the bad value from ever leaving
+            // the control (WEB-M13).
+            if (item.options.some((o) => o.value === v)) {
+              update({ [item.key]: v } as Partial<Settings>);
+            }
+          }}
         />
       )}
     </Row>

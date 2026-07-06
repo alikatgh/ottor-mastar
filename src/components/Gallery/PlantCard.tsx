@@ -1,4 +1,4 @@
-import { useState, memo } from 'react';
+import { useState, memo, type KeyboardEvent } from 'react';
 import { motion } from 'framer-motion';
 import { getImagePath } from '../../data/plants';
 import { useSettings } from '../../context/SettingsContext';
@@ -13,35 +13,63 @@ interface PlantCardProps {
 
 const PlantCard = memo(function PlantCard({ plant, index, lang, onClick }: PlantCardProps) {
   const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
   const { settings } = useSettings();
   const name = plant.names[lang as Language] || plant.names.sah;
 
   // Optimized thumbnail (webp) served from /plants/thumb/.
   const imageSrc = getImagePath(plant, 'thumb');
 
+  // Keyboard-activate the card the same way a click does. Enter/Space are the
+  // standard "activate" keys for a role="button"; preventDefault stops Space
+  // from scrolling the grid.
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
     <motion.div
       className="gallery-item group"
-      layoutId={`plant-${plant.id}`}
+      role="button"
+      tabIndex={0}
+      aria-label={name}
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: Math.min(index * 0.03, 0.5) }}
       whileTap={{ scale: 0.97 }}
     >
-      {/* Skeleton placeholder */}
-      {!loaded && (
+      {/* Skeleton placeholder — until the photo loads, or a parchment fill if
+          it fails outright (broken/missing asset), so we never leave a raw
+          broken-image icon over the herbarium grid (WEB-L11). */}
+      {!loaded && !failed && (
         <div className="absolute inset-0 skeleton" />
       )}
+      {failed && (
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ backgroundColor: 'var(--color-parchment)' }}
+          aria-hidden="true"
+        >
+          <span className="font-serif text-2xl text-ink-muted/50 select-none">❦</span>
+        </div>
+      )}
 
+      {!failed && (
       <img
         src={imageSrc}
         alt={name}
         loading={index < 12 ? 'eager' : 'lazy'}
         onLoad={() => setLoaded(true)}
+        onError={() => setFailed(true)}
         className={`transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
         draggable={false}
       />
+      )}
 
       {/* Name label — always visible and readable over any photo. A strong
           bottom scrim plus a text-shadow carries the white text across the

@@ -12,16 +12,21 @@ import { CATEGORIES } from './plants';
  * - To add more: drop the picks into the script's IMAGE_MAP, run it, then add a
  *   Plant entry here with the same imageId. Slugs must stay unique ACROSS
  *   countries (see findPlantBySlug in countries.ts).
- * - Botanical plates: none yet. Gemini-generated plates will be dropped into the
- *   Mongolia pipeline later; until a Mongolia manifest exists, hasIllustration()
- *   returns false for imageBase-tagged plants, so these render photo-only.
+ * - Botanical plates: the first 11 species (mongolia-01…11) have genuine plates
+ *   in the shared AVAILABLE_ILLUSTRATIONS manifest, so hasIllustration() is true
+ *   for them; the rest render photo-only until their plates are optimized in.
+ *   To add a plate, drop its source into the illustration pipeline and run
+ *   `npm run optimize` — no edit here is needed.
  *
  * The Mongolia option in Settings enables itself once this array is non-empty.
+ *
+ * `imageBase` is stamped onto every plant centrally in countries.ts (the single
+ * choke point), so entries here omit it.
  *
  * Species IDs are best-effort from the photographs; the app-wide disclaimer and
  * the per-entry (?) note on medicinal uses apply.
  */
-const RAW: Omit<Plant, 'imageBase'>[] = [
+export const mongoliaPlants: Omit<Plant, 'imageBase'>[] = [
   {
     id: 'mn-marigold',
     slug: 'mn-marigold',
@@ -719,6 +724,3 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     color: '#F07B1D',
   },
 ];
-
-// Every Mongolia plant resolves its images under /mongolia instead of /plants.
-export const mongoliaPlants: Plant[] = RAW.map((p) => ({ ...p, imageBase: '/mongolia' }));

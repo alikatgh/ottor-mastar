@@ -43,6 +43,11 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Multi-agent fix fleet: central-verify integration seams (web)
+- Symptom: after a 16-group parallel fix pass, web tsc/build failed and raw i18n keys would ship — cross-group seams the scoped agents couldn't see.
+- Causes & fixes: (1) G2 consumers referenced 7 keys G1 never added (`about.stat*`, `notFound.home/catalog`, `settings.sectionLanguage/sectionCountry`) → added to all three locales (a missing key ships the raw string; fallbackLng='sah'). (2) G8 put a dup-slug assertion using `process.env.NODE_ENV` at module scope in `countries.ts`, which breaks the bare `tsc --module commonjs` transpile in gen-sitemap/export-native-data → moved it to an exported `assertUniqueSlugs()` called from `main.tsx` under `import.meta.env.DEV`, so the data module references neither `process` nor `import.meta`. (3) Header subtitle still hardcoded `t('app.subtitle')` (Header.tsx wasn't in any group's allowlist) → country-aware like the other consumers. (4) `check-locale-keys.cjs` failed on dead keys → downgraded to warning (missing=fail, dead=warn) so the gate reflects real severity.
+- Lesson: disjoint-file fan-out leaves CROSS-FILE contracts (shared locale keys, a module consumed by both browser and CJS scripts, files no group owns) unverified — the central typecheck/build/locale-parity pass is mandatory and is where these surface. A data module shared with CJS scripts must never reference `process`/`import.meta`.
+
 ### 2026-07-06 — Phase 1 (R2 additions): leadImage carousel reset + OS reduce-motion CSS (R2-W-H01, R2-W-H02)
 - Symptom: (a) flipping "Lead image" plate↔photo left the detail carousel on a stale index → wrong slide/dot/viewer asset; (b) plain CSS animations (shelf-nudge, swipe-drift, skeleton shimmer, smooth scroll) ran even when the OS "Reduce motion" preference was on but the in-app toggle was off.
 - Cause: (a) the Phase-1 reset effect keyed on `[slug]` only, not `settings.leadImage`; (b) CSS motion was gated solely on `html[data-reduce-motion='true']` (in-app toggle) — framer's `MotionConfig reducedMotion="user"` covers JS motion only. `PlantDetailPage.tsx`, `src/index.css`.

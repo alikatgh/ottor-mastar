@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Info, Leaf } from 'lucide-react';
+import { useSettings } from '../../context/SettingsContext';
 
 export default function Footer() {
   const { t } = useTranslation();
+  const { settings } = useSettings();
   const year = new Date().getFullYear();
+
+  // Country-aware subtitle for the colophon, falling back to the generic label
+  // (WEB-M01/R-W03).
+  const subtitle = t([`app.subtitle_${settings.country}`, 'app.subtitle']);
 
   return (
     <footer className="border-t border-hairline mt-12">
@@ -50,7 +56,7 @@ export default function Footer() {
 
         <div className="mt-10 pt-6 border-t border-hairline flex flex-wrap items-center justify-between gap-2 text-xs text-ink-muted">
           <span>© {year} Ottor Mastar</span>
-          <span className="tabular-nums">{t('app.subtitle')}</span>
+          <span className="tabular-nums">{subtitle}</span>
         </div>
       </div>
     </footer>

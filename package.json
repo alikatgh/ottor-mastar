@@ -5,12 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/gen-sitemap.cjs",
     "build": "tsc -b && vite build",
     "lint": "oxlint src scripts",
     "typecheck": "tsc -b",
     "preview": "vite preview",
     "optimize": "node scripts/optimize-images.cjs && node scripts/optimize-illustrations.cjs && node scripts/gen-illustration-manifest.cjs",
-    "optimize:illustrations": "node scripts/optimize-illustrations.cjs && node scripts/gen-illustration-manifest.cjs"
+    "optimize:illustrations": "node scripts/optimize-illustrations.cjs && node scripts/gen-illustration-manifest.cjs",
+    "optimize:mongolia": "node scripts/optimize-mongolia.cjs",
+    "optimize:all": "node scripts/optimize-images.cjs && node scripts/optimize-illustrations.cjs && node scripts/optimize-mongolia.cjs && node scripts/gen-illustration-manifest.cjs",
+    "data:sitemap": "node scripts/gen-sitemap.cjs",
+    "data:export": "node scripts/export-native-data.cjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

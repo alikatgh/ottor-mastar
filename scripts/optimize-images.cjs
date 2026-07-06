@@ -61,23 +61,25 @@ async function optimizeImages() {
     }
 
     try {
-      const image = sharp(inputPath);
-      
-      // Generate each size
+      // Generate each size. A sharp pipeline is consumed by .toFile(), so a
+      // FRESH sharp(inputPath) is created per output size — reusing one instance
+      // silently drops every size after the first. Mirrors optimize-mongolia.cjs.
       for (const [sizeName, config] of Object.entries(SIZES)) {
         const outputPath = path.join(OUTPUT_DIR, sizeName, `${plantId}.webp`);
-        
+
         const resizeOptions = {
           width: config.width,
           fit: config.fit,
           withoutEnlargement: true
         };
-        
+
         if (config.height) {
           resizeOptions.height = config.height;
         }
 
-        await image
+        // .rotate() honours EXIF orientation from the phone camera.
+        await sharp(inputPath)
+          .rotate()
           .resize(resizeOptions)
           .webp({ quality: 80 })
           .toFile(outputPath);

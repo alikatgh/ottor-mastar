@@ -22,21 +22,33 @@
 
 ```text
 ottor_mastar/
+├── _src_originals/        # Raw source art (git-ignored, never bundled)
+│   ├── illustrations/     # Botanical-plate sources (plant-NN-ill.png/jpg)
+│   └── mongolia/          # Mongolia field-photo camera originals
 ├── public/
 │   ├── _redirects         # Cloudflare Pages SPA configuration
-│   ├── images/            # Original raw JPEGs & generated illustrations
-│   └── plants/            # Auto-generated optimized WebP images (thumb/medium/full)
-├── scripts/
-│   ├── optimize-images.cjs        # Script to optimize raw JPEGs to WebP
-│   └── optimize-illustrations.cjs # Script to optimize generated illustrations
+│   ├── plants/            # Auto-generated Yakutia WebP (thumb/medium/full)
+│   ├── mongolia/          # Auto-generated Mongolia WebP (thumb/medium/full)
+│   ├── fonts/             # Self-hosted fonts (no third-party requests)
+│   ├── sitemap.xml        # Auto-generated (npm run data:sitemap / prebuild)
+│   └── robots.txt
+├── scripts/               # Node build/data scripts (see "Scripts" below)
 ├── src/
 │   ├── components/        # Reusable React components (Gallery, Layout, Common)
-│   ├── data/              # plants.ts (Central data store)
+│   ├── data/              # countries.ts registry + plants.ts / mongolia.ts
 │   ├── i18n/              # Translation files (sah.json, ru.json, en.json)
 │   ├── pages/             # Route components (HomePage, CatalogPage, etc.)
 │   └── types/             # TypeScript definitions
+├── ios/                   # Native iOS app (SwiftUI)
+├── android/               # Native Android app (Jetpack Compose)
+├── shared/                # Generated native data snapshot (git-ignored)
 └── index.html
 ```
+
+Field-photo and illustration **sources live in `_src_originals/`**, outside
+`public/` so the large originals are never copied into the build. The optimize
+scripts read from there and emit optimized WebP into `public/plants/` and
+`public/mongolia/`.
 
 ## 🛠 Setup & Local Development
 
@@ -58,28 +70,78 @@ ottor_mastar/
 
 ## 🖼 Image Pipeline
 
-To achieve native-app performance, all images in the app are served as heavily optimized `WebP` files in three sizes: `thumb` (400px), `medium` (800px), and `full` (1600px).
-
-If you add new photos or illustrations to the `public/images/` directory, you must run the optimization scripts before starting the dev server:
+To achieve native-app performance, all images are served as heavily optimized
+`WebP` files in three sizes: `thumb` (400px), `medium` (800px), and `full`
+(1600px). Sources live in `_src_originals/`; the optimize scripts read them and
+emit WebP into the auto-generated `public/plants/` (Yakutia) and
+`public/mongolia/` (Mongolia) directories.
 
 ```bash
-# Optimize original photographs
-node scripts/optimize-images.cjs
+# Yakutia photos + illustrations + illustration manifest
+npm run optimize
 
-# Optimize vintage illustrations
-node scripts/optimize-illustrations.cjs
+# Just the botanical-plate illustrations (+ manifest)
+npm run optimize:illustrations
+
+# Just the Mongolia field photos
+npm run optimize:mongolia
+
+# Everything: Yakutia photos, illustrations, Mongolia, and the manifest
+npm run optimize:all
 ```
 
-This will generate the required WebP files in `public/plants/`. **Do not manually add files to `public/plants/`** as it is an auto-generated directory.
+**Do not manually add files to `public/plants/` or `public/mongolia/`** — they
+are auto-generated. A plant's botanical plate lights up automatically once its
+`plant-NN-ill` source is optimized: `gen-illustration-manifest.cjs` writes
+`src/data/available-illustrations.ts` from the plates that actually exist, so
+the data never needs hand-editing.
+
+## 🧰 Scripts
+
+Run via `npm run <name>` where a shortcut exists, otherwise
+`node scripts/<file>`.
+
+| Script | Purpose |
+|--------|---------|
+| `optimize-images.cjs` | Optimize Yakutia field photos → WebP (`npm run optimize`) |
+| `optimize-illustrations.cjs` | Optimize botanical plates → WebP |
+| `optimize-mongolia.cjs` | Optimize Mongolia field photos → WebP (`npm run optimize:mongolia`) |
+| `gen-illustration-manifest.cjs` | Regenerate `src/data/available-illustrations.ts` |
+| `gen-sitemap.cjs` | Write `public/sitemap.xml` from all routes + every country's slugs (`npm run data:sitemap`; runs on `prebuild`) |
+| `export-native-data.cjs` | Export the dataset + locales + images for the native apps (`npm run data:export`) |
+| `gen-icons.cjs` | Generate social + PWA/app icons |
+| `fetch-fonts.cjs` | Self-host the app fonts (no third-party font requests) |
+| `rotate-photos.cjs` / `swap-photos.cjs` | One-off photo↔species reconciliation helpers |
+
+Handy npm shortcuts: `optimize`, `optimize:illustrations`, `optimize:mongolia`,
+`optimize:all`, `data:sitemap`, `data:export`. `prebuild` regenerates the
+sitemap automatically before every `npm run build`.
 
 ## 📝 Adding New Plants
 
+Each country is a self-contained collection in `src/data/` wired together by
+the `COUNTRIES` registry in `src/data/countries.ts`. Yakutia lives in
+`plants.ts`, Mongolia in `mongolia.ts`. Slugs must stay **unique across all
+countries** (a dev-time guard throws on collisions).
+
 To add a new plant to the encyclopedia:
 
-1. **Add Photos:** Place the original high-resolution photo in `public/images/`. (If you have a vintage illustration, place it in `public/images/illustrations/`).
-2. **Update Image Map:** In `src/data/plants.ts`, update the `IMAGE_MAP` object to link a new `plant-XX` ID to your exact filename.
-3. **Add Data:** Add the plant object to the `plants` array in `src/data/plants.ts`. Ensure all trilingual fields (`names`, `description`, `medicinalUses`) are populated.
-4. **Run Optimization:** Run `node scripts/optimize-images.cjs`.
+1. **Add the source photo:** Drop the original into `_src_originals/` — the
+   `IMAGE_MAP` in the matching optimize script (`optimize-images.cjs` for
+   Yakutia, `optimize-mongolia.cjs` for Mongolia) links a new `plant-NN` /
+   `mongolia-NN` `imageId` to your exact filename. For a botanical plate, add a
+   `plant-NN-ill` source under `_src_originals/illustrations/`.
+2. **Add the data:** Add the plant object to the `plants` array in the
+   country's dataset (`src/data/plants.ts` or `src/data/mongolia.ts`). Populate
+   every trilingual field (`names`, `description`, `medicinalUses`, `habitat`).
+3. **Optimize the images:** `npm run optimize` (Yakutia) or
+   `npm run optimize:mongolia`. This regenerates the WebP variants and, for
+   plates, the illustration manifest.
+4. **Refresh the native snapshot:** `npm run data:export` so the iOS/Android
+   apps pick up the new plant and its images.
+
+The sitemap regenerates on every build (`prebuild`), or on demand with
+`npm run data:sitemap`.
 
 ## ☁️ Cloudflare Pages Deployment
 

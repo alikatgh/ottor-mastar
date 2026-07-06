@@ -34,7 +34,10 @@ async function main() {
 
   // Branded social card: the hero lily meadow (cropped low to show the
   // Sardaana blooms) under a scrim, with the wordmark — mirrors the homepage hero.
-  const hero = path.join(PUB, 'plants/full/plant-23.webp');
+  // HERO_IMAGE overrides the source (path relative to public/); defaults to the
+  // Sardaana lily (plant-23) so the card stays branded if nothing is passed.
+  const heroRel = process.env.HERO_IMAGE ?? 'plants/full/plant-23.webp';
+  const hero = path.join(PUB, heroRel);
   const base = await sharp(hero)
     .resize(1200, 630, { fit: 'cover', position: 'bottom' })
     .toBuffer();

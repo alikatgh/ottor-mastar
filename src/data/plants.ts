@@ -18,15 +18,13 @@ export const CATEGORIES = {
   POISONOUS: 'poisonous',
 };
 
-export const SEASONS = {
-  SPRING: 'spring',
-  SUMMER: 'summer',
-  AUTUMN: 'autumn',
-};
-
 /**
- * Mapping from original filenames to clean slugs for optimized images.
- * After image optimization, files will be at /plants/{slug}.webp
+ * Provenance map from clean imageId → the original WhatsApp filename each
+ * Yakutia photo came from. Kept as documentation of image origins.
+ *
+ * @deprecated Not consumed at runtime. The optimize scripts carry their own
+ * IMAGE_MAP; this copy has no importer. Safe to delete once provenance is
+ * recorded elsewhere.
  */
 export const IMAGE_MAP: Record<string, string> = {
   'plant-01': 'WhatsApp Image 2026-07-04 at 12.36.22.jpeg',
@@ -747,13 +745,6 @@ export const plants: Plant[] = [
 ];
 
 /**
- * Get the original image filename for a plant
- */
-export function getOriginalImagePath(plant: Plant) {
-  return IMAGE_MAP[plant.imageId];
-}
-
-/**
  * Get the optimized image path for a given plant and size
  * @param {object} plant - Plant object
  * @param {'thumb' | 'medium' | 'full'} size - Image size variant
@@ -792,21 +783,21 @@ export function getIllustrationPath(plant: Plant, size = 'medium'): string | nul
 }
 
 /**
- * Get all plants in a specific category
+ * Get all plants in a specific category (Yakutia set only).
+ *
+ * @deprecated No current importer. Note it only covers the Yakutia `plants`
+ * array, not the active country — use the country-aware data via `usePlants()`
+ * plus a local filter instead.
  */
 export function getPlantsByCategory(category: string) {
   return plants.filter((p) => p.categories.includes(category));
 }
 
 /**
- * Get a plant by slug
- */
-export function getPlantBySlug(slug: string) {
-  return plants.find((p) => p.slug === slug);
-}
-
-/**
- * Get plants sorted by name in a given language
+ * Get plants sorted by name in a given language (Yakutia set only).
+ *
+ * @deprecated No current importer. Only sorts the Yakutia `plants` array, not
+ * the active country — sort the result of `usePlants()` instead.
  */
 export function getPlantsSortedByName(lang: import('../types').Language = 'sah') {
   return [...plants].sort((a, b) =>

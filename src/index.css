@@ -307,21 +307,6 @@ p {
 }
 .swipe-drift { animation: swipe-drift 1.4s ease-in-out infinite; }
 
-/* Hover reveals the name scrim — opacity only, the image never moves */
-.gallery-item::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 50%);
-  opacity: 0;
-  transition: opacity 0.3s var(--ease-smooth);
-  pointer-events: none;
-}
-
-.gallery-item:hover::after {
-  opacity: 1;
-}
-
 /* ============================================
    Backdrop blur (header / bottom nav)
    ============================================ */

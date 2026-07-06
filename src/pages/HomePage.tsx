@@ -14,6 +14,10 @@ export default function HomePage() {
   const { settings } = useSettings();
   const plants = usePlants();
 
+  // Country-aware subtitle, falling back to the generic label when a country
+  // has no specific one (WEB-M01/R-W03).
+  const subtitle = t([`app.subtitle_${settings.country}`, 'app.subtitle']);
+
   // Cover plant = the collection's last entry (Sardaana for Yakutia — the most
   // iconic). The cover of an encyclopedia is its finest plate, not a snapshot;
   // collections without plates yet fall back to the field photo.
@@ -53,7 +57,7 @@ export default function HomePage() {
           {/* Title panel */}
           <div className="md:order-1 flex items-center justify-center px-6 py-12 sm:px-10 md:py-0">
             <div className="max-w-md w-full">
-              <p className="overline-label mb-4">{t('app.subtitle')}</p>
+              <p className="overline-label mb-4">{subtitle}</p>
               <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-ink leading-[0.98] tracking-[-0.01em] mb-5">
                 {t('app.title')}
               </h1>
