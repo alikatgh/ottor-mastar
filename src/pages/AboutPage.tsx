@@ -11,7 +11,7 @@ const STATS: { value: string; label: Record<Language, string> }[] = [
   {
     value: String(plants.length),
     label: {
-      sah: 'Кыыл үүнээйи',
+      sah: 'Айылҕа үүнээйилэрэ',
       ru: 'Дикорастущих растений',
       en: 'Wild plants',
     },
@@ -19,7 +19,7 @@ const STATS: { value: string; label: Record<Language, string> }[] = [
   {
     value: String(MEDICINAL_COUNT),
     label: {
-      sah: 'Эм оттор',
+      sah: 'Эмтээх оттор',
       ru: 'Лекарственных трав',
       en: 'Medicinal herbs',
     },
@@ -27,7 +27,7 @@ const STATS: { value: string; label: Record<Language, string> }[] = [
   {
     value: '3',
     label: {
-      sah: 'Тыл: сахалыы, нууччалыы, аҥылычаанныы',
+      sah: 'Тыллар: саха, нуучча, ангылычаан',
       ru: 'Языка: якутский, русский, английский',
       en: 'Languages: Yakut, Russian, English',
     },

@@ -7,24 +7,24 @@ type Tri = Record<Language, string>;
 type TriList = Record<Language, string[]>;
 
 const T = {
-  title: { sah: 'Быраап уонна кистэлэҥ', ru: 'Правовая информация и конфиденциальность', en: 'Legal & Privacy' } as Tri,
-  updated: { sah: 'Сонньуйуллубута: 2026 сыл', ru: 'Обновлено: 2026 год', en: 'Last updated: 2026' } as Tri,
+  title: { sah: 'Сокуон уонна тус кистэлэҥ', ru: 'Правовая информация и конфиденциальность', en: 'Legal & Privacy' } as Tri,
+  updated: { sah: 'Саҥардылынна: 2026 сыл', ru: 'Обновлено: 2026 год', en: 'Last updated: 2026' } as Tri,
   intro: {
-    sah: 'Оттор Мастар — үөрэхтээһин уонна культура проега. Маны туһаныаҥ иннинэ бу сирэйи ааҕыаҥ.',
+    sah: 'Оттор Мастар — үөрэхтээһин уонна култуура бырайыага. Бу сыһыарыыны туһаныаххыт иннинэ бу сирэйи ааҕыҥ.',
     ru: '«Оттор Мастар» — образовательный и культурный проект. Пожалуйста, ознакомьтесь с этой страницей перед использованием приложения.',
     en: 'Ottor Mastar is an educational and cultural project. Please read this page before using the application.',
   } as Tri,
 };
 
 const DISCLAIMER = {
-  heading: { sah: 'Эппиэтинэстэн аккаастаныы', ru: 'Отказ от ответственности', en: 'Disclaimer' } as Tri,
+  heading: { sah: 'Эппиэтинэһи сүкпэт буолуу', ru: 'Отказ от ответственности', en: 'Disclaimer' } as Tri,
   body: {
     sah: [
-      'Бу приложение биэрэр информацията (ааттара, ойдобулунуута, үүнэр сирэ, норуот эмтиир туттуута) — үөрэхтээһин уонна билии тэнитэр сыаллаах эрэ.',
-      'Бу эмчит сүбэтэ БУОЛБАТАХ. Ханнык баҕарар үүнээйини бэлиэтииргэ, хомуйарга, астыырга эбэтэр аһыырга туттума.',
-      'Элбэх кыыл үүнээйи дьаактаах, өлөрөр кыахтаах, уонна аһыыр эбэтэр эмтиир үүнээйилэри кытта майгыннаһар. Бу приложениеҕэ олоҕуран туох да үүнээйини аһаама, тутума, туттума — сыыһа бэлиэтээһин ыар охсууну эбэтэр өлүүнү аҕалыан сөп.',
-      'Норуот эмтиир туттуута культура уонна история туһугар эрэ суруллубут, сүбэ буолбатах. Доруобуйаҕар туһаныаҥ иннинэ эмчиккэ көрдөр.',
-      'Ааптардар уонна кыттыылаахтар бу приложение информациятын туһанааһынтан тахсар ханнык баҕарар сүтүккэ, охсууга, ыарыыга, дьааттаныыга эбэтэр алдьаныыга эппиэттээбэттэр. Эн бэйэҥ эппиэтинэскинэн туттаҕын.',
+      'Бу сыһыарыы биэрэр иһитиннэриитэ (ааттара, ойуулааһыннара, үүнэр сирдэрэ, норуот эмтиир туттуута) — үөрэхтээһин уонна билии тарҕатар сыаллаах эрэ.',
+      'Бу эмчит сүбэтэ БУОЛБАТАХ. Ханнык баҕарар үүнээйини бэлиэтииргэ, хомуйарга, буһарарга эбэтэр сииргэ туһанымаҥ.',
+      'Элбэх айылҕа үүнээйитэ дьааттаах, өлөрөр кыахтаах, уонна сиэнэр эбэтэр эмтээх отторго олус майгынныыр. Бу сыһыарыыга олоҕуран туох да үүнээйини сиэмэҥ, тутумаҥ, туттумаҥ — сыыһа быһаарыы ыар охсууга эбэтэр өлүүнү аҕалыан сөп.',
+      'Норуот эмтиир туттуута култуура уонна устуоруйа туһугар эрэ суруллубут, сүбэ буолбатах. Доруобуйаҕытыгар туһаныаххыт иннинэ булгуччу бырааска көрдөрүҥ.',
+      'Ааптардар уонна кыттыылаахтар бу сыһыарыы иһитиннэриитин туһаныыттан тахсар ханнык баҕарар сүтүккэ, охсууга, ыарыыга, дьааттаныыга эбэтэр алдьаныыга эппиэтинэс сүкпэттэр. Бэйэҕит сэрэниҥ.',
     ],
     ru: [
       'Вся информация в этом приложении (названия, описания, места обитания, сведения о традиционном и лечебном применении) предоставляется исключительно в общеобразовательных и справочных целях.',
@@ -44,13 +44,13 @@ const DISCLAIMER = {
 };
 
 const PRIVACY = {
-  heading: { sah: 'Кистэлэҥ политиката', ru: 'Политика конфиденциальности', en: 'Privacy Policy' } as Tri,
+  heading: { sah: 'Тус дааннайдары харыстааһын', ru: 'Политика конфиденциальности', en: 'Privacy Policy' } as Tri,
   body: {
     sah: [
-      'Оттор Мастар туох да бэйэ туһунан информацияны хомуйбат, харайбат, ыыппат. Бэлиэтэнии, киирии, реклама эбэтэр атын сирдэр кэтээн көрүүлэрэ суох.',
-      'Соҕотох харайыллар — эн талбыт тылыҥ, ол эн браузерыҥ иһигэр (localStorage) эрэ хараллар, приложение өйдүүр туһугар. Ол эн тэрилгиттэн тахсыбат, браузер туруоруутунан ханнык баҕарар кэмҥэ сотуллуон сөп.',
-      'Кэтээн көрөр cookie туттуллубат. Эйигин билэр аналитика хомуллубат.',
-      'Бу приложение эн даннайыҥ туһунан тас ыйытыы ыытпат.',
+      '«Оттор Мастар» туох да тус дааннайдары хомуйбат, харайбат уонна ыыппат. Бэлиэтэнии, киирии, реклама эбэтэр кэтээн көрүү суох.',
+      'Соҕотох харайыллара — эһиги талбыт тылгыт, ол браузергыт иһигэр эрэ хараллар (localStorage). Ол тэрилгититтэн тахсыбат уонна ханнык баҕарар кэмҥэ браузер туруоруутунан сотуллуон сөп.',
+      'Кэтээн көрөр cookie туттуллубат. Эһигини билэр аналитика хомуллубат.',
+      'Бу сыһыарыы эһиги дааннайгытын таска ыытпат.',
     ],
     ru: [
       '«Оттор Мастар» не собирает, не хранит и не передаёт никаких персональных данных. Нет учётных записей, входа, рекламы и стороннего отслеживания.',
@@ -68,10 +68,10 @@ const PRIVACY = {
 };
 
 const CONTENT = {
-  heading: { sah: 'Ис хоһоон уонна аптар', ru: 'Контент и авторские права', en: 'Content & copyright' } as Tri,
+  heading: { sah: 'Иһинээҕитэ уонна ааптар бырааба', ru: 'Контент и авторские права', en: 'Content & copyright' } as Tri,
   body: {
     sah: [
-      'Ботаническай ойуулар уонна хаартыскалар үөрэхтээһин уонна культура сыалыгар туттуллаллар. Үүнээйи туһунан ойдобул уопсай ботаника билиитин уонна саха норуотун үгэһин холбуур.',
+      'Ботаника ойуулара уонна хаартыскалара үөрэхтээһин уонна култуура сыалыгар туттуллаллар. Үүнээйилэр быһаарыылара уопсай ботаника билиитин уонна саха норуотун үгэстэрин холбууллар.',
       '© 2026 Оттор Мастар.',
     ],
     ru: [
@@ -107,26 +107,44 @@ export default function LegalPage() {
   const lang = i18n.language as Language;
 
   return (
-    <div className="min-h-screen pt-16 pb-24 md:pb-10">
-      <div className="max-w-2xl mx-auto px-5 py-6">
-        <Link
-          to="/about"
-          className="inline-flex items-center gap-1.5 mb-6 text-sm font-medium text-ink-muted hover:text-forest no-underline transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          {t('nav.about')}
-        </Link>
-
-        <h1 className="font-heading text-3xl font-bold text-ink mb-1">{T.title[lang]}</h1>
-        <p className="text-ink-muted text-sm mb-2">{T.updated[lang]}</p>
-        <p className="text-ink-light text-[15px] leading-relaxed mb-8">{T.intro[lang]}</p>
-
-        <div className="space-y-4">
-          <Section tone="warn" heading={DISCLAIMER.heading[lang]} paragraphs={DISCLAIMER.body[lang]} />
-          <Section heading={PRIVACY.heading[lang]} paragraphs={PRIVACY.body[lang]} />
-          <Section heading={CONTENT.heading[lang]} paragraphs={CONTENT.body[lang]} />
+    <div className="min-h-screen bg-bg-surface flex flex-col">
+      <header className="sticky top-0 z-10 bg-card/80 backdrop-blur-md border-b border-hairline shadow-soft">
+        <div className="flex h-14 items-center px-4 max-w-3xl mx-auto w-full">
+          <Link
+            to="/about"
+            className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-bg-subtle active:scale-95 transition-all text-ink-light"
+            aria-label={t('common.previous')}
+          >
+            <ArrowLeft className="h-6 w-6" />
+          </Link>
+          <h1 className="ml-2 font-heading text-xl font-semibold text-ink">
+            {T.title[lang]}
+          </h1>
         </div>
-      </div>
+      </header>
+
+      <main className="flex-1 overflow-y-auto w-full max-w-3xl mx-auto pb-safe">
+        <div className="p-6 space-y-8 animate-fade-in">
+          {/* Intro & Meta */}
+          <div className="space-y-3">
+            <p className="text-sm font-medium text-ink-lighter tracking-wide uppercase">
+              {T.updated[lang]}
+            </p>
+            <p className="text-ink text-base leading-relaxed">
+              {T.intro[lang]}
+            </p>
+          </div>
+
+          <div className="h-px bg-hairline w-full" />
+
+          {/* Sections */}
+          <div className="space-y-6">
+            <Section heading={DISCLAIMER.heading[lang]} paragraphs={DISCLAIMER.body[lang]} tone="warn" />
+            <Section heading={PRIVACY.heading[lang]} paragraphs={PRIVACY.body[lang]} />
+            <Section heading={CONTENT.heading[lang]} paragraphs={CONTENT.body[lang]} />
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
