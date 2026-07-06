@@ -35,6 +35,18 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Sakha UI showed literal i18n keys ("PLANT.NAMES", "APP.SUBTITLE")
+- Symptom: in Sakha, the detail-page section header rendered "PLANT.NAMES", the header/hero showed "APP.SUBTITLE", etc.
+- Cause: the Sakha translation pass restructured `sah.json` and dropped 6 keys still referenced in code (`app.subtitle`, `plant.names`, `plant.backToGallery`, `common.legal`, `common.readDisclaimer`, `about.intro`); `fallbackLng` is `sah`, so a missing Sakha key can't fall back to en.
+- Fix: restored the 6 keys in `sah.json`. Added a coverage check (grep every `t('key')` vs all three locale JSONs) — now 0 gaps.
+- Lesson: after any locale edit, diff the key SET across locales, don't just eyeball. A missing key with same-lang fallback ships the raw key to users.
+
+### 2026-07-06 — photo audit resolution: 11 more photos corrected (19/23 match)
+- Symptom: after the first 2 swaps, 11 entries still showed the wrong species.
+- Cause: photos were shuffled — one clean pair (03↔04), one clean 4-chain (18→16→15→13), one one-way fix (14→20); the rest are orphans.
+- Fix: `scripts/rotate-photos.cjs` (new, for the cycle) + `swap-photos.cjs`. Each corrected photo re-verified by eye before committing. `docs/audits/2026-07-06-photo-species-audit.md` §7.
+- Lesson: model a photo-shuffle as a permutation — clean cycles are safe to auto-fix; open chains end in orphans that need real re-shooting, don't force them.
+
 ### 2026-07-06 — 15/23 field photos show the wrong species (photo↔species audit)
 - Symptom: on detail pages the botanical plate and the field photo often show different plants (e.g. Filipendula plate + a vetch photo); user: "some seem like different ones."
 - Cause: field photos were assigned to species carelessly; plates were fine. Two clean reciprocal swaps (plant-10↔11 Filipendula/Vicia, plant-21↔22 Valeriana/Geranium) plus ~11 orphan mismatches with no correct photo in the set.

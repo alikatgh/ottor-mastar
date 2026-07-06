@@ -106,3 +106,33 @@ No entries remain in a genuinely unresolved "uncertain" state after final adjudi
 | 21 | plant-21 | Geranium sibiricum | mismatch | mismatch | yes | 0.95 |
 | 22 | plant-22 | Valeriana officinalis | mismatch | mismatch | yes | 0.90 |
 | 23 | plant-23 | Lilium pensylvanicum | match | match | — | 0.85 |
+
+---
+
+## 7. Resolution applied (2026-07-06)
+
+After the audit, photos were re-verified by hand and corrected where a right
+photo existed somewhere in the set. **19 of 23 entries now match.**
+
+Fixes applied (via `scripts/swap-photos.cjs` / `scripts/rotate-photos.cjs`):
+
+| Operation | Entries | Result |
+|---|---|---|
+| swap | plant-10 ↔ plant-11 | Filipendula ✓ / Vicia ✓ |
+| swap | plant-21 ↔ plant-22 | Geranium sibiricum ✓ / Valeriana ✓ |
+| swap | plant-03 ↔ plant-04 | Galium verum ✓ / Campanula ✓ |
+| swap | plant-14 ↔ plant-20 | Ranunculus auricomus ✓ (plant-14 now orphaned) |
+| rotate | plant-13 ← 15 ← 16 ← 18 | Delphinium ✓ / Dianthus ✓ / Geranium pratense ✓ |
+
+**plant-05** was re-examined and kept as declared *Campanula glomerata* — the
+dense purple clustered heads are a plausible match; the palmate leaves in frame
+are a co-occurring geranium.
+
+**4 true orphans remain — no correct photo exists in the set, needs re-shooting:**
+
+| # | ID | Needs a photo of | Currently shows |
+|---|----|----|----|
+| 12 | plant-12 | *Leucanthemum vulgare* (large oxeye daisy) | small white Erigeron/anemone |
+| 14 | plant-14 | *Lupinus polyphyllus* (lupine) | a vetch (Vicia) |
+| 18 | plant-18 | *Lathyrus pratensis* (yellow vetchling) | magenta pea legume |
+| 19 | plant-19 | *Oxytropis jacutica* (purple oxytrope) | cream Pedicularis (lousewort) |
