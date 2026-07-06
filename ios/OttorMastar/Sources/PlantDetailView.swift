@@ -55,6 +55,9 @@ struct PlantDetailView: View {
         .onAppear {
             withAnimation(.spring(response: 0.42, dampingFraction: 0.86)) { sheetUp = true }
         }
+        // Reordering the pager (lead-image setting flip) can leave `slide` on a
+        // stale tag; snap back to the first slide, matching the web reset.
+        .onChange(of: settings.leadImage) { slide = 0 }
         .fullScreenCover(item: $viewer) { state in
             ImageViewer(items: viewerItems, index: state.index)
         }

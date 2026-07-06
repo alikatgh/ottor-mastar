@@ -57,11 +57,14 @@ fun SearchScreen(onOpenPlant: (Plant) -> Unit) {
     val focusRequester = remember { FocusRequester() }
 
     val q = query.trim()
+    // Fold the query once; diacritic-insensitive so "полынь" finds "полы́нь"
+    // (parity with iOS `.diacriticInsensitive`, SP2-M01).
+    val qFolded = q.foldDiacritics()
     val results = if (q.isEmpty()) emptyList() else country.plants.filter { plant ->
         listOf(
             plant.names.sah, plant.names.ru, plant.names.en, plant.names.latin,
             plant.description[lang], plant.medicinalUses[lang],
-        ).any { it.contains(q, ignoreCase = true) }
+        ).any { it.foldDiacritics().contains(qFolded) }
     }
 
     LaunchedEffect(Unit) { focusRequester.requestFocus() }

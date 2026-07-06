@@ -1,6 +1,7 @@
 package com.aulenor.ottormastar.data
 
 import android.content.Context
+import android.provider.Settings as AndroidSettings
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -17,12 +18,18 @@ enum class LeadImage { PLATE, PHOTO }
 enum class TileTap { VIEWER, DETAIL }
 
 class Settings(context: Context) {
-    private val prefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+    private val appContext = context.applicationContext
+    private val prefs = appContext.getSharedPreferences("settings", Context.MODE_PRIVATE)
 
     private var languageState by mutableStateOf(
         Language.from(prefs.getString("language", null) ?: detectLanguage())
     )
-    private var countryState by mutableStateOf(prefs.getString("country", "yakutia")!!)
+    // Normalize on read: a persisted id that no longer maps to an available
+    // country (dataset changed, corrupt prefs) falls back to the default so
+    // the country pill always shows a valid selection — never a phantom id.
+    private var countryState by mutableStateOf(
+        normalizeCountry(prefs.getString("country", null))
+    )
     private var showLatinState by mutableStateOf(prefs.getBoolean("showLatin", true))
     private var catalogSortState by mutableStateOf(
         runCatching { CatalogSort.valueOf(prefs.getString("catalogSort", "NAME")!!) }
@@ -78,12 +85,29 @@ class Settings(context: Context) {
             prefs.edit().putString("textSize", value.name).apply()
         }
 
+    // Honor the OS-level "remove animations" accessibility switch in addition
+    // to the in-app toggle: when the system animator duration scale is 0, the
+    // device is asking every app to drop motion, mirroring the web's
+    // prefers-reduced-motion media query. Either source turns motion off.
     var reduceMotion: Boolean
-        get() = reduceMotionState
+        get() = reduceMotionState || systemReduceMotion()
         set(value) {
             reduceMotionState = value
             prefs.edit().putBoolean("reduceMotion", value).apply()
         }
+
+    private fun systemReduceMotion(): Boolean = runCatching {
+        AndroidSettings.Global.getFloat(
+            appContext.contentResolver,
+            AndroidSettings.Global.ANIMATOR_DURATION_SCALE,
+            1f,
+        ) == 0f
+    }.getOrDefault(false)
+
+    private fun normalizeCountry(raw: String?): String {
+        val available = PlantStore.availableCountries.map { it.id }
+        return if (raw != null && raw in available) raw else PlantStore.data.defaultCountry
+    }
 
     var leadImage: LeadImage
         get() = leadImageState
@@ -111,7 +135,7 @@ class Settings(context: Context) {
     fun reset() {
         prefs.edit().clear().apply()
         languageState = Language.from(detectLanguage())
-        countryState = "yakutia"
+        countryState = normalizeCountry(null)
         showLatinState = true
         catalogSortState = CatalogSort.NAME
         textSizeState = TextSizeOpt.DEFAULT

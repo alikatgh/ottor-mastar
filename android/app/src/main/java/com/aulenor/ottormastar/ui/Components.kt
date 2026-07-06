@@ -47,6 +47,18 @@ fun rememberL10n(): L10n {
 
 enum class ImgSize(val dir: String) { THUMB("thumb"), MEDIUM("medium"), FULL("full") }
 
+private val COMBINING_MARKS = Regex("\\p{Mn}+")
+
+/**
+ * Fold diacritics for search: NFD-decompose, drop combining marks, lowercase.
+ * Mirrors iOS `String.folding(.diacriticInsensitive)` so "полынь" matches
+ * "полы́нь" and "Ácer" matches "acer". Sakha keeps its own letters (ҥ, ө, ү…)
+ * — those are base characters, not accents, so they survive folding.
+ */
+fun String.foldDiacritics(): String =
+    COMBINING_MARKS.replace(java.text.Normalizer.normalize(this, java.text.Normalizer.Form.NFD), "")
+        .lowercase()
+
 /**
  * Model URI for a plant image. thumb + medium ship in assets (the guide must
  * work offline, in the field); full is remote-only from the deployed site.

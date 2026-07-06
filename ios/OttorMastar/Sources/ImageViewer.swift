@@ -37,7 +37,12 @@ struct ImageViewer: View {
 
     private var loc: L10n { settings.loc }
     private var reduceMotion: Bool { settings.reduceMotion }
-    private var item: ViewerItem { items[min(index, items.count - 1)] }
+    /// Nil only if presented with no items — the body dismisses in that case,
+    /// so downstream chrome never indexes an empty array.
+    private var item: ViewerItem? {
+        guard !items.isEmpty else { return nil }
+        return items[min(max(index, 0), items.count - 1)]
+    }
 
     private var backdropOpacity: Double { max(0.25, 1 - Double(dragY) / 320) }
     private var chromeOpacity: Double { max(0, 1 - Double(dragY) / 120) }
@@ -45,15 +50,24 @@ struct ImageViewer: View {
 
     var body: some View {
         ZStack {
-            backdrop
-            pager
-            chrome
+            if item != nil {
+                backdrop
+                pager
+                chrome
+            } else {
+                // Defensive: never present the viewer with no images.
+                Color.black.ignoresSafeArea()
+            }
         }
         .statusBarHidden()
         .opacity(appeared || reduceMotion ? 1 : 0)
         .onAppear {
+            guard item != nil else { dismiss(); return }
             withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { appeared = true }
         }
+        // Paging to another image resets any pinch-zoom, so the swipe-down
+        // dismiss gesture re-arms on the fresh page.
+        .onChange(of: index) { zoomed = false }
     }
 
     // MARK: Backdrop — blurred image letterbox fill
@@ -61,11 +75,13 @@ struct ImageViewer: View {
     private var backdrop: some View {
         ZStack {
             Color(white: 0.04)
-            BundledPlantImage(item: item, size: .medium)
-                .scaledToFill()
-                .scaleEffect(1.25)
-                .blur(radius: 60)
-                .opacity(0.6)
+            if let item {
+                BundledPlantImage(item: item, size: .medium)
+                    .scaledToFill()
+                    .scaleEffect(1.25)
+                    .blur(radius: 60)
+                    .opacity(0.6)
+            }
             LinearGradient(
                 stops: [
                     .init(color: .black.opacity(0.45), location: 0),
@@ -166,7 +182,11 @@ struct ImageViewer: View {
     }
 
     private var caption: some View {
-        HStack(alignment: .bottom, spacing: 16) {
+        // `item` is optional only to guard the empty-viewer case; the body
+        // renders chrome only when non-nil, so unwrap once here.
+        Group {
+            if let item {
+                HStack(alignment: .bottom, spacing: 16) {
             VStack(alignment: .leading, spacing: 6) {
                 if let kindLabel = item.kindLabel {
                     Text(kindLabel.uppercased())
@@ -222,6 +242,8 @@ struct ImageViewer: View {
             .ignoresSafeArea(edges: .bottom)
         )
         .animation(.easeOut(duration: 0.2), value: index)
+            }
+        }
     }
 }
 

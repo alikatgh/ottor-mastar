@@ -79,12 +79,18 @@ struct PlantImageView: View {
                 if let img = ImageResolver.loadBundled(country: ctry, plant: plnt, size: sz, kind: knd) {
                     return img
                 }
-                if let url = ImageResolver.remoteURL(country: ctry, plant: plnt, size: sz, kind: knd),
-                    let (data, _) = try? await URLSession.shared.data(from: url)
-                {
-                    return UIImage(data: data)
+                // Offline-first: thumb/medium ship in the bundle, so a miss there
+                // means a genuinely absent asset — show the parchment placeholder,
+                // never reach for the network (mirrors ImageViewer). Only `.full`
+                // is a deliberate remote dependency.
+                guard sz == .full,
+                    let url = ImageResolver.remoteURL(country: ctry, plant: plnt, size: sz, kind: knd),
+                    let (data, response) = try? await URLSession.shared.data(from: url),
+                    (response as? HTTPURLResponse)?.statusCode == 200
+                else {
+                    return nil
                 }
-                return nil
+                return UIImage(data: data)
             }.value
             if let loaded {
                 ImageMemoryCache.shared.setObject(loaded, forKey: key)

@@ -23,7 +23,8 @@ struct CatalogView: View {
             result.sort {
                 let (ra, rb) = (SeasonOrder.rank($0.bloomingSeason), SeasonOrder.rank($1.bloomingSeason))
                 if ra != rb { return ra < rb }
-                return $0.names[lang] < $1.names[lang]
+                // Locale-aware tiebreaker, matching Android's Collator.
+                return $0.names[lang].localizedStandardCompare($1.names[lang]) == .orderedAscending
             }
         }
         if activeCategory != "all" {
@@ -86,7 +87,8 @@ struct CatalogView: View {
         .background(Color.cream)
         .toolbar(.hidden, for: .navigationBar)
         .navigationDestination(for: Plant.self) { plant in
-            PlantDetailView(plant: plant, country: country)
+            // Resolve the plant's OWN country so cross-country entries open correctly.
+            PlantDetailView(plant: plant, country: PlantStore.findPlant(slug: plant.slug)?.1 ?? country)
         }
         .navigationDestination(for: PushedPage.self) { page in
             switch page {

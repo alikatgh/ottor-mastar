@@ -43,9 +43,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.ui.platform.LocalDensity
@@ -90,6 +94,14 @@ fun DetailScreen(
     }
     val pagerState = rememberPagerState(pageCount = { slides.size })
 
+    // When the plant changes, or the lead-image order flips, snap the carousel
+    // back to the first slide — otherwise `currentPage` points at a stale slide
+    // (or past the end for a shorter list). Web parity: PlantDetailPage resets
+    // activeSlide on [slug, leadImage] (SP2-M08 / R2-W-H01).
+    LaunchedEffect(plant.slug, settings.leadImage) {
+        pagerState.scrollToPage(0)
+    }
+
     // The web's sheet entrance: y 28→0 + fade, spring 320/34.
     val sheetOffset = remember { Animatable(if (settings.reduceMotion) 0f else 28f) }
     val sheetAlpha = remember { Animatable(if (settings.reduceMotion) 1f else 0f) }
@@ -104,7 +116,27 @@ fun DetailScreen(
         }
     }
 
-    Column(Modifier.fillMaxSize().background(Color.White).verticalScroll(rememberScrollState())) {
+    val scrollState = rememberScrollState()
+    // The image panel's HorizontalPager lives inside a verticalScroll parent.
+    // Left to itself the pager's touch region can swallow a mostly-vertical
+    // drag, so the page won't scroll while a finger is over the images. This
+    // connection forwards vertical deltas the pager doesn't use up to the
+    // parent scroll (horizontal paging still wins horizontally) — SP2-M10.
+    val panelToParentScroll = remember(scrollState) {
+        object : NestedScrollConnection {
+            override fun onPostScroll(
+                consumed: Offset,
+                available: Offset,
+                source: NestedScrollSource,
+            ): Offset {
+                if (available.y == 0f) return Offset.Zero
+                val consumedY = scrollState.dispatchRawDelta(-available.y)
+                return Offset(0f, -consumedY)
+            }
+        }
+    }
+
+    Column(Modifier.fillMaxSize().background(Color.White).verticalScroll(scrollState)) {
         // ===== Image panel =====
         Box(Modifier.fillMaxWidth().height(400.dp).background(Parchment)) {
             // beyondViewportPageCount keeps the second slide composed (no
@@ -114,7 +146,7 @@ fun DetailScreen(
             HorizontalPager(
                 state = pagerState,
                 beyondViewportPageCount = 1,
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().nestedScroll(panelToParentScroll),
             ) { page ->
                 val isPlate = slides[page]
                 if (isPlate) {

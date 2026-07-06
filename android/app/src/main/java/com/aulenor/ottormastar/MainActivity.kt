@@ -10,7 +10,16 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.outlined.Info
@@ -20,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,11 +38,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -50,6 +65,7 @@ import com.aulenor.ottormastar.ui.CreamDark
 import com.aulenor.ottormastar.ui.DetailScreen
 import com.aulenor.ottormastar.ui.Forest
 import com.aulenor.ottormastar.ui.HomeScreen
+import com.aulenor.ottormastar.ui.Ink
 import com.aulenor.ottormastar.ui.InkMuted
 import com.aulenor.ottormastar.ui.LegalScreen
 import com.aulenor.ottormastar.ui.OttorMastarTheme
@@ -169,7 +185,15 @@ private fun AppRoot() {
                     onOpenViewer = { index ->
                         viewer = ViewerRequest(
                             country.plants.map {
-                                ViewerItem(it, plate = false, kindLabel = null, detailSlug = it.slug)
+                                ViewerItem(
+                                    plant = it,
+                                    country = country,
+                                    plate = false,
+                                    // Match iOS: the field-photo viewer labels each
+                                    // item "Photograph" (SP2-M09).
+                                    kindLabel = loc.t("plant.photograph"),
+                                    detailSlug = it.slug,
+                                )
                             },
                             index,
                         )
@@ -200,8 +224,25 @@ private fun AppRoot() {
                 // the web — no page-level rise on top of it.
                 enterTransition = { fadeIn(tween(if (reduce) 150 else 260, easing = pushEase)) },
             ) { entry ->
-                val slug = entry.arguments?.getString("slug") ?: return@composable
-                val found = PlantStore.findPlant(slug) ?: return@composable
+                val slug = entry.arguments?.getString("slug")
+                // A bad/stale slug (edited deep link, removed plant) must show a
+                // proper not-found screen with a way back — never a blank page.
+                val found = slug?.let { PlantStore.findPlant(it) }
+                if (found == null) {
+                    // "Back to gallery" always lands somewhere real: pop if we
+                    // have history, otherwise route home (a cold deep link into
+                    // a dead slug has an empty back stack).
+                    PlantNotFound(onBack = {
+                        if (!nav.popBackStack()) {
+                            nav.navigate("home") {
+                                popUpTo(nav.graph.findStartDestination().id) { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    })
+                    return@composable
+                }
                 val (plant, plantCountry) = found
                 val kindLoc = rememberL10n()
                 DetailScreen(
@@ -211,7 +252,13 @@ private fun AppRoot() {
                         viewer = ViewerRequest(
                             slides.map { isPlate ->
                                 ViewerItem(
-                                    plant, plate = isPlate,
+                                    plant = plant,
+                                    // The plant's OWN resolved country, which may
+                                    // differ from the active setting (findPlant
+                                    // searches every country) — so the viewer's
+                                    // image URLs resolve against the right dataset.
+                                    country = plantCountry,
+                                    plate = isPlate,
                                     kindLabel = kindLoc.t(
                                         if (isPlate) "plant.illustration" else "plant.photograph"),
                                 )
@@ -227,7 +274,8 @@ private fun AppRoot() {
 
     viewer?.let { request ->
         ViewerOverlay(
-            country = country,
+            // Each ViewerItem carries its own plant's country now (SP2-H01), so
+            // the overlay resolves image URLs per item instead of from settings.
             items = request.items,
             initialIndex = request.index,
             onDismiss = { viewer = null },
@@ -235,5 +283,50 @@ private fun AppRoot() {
                 nav.navigate("plant/$slug") { launchSingleTop = true }
             },
         )
+    }
+}
+
+/**
+ * Shown when a plant route resolves to no plant (stale/edited deep link,
+ * removed dataset entry). Herbarium-plain: cream canvas, serif-weight title,
+ * muted body, one Forest "back to gallery" action — never a blank screen.
+ */
+@Composable
+private fun PlantNotFound(onBack: () -> Unit) {
+    val loc = rememberL10n()
+    Box(
+        Modifier
+            .fillMaxSize()
+            .background(Cream)
+            .padding(32.dp),
+        contentAlignment = Alignment.Center,
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            Text(
+                loc.t("plant.notFound"),
+                style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.SemiBold),
+                color = Ink,
+                textAlign = TextAlign.Center,
+            )
+            Text(
+                loc.t("plant.notFoundBody"),
+                style = MaterialTheme.typography.bodyMedium,
+                color = InkMuted,
+                textAlign = TextAlign.Center,
+            )
+            Spacer(Modifier.height(8.dp))
+            Text(
+                loc.t("plant.backToGallery"),
+                style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                color = Forest,
+                modifier = Modifier
+                    .clip(RoundedCornerShape(999.dp))
+                    .clickable { onBack() }
+                    .padding(horizontal = 20.dp, vertical = 12.dp),
+            )
+        }
     }
 }

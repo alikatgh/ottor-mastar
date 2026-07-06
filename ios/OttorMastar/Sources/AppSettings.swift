@@ -10,6 +10,8 @@ enum LeadImage: String, CaseIterable { case plate, photo }
 enum TileTap: String, CaseIterable { case viewer, detail }
 
 final class AppSettings: ObservableObject {
+    private var reduceMotionObserver: NSObjectProtocol?
+
     @AppStorage("language") private var storedLanguage: String = AppSettings.detectLanguage()
     @AppStorage("country") private var storedCountry: String = "yakutia"
     @AppStorage("showLatin") var showLatin: Bool = true
@@ -19,6 +21,24 @@ final class AppSettings: ObservableObject {
     @AppStorage("leadImage") private var storedLeadImage: String = LeadImage.plate.rawValue
     @AppStorage("tileLabels") var tileLabels: Bool = true
     @AppStorage("tileTap") private var storedTileTap: String = TileTap.viewer.rawValue
+
+    init() {
+        // Publish when the OS Reduce Motion preference flips at runtime, so
+        // `reduceMotion` (which folds in the live OS value) re-drives the UI
+        // instead of only reflecting the setting at each isolated read.
+        reduceMotionObserver = NotificationCenter.default.addObserver(
+            forName: UIAccessibility.reduceMotionStatusDidChangeNotification,
+            object: nil, queue: .main
+        ) { [weak self] _ in
+            self?.objectWillChange.send()
+        }
+    }
+
+    deinit {
+        if let reduceMotionObserver {
+            NotificationCenter.default.removeObserver(reduceMotionObserver)
+        }
+    }
 
     var language: Language {
         get { Language(rawValue: storedLanguage) ?? .sah }
@@ -55,7 +75,8 @@ final class AppSettings: ObservableObject {
     var loc: L10n { L10n.for(language) }
 
     /// Same rule as the web's MotionConfig: our toggle forces reduced motion,
-    /// otherwise the OS preference is respected.
+    /// otherwise the OS preference is respected. The OS value is observed live
+    /// (see `init`) so a change in system settings re-renders immediately.
     var reduceMotion: Bool {
         reduceMotionSetting || UIAccessibility.isReduceMotionEnabled
     }

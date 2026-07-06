@@ -9,11 +9,20 @@ struct HomeView: View {
     var zoomNamespace: Namespace.ID
 
     @State private var viewer: ViewerState?
+    /// Detail push requested from the viewer's "Details" button — presented
+    /// once the fullScreenCover has dismissed.
+    @State private var pendingDetail: Plant?
 
     private var country: Country { settings.country }
     private var loc: L10n { settings.loc }
     private var plants: [Plant] { country.plants }
     private var plated: [Plant] { plants.filter(\.hasIllustration) }
+
+    /// The plant's OWN country (falls back to the active country), so a
+    /// cross-country entry opens with its own images.
+    private func country(for plant: Plant) -> Country {
+        PlantStore.findPlant(slug: plant.slug)?.1 ?? country
+    }
 
     var body: some View {
         ScrollView {
@@ -25,8 +34,12 @@ struct HomeView: View {
             }
         }
         .background(Color.cream)
-        .navigationDestination(for: Plant.self) { plant in
-            PlantDetailView(plant: plant, country: country)
+        // Single guarded detail destination: every plate/photo/viewer tap routes
+        // through `pendingDetail`, so a double-tap can't push the same plant twice
+        // (SwiftUI's value-based NavigationLink otherwise would). Mirrors the
+        // Android side's `launchSingleTop = true`.
+        .navigationDestination(item: $pendingDetail) { plant in
+            PlantDetailView(plant: plant, country: country(for: plant))
                 .zoomTransition(sourceID: plant.slug, in: zoomNamespace, enabled: !settings.reduceMotion)
         }
         .navigationDestination(for: PushedPage.self) { page in
@@ -39,9 +52,19 @@ struct HomeView: View {
         .fullScreenCover(item: $viewer) { state in
             ImageViewer(
                 items: viewerItems, index: state.index,
-                onOpenDetail: { _ in }
+                onOpenDetail: { slug in
+                    // Cover has dismissed itself; push the resolved plant next.
+                    if let plant = PlantStore.findPlant(slug: slug)?.0 { pushDetail(plant) }
+                }
             )
         }
+    }
+
+    /// Guarded push — ignored while a detail push is already in flight, so a
+    /// rapid double-tap can't stack the same page twice.
+    private func pushDetail(_ plant: Plant) {
+        guard pendingDetail == nil else { return }
+        pendingDetail = plant
     }
 
     /// Full-resolution viewer items for the whole photo wall, like the web's
@@ -49,7 +72,7 @@ struct HomeView: View {
     private var viewerItems: [ViewerItem] {
         plants.map { plant in
             ViewerItem(
-                country: country, plant: plant, kind: .photo,
+                country: country(for: plant), plant: plant, kind: .photo,
                 title: plant.names[settings.language],
                 subtitle: plant.names.latin,
                 kindLabel: loc.t("plant.photograph"),
@@ -65,7 +88,9 @@ struct HomeView: View {
         VStack(spacing: 0) {
             // Plate panel first, like the web's mobile order.
             if let hero = plants.last {
-                NavigationLink(value: hero) {
+                Button {
+                    pushDetail(hero)
+                } label: {
                     ZStack(alignment: .bottomTrailing) {
                         PlantImageView(
                             country: country, plant: hero, size: .medium,
@@ -181,7 +206,9 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(alignment: .top, spacing: 16) {
                     ForEach(Array(plated.enumerated()), id: \.element.slug) { index, plant in
-                        NavigationLink(value: plant) {
+                        Button {
+                            pushDetail(plant)
+                        } label: {
                             plateTile(plant, index: index)
                         }
                         .buttonStyle(.plain)
@@ -257,7 +284,8 @@ struct HomeView: View {
                     if settings.tileTap == .viewer {
                         viewer = ViewerState(index: index)
                     }
-                }
+                },
+                onOpenDetail: pushDetail
             )
         }
     }
@@ -277,6 +305,8 @@ struct GalleryGrid: View {
     let country: Country
     let plants: [Plant]
     let onTapTile: (Int) -> Void
+    /// Guarded detail push (dedupes double-taps); used in "detail" tap mode.
+    var onOpenDetail: ((Plant) -> Void)? = nil
 
     var body: some View {
         LazyVGrid(
@@ -285,7 +315,7 @@ struct GalleryGrid: View {
         ) {
             ForEach(Array(plants.enumerated()), id: \.element.slug) { index, plant in
                 if settings.tileTap == .detail {
-                    NavigationLink(value: plant) { tile(plant) }
+                    Button { onOpenDetail?(plant) } label: { tile(plant) }
                         .buttonStyle(GalleryTileButtonStyle(reduceMotion: settings.reduceMotion))
                 } else {
                     Button { onTapTile(index) } label: { tile(plant) }

@@ -60,9 +60,15 @@ import com.aulenor.ottormastar.data.Plant
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
-/** One viewer entry: which image + editorial caption fields. */
+/**
+ * One viewer entry: which image + editorial caption fields. `country` is the
+ * plant's OWN collection (matching iOS `ViewerItem.country`), so a
+ * cross-collection entry resolves its images from the right imageBase — never
+ * from `settings.country`.
+ */
 data class ViewerItem(
     val plant: Plant,
+    val country: Country,
     val plate: Boolean,
     val kindLabel: String?,
     val detailSlug: String? = null,
@@ -77,12 +83,18 @@ data class ViewerItem(
  */
 @Composable
 fun ViewerOverlay(
-    country: Country,
     items: List<ViewerItem>,
     initialIndex: Int,
     onDismiss: () -> Unit,
     onOpenDetail: ((String) -> Unit)? = null,
 ) {
+    // Nothing to show (no slides / stale request) → dismiss instead of
+    // indexing an empty list. Guards the pager's undefined empty state.
+    if (items.isEmpty()) {
+        LaunchedEffect(Unit) { onDismiss() }
+        return
+    }
+
     val settings = LocalSettings.current
     val loc = rememberL10n()
     val scope = rememberCoroutineScope()
@@ -91,6 +103,10 @@ fun ViewerOverlay(
     var zoomed by remember { mutableStateOf(false) }
     var dragY by remember { mutableFloatStateOf(0f) }
     val fade = remember { Animatable(if (settings.reduceMotion) 1f else 0f) }
+
+    // Leaving a zoomed page must not carry the zoom-lock to the next: reset so
+    // the pager scroll + dismiss drag are re-enabled (mirrors iOS SP2-M07).
+    LaunchedEffect(pagerState.currentPage) { zoomed = false }
 
     LaunchedEffect(Unit) {
         if (!settings.reduceMotion) fade.animateTo(1f, tween(200))
@@ -122,7 +138,7 @@ fun ViewerOverlay(
             Box(Modifier.fillMaxSize().alpha(backdropAlpha)) {
                 Box(Modifier.fillMaxSize().background(Color(0xFF0A0A0A)))
                 AsyncImage(
-                    model = plantImageModel(country, current.plant, ImgSize.MEDIUM, current.plate),
+                    model = plantImageModel(current.country, current.plant, ImgSize.MEDIUM, current.plate),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -187,7 +203,6 @@ fun ViewerOverlay(
             ) { page ->
                 val item = items[page]
                 ZoomablePage(
-                    country = country,
                     item = item,
                     onZoomChange = { zoomed = it },
                     reduceMotion = settings.reduceMotion,
@@ -313,7 +328,6 @@ private suspend fun PointerInputScope.detectVerticalDragOnly(
  */
 @Composable
 private fun ZoomablePage(
-    country: Country,
     item: ViewerItem,
     onZoomChange: (Boolean) -> Unit,
     reduceMotion: Boolean,
@@ -386,14 +400,14 @@ private fun ZoomablePage(
             }
         ) {
             AsyncImage(
-                model = plantImageModel(country, item.plant, ImgSize.MEDIUM, item.plate),
+                model = plantImageModel(item.country, item.plant, ImgSize.MEDIUM, item.plate),
                 contentDescription = item.plant.names.latin,
                 contentScale = ContentScale.Fit,
                 modifier = Modifier.fillMaxSize(),
             )
             // Remote full-res quietly replaces the bundled medium when it loads.
             AsyncImage(
-                model = plantImageModel(country, item.plant, ImgSize.FULL, item.plate),
+                model = plantImageModel(item.country, item.plant, ImgSize.FULL, item.plate),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = Modifier.fillMaxSize(),
