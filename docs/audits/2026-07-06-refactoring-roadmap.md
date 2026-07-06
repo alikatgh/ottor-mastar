@@ -13,10 +13,11 @@
 |---|------|-------|-----|
 | 1.1 | Validate `country` + all settings fields on localStorage load | `src/context/SettingsContext.tsx` | WEB-C01, WEB-M12 |
 | 1.2 | Reset/clamp gallery `selectedIndex` when `plants` changes | `src/components/Gallery/GalleryGrid.tsx` | WEB-C02 |
-| 1.3 | Reset plant detail state on slug change | `src/pages/PlantDetailPage.tsx` or `src/App.tsx` | WEB-H01 |
+| 1.3 | Reset plant detail carousel on `leadImage` + slug change | `src/pages/PlantDetailPage.tsx` | **R2-W-H01** (replaces WEB-H01) |
 | 1.4 | Fix `onTransform` in ImageViewer | `src/components/common/ImageViewer.tsx:146` | WEB-H02 |
 | 1.5 | Add `typecheck` script + CSS module declaration | `package.json`, `src/vite-env.d.ts` or similar | WEB-L02, WEB-L19 |
 | 1.6 | Fix lint script (oxlint) | `package.json:9` | DATA-B02 |
+| 1.7 | **`prefers-reduced-motion` CSS pass** | `src/index.css` | **R2-W-H02** |
 
 **Verify:** `npx tsc -b && npm run lint && npm run build`
 
@@ -56,10 +57,14 @@
 |---|------|-------|-----|
 | 4.1 | iOS Home viewer Details button | `HomeView.swift:39-43` | NAT-H01 |
 | 4.2 | iOS pass plant's country to detail | `CatalogView`, `SearchView`, `HomeView`, `AboutView` | NAT-H02 |
-| 4.3 | iOS navigation dedupe | All `NavigationLink(value: plant)` sites | NAT-M01 |
-| 4.4 | Android invalid slug → not-found UI | `MainActivity.kt:203-204` | NAT-M02 |
-| 4.5 | Country change resets nav + viewer | `MainActivity.kt`, iOS settings handler | NAT-M08 |
-| 4.6 | Android reduceMotion system setting | `Settings.kt:81-86` | NAT-M03 |
+| 4.3 | **Android viewer: pass plantCountry per ViewerItem** | `MainActivity.kt`, `ViewerScreen.kt`, `ViewerItem` | **SP2-H01** |
+| 4.4 | **iOS PlantImageView: no network for thumb/medium** | `PlantImage.swift:78-86` | **SP2-H02** |
+| 4.5 | iOS navigation dedupe | All `NavigationLink(value: plant)` sites | NAT-M01 |
+| 4.6 | Android invalid slug → not-found UI | `MainActivity.kt:203-204` | NAT-M02 |
+| 4.7 | Country change resets nav + viewer | `MainActivity.kt`, iOS settings handler | NAT-M08 |
+| 4.8 | Android reduceMotion system setting | `Settings.kt:81-86` | NAT-M03 |
+| 4.9 | **Reset zoomed on viewer page change (all platforms)** | `ImageViewer.tsx`, `ImageViewer.swift`, `ViewerScreen.kt` | **SP2-M07, R2-W-M05** |
+| 4.10 | **Android diacritic-insensitive search** | `SearchScreen.kt`, `CatalogScreen.kt` | **SP2-M01/M02** |
 
 **Verify:** iOS + Android simulator builds pass.
 
