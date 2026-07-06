@@ -92,7 +92,10 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
           wrapperStyle={{ width: '100%', height: '100%' }}
           contentStyle={{ width: '100%', height: '100%' }}
         >
-          <div className="w-screen h-screen flex items-center justify-center p-2">
+          {/* The fit box reserves room for the top counter bar and the caption
+              so the contained image fills the clear central zone — as large as
+              possible while staying fully visible, never tucked under chrome. */}
+          <div className="w-screen h-screen flex items-center justify-center px-3 pt-16 pb-40 sm:pb-32">
             <img
               src={item.src}
               alt={item.title}
@@ -137,23 +140,24 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
         </button>
       )}
 
-      {/* Caption — always visible, high contrast */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 pt-16 pb-5 px-5 safe-bottom bg-gradient-to-t from-black/90 via-black/70 to-transparent">
-        <div className="max-w-3xl mx-auto flex items-end justify-between gap-4">
+      {/* Caption — always visible, editorial. Letterspaced kind label over a
+          serif name and italic Latin, category dots, and a Details action. */}
+      <div className="absolute bottom-0 left-0 right-0 z-10 pt-24 pb-6 px-5 safe-bottom bg-gradient-to-t from-black/95 via-black/70 to-transparent">
+        <div className="max-w-3xl mx-auto flex items-end justify-between gap-5">
           <div className="min-w-0">
             {item.kind && (
-              <p className="text-white/60 text-xs font-medium mb-1">{item.kind}</p>
+              <p className="overline-label !text-white/55 mb-1.5">{item.kind}</p>
             )}
-            <h3 className="font-heading text-xl sm:text-2xl font-semibold text-white truncate">
+            <h3 className="font-heading text-2xl sm:text-3xl font-semibold text-white leading-tight">
               {item.title}
             </h3>
             {item.subtitle && (
-              <p className="text-white/85 text-sm sm:text-base italic truncate mt-0.5">
+              <p className="text-white/70 text-sm sm:text-base italic mt-1 truncate">
                 {item.subtitle}
               </p>
             )}
             {item.badges && item.badges.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-2.5">
+              <div className="flex flex-wrap gap-1.5 mt-3">
                 {item.badges.map((cat) => (
                   <CategoryBadge key={cat} category={cat} onDark />
                 ))}
@@ -164,7 +168,7 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
           {onOpenDetail && (
             <button
               onClick={() => onOpenDetail(index)}
-              className="flex-shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-white text-ink text-sm font-semibold hover:bg-white/90 transition-colors"
+              className="flex-shrink-0 inline-flex items-center gap-1.5 pl-4 pr-3.5 py-2.5 rounded-full bg-white text-ink text-sm font-semibold hover:bg-white/90 transition-colors motion-safe:active:scale-[0.97]"
             >
               {t('plant.details')}
               <ArrowUpRight className="w-4 h-4" />

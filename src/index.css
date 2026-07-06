@@ -42,6 +42,11 @@
   /* Fonts */
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Sakha-only heading serif. Playfair Display has no glyphs for the Yakut
+     extended-Cyrillic letters (ө ү ҥ һ ҕ) and falls back mid-word, so Sakha
+     headings render in two clashing fonts. PT Serif (ParaType) was designed
+     with full coverage of the titular languages of Russia, Yakut included. */
+  --font-heading-sah: 'PT Serif', 'Playfair Display', Georgia, serif;
 
   /* Spacing scale */
   --spacing-gallery-gap: 2px;
@@ -109,6 +114,15 @@ h1, h2, h3, h4 {
   font-weight: 600;
   line-height: 1.2;
   text-wrap: balance;
+}
+
+/* Sakha: swap the heading serif for one that has the Yakut glyphs. Driven by
+   <html lang>, which App.tsx keeps in sync with the chosen language. Scoped to
+   headings + anything explicitly using the heading token; body stays Inter
+   (its Cyrillic already covers Yakut). */
+html:lang(sah) :is(h1, h2, h3, h4),
+html:lang(sah) .font-heading {
+  font-family: var(--font-heading-sah);
 }
 
 p {

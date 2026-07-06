@@ -52,15 +52,19 @@ const PlantCard = memo(function PlantCard({ plant, index, lang, onClick }: Plant
         draggable={false}
       />
 
-      {/* Name overlay on hover */}
+      {/* Name label — always visible and readable over any photo. A strong
+          bottom scrim plus a text-shadow carries the white text across the
+          busiest bright-meadow shots (the old hover-only ghost was invisible
+          on touch and low-contrast on light backgrounds). */}
       <div className="
-        absolute bottom-0 left-0 right-0 p-2
-        opacity-0 group-hover:opacity-100
-        transition-opacity duration-200
+        absolute inset-x-0 bottom-0 px-1.5 pb-1.5 pt-7
         pointer-events-none
-        bg-gradient-to-t from-black/50 to-transparent
+        bg-gradient-to-t from-black/80 via-black/40 to-transparent
       ">
-        <p className="text-white text-xs font-medium drop-shadow-lg truncate">
+        <p
+          className="text-white text-[11px] font-medium leading-tight line-clamp-2"
+          style={{ textShadow: '0 1px 3px rgba(0,0,0,0.9)' }}
+        >
           {name}
         </p>
       </div>

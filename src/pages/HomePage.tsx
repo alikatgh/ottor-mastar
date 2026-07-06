@@ -32,13 +32,21 @@ export default function HomePage() {
           <p className="overline-label !text-white/70 mb-3">
             {t('app.subtitle')}
           </p>
-          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-3">
+          <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-4 leading-[0.95] tracking-[-0.01em]">
             {t('app.title')}
           </h1>
-          <p className="text-white/85 text-lg sm:text-xl font-light max-w-lg">
+          <p className="text-white/85 text-lg sm:text-xl font-light max-w-lg leading-snug">
             {t('app.description')}
           </p>
         </div>
+
+        {/* Plate-style credit for the pictured flower — the way a botanical
+            encyclopedia captions its hero image. */}
+        <p className="absolute bottom-4 right-5 z-10 text-right text-[11px] text-white/70 italic leading-tight max-w-[45%]">
+          {HERO_PLANT.names[i18n.language as Language]}
+          <span className="not-italic"> · </span>
+          {HERO_PLANT.names.latin}
+        </p>
       </section>
 
       {/* Gallery Section */}
