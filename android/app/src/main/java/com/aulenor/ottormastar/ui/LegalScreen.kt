@@ -54,7 +54,7 @@ fun LegalScreen(onBack: () -> Unit) {
                 modifier = Modifier
                     .clip(CircleShape)
                     .clickable { onBack() }
-                    .padding(10.dp),
+                    .padding(12.dp),
             )
             Text(
                 LegalContent.title(lang),

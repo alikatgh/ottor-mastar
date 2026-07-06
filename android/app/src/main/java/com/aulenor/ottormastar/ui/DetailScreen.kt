@@ -47,6 +47,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -195,9 +197,10 @@ fun DetailScreen(
         }
 
         // ===== Info sheet =====
+        val density = LocalDensity.current.density
         Column(
             Modifier
-                .offset { IntOffset(0, ((sheetOffset.value - 24f) * 3).roundToInt()) }
+                .offset { IntOffset(0, ((sheetOffset.value - 24f) * density).roundToInt()) }
                 .alpha(sheetAlpha.value)
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
@@ -357,16 +360,27 @@ private fun MedicinalSection(plant: Plant, lang: Language) {
                         fontWeight = FontWeight.SemiBold, letterSpacing = 1.6.sp),
                     color = InkMuted,
                 )
-                Text(
-                    "?",
-                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                    color = if (tipOpen) Forest else InkMuted,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .size(16.dp)
-                        .border(1.dp, if (tipOpen) Forest else InkMuted.copy(alpha = 0.5f), CircleShape)
-                        .clickable { tipOpen = !tipOpen },
-                )
+                // 16dp visual, 40dp touch target — small icons must never be
+                // their own hit area.
+                Box(
+                    Modifier
+                        .size(40.dp)
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null,
+                        ) { tipOpen = !tipOpen },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        "?",
+                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                        color = if (tipOpen) Forest else InkMuted,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .size(16.dp)
+                            .border(1.dp, if (tipOpen) Forest else InkMuted.copy(alpha = 0.5f), CircleShape),
+                    )
+                }
             }
             Spacer(Modifier.height(8.dp))
             Box(Modifier.fillMaxWidth().height(1.dp).background(Hairline))

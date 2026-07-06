@@ -278,7 +278,7 @@ fun ViewerOverlay(
                                         onOpenDetail(current.detailSlug)
                                     }
                                 }
-                                .padding(horizontal = 16.dp, vertical = 10.dp),
+                                .padding(horizontal = 18.dp, vertical = 13.dp),
                         )
                     }
                 }

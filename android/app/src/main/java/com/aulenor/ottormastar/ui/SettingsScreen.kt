@@ -3,6 +3,9 @@ package com.aulenor.ottormastar.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.runtime.remember
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -197,7 +200,11 @@ private fun SettingRow(label: String, note: String? = null, control: @Composable
     }
 }
 
-/** Pill segmented control — active state changes only color, never geometry. */
+/**
+ * Pill segmented control — active state changes only color, never geometry.
+ * Each option is a ≥44dp-tall touch target (visual pill stays compact; the
+ * hit area is the padded cell).
+ */
 @Composable
 fun Segmented(
     value: String,
@@ -208,39 +215,57 @@ fun Segmented(
         Modifier
             .clip(CircleShape)
             .border(1.dp, Hairline, CircleShape),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         for ((optValue, label) in options) {
             val active = value == optValue
-            Text(
-                label,
-                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium),
-                color = if (active) Color.White else InkLight,
-                modifier = Modifier
+            Box(
+                Modifier
+                    .defaultMinSize(minHeight = 44.dp)
                     .background(if (active) Forest else Color.Transparent)
                     .clickable { onChange(optValue) }
-                    .padding(horizontal = 12.dp, vertical = 7.dp),
-            )
+                    .padding(horizontal = 14.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(
+                    label,
+                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium),
+                    color = if (active) Color.White else InkLight,
+                )
+            }
         }
     }
 }
 
-/** Switch with the web's fixed-track geometry, tinted forest. */
+/**
+ * Switch with the web's fixed-track geometry, tinted forest. The visible
+ * track is 44×26; the touch target is a full 48dp square around it.
+ */
 @Composable
 fun PillToggle(checked: Boolean, onChange: (Boolean) -> Unit) {
     Box(
         Modifier
-            .size(width = 44.dp, height = 26.dp)
-            .clip(CircleShape)
-            .background(if (checked) Forest else CreamDark)
-            .border(1.dp, if (checked) Forest else HairlineStrong, CircleShape)
-            .clickable { onChange(!checked) },
+            .defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+            ) { onChange(!checked) },
+        contentAlignment = Alignment.Center,
     ) {
         Box(
             Modifier
-                .align(if (checked) Alignment.CenterEnd else Alignment.CenterStart)
-                .padding(2.dp)
-                .size(22.dp)
-                .background(Color.White, CircleShape)
-        )
+                .size(width = 44.dp, height = 26.dp)
+                .clip(CircleShape)
+                .background(if (checked) Forest else CreamDark)
+                .border(1.dp, if (checked) Forest else HairlineStrong, CircleShape),
+        ) {
+            Box(
+                Modifier
+                    .align(if (checked) Alignment.CenterEnd else Alignment.CenterStart)
+                    .padding(2.dp)
+                    .size(22.dp)
+                    .background(Color.White, CircleShape)
+            )
+        }
     }
 }

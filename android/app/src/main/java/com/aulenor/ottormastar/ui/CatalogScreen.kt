@@ -136,7 +136,7 @@ fun CatalogScreen(onOpenPlant: (Plant) -> Unit) {
                             .background(if (active) Forest else Color.Transparent)
                             .border(1.dp, if (active) Forest else Hairline, CircleShape)
                             .clickable { activeCategory = key }
-                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                            .padding(horizontal = 16.dp, vertical = 10.dp),
                     )
                 }
             }

@@ -228,6 +228,9 @@ struct PillToggle: View {
                     Capsule().strokeBorder(
                         isOn ? Color.forest : Color.hairlineStrong, lineWidth: 1)
                 )
+                // 44×26 visual, ≥44pt hit target.
+                .frame(minWidth: 48, minHeight: 44)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }

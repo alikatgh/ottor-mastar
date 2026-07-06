@@ -107,7 +107,12 @@ private fun AppRoot() {
 
     val backStack by nav.currentBackStackEntryAsState()
     val currentRoute = backStack?.destination?.route
-    val openPlant = { plant: Plant -> nav.navigate("plant/${plant.slug}") }
+    // launchSingleTop everywhere: a double-tap (mouse users double-click by
+    // habit) must never push the same screen twice — that makes Back appear
+    // broken.
+    val openPlant = { plant: Plant ->
+        nav.navigate("plant/${plant.slug}") { launchSingleTop = true }
+    }
 
     // The web's page-enter motion: opacity + a small rise, ease [.32,.72,0,1].
     val pushEase = CubicBezierEasing(0.32f, 0.72f, 0f, 1f)
@@ -176,15 +181,15 @@ private fun AppRoot() {
                             restoreState = true
                         }
                     },
-                    onOpenLegal = { nav.navigate("legal") },
+                    onOpenLegal = { nav.navigate("legal") { launchSingleTop = true } },
                 )
             }
             composable("catalog") { CatalogScreen(onOpenPlant = openPlant) }
             composable("search") { SearchScreen(onOpenPlant = openPlant) }
             composable("about") {
                 AboutScreen(
-                    onOpenSettings = { nav.navigate("settings") },
-                    onOpenLegal = { nav.navigate("legal") },
+                    onOpenSettings = { nav.navigate("settings") { launchSingleTop = true } },
+                    onOpenLegal = { nav.navigate("legal") { launchSingleTop = true } },
                 )
             }
             composable("settings") { SettingsScreen() }
@@ -214,7 +219,7 @@ private fun AppRoot() {
                             index,
                         )
                     },
-                    onOpenLegal = { nav.navigate("legal") },
+                    onOpenLegal = { nav.navigate("legal") { launchSingleTop = true } },
                 )
             }
         }
@@ -226,7 +231,9 @@ private fun AppRoot() {
             items = request.items,
             initialIndex = request.index,
             onDismiss = { viewer = null },
-            onOpenDetail = { slug -> nav.navigate("plant/$slug") },
+            onOpenDetail = { slug ->
+                nav.navigate("plant/$slug") { launchSingleTop = true }
+            },
         )
     }
 }

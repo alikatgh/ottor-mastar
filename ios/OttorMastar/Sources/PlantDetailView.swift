@@ -245,6 +245,9 @@ struct PlantDetailView: View {
                         Image(systemName: "questionmark.circle")
                             .font(.caption)
                             .foregroundStyle(infoTipOpen ? .forest : .inkMuted)
+                            // Small glyph, full-size hit target.
+                            .frame(width: 40, height: 40)
+                            .contentShape(Rectangle())
                     }
                     .accessibilityLabel(loc.t("plant.medicinalDisclaimerLabel"))
                     Spacer()

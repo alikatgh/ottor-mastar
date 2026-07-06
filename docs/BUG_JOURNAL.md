@@ -43,6 +43,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Touch-UX sweep: double-tap pushed detail twice; sub-44dp targets
+- Symptom: double-clicking a catalog row (mouse habit on emulator) stacked two identical detail screens — Back seemed broken; settings toggle (26dp), (?) tip (16dp) were fiddly to hit.
+- Cause: `nav.navigate` without `launchSingleTop`; visual-size == hit-size on custom controls. `android/.../MainActivity.kt`, `SettingsScreen.kt`, `DetailScreen.kt` (+ iOS mirrors).
+- Fix: `launchSingleTop` on every route; 44–48dp touch targets around small visuals (both platforms); real density in the sheet-offset px math.
+- Lesson: every nav call gets launchSingleTop by default; small glyphs NEVER define their own hit area.
+
 ### 2026-07-06 — Android viewer: couldn't swipe between images
 - Symptom: horizontal swipes in the full-screen viewer barely/never paged; felt broken.
 - Cause: `detectTransformGestures` on each zoomable page consumes single-finger pans, starving HorizontalPager. `android/.../ViewerScreen.kt`.
