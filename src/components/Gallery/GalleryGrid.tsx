@@ -1,10 +1,14 @@
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef, useMemo, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import PlantCard from './PlantCard';
-import ImageViewer, { ViewerItem } from '../common/ImageViewer';
+import type { ViewerItem } from '../common/ImageViewer';
 import { getImagePath } from '../../data/plants';
 import { Plant, Language } from '../../types';
+
+// The zoom viewer (and its react-zoom-pan-pinch dependency) only loads the
+// first time a photo is opened — it has no business in the initial bundle.
+const ImageViewer = lazy(() => import('../common/ImageViewer'));
 
 export default function GalleryGrid({ plants }: { plants: Plant[] }) {
   const { i18n } = useTranslation();
@@ -40,16 +44,18 @@ export default function GalleryGrid({ plants }: { plants: Plant[] }) {
 
       {/* Full-screen zoomable viewer */}
       {selectedIndex !== null && (
-        <ImageViewer
-          items={items}
-          index={selectedIndex}
-          onIndexChange={setSelectedIndex}
-          onClose={() => setSelectedIndex(null)}
-          onOpenDetail={(i) => {
-            setSelectedIndex(null);
-            navigate(`/plant/${plants[i].slug}`);
-          }}
-        />
+        <Suspense fallback={null}>
+          <ImageViewer
+            items={items}
+            index={selectedIndex}
+            onIndexChange={setSelectedIndex}
+            onClose={() => setSelectedIndex(null)}
+            onOpenDetail={(i) => {
+              setSelectedIndex(null);
+              navigate(`/plant/${plants[i].slug}`);
+            }}
+          />
+        </Suspense>
       )}
     </>
   );

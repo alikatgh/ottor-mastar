@@ -1,11 +1,14 @@
 import { Language } from "../types";
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { useState, useRef, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ZoomIn, Info } from 'lucide-react';
 import { getPlantBySlug, getImagePath, getIllustrationPath } from '../data/plants';
 import CategoryBadge from '../components/common/CategoryBadge';
-import ImageViewer, { ViewerItem } from '../components/common/ImageViewer';
+import type { ViewerItem } from '../components/common/ImageViewer';
+
+// Zoom viewer loads on first open, keeping react-zoom-pan-pinch out of this chunk.
+const ImageViewer = lazy(() => import('../components/common/ImageViewer'));
 
 export default function PlantDetailPage() {
   const { slug } = useParams();
@@ -258,12 +261,14 @@ export default function PlantDetailPage() {
       </div>
 
       {viewerIndex !== null && (
-        <ImageViewer
-          items={viewerItems}
-          index={viewerIndex}
-          onIndexChange={setViewerIndex}
-          onClose={() => setViewerIndex(null)}
-        />
+        <Suspense fallback={null}>
+          <ImageViewer
+            items={viewerItems}
+            index={viewerIndex}
+            onIndexChange={setViewerIndex}
+            onClose={() => setViewerIndex(null)}
+          />
+        </Suspense>
       )}
     </div>
   );
