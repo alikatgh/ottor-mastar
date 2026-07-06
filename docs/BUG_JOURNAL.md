@@ -4,6 +4,18 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Patterns to scan for FIRST
 
+- **AI-assembled plant/photo datasets: audit photo↔species assignment, not just captions.**
+  In this repo 15 of 23 field photos depicted a DIFFERENT species than declared
+  (clean reciprocal swaps + orphans), while all 23 botanical PLATES matched their
+  declared species. Plate captions are cheap to verify (printed on the plate); the
+  field photos are the weak link. Read the photo, ID the in-focus foreground plant,
+  compare to the declared latin. See `docs/audits/2026-07-06-photo-species-audit.md`.
+- **Full-screen media viewer: never reserve a big bottom pad for the caption.**
+  Reserving `pb-40` under a contained image pushes it up and leaves a flat black
+  void between image and caption ("looks unstyled"). Fix: keep the reserve small
+  and make the blurred letterbox-fill bright enough (`opacity-60`) to read as an
+  intentional soft backdrop, so negative space never looks like a void.
+
 - **Tailwind v4 + a plain `* { margin:0; padding:0 }` reset = spacing dies app-wide.**
   Tailwind v4 puts utilities in `@layer utilities`; *unlayered* CSS beats any
   layered rule regardless of specificity. So a global reset silently overrides
@@ -22,6 +34,18 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
   `md5` them — 6 of 23 "illustrations" were byte-for-byte copies of others.
 
 ## Chronological log
+
+### 2026-07-06 — 15/23 field photos show the wrong species (photo↔species audit)
+- Symptom: on detail pages the botanical plate and the field photo often show different plants (e.g. Filipendula plate + a vetch photo); user: "some seem like different ones."
+- Cause: field photos were assigned to species carelessly; plates were fine. Two clean reciprocal swaps (plant-10↔11 Filipendula/Vicia, plant-21↔22 Valeriana/Geranium) plus ~11 orphan mismatches with no correct photo in the set.
+- Fix: `scripts/swap-photos.cjs plant-10 plant-11` and `plant-21 plant-22` (swaps thumb/medium/full webp + IMAGE_MAP provenance; leaves the correct `-ill` plates untouched). Rest logged for re-sourcing in the audit report.
+- Lesson: see top pattern — audit photo↔species, not just plate captions. Full findings: `docs/audits/2026-07-06-photo-species-audit.md`.
+
+### 2026-07-06 — Image viewer caption looked unstyled (black void above it)
+- Symptom: full-screen viewer showed the photo up top, a large flat-black gap, then the caption pinned to the bottom — "looks like no styling at all."
+- Cause: the fit box reserved `pb-40 sm:pb-32` for the caption, pushing a contained image up; the blurred letterbox-fill was too dark (`opacity-40` + `/40` overlay) to fill the gap, so it read as black void. `src/components/common/ImageViewer.tsx`.
+- Fix: reserve shrunk to `pb-24`, blurred fill brightened to `opacity-60` with a bottom-weighted scrim; caption tightened into a cohesive panel.
+- Lesson: see top pattern — bright blurred fill, small reserve; negative space must read as intentional backdrop.
 
 ### 2026-07-06 — Catalog/Search/About unreachable on desktop; header search button dead
 - Symptom: at ≥640px the bottom tab bar is hidden and the header had no nav links; its search icon button had no onClick/href — desktop users could only browse the gallery.

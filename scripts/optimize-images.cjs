@@ -12,8 +12,8 @@ const IMAGE_MAP = {
   'plant-07': 'WhatsApp Image 2026-07-04 at 12.36.29 (1).jpeg',
   'plant-08': 'WhatsApp Image 2026-07-04 at 12.36.30.jpeg',
   'plant-09': 'WhatsApp Image 2026-07-04 at 12.36.31.jpeg',
-  'plant-10': 'WhatsApp Image 2026-07-04 at 12.36.32.jpeg',
-  'plant-11': 'WhatsApp Image 2026-07-04 at 12.36.32 (1).jpeg',
+  'plant-10': 'WhatsApp Image 2026-07-04 at 12.36.32 (1).jpeg',
+  'plant-11': 'WhatsApp Image 2026-07-04 at 12.36.32.jpeg',
   'plant-12': 'WhatsApp Image 2026-07-04 at 12.36.32 (2).jpeg',
   'plant-13': 'WhatsApp Image 2026-07-04 at 12.36.33.jpeg',
   'plant-14': 'WhatsApp Image 2026-07-04 at 12.36.33 (1).jpeg',
@@ -23,8 +23,8 @@ const IMAGE_MAP = {
   'plant-18': 'WhatsApp Image 2026-07-04 at 12.36.36.jpeg',
   'plant-19': 'WhatsApp Image 2026-07-04 at 12.36.36 (1).jpeg',
   'plant-20': 'WhatsApp Image 2026-07-04 at 12.36.36 (2).jpeg',
-  'plant-21': 'WhatsApp Image 2026-07-04 at 12.36.37.jpeg',
-  'plant-22': 'WhatsApp Image 2026-07-04 at 12.36.37 (1).jpeg',
+  'plant-21': 'WhatsApp Image 2026-07-04 at 12.36.37 (1).jpeg',
+  'plant-22': 'WhatsApp Image 2026-07-04 at 12.36.37.jpeg',
   'plant-23': 'WhatsApp Image 2026-07-04 at 12.36.38.jpeg',
 };
 

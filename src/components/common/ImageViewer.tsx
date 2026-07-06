@@ -66,15 +66,18 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
 
   return createPortal(
     <div className="fixed inset-0 z-[300] bg-neutral-950 select-none" style={{ touchAction: 'none' }}>
-      {/* Blurred fill so letterboxed images don't sit in harsh black bars */}
+      {/* Blurred copy of the image fills the letterbox (iOS Photos style) so
+          the negative space reads as an intentional soft backdrop, never a flat
+          black void. Kept bright enough to register; a bottom-weighted scrim
+          keeps the caption legible without darkening the whole frame. */}
       <img
         key={`bg-${index}`}
         src={item.src}
         alt=""
         aria-hidden
-        className="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl opacity-40 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover scale-125 blur-3xl opacity-60 pointer-events-none"
       />
-      <div className="absolute inset-0 bg-neutral-950/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/70 pointer-events-none" />
 
       {/* Zoomable image */}
       <TransformWrapper
@@ -92,10 +95,10 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
           wrapperStyle={{ width: '100%', height: '100%' }}
           contentStyle={{ width: '100%', height: '100%' }}
         >
-          {/* The fit box reserves room for the top counter bar and the caption
-              so the contained image fills the clear central zone — as large as
-              possible while staying fully visible, never tucked under chrome. */}
-          <div className="w-screen h-screen flex items-center justify-center px-3 pt-16 pb-40 sm:pb-32">
+          {/* The fit box leaves a small margin for the top counter and the
+              caption panel. Kept tight so the image stays large and sits just
+              above the caption — no dead gap between them. */}
+          <div className="w-screen h-screen flex items-center justify-center px-3 pt-14 pb-24">
             <img
               src={item.src}
               alt={item.title}
@@ -140,24 +143,25 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
         </button>
       )}
 
-      {/* Caption — always visible, editorial. Letterspaced kind label over a
-          serif name and italic Latin, category dots, and a Details action. */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 pt-24 pb-6 px-5 safe-bottom bg-gradient-to-t from-black/95 via-black/70 to-transparent">
-        <div className="max-w-3xl mx-auto flex items-end justify-between gap-5">
+      {/* Caption panel — always visible, editorial. Letterspaced kind label
+          over a serif name and italic Latin, category dots, and a Details
+          action. Solid-enough scrim so it reads as a cohesive panel. */}
+      <div className="absolute inset-x-0 bottom-0 z-10 pt-20 px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] bg-gradient-to-t from-black via-black/85 to-transparent">
+        <div className="max-w-3xl mx-auto flex items-end justify-between gap-4 sm:gap-6">
           <div className="min-w-0">
             {item.kind && (
-              <p className="overline-label !text-white/55 mb-1.5">{item.kind}</p>
+              <p className="overline-label !text-white/55 mb-2">{item.kind}</p>
             )}
-            <h3 className="font-heading text-2xl sm:text-3xl font-semibold text-white leading-tight">
+            <h3 className="font-heading text-[1.6rem] leading-[1.1] sm:text-3xl font-semibold text-white">
               {item.title}
             </h3>
             {item.subtitle && (
-              <p className="text-white/70 text-sm sm:text-base italic mt-1 truncate">
+              <p className="text-white/65 text-sm sm:text-base italic mt-1.5 truncate">
                 {item.subtitle}
               </p>
             )}
             {item.badges && item.badges.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-3">
+              <div className="flex flex-wrap gap-1.5 mt-3.5">
                 {item.badges.map((cat) => (
                   <CategoryBadge key={cat} category={cat} onDark />
                 ))}
