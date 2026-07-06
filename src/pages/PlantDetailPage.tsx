@@ -3,9 +3,9 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useRef, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, ZoomIn, Info, HelpCircle } from 'lucide-react';
+import { ArrowLeft, ZoomIn, Info, HelpCircle, ExternalLink, ArrowUpRight } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
-import { getImagePath, getIllustrationPath } from '../data/plants';
+import { getImagePath, getIllustrationPath, getWikipediaUrl } from '../data/plants';
 import { findPlantBySlug } from '../data/countries';
 import { useSettings } from '../context/SettingsContext';
 import CategoryBadge from '../components/common/CategoryBadge';
@@ -249,6 +249,33 @@ export default function PlantDetailPage() {
                 {content}
               </section>
             ))}
+
+            {/* Further reading — a language-matched Wikipedia lookup so readers
+                who want to go deeper stay in their chosen language. */}
+            <section>
+              <h2 className="overline-label !font-body border-t border-hairline pt-3 mb-3">
+                {t('plant.furtherReading')}
+              </h2>
+              <a
+                href={getWikipediaUrl(plant, lang)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  flex items-center gap-3 rounded-xl border border-hairline bg-card
+                  px-4 py-3.5 no-underline hover:bg-cream-dark/40 transition-colors
+                  motion-safe:active:scale-[0.99]
+                "
+              >
+                <ExternalLink className="w-4 h-4 text-forest shrink-0" strokeWidth={1.9} />
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium text-ink">{t('plant.readOnWikipedia')}</p>
+                  <p className="text-xs text-ink-muted truncate tabular-nums">
+                    {lang}.wikipedia.org
+                  </p>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-ink-muted/60 shrink-0" />
+              </a>
+            </section>
           </div>
 
           {/* Safety disclaimer — this page shows traditional medicinal uses */}

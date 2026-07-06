@@ -817,3 +817,28 @@ export function getPlantsSortedByName(lang: import('../types').Language = 'sah')
     a.names[lang].localeCompare(b.names[lang], lang)
   );
 }
+
+/**
+ * "Further reading" link: a language-matched Wikipedia lookup so a reader stays
+ * in their chosen language. The UI language maps 1:1 to a Wikipedia subdomain
+ * (sah / ru / en), so a Sakha reader is sent only to Sakha-language content.
+ *
+ * Query strategy (verified against live Wikipedia):
+ * - sah: the Sakha name — the only way to reach a Sakha-titled article (e.g.
+ *   "Сардаана"); when none exists the Sakha search surfaces related Sakha
+ *   plant articles rather than leaving the language. Parenthetical glosses are
+ *   stripped for a cleaner query.
+ * - ru / en: the Latin binomial — it resolves reliably to the right article in
+ *   that language (e.g. ru "Lilium pensylvanicum" → «Лилия даурская»), avoiding
+ *   the disambiguation pages that bare common names can hit.
+ *
+ * Special:Search lands on the article when the query matches a title/redirect,
+ * and on a same-language results page otherwise — so the link is never a 404.
+ */
+export function getWikipediaUrl(plant: Plant, lang: import('../types').Language): string {
+  const query =
+    lang === 'sah'
+      ? plant.names.sah.replace(/\s*\([^)]*\)\s*/g, ' ').trim()
+      : plant.names.latin;
+  return `https://${lang}.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(query)}`;
+}

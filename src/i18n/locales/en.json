@@ -78,7 +78,9 @@
     "illustration": "Botanical illustration",
     "photograph": "Photograph",
     "medicinalDisclaimerLabel": "About this section",
-    "medicinalDisclaimer": "These are traditional and folk associations recorded for reference only — not instructions, dosages, or medical advice. Nothing here should be used to gather, prepare, or consume any plant; many are toxic and misidentification is easy. Treat every entry as a starting point for your own further research, and consult a qualified professional before acting. You use this information entirely at your own risk and assume full responsibility for any consequences."
+    "medicinalDisclaimer": "These are traditional and folk associations recorded for reference only — not instructions, dosages, or medical advice. Nothing here should be used to gather, prepare, or consume any plant; many are toxic and misidentification is easy. Treat every entry as a starting point for your own further research, and consult a qualified professional before acting. You use this information entirely at your own risk and assume full responsibility for any consequences.",
+    "furtherReading": "Further reading",
+    "readOnWikipedia": "Read on Wikipedia"
   },
   "categories": {
     "medicinal": "Medicinal",
