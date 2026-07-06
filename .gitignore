@@ -26,3 +26,12 @@ dist-ssr
 # Large source photos — unused at runtime (only optimized /plants/*.webp ship)
 _src_originals/whatsapp/
 _src_originals/mongolia/
+
+# Native apps — generated artifacts.
+# Bundled data/images regenerate with: node scripts/export-native-data.cjs
+shared/
+ios/OttorMastar/Resources/
+android/app/src/main/assets/
+# Xcode project is generated from ios/project.yml with: cd ios && xcodegen
+ios/OttorMastar.xcodeproj/
+ios/OttorMastar/Info.plist

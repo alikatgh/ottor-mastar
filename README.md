@@ -89,3 +89,40 @@ This project is configured for seamless deployment to Cloudflare Pages.
 - **Build output directory:** `dist`
 
 The repository includes a `public/_redirects` file that contains `/* /index.html 200`. This ensures that Cloudflare Pages correctly routes all traffic to the React SPA router, preventing 404 errors on direct links.
+
+## 📱 Native apps (iOS + Android)
+
+Both native apps live in this repo and bundle the same trilingual dataset as
+the web app — fully offline (thumb + medium images ship in the binary; the
+remote `full` size lights up for deep zoom once the site is deployed).
+
+**Shared data pipeline** — after ANY edit to `src/data/*` or `src/i18n/locales/*`:
+
+```bash
+node scripts/export-native-data.cjs
+```
+
+This regenerates `shared/plants.json` (with `hasIllustration` baked in) plus
+each app's bundled copy and images. All three outputs are gitignored.
+
+**iOS** (`ios/` — SwiftUI, iOS 17+, XcodeGen):
+
+```bash
+node scripts/export-native-data.cjs   # once, or after data changes
+cd ios && xcodegen                    # generates OttorMastar.xcodeproj from project.yml
+xcodebuild -project OttorMastar.xcodeproj -scheme OttorMastar \
+  -destination 'platform=iOS Simulator,name=iPhone 17' build
+```
+
+**Android** (`android/` — Kotlin, Jetpack Compose Material 3, minSdk 26):
+
+```bash
+node scripts/export-native-data.cjs
+cd android && JAVA_HOME=/opt/homebrew/opt/openjdk@17 ./gradlew :app:assembleDebug
+```
+
+Design notes: both apps implement the herbarium tokens from `src/index.css`
+(cream canvas, parchment plates, hairline rules, one forest accent, overline
+section labels, serif headings with full Cyrillic for Sakha). Settings mirror
+the web policy — language, country, Latin names, reset; Yakutia is always the
+default collection.

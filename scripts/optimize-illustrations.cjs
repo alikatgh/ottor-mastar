@@ -5,7 +5,6 @@ const sharp = require('sharp');
 // Drop new botanical-plate sources (PNG/JPG named `plant-NN-ill.png`) here.
 // Kept outside public/ so large source art is never copied into the build.
 const INPUT_DIR = path.join(__dirname, '../_src_originals/illustrations');
-const OUTPUT_DIR = path.join(__dirname, '../public/plants');
 
 const SIZES = {
   thumb: { width: 400, height: 400, fit: 'cover' },
@@ -33,11 +32,17 @@ async function optimizeIllustrations() {
     const inputPath = path.join(INPUT_DIR, filename);
     const basename = path.basename(filename, path.extname(filename)); // e.g. plant-01-ill
     
+    const outputBaseDir = basename.startsWith('mongolia-') 
+      ? path.join(__dirname, '../public/mongolia')
+      : path.join(__dirname, '../public/plants');
+      
     try {
       const image = sharp(inputPath);
       
       for (const [sizeName, config] of Object.entries(SIZES)) {
-        const outputPath = path.join(OUTPUT_DIR, sizeName, `${basename}.webp`);
+        const sizeDir = path.join(outputBaseDir, sizeName);
+        if (!fs.existsSync(sizeDir)) fs.mkdirSync(sizeDir, { recursive: true });
+        const outputPath = path.join(sizeDir, `${basename}.webp`);
         
         const resizeOptions = {
           width: config.width,

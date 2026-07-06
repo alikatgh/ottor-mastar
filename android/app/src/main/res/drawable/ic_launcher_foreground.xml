@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simple sprig — two leaves on a stem, forest on cream. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group android:translateX="27" android:translateY="24">
+        <path
+            android:fillColor="#2C5A2E"
+            android:pathData="M27,60 C27,44 27,30 27,14 C27,12 28,10 30,9 L31,11 C29,12 29,13 29,15 C29,30 29,44 29,60 Z" />
+        <path
+            android:fillColor="#3D7A3D"
+            android:pathData="M28,26 C20,24 14,18 13,9 C22,10 28,16 29,25 Z" />
+        <path
+            android:fillColor="#2C5A2E"
+            android:pathData="M29,38 C37,36 43,30 44,21 C35,22 29,28 28,37 Z" />
+    </group>
+</vector>

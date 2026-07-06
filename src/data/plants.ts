@@ -776,10 +776,6 @@ function illustrationSlug(plant: Plant): string {
  * `_src_originals/illustrations/`, run `npm run optimize`, and it lights up.
  */
 export function hasIllustration(plant: Plant): boolean {
-  // The manifest only indexes the Yakutia set under /plants. Datasets with
-  // their own imageBase (e.g. Mongolia) need their own manifest before plates
-  // can light up — until then they are photo-only.
-  if (plant.imageBase) return false;
   return AVAILABLE_ILLUSTRATION_SET.has(illustrationSlug(plant));
 }
 

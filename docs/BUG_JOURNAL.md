@@ -35,6 +35,24 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Native apps rendered raw key "gallery.photoCount" in headers
+- Symptom: photo-wall header showed the literal key instead of "23 photos" (both native apps).
+- Cause: hand-rolled i18next-style `plural()` fell back `key_one → key` but never tried the bare `table[key]` — and `gallery.photoCount` is an un-suffixed single-form key. `android/.../L10n.kt`, `ios/.../L10n.swift`.
+- Fix: fallback chain now ends `…?? table[key] ?? key`.
+- Lesson: when re-implementing i18next lookups, remember plural keys come in BOTH suffixed and bare forms — test one of each.
+
+### 2026-07-06 — iOS app install failed: "Missing bundle ID" despite valid Info.plist
+- Symptom: `simctl install` rejected the built .app; Info.plist had a correct CFBundleIdentifier.
+- Cause: XcodeGen folder-reference at `OttorMastar/Resources` put a directory literally named `Resources` in the .app — iOS then treats the bundle as a macOS-style deep bundle. `ios/project.yml`.
+- Fix: reference `Resources/PlantImages` as the blue folder + list the JSONs individually, so no top-level `Resources/` dir lands in the bundle.
+- Lesson: never ship a folder named `Resources` (or `Contents`) inside an iOS .app.
+
+### 2026-07-06 — Android home header stayed "Plants of Yakutia" on the Mongolia collection
+- Symptom: switching country to Mongolia kept the Yakutia title/description on Home (both native apps).
+- Cause: cover hardcoded `app.subtitle`/`app.description`, which are Yakutia-specific copy. `android/.../HomeScreen.kt`, `ios/.../HomeView.swift`.
+- Fix: non-default countries title themselves via `settings.country_<id>`; description shows only for Yakutia.
+- Lesson: any copy written for the default collection must be gated on `country.id`, not reused globally.
+
 ### 2026-07-06 — Plant detail page opened already scrolled past its hero image
 - Symptom: tapping a plant from a scrolled list opened the detail page mid-scroll (names section), hero image + back button overlapping the title; read as "must scroll up to see the image".
 - Cause: no scroll reset on route change — react-router keeps the window scroll position across navigations. `src/App.tsx`.
