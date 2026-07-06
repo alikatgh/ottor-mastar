@@ -33,7 +33,21 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 - **Assets can be silent duplicates.** Before trusting a generated asset set,
   `md5` them — 6 of 23 "illustrations" were byte-for-byte copies of others.
 
+## Patterns to scan for FIRST (native/Compose)
+
+- **Compose `detectTransformGestures` eats ONE-finger drags too** — inside a
+  Pager it silently kills horizontal paging. For pinch-zoom inside a pager,
+  hand-roll `awaitEachGesture`: consume only multi-finger events, or single
+  finger while zoomed (scale > 1); otherwise let the pager/dismiss gestures
+  have the pointer. Same idea anywhere two gesture owners share a surface.
+
 ## Chronological log
+
+### 2026-07-06 — Android viewer: couldn't swipe between images
+- Symptom: horizontal swipes in the full-screen viewer barely/never paged; felt broken.
+- Cause: `detectTransformGestures` on each zoomable page consumes single-finger pans, starving HorizontalPager. `android/.../ViewerScreen.kt`.
+- Fix: custom `awaitEachGesture` (consume multi-finger, or 1-finger only when zoomed) + clamped pan; detail pager taps via `detectTapGestures` (no clickable press-delay) + `beyondViewportPageCount = 1`.
+- Lesson: see "detectTransformGestures eats one-finger drags" pattern above.
 
 ### 2026-07-06 — Native apps rendered raw key "gallery.photoCount" in headers
 - Symptom: photo-wall header showed the literal key instead of "23 photos" (both native apps).

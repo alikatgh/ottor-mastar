@@ -4,8 +4,11 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.calculatePan
+import androidx.compose.foundation.gestures.calculateZoom
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.PointerInputScope
@@ -147,6 +150,9 @@ fun ViewerOverlay(
             HorizontalPager(
                 state = pagerState,
                 userScrollEnabled = !zoomed,
+                // Neighbor pages stay composed so a swipe never lands on a
+                // blank, still-decoding image.
+                beyondViewportPageCount = 1,
                 modifier = Modifier
                     .fillMaxSize()
                     .graphicsLayer {
@@ -156,14 +162,14 @@ fun ViewerOverlay(
                     }
                     .pointerInput(zoomed) {
                         if (!zoomed) {
-                            var totalDx = 0f
+                            // detectVerticalDragGestures only claims drags that
+                            // pass VERTICAL touch slop — horizontal swipes fall
+                            // through to the pager untouched.
                             detectVerticalDragOnly(
-                                onDrag = { dy, dx ->
-                                    totalDx += dx
-                                    if (abs(totalDx) < 60f) dragY = (dragY + dy).coerceAtLeast(0f)
+                                onDrag = { dy, _ ->
+                                    dragY = (dragY + dy).coerceAtLeast(0f)
                                 },
                                 onEnd = { velocity ->
-                                    totalDx = 0f
                                     if (dragY > 300f || velocity > 2200f) {
                                         close()
                                     } else {
@@ -322,13 +328,39 @@ private fun ZoomablePage(
     }
     LaunchedEffect(scale) { onZoomChange(scale > 1.02f) }
 
+    // Keep the zoomed image on-screen: pan is clamped to the overflow.
+    fun clampOffset(raw: Offset, size: androidx.compose.ui.unit.IntSize): Offset {
+        val maxX = (size.width * (scale - 1f)) / 2f
+        val maxY = (size.height * (scale - 1f)) / 2f
+        return Offset(raw.x.coerceIn(-maxX, maxX), raw.y.coerceIn(-maxY, maxY))
+    }
+
     Box(
         modifier
             .fillMaxSize()
+            // Zoom/pan claims touches ONLY for multi-finger gestures or a
+            // single finger while zoomed in — otherwise the pager (horizontal
+            // swipe) and the dismiss drag (vertical) get the events. This is
+            // what detectTransformGestures gets wrong: it eats one-finger
+            // drags too, which is why paging felt broken.
             .pointerInput(Unit) {
-                detectTransformGestures { _, pan, zoom, _ ->
-                    scale = (scale * zoom).coerceIn(1f, 6f)
-                    offset = if (scale > 1f) offset + pan else Offset.Zero
+                awaitEachGesture {
+                    awaitFirstDown(requireUnconsumed = false)
+                    do {
+                        val event = awaitPointerEvent()
+                        val pressed = event.changes.count { it.pressed }
+                        if (pressed > 1) {
+                            val zoom = event.calculateZoom()
+                            val pan = event.calculatePan()
+                            scale = (scale * zoom).coerceIn(1f, 6f)
+                            offset = if (scale > 1f) clampOffset(offset + pan, size) else Offset.Zero
+                            event.changes.forEach { it.consume() }
+                        } else if (pressed == 1 && scale > 1.02f) {
+                            val pan = event.calculatePan()
+                            offset = clampOffset(offset + pan, size)
+                            event.changes.forEach { it.consume() }
+                        }
+                    } while (event.changes.any { it.pressed })
                 }
             }
             .pointerInput(Unit) {

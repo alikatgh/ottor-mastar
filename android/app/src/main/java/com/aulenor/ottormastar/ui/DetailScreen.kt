@@ -11,6 +11,8 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -103,13 +105,21 @@ fun DetailScreen(
     Column(Modifier.fillMaxSize().background(Color.White).verticalScroll(rememberScrollState())) {
         // ===== Image panel =====
         Box(Modifier.fillMaxWidth().height(400.dp).background(Parchment)) {
-            HorizontalPager(state = pagerState, modifier = Modifier.fillMaxSize()) { page ->
+            // beyondViewportPageCount keeps the second slide composed (no
+            // decode jank on first swipe); tap via detectTapGestures instead
+            // of clickable — no ripple, no press-delay, never fights the
+            // pager's horizontal drag.
+            HorizontalPager(
+                state = pagerState,
+                beyondViewportPageCount = 1,
+                modifier = Modifier.fillMaxSize(),
+            ) { page ->
                 val isPlate = slides[page]
                 if (isPlate) {
                     Box(
                         Modifier
                             .fillMaxSize()
-                            .clickable { onOpenViewer(slides, page) },
+                            .pointerInput(page) { detectTapGestures { onOpenViewer(slides, page) } },
                         contentAlignment = Alignment.Center,
                     ) {
                         PlantImage(
@@ -123,7 +133,11 @@ fun DetailScreen(
                         )
                     }
                 } else {
-                    Box(Modifier.fillMaxSize().clickable { onOpenViewer(slides, page) }) {
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .pointerInput(page) { detectTapGestures { onOpenViewer(slides, page) } },
+                    ) {
                         PlantImage(
                             country, plant, ImgSize.MEDIUM,
                             modifier = Modifier.fillMaxSize(),
