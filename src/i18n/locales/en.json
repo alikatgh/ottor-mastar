@@ -33,7 +33,10 @@
     "habitat": "Habitat",
     "bloomingSeason": "Blooming Season",
     "categories": "Categories",
-    "backToGallery": "Back to Gallery"
+    "backToGallery": "Back to Gallery",
+    "details": "Details",
+    "illustration": "Botanical illustration",
+    "photograph": "Photograph"
   },
   "categories": {
     "medicinal": "Medicinal",
@@ -63,6 +66,9 @@
     "close": "Close",
     "next": "Next",
     "previous": "Previous",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "legal": "Legal & Privacy",
+    "disclaimerShort": "For educational use only — not medical or safety advice. Never gather, prepare, or use a plant based on this app; many are poisonous. Consult a professional.",
+    "readDisclaimer": "Read the full disclaimer"
   }
 }

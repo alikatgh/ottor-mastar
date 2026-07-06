@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { plants, getImagePath } from '../data/plants';
 import GalleryGrid from '../components/Gallery/GalleryGrid';
+import Footer from '../components/Layout/Footer';
 
 import { Language } from "../types";
 const HERO_PLANT = plants[plants.length - 1]; // Sardaana (Siberian Lily) — the last and most iconic
@@ -22,8 +23,10 @@ export default function HomePage() {
             className="w-full h-full object-cover"
             loading="eager"
           />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-cream" />
+          {/* Readability scrim — dark at the bottom where the title/tagline sit,
+              fading to transparent so the sky stays bright. The old overlay faded
+              to cream, washing the white text into an invisible light background. */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
         </div>
 
         {/* Hero Content */}
@@ -60,6 +63,8 @@ export default function HomePage() {
           <GalleryGrid plants={plants} />
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

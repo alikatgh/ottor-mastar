@@ -28,7 +28,10 @@ const IMAGE_MAP = {
   'plant-23': 'WhatsApp Image 2026-07-04 at 12.36.38.jpeg',
 };
 
-const INPUT_DIR = path.join(__dirname, '../public/images');
+// Source photos live OUTSIDE public/ so the (large, unused-at-runtime)
+// originals are not copied into the production build. The app serves only the
+// optimized /plants/*.webp variants written to OUTPUT_DIR.
+const INPUT_DIR = path.join(__dirname, '../_src_originals/whatsapp');
 const OUTPUT_DIR = path.join(__dirname, '../public/plants');
 
 const SIZES = {

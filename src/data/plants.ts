@@ -55,6 +55,9 @@ export const IMAGE_MAP: Record<string, string> = {
 };
 
 import { Plant } from '../types';
+import { AVAILABLE_ILLUSTRATIONS } from './available-illustrations';
+
+const AVAILABLE_ILLUSTRATION_SET = new Set(AVAILABLE_ILLUSTRATIONS);
 
 export const plants: Plant[] = [
   {
@@ -571,7 +574,6 @@ export const plants: Plant[] = [
     id: 'vetch-pea',
     slug: 'vetch-pea',
     imageId: 'plant-18',
-    illustrationId: 'plant-18-ill',
     names: {
       sah: 'Чэмэр кулумах',
       ru: 'Чина луговая',
@@ -601,7 +603,6 @@ export const plants: Plant[] = [
     id: 'astragalus',
     slug: 'astragalus',
     imageId: 'plant-19',
-    illustrationId: 'plant-19-ill',
     names: {
       sah: 'Тэбиэн от',
       ru: 'Остролодочник якутский',
@@ -631,7 +632,6 @@ export const plants: Plant[] = [
     id: 'ranunculus',
     slug: 'ranunculus',
     imageId: 'plant-20',
-    illustrationId: 'plant-20-ill',
     names: {
       sah: 'Алтан от',
       ru: 'Лютик золотистый',
@@ -661,7 +661,6 @@ export const plants: Plant[] = [
     id: 'geranium-sibiricum',
     slug: 'geranium-sibiricum',
     imageId: 'plant-21',
-    illustrationId: 'plant-21-ill',
     names: {
       sah: 'Сибиир кытыылыкайа',
       ru: 'Герань сибирская',
@@ -691,7 +690,6 @@ export const plants: Plant[] = [
     id: 'valerian',
     slug: 'valerian',
     imageId: 'plant-22',
-    illustrationId: 'plant-22-ill',
     names: {
       sah: 'Кэтэх от',
       ru: 'Валериана лекарственная',
@@ -721,7 +719,6 @@ export const plants: Plant[] = [
     id: 'daylily',
     slug: 'daylily',
     imageId: 'plant-23',
-    illustrationId: 'plant-23-ill',
     names: {
       sah: 'Сардаана',
       ru: 'Саранка (лилия кудреватая)',
@@ -763,6 +760,33 @@ export function getOriginalImagePath(plant: Plant) {
  */
 export function getImagePath(plant: Plant, size = 'medium') {
   return `/plants/${size}/${plant.imageId}.webp`;
+}
+
+/** Canonical plate slug for a plant, e.g. plant-01 → plant-01-ill. */
+function illustrationSlug(plant: Plant): string {
+  return `${plant.imageId}-ill`;
+}
+
+/**
+ * Whether this plant has a genuine, matching botanical illustration plate.
+ *
+ * Source of truth is the auto-generated `available-illustrations.ts` manifest
+ * (which lists the plate files that actually exist), NOT the hand-authored
+ * `illustrationId` field. To add a plate: drop the source into
+ * `_src_originals/illustrations/`, run `npm run optimize`, and it lights up.
+ */
+export function hasIllustration(plant: Plant): boolean {
+  return AVAILABLE_ILLUSTRATION_SET.has(illustrationSlug(plant));
+}
+
+/**
+ * Get the optimized illustration (botanical plate) path, or null when this
+ * plant has no genuine plate.
+ * @param {object} plant - Plant object
+ * @param {'thumb' | 'medium' | 'full'} size - Image size variant
+ */
+export function getIllustrationPath(plant: Plant, size = 'medium'): string | null {
+  return hasIllustration(plant) ? `/plants/${size}/${illustrationSlug(plant)}.webp` : null;
 }
 
 /**

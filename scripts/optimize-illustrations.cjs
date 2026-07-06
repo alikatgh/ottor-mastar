@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-const INPUT_DIR = path.join(__dirname, '../public/images/illustrations');
+// Drop new botanical-plate sources (PNG/JPG named `plant-NN-ill.png`) here.
+// Kept outside public/ so large source art is never copied into the build.
+const INPUT_DIR = path.join(__dirname, '../_src_originals/illustrations');
 const OUTPUT_DIR = path.join(__dirname, '../public/plants');
 
 const SIZES = {
@@ -12,8 +14,19 @@ const SIZES = {
 };
 
 async function optimizeIllustrations() {
-  const files = fs.readdirSync(INPUT_DIR).filter(f => f.endsWith('.png') || f.endsWith('.jpg'));
-  
+  if (!fs.existsSync(INPUT_DIR)) {
+    console.log(`No source folder at ${INPUT_DIR} — nothing to optimize. Add plant-NN-ill.png files there.`);
+    return;
+  }
+  const files = fs
+    .readdirSync(INPUT_DIR)
+    .filter((f) => f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg') || f.endsWith('.webp'));
+
+  if (files.length === 0) {
+    console.log(`No illustration sources found in ${INPUT_DIR}.`);
+    return;
+  }
+
   console.log(`Starting optimization for ${files.length} illustrations...`);
 
   for (const filename of files) {

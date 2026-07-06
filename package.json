@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "optimize": "node scripts/optimize-images.cjs && node scripts/optimize-illustrations.cjs"
+    "optimize": "node scripts/optimize-images.cjs && node scripts/optimize-illustrations.cjs && node scripts/gen-illustration-manifest.cjs",
+    "optimize:illustrations": "node scripts/optimize-illustrations.cjs && node scripts/gen-illustration-manifest.cjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",
@@ -18,7 +19,8 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-i18next": "^17.0.8",
-    "react-router-dom": "^7.18.1"
+    "react-router-dom": "^7.18.1",
+    "react-zoom-pan-pinch": "^4.0.3"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.2",

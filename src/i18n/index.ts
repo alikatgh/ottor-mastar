@@ -21,6 +21,12 @@ i18n
       ru: { translation: ru },
       en: { translation: en },
     },
+    // Data is keyed by 'sah' | 'ru' | 'en'. Without these, a browser reporting
+    // 'en-US' / 'ru-RU' leaves i18n.language region-suffixed, so every
+    // plant.xxx[lang] lookup returns undefined and content renders blank.
+    supportedLngs: ['sah', 'ru', 'en'],
+    nonExplicitSupportedLngs: true,
+    load: 'languageOnly',
     fallbackLng: 'sah',
     interpolation: {
       escapeValue: false,
@@ -28,6 +34,9 @@ i18n
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
+      // Strip region suffix so 'en-US' → 'en', 'ru-RU' → 'ru'. This makes
+      // i18n.language exactly match the data keys used for plant.xxx[lang].
+      convertDetectedLanguage: (lng: string) => lng.split('-')[0],
     },
   });
 

@@ -1,30 +1,28 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import PlantCard from './PlantCard';
-import PhotoViewer from './PhotoViewer';
+import ImageViewer, { ViewerItem } from '../common/ImageViewer';
+import { getImagePath } from '../../data/plants';
+import { Plant, Language } from '../../types';
 
-import { Plant } from "../../types";
 export default function GalleryGrid({ plants }: { plants: Plant[] }) {
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
+  const lang = i18n.language as Language;
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const gridRef = useRef(null);
 
-  const handleOpen = useCallback((index: number) => {
-    setSelectedIndex(index);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setSelectedIndex(null);
-  }, []);
-
-  const handleNavigate = useCallback((direction: number) => {
-    setSelectedIndex((prev) => {
-      if (prev === null) return null;
-      const next = prev + direction;
-      if (next < 0 || next >= plants.length) return prev;
-      return next;
-    });
-  }, [plants.length]);
+  const items: ViewerItem[] = useMemo(
+    () =>
+      plants.map((p) => ({
+        src: getImagePath(p, 'full'),
+        title: p.names[lang] || p.names.sah,
+        subtitle: p.names.latin,
+        badges: p.categories,
+      })),
+    [plants, lang]
+  );
 
   return (
     <>
@@ -35,19 +33,22 @@ export default function GalleryGrid({ plants }: { plants: Plant[] }) {
             plant={plant}
             index={index}
             lang={i18n.language}
-            onClick={() => handleOpen(index)}
+            onClick={() => setSelectedIndex(index)}
           />
         ))}
       </div>
 
-      {/* Full-screen Photo Viewer */}
+      {/* Full-screen zoomable viewer */}
       {selectedIndex !== null && (
-        <PhotoViewer
-          plants={plants}
-          currentIndex={selectedIndex}
-          onClose={handleClose}
-          onNavigate={handleNavigate}
-          lang={i18n.language}
+        <ImageViewer
+          items={items}
+          index={selectedIndex}
+          onIndexChange={setSelectedIndex}
+          onClose={() => setSelectedIndex(null)}
+          onOpenDetail={(i) => {
+            setSelectedIndex(null);
+            navigate(`/plant/${plants[i].slug}`);
+          }}
         />
       )}
     </>

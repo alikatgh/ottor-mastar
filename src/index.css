@@ -66,9 +66,14 @@
    Base Styles
    ============================================ */
 
-* {
-  margin: 0;
-  padding: 0;
+/* Only normalize box-sizing here. Do NOT reset margin/padding on `*`:
+   this file's rules are unlayered, so a `* { margin:0; padding:0 }` reset
+   would beat every Tailwind `p-*` / `m-*` / `space-y-*` utility (which live
+   in @layer utilities) regardless of specificity — collapsing spacing app-wide.
+   Tailwind's Preflight already zeroes element margins in @layer base. */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -117,6 +122,15 @@ h1, h2, h3, h4 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.25);
+}
+
+/* Fully hidden scrollbar (used by the plant-detail hero carousel) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* ============================================

@@ -1,9 +1,13 @@
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Leaf, Heart, Globe } from 'lucide-react';
+import { Leaf, Heart, Globe, ShieldAlert, ChevronRight } from 'lucide-react';
+import { Language } from '../types';
+import Footer from '../components/Layout/Footer';
 
 export default function AboutPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language as Language;
 
   const features = [
     {
@@ -99,23 +103,34 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-ink mb-0.5">
-                    {title[t('app.title') === 'Оттор Мастар' ? 'sah' : t('app.title') === 'Ottor Mastar' ? 'en' : 'ru']}
+                    {title[lang]}
                   </h3>
                   <p className="text-xs text-ink-muted">
-                    {desc[t('app.title') === 'Оттор Мастар' ? 'sah' : t('app.title') === 'Ottor Mastar' ? 'en' : 'ru']}
+                    {desc[lang]}
                   </p>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Footer */}
-          <div className="text-center text-ink-muted text-xs">
-            <p>© {new Date().getFullYear()} Ottor Mastar</p>
-            <p className="mt-1">ottormastar.aulenor.com</p>
-          </div>
+          {/* Legal & Privacy entry */}
+          <Link
+            to="/legal"
+            className="flex items-center gap-3 bg-white rounded-2xl p-5 shadow-card no-underline hover:bg-cream-dark/40 transition-colors"
+          >
+            <div className="w-10 h-10 rounded-xl bg-amber/15 text-amber-warm flex items-center justify-center flex-shrink-0">
+              <ShieldAlert className="w-5 h-5" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-sm font-semibold text-ink">{t('common.legal')}</h3>
+              <p className="text-xs text-ink-muted">{t('common.readDisclaimer')}</p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-ink-muted/60 flex-shrink-0" />
+          </Link>
         </motion.div>
       </div>
+
+      <Footer />
     </div>
   );
 }

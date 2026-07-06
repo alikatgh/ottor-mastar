@@ -6,6 +6,7 @@ import CatalogPage from './pages/CatalogPage';
 import PlantDetailPage from './pages/PlantDetailPage';
 import SearchPage from './pages/SearchPage';
 import AboutPage from './pages/AboutPage';
+import LegalPage from './pages/LegalPage';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="/plant/:slug" element={<PlantDetailPage />} />
             <Route path="/search" element={<SearchPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/legal" element={<LegalPage />} />
           </Routes>
         </main>
         <BottomNav />
