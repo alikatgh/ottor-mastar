@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import PlantCard from './PlantCard';
 import type { ViewerItem } from '../common/ImageViewer';
 import { getImagePath } from '../../data/plants';
+import { useSettings } from '../../context/SettingsContext';
 import { Plant, Language } from '../../types';
 
 // The zoom viewer (and its react-zoom-pan-pinch dependency) only loads the
@@ -14,6 +15,7 @@ export default function GalleryGrid({ plants }: { plants: Plant[] }) {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
   const lang = i18n.language as Language;
+  const { settings } = useSettings();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const gridRef = useRef(null);
 
@@ -37,7 +39,11 @@ export default function GalleryGrid({ plants }: { plants: Plant[] }) {
             plant={plant}
             index={index}
             lang={i18n.language}
-            onClick={() => setSelectedIndex(index)}
+            onClick={() =>
+              settings.tileTap === 'detail'
+                ? navigate(`/plant/${plant.slug}`)
+                : setSelectedIndex(index)
+            }
           />
         ))}
       </div>

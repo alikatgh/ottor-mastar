@@ -13,6 +13,8 @@ export interface Plant {
   medicinalUses: LocalizedString;
   habitat: LocalizedString;
   bloomingSeason: string;
+  /** Base public path for this plant's images; defaults to the Yakutia set at /plants. */
+  imageBase?: string;
   categories: string[];
   color: string;
 }

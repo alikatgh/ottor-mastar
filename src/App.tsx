@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import BottomNav from './components/Layout/BottomNav';
 import HomePage from './pages/HomePage';
+import { SettingsProvider } from './context/SettingsContext';
 
 // Route-level code-splitting: only the gallery ships in the initial bundle;
 // every other screen loads on first navigation.
@@ -12,6 +13,7 @@ const PlantDetailPage = lazy(() => import('./pages/PlantDetailPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const LegalPage = lazy(() => import('./pages/LegalPage'));
+const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 
 const OG_LOCALES: Record<string, string> = {
   sah: 'sah_RU',
@@ -42,6 +44,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <SettingsProvider>
       <div className="relative min-h-screen bg-cream">
         <Header />
         <main>
@@ -55,11 +58,13 @@ export default function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/legal" element={<LegalPage />} />
+              <Route path="/settings" element={<SettingsPage />} />
             </Routes>
           </Suspense>
         </main>
         <BottomNav />
       </div>
+      </SettingsProvider>
     </BrowserRouter>
   );
 }

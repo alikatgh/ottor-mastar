@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Search as SearchIcon } from 'lucide-react';
-import { plants, getImagePath } from '../data/plants';
+import { getImagePath, getIllustrationPath } from '../data/plants';
+import { usePlants, useSettings } from '../context/SettingsContext';
 
 export default function SearchPage() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as Language;
+  const plants = usePlants();
+  const { settings } = useSettings();
   const [query, setQuery] = useState('');
 
   const results = useMemo(() => {
@@ -22,7 +25,7 @@ export default function SearchPage() {
       p.description[lang]?.toLowerCase().includes(q) ||
       p.medicinalUses[lang]?.toLowerCase().includes(q)
     );
-  }, [query, lang]);
+  }, [plants, query, lang]);
 
   return (
     <div className="min-h-screen pt-16 pb-20 md:pb-6">
@@ -55,7 +58,7 @@ export default function SearchPage() {
           ) : (
             <div className="divide-y divide-hairline border-t border-b border-hairline">
               {results.map((plant, index) => {
-                const imgSrc = getImagePath(plant, 'thumb');
+                const imgSrc = getIllustrationPath(plant, 'thumb') ?? getImagePath(plant, 'thumb');
 
                 return (
                   <motion.div
@@ -72,7 +75,7 @@ export default function SearchPage() {
                         transition-colors no-underline
                       "
                     >
-                      <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 border border-hairline bg-parchment">
                         <img
                           src={imgSrc}
                           alt={plant.names[lang]}
@@ -83,9 +86,11 @@ export default function SearchPage() {
                         <h3 className="text-[15px] font-semibold text-ink truncate">
                           {plant.names[lang]}
                         </h3>
-                        <p className="text-xs text-ink-muted italic truncate">
-                          {plant.names.latin}
-                        </p>
+                        {settings.showLatin && (
+                          <p className="text-xs text-ink-muted italic truncate">
+                            {plant.names.latin}
+                          </p>
+                        )}
                       </div>
                     </Link>
                   </motion.div>

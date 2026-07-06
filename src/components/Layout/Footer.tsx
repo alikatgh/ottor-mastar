@@ -26,6 +26,9 @@ export default function Footer() {
             <Link to="/about" className="hover:text-forest no-underline transition-colors">
               {t('nav.about')}
             </Link>
+            <Link to="/settings" className="hover:text-forest no-underline transition-colors">
+              {t('settings.title')}
+            </Link>
             <Link to="/legal" className="hover:text-forest no-underline transition-colors">
               {t('common.legal')}
             </Link>

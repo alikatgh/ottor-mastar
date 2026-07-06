@@ -106,6 +106,30 @@ body {
 }
 
 /* ============================================
+   User settings (set as <html data-*> by SettingsProvider)
+   ============================================ */
+
+/* Text size — every rem-based utility in the app scales with the root. */
+html[data-text-size='small'] {
+  font-size: 15px;
+}
+html[data-text-size='large'] {
+  font-size: 17.5px;
+}
+
+/* Reduce motion — framer-motion is calmed via <MotionConfig>; this covers
+   plain CSS animation, transitions and smooth scrolling. */
+html[data-reduce-motion='true'] {
+  scroll-behavior: auto;
+}
+html[data-reduce-motion='true'] *,
+html[data-reduce-motion='true'] *::before,
+html[data-reduce-motion='true'] *::after {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* ============================================
    Typography
    ============================================ */
 

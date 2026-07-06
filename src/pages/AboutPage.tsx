@@ -2,41 +2,45 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronRight } from 'lucide-react';
 import { Language } from '../types';
-import { plants, CATEGORIES } from '../data/plants';
+import { CATEGORIES } from '../data/plants';
+import { usePlants } from '../context/SettingsContext';
 import Footer from '../components/Layout/Footer';
-
-const MEDICINAL_COUNT = plants.filter((p) => p.categories.includes(CATEGORIES.MEDICINAL)).length;
-
-const STATS: { value: string; label: Record<Language, string> }[] = [
-  {
-    value: String(plants.length),
-    label: {
-      sah: 'Айылҕа үүнээйилэрэ',
-      ru: 'Дикорастущих растений',
-      en: 'Wild plants',
-    },
-  },
-  {
-    value: String(MEDICINAL_COUNT),
-    label: {
-      sah: 'Эмтээх оттор',
-      ru: 'Лекарственных трав',
-      en: 'Medicinal herbs',
-    },
-  },
-  {
-    value: '3',
-    label: {
-      sah: 'Тыллар: саха, нуучча, ангылычаан',
-      ru: 'Языка: якутский, русский, английский',
-      en: 'Languages: Yakut, Russian, English',
-    },
-  },
-];
 
 export default function AboutPage() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as Language;
+  const plants = usePlants();
+
+  const medicinalCount = plants.filter((p) =>
+    p.categories.includes(CATEGORIES.MEDICINAL)
+  ).length;
+
+  const STATS: { value: string; label: Record<Language, string> }[] = [
+    {
+      value: String(plants.length),
+      label: {
+        sah: 'Айылҕа үүнээйилэрэ',
+        ru: 'Дикорастущих растений',
+        en: 'Wild plants',
+      },
+    },
+    {
+      value: String(medicinalCount),
+      label: {
+        sah: 'Эмтээх оттор',
+        ru: 'Лекарственных трав',
+        en: 'Medicinal herbs',
+      },
+    },
+    {
+      value: '3',
+      label: {
+        sah: 'Тыллар: саха, нуучча, ангылычаан',
+        ru: 'Языка: якутский, русский, английский',
+        en: 'Languages: Yakut, Russian, English',
+      },
+    },
+  ];
 
   return (
     <div className="min-h-screen pt-16 pb-20 md:pb-6">
@@ -71,20 +75,35 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* Legal & Privacy entry */}
-        <Link
-          to="/legal"
-          className="
-            flex items-center gap-3 border border-hairline rounded-2xl bg-card p-5
-            no-underline hover:bg-cream-dark/40 transition-colors
-          "
-        >
-          <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-ink font-body">{t('common.legal')}</h3>
-            <p className="text-xs text-ink-muted mt-0.5">{t('common.readDisclaimer')}</p>
-          </div>
-          <ChevronRight className="w-4 h-4 text-ink-muted/60 flex-shrink-0" />
-        </Link>
+        {/* Settings & Legal entries */}
+        <div className="space-y-3">
+          <Link
+            to="/settings"
+            className="
+              flex items-center gap-3 border border-hairline rounded-2xl bg-card p-5
+              no-underline hover:bg-cream-dark/40 transition-colors
+            "
+          >
+            <div className="flex-1 min-w-0">
+              <h3 className="text-sm font-semibold text-ink font-body">{t('settings.title')}</h3>
+              <p className="text-xs text-ink-muted mt-0.5">{t('settings.storageNote')}</p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-ink-muted/60 flex-shrink-0" />
+          </Link>
+          <Link
+            to="/legal"
+            className="
+              flex items-center gap-3 border border-hairline rounded-2xl bg-card p-5
+              no-underline hover:bg-cream-dark/40 transition-colors
+            "
+          >
+            <div className="flex-1 min-w-0">
+              <h3 className="text-sm font-semibold text-ink font-body">{t('common.legal')}</h3>
+              <p className="text-xs text-ink-muted mt-0.5">{t('common.readDisclaimer')}</p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-ink-muted/60 flex-shrink-0" />
+          </Link>
+        </div>
       </div>
 
       <Footer />

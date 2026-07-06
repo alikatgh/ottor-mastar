@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Leaf } from 'lucide-react';
+import { Leaf, SlidersHorizontal } from 'lucide-react';
 import LanguageSwitcher from '../common/LanguageSwitcher';
 
 const NAV_ITEMS = [
@@ -83,7 +83,21 @@ export default function Header() {
           ))}
         </nav>
 
-        <LanguageSwitcher />
+        <div className="flex items-center gap-1.5">
+          <LanguageSwitcher />
+          {/* Desktop-only: on mobile, Settings is reached from the About tab */}
+          <NavLink
+            to="/settings"
+            aria-label={t('settings.title')}
+            className={({ isActive }) => `
+              hidden md:flex w-9 h-9 rounded-full items-center justify-center
+              transition-colors no-underline
+              ${isActive ? 'text-forest bg-cream-dark' : 'text-ink-muted hover:text-ink hover:bg-cream-dark'}
+            `}
+          >
+            <SlidersHorizontal className="w-[18px] h-[18px]" strokeWidth={1.8} />
+          </NavLink>
+        </div>
       </div>
     </header>
   );

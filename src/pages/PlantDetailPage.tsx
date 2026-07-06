@@ -3,7 +3,9 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useRef, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ZoomIn, Info } from 'lucide-react';
-import { getPlantBySlug, getImagePath, getIllustrationPath } from '../data/plants';
+import { getImagePath, getIllustrationPath } from '../data/plants';
+import { findPlantBySlug } from '../data/countries';
+import { useSettings } from '../context/SettingsContext';
 import CategoryBadge from '../components/common/CategoryBadge';
 import type { ViewerItem } from '../components/common/ImageViewer';
 
@@ -21,7 +23,9 @@ export default function PlantDetailPage() {
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const plant = getPlantBySlug(slug as string);
+  const { settings } = useSettings();
+  // Search every country so shared links resolve regardless of selection.
+  const plant = findPlantBySlug(slug as string);
 
   if (!plant) {
     return (
@@ -34,33 +38,38 @@ export default function PlantDetailPage() {
   const imageSrc = getImagePath(plant, 'medium');
   const illSrc = getIllustrationPath(plant, 'medium');
 
-  // Illustration-forward: when a genuine botanical plate exists it leads as the
-  // primary hero, with the photo as the secondary swipe. Plants without a plate
-  // simply show the photo.
-  const slides: { kind: 'plate' | 'photo'; src: string }[] = [
-    ...(illSrc ? [{ kind: 'plate' as const, src: illSrc }] : []),
-    { kind: 'photo' as const, src: imageSrc },
-  ];
+  // Illustration-forward by default: a genuine botanical plate leads with the
+  // photo as the secondary swipe. The "lead image" setting flips the order;
+  // plants without a plate simply show the photo.
+  const plateSlide = illSrc ? [{ kind: 'plate' as const, src: illSrc }] : [];
+  const photoSlide = [{ kind: 'photo' as const, src: imageSrc }];
+  const slides: { kind: 'plate' | 'photo'; src: string }[] =
+    settings.leadImage === 'photo'
+      ? [...photoSlide, ...plateSlide]
+      : [...plateSlide, ...photoSlide];
 
   // Full-resolution items for the zoom viewer, in the same order as the slides.
-  const viewerItems: ViewerItem[] = [
-    ...(getIllustrationPath(plant, 'full')
-      ? [{
-          src: getIllustrationPath(plant, 'full')!,
-          title: plant.names[lang],
-          subtitle: plant.names.latin,
-          kind: t('plant.illustration'),
-          badges: plant.categories,
-        }]
-      : []),
-    {
-      src: getImagePath(plant, 'full'),
-      title: plant.names[lang],
-      subtitle: plant.names.latin,
-      kind: t('plant.photograph'),
-      badges: plant.categories,
-    },
-  ];
+  const fullIll = getIllustrationPath(plant, 'full');
+  const plateItem: ViewerItem[] = fullIll
+    ? [{
+        src: fullIll,
+        title: plant.names[lang],
+        subtitle: plant.names.latin,
+        kind: t('plant.illustration'),
+        badges: plant.categories,
+      }]
+    : [];
+  const photoItem: ViewerItem[] = [{
+    src: getImagePath(plant, 'full'),
+    title: plant.names[lang],
+    subtitle: plant.names.latin,
+    kind: t('plant.photograph'),
+    badges: plant.categories,
+  }];
+  const viewerItems: ViewerItem[] =
+    settings.leadImage === 'photo'
+      ? [...photoItem, ...plateItem]
+      : [...plateItem, ...photoItem];
 
   const handleScroll = () => {
     if (scrollRef.current) {

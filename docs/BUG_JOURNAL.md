@@ -35,6 +35,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Sakha blooming season rendered raw key ("seasons.june-july")
+- Symptom: detail page in Sakha showed the literal string `seasons.june-july` under СИБЭККИЛЭНЭР КЭМЭ.
+- Cause: in `sah.json` the `seasons` block was nested inside `plant` (en/ru have it top-level) AND lacked the 5 month-range keys the data uses; `fallbackLng: 'sah'` so no fallback.
+- Fix: moved `seasons` to top level in `sah.json` with all 8 keys (Sakha month names: Бэс ыйа, От ыйа…).
+- Lesson: the key-coverage grep missed this because the call site is dynamic — `t(\`seasons.${plant.bloomingSeason}\`)`. Coverage checks must also enumerate data-driven key values, not just literal `t('…')` strings.
+
 ### 2026-07-06 — Sakha UI showed literal i18n keys ("PLANT.NAMES", "APP.SUBTITLE")
 - Symptom: in Sakha, the detail-page section header rendered "PLANT.NAMES", the header/hero showed "APP.SUBTITLE", etc.
 - Cause: the Sakha translation pass restructured `sah.json` and dropped 6 keys still referenced in code (`app.subtitle`, `plant.names`, `plant.backToGallery`, `common.legal`, `common.readDisclaimer`, `about.intro`); `fallbackLng` is `sah`, so a missing Sakha key can't fall back to en.

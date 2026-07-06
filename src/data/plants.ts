@@ -759,7 +759,7 @@ export function getOriginalImagePath(plant: Plant) {
  * @param {'thumb' | 'medium' | 'full'} size - Image size variant
  */
 export function getImagePath(plant: Plant, size = 'medium') {
-  return `/plants/${size}/${plant.imageId}.webp`;
+  return `${plant.imageBase ?? '/plants'}/${size}/${plant.imageId}.webp`;
 }
 
 /** Canonical plate slug for a plant, e.g. plant-01 → plant-01-ill. */
@@ -776,6 +776,10 @@ function illustrationSlug(plant: Plant): string {
  * `_src_originals/illustrations/`, run `npm run optimize`, and it lights up.
  */
 export function hasIllustration(plant: Plant): boolean {
+  // The manifest only indexes the Yakutia set under /plants. Datasets with
+  // their own imageBase (e.g. Mongolia) need their own manifest before plates
+  // can light up — until then they are photo-only.
+  if (plant.imageBase) return false;
   return AVAILABLE_ILLUSTRATION_SET.has(illustrationSlug(plant));
 }
 
@@ -786,7 +790,9 @@ export function hasIllustration(plant: Plant): boolean {
  * @param {'thumb' | 'medium' | 'full'} size - Image size variant
  */
 export function getIllustrationPath(plant: Plant, size = 'medium'): string | null {
-  return hasIllustration(plant) ? `/plants/${size}/${illustrationSlug(plant)}.webp` : null;
+  return hasIllustration(plant)
+    ? `${plant.imageBase ?? '/plants'}/${size}/${illustrationSlug(plant)}.webp`
+    : null;
 }
 
 /**

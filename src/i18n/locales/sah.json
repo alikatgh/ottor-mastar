@@ -13,7 +13,45 @@
   "gallery": {
     "title": "Сибэкки ойуулара",
     "allPlants": "Барыта",
-    "photoCount": "{{count}} ойуу"
+    "photoCount": "{{count}} хаартыска"
+  },
+  "home": {
+    "cta": "Испииһэги көрүү",
+    "platesTitle": "Ботаническай ойуулар",
+    "plateCount": "{{count}} ойуу",
+    "photosTitle": "Хонуу хаартыскалара"
+  },
+  "settings": {
+    "title": "Туруоруулар",
+    "storageNote": "Туруоруулар бу тэрилгэ эрэ ууруллаллар.",
+    "sectionRegion": "Дойду уонна тыл",
+    "language": "Тыл",
+    "country": "Дойду",
+    "countryNote": "Бастаан Саха сирэ көрдөрүллэр. Саҥа дойдулар хомуйуу эбилиннэҕинэ аһыллыахтара.",
+    "country_yakutia": "Саха сирэ",
+    "country_mongolia": "Монголия",
+    "comingSoon": "Сотору кэлиэ",
+    "sectionContent": "Испииһэк уонна иһинээҕитэ",
+    "showLatin": "Испииһэккэ латыын ааттара",
+    "catalogSort": "Испииһэк бэрээдэгэ",
+    "sortName": "Аатынан",
+    "sortSeason": "Сибэккилэнэр кэминэн",
+    "leadImage": "Үүнээйи сирэйин бастакы ойуута",
+    "leadPlate": "Ойуу",
+    "leadPhoto": "Хаартыска",
+    "sectionDisplay": "Ааҕыы уонна көстүү",
+    "textSize": "Буукуба кээмэйэ",
+    "textSmall": "Кыра",
+    "textDefault": "Орто",
+    "textLarge": "Улахан",
+    "reduceMotion": "Хамсааһыны аҕыйатыы",
+    "sectionGallery": "Ойуулар",
+    "tileLabels": "Хаартыскаҕа ааттар",
+    "tileTap": "Хаартысканы баттааһын",
+    "tapViewer": "Толору экран",
+    "tapDetail": "Үүнээйи сирэйэ",
+    "sectionData": "Дааннайдар",
+    "reset": "Туруоруулары төнүннэрии"
   },
   "catalog": {
     "title": "Үүнээйилэр испииһэктэрэ",
@@ -36,12 +74,17 @@
     "bloomingSeason": "Сибэккилэнэр кэмэ",
     "details": "Сиһилии",
     "illustration": "Ойуута",
-    "photograph": "Хаартыската",
-    "seasons": {
-      "spring": "Саас",
-      "summer": "Сайын",
-      "autumn": "Күһүн"
-    }
+    "photograph": "Хаартыската"
+  },
+  "seasons": {
+    "spring": "Саас",
+    "summer": "Сайын",
+    "autumn": "Күһүн",
+    "may-june": "Ыам ыйа — Бэс ыйа",
+    "june-july": "Бэс ыйа — От ыйа",
+    "june-august": "Бэс ыйа — Атырдьах ыйа",
+    "july-august": "От ыйа — Атырдьах ыйа",
+    "may-july": "Ыам ыйа — От ыйа"
   },
   "categories": {
     "medicinal": "Эмтээх оттор",

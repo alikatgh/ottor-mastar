@@ -3,8 +3,25 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
-import { getImagePath, CATEGORIES, getPlantsSortedByName } from '../data/plants';
+import { getImagePath, getIllustrationPath, CATEGORIES } from '../data/plants';
+import { usePlants, useSettings } from '../context/SettingsContext';
 import CategoryBadge from '../components/common/CategoryBadge';
+
+// Blooming-season sort: earliest start first, longest season breaking ties.
+const SEASON_ORDER = [
+  'spring',
+  'may-june',
+  'may-july',
+  'june-july',
+  'june-august',
+  'summer',
+  'july-august',
+  'autumn',
+];
+const seasonRank = (s: string) => {
+  const i = SEASON_ORDER.indexOf(s);
+  return i === -1 ? SEASON_ORDER.length : i;
+};
 
 const CATEGORY_FILTERS = [
   'all',
@@ -17,11 +34,22 @@ const CATEGORY_FILTERS = [
 export default function CatalogPage() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as import("../types").Language;
+  const plants = usePlants();
+  const { settings } = useSettings();
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
 
   const filtered = useMemo(() => {
-    let result = getPlantsSortedByName(lang);
+    let result = [...plants].sort((a, b) =>
+      a.names[lang].localeCompare(b.names[lang], lang)
+    );
+    if (settings.catalogSort === 'season') {
+      result.sort(
+        (a, b) =>
+          seasonRank(a.bloomingSeason) - seasonRank(b.bloomingSeason) ||
+          a.names[lang].localeCompare(b.names[lang], lang)
+      );
+    }
 
     if (activeCategory !== 'all') {
       result = result.filter((p) => p.categories.includes(activeCategory));
@@ -38,7 +66,7 @@ export default function CatalogPage() {
     }
 
     return result;
-  }, [lang, search, activeCategory]);
+  }, [plants, lang, search, activeCategory, settings.catalogSort]);
 
   return (
     <div className="min-h-screen pt-16 pb-20 md:pb-6">
@@ -99,7 +127,9 @@ export default function CatalogPage() {
         ) : (
           <div className="divide-y divide-hairline border-t border-b border-hairline">
             {filtered.map((plant, index) => {
-              const imgSrc = getImagePath(plant, 'thumb');
+              // Index entries show the plate, like an encyclopedia's plate list;
+              // the field photo appears on the entry's own page.
+              const imgSrc = getIllustrationPath(plant, 'thumb') ?? getImagePath(plant, 'thumb');
 
               return (
                 <motion.div
@@ -123,7 +153,7 @@ export default function CatalogPage() {
                     </span>
 
                     {/* Thumbnail */}
-                    <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+                    <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-hairline bg-parchment">
                       <img
                         src={imgSrc}
                         alt={plant.names[lang]}
@@ -137,9 +167,11 @@ export default function CatalogPage() {
                       <h3 className="text-[15px] font-semibold text-ink truncate">
                         {plant.names[lang]}
                       </h3>
-                      <p className="text-xs text-ink-muted italic truncate">
-                        {plant.names.latin}
-                      </p>
+                      {settings.showLatin && (
+                        <p className="text-xs text-ink-muted italic truncate">
+                          {plant.names.latin}
+                        </p>
+                      )}
                       <div className="flex gap-1.5 mt-1.5">
                         {plant.categories.map((cat) => (
                           <CategoryBadge key={cat} category={cat} />
