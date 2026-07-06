@@ -43,6 +43,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Phase 1 (R2 additions): leadImage carousel reset + OS reduce-motion CSS (R2-W-H01, R2-W-H02)
+- Symptom: (a) flipping "Lead image" plate↔photo left the detail carousel on a stale index → wrong slide/dot/viewer asset; (b) plain CSS animations (shelf-nudge, swipe-drift, skeleton shimmer, smooth scroll) ran even when the OS "Reduce motion" preference was on but the in-app toggle was off.
+- Cause: (a) the Phase-1 reset effect keyed on `[slug]` only, not `settings.leadImage`; (b) CSS motion was gated solely on `html[data-reduce-motion='true']` (in-app toggle) — framer's `MotionConfig reducedMotion="user"` covers JS motion only. `PlantDetailPage.tsx`, `src/index.css`.
+- Fix: (a) effect deps → `[slug, settings.leadImage]` (moved `useSettings()` above it); (b) added `@media (prefers-reduced-motion: reduce)` mirroring the data-attr suppression. Verified in preview: detail renders post-reorder; media rule shipped; infinite animation collapses 1.5s→0.001ms under suppression.
+- Lesson: reset index-into-list state on EVERY input that reorders the list, not just the id; and OS reduce-motion needs a CSS `@media` block — a JS/framer setting never reaches plain keyframes.
+
 ### 2026-07-06 — Phase 1 P0: invalid localStorage settings crashed the web app (WEB-C01/M12)
 - Symptom: a tampered/legacy `om_settings_v1` with `country:"france"` (or garbage enums) → `COUNTRIES[id]` undefined → `usePlants()` throws → white screen.
 - Cause: `loadSettings` only guarded `country` via `isCountryAvailable` (which itself throws on an unknown id) and validated no other field; `update()` wasn't validated at all. `src/context/SettingsContext.tsx`.

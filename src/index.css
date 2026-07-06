@@ -129,6 +129,23 @@ html[data-reduce-motion='true'] *::after {
   transition-duration: 0.001ms !important;
 }
 
+/* Respect the OS "Reduce motion" preference even when the in-app toggle is
+   off — mirrors framer's <MotionConfig reducedMotion="user"> policy for plain
+   CSS animation, transitions and smooth scroll (shelf-nudge, swipe-drift,
+   skeleton shimmer). Without this, OS reduce-motion users still saw those
+   run (R2-W-H02). */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 /* ============================================
    Typography
    ============================================ */

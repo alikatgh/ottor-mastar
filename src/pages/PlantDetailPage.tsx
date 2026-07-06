@@ -25,17 +25,18 @@ export default function PlantDetailPage() {
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Reset carousel slide, open viewer, and scroll when the slug changes, so
-  // navigating plant→plant never inherits the previous entry's state. A local
-  // guarantee that doesn't depend on the route animation wrapper remounting
-  // this component (WEB-H01).
+  const { settings } = useSettings();
+
+  // Reset carousel slide, open viewer, and scroll whenever the slug OR the
+  // lead-image order changes. A new plant must start at slide 0, and flipping
+  // "lead image" (plate↔photo) reorders `slides`/`viewerItems` so a kept index
+  // would point at the wrong asset and dot (WEB-H01, R2-W-H01). Local
+  // guarantee, independent of the route animation wrapper's remount.
   useEffect(() => {
     setActiveSlide(0);
     setViewerIndex(null);
     scrollRef.current?.scrollTo({ left: 0 });
-  }, [slug]);
-
-  const { settings } = useSettings();
+  }, [slug, settings.leadImage]);
   // Search every country so shared links resolve regardless of selection.
   const plant = findPlantBySlug(slug as string);
 
