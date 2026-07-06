@@ -1,6 +1,7 @@
 import { Language } from "../types";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useRef, lazy, Suspense } from 'react';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ZoomIn, Info } from 'lucide-react';
 import { getImagePath, getIllustrationPath } from '../data/plants';
@@ -172,9 +173,11 @@ export default function PlantDetailPage() {
           <ZoomIn className="w-4.5 h-4.5 text-white" />
         </div>
 
-        {/* Pagination Dots — frosted chip so they read over plate or photo */}
+        {/* Pagination Dots — frosted chip so they read over plate or photo.
+            On mobile the info sheet overlaps this panel by 24px, so the chip
+            rides at bottom-12 to stay fully clear of the sheet edge. */}
         {slides.length > 1 && (
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex gap-2 px-2.5 py-1.5 rounded-full bg-white/70 backdrop-blur-sm shadow-sm">
+          <div className="absolute bottom-12 md:bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2 px-2.5 py-1.5 rounded-full bg-white/70 backdrop-blur-sm shadow-sm">
             {slides.map((_, i) => (
               <div
                 key={i}
@@ -186,14 +189,19 @@ export default function PlantDetailPage() {
       </div>
 
       {/* ============ INFO PANEL — below on mobile, left on desktop ============ */}
-      <div
+      <motion.div
         className="
           relative z-10 bg-white
           -mt-6 rounded-t-[1.75rem] md:mt-0 md:rounded-none
           md:order-1 md:w-1/2 md:h-screen md:overflow-y-auto
           pb-24 md:pb-16
         "
+        initial={{ y: 28, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 320, damping: 34, mass: 0.9 }}
       >
+        {/* iOS sheet grabber — mobile only, where the panel reads as a sheet */}
+        <div aria-hidden className="md:hidden w-10 h-[5px] rounded-full bg-ink/15 mx-auto mt-2.5" />
         <div className="max-w-xl mx-auto px-6 pt-8 md:px-8 md:pt-12 lg:px-16 lg:pt-16">
           {/* Desktop back link */}
           <button
@@ -267,7 +275,7 @@ export default function PlantDetailPage() {
             </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {viewerIndex !== null && (
         <Suspense fallback={null}>

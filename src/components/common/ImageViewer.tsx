@@ -1,9 +1,11 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import CategoryBadge from './CategoryBadge';
+import { useSettings } from '../../context/SettingsContext';
 
 export interface ViewerItem {
   src: string;
@@ -25,9 +27,12 @@ interface ImageViewerProps {
 }
 
 /**
- * Full-screen image viewer with native-feel zoom.
+ * Full-screen image viewer with native-feel zoom and iOS-Photos motion.
  *
  * - Pinch, double-tap, and wheel zoom + drag-to-pan (react-zoom-pan-pinch).
+ * - Springy scale-up on open; swipe DOWN (when not zoomed) drags the image
+ *   with the finger while the backdrop and chrome fade — release past the
+ *   threshold to dismiss, otherwise it springs back. Close/Esc fade out.
  * - A blurred copy of the image fills the letterbox instead of black bars
  *   (iOS Photos style), so portrait shots don't leave a narrow image in a
  *   sea of black.
@@ -35,9 +40,40 @@ interface ImageViewerProps {
  */
 export default function ImageViewer({ items, index, onIndexChange, onClose, onOpenDetail }: ImageViewerProps) {
   const { t } = useTranslation();
+  const { settings } = useSettings();
   const item = items[index];
   const hasPrev = index > 0;
   const hasNext = index < items.length - 1;
+
+  // While zoomed in, vertical drags belong to pan — dismiss is scale-1 only.
+  const [zoomed, setZoomed] = useState(false);
+  const closingRef = useRef(false);
+
+  // Swipe-down state: image follows the finger; backdrop & chrome fade with it.
+  const y = useMotionValue(0);
+  const backdropOpacity = useTransform(y, [0, 320], [1, 0.25]);
+  const chromeOpacity = useTransform(y, [0, 120], [1, 0]);
+  const dragScale = useTransform(y, [0, 360], [1, 0.86]);
+  // Whole-overlay fade, driven imperatively for open and close.
+  const fade = useMotionValue(settings.reduceMotion ? 1 : 0);
+
+  useEffect(() => {
+    if (!settings.reduceMotion) animate(fade, 1, { duration: 0.2, ease: 'easeOut' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const requestClose = useCallback((flungDown = false) => {
+    if (closingRef.current) return;
+    closingRef.current = true;
+    if (settings.reduceMotion) {
+      onClose();
+      return;
+    }
+    if (flungDown) {
+      animate(y, y.get() + window.innerHeight * 0.4, { duration: 0.24, ease: [0.32, 0.72, 0, 1] });
+    }
+    animate(fade, 0, { duration: 0.22, ease: 'easeOut' }).then(() => onClose());
+  }, [settings.reduceMotion, onClose, y, fade]);
 
   const go = useCallback((dir: number) => {
     const next = index + dir;
@@ -54,81 +90,108 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
   // Keyboard: Esc closes, arrows navigate.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') requestClose();
       else if (e.key === 'ArrowLeft') go(-1);
       else if (e.key === 'ArrowRight') go(1);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [go, onClose]);
+  }, [go, requestClose]);
 
   if (!item) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[300] bg-neutral-950 select-none" style={{ touchAction: 'none' }}>
-      {/* Blurred copy of the image fills the letterbox (iOS Photos style) so
-          the negative space reads as an intentional soft backdrop, never a flat
-          black void. Kept bright enough to register; a bottom-weighted scrim
-          keeps the caption legible without darkening the whole frame. */}
-      <img
-        key={`bg-${index}`}
-        src={item.src}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 w-full h-full object-cover scale-125 blur-3xl opacity-60 pointer-events-none"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/70 pointer-events-none" />
+    <motion.div
+      className="fixed inset-0 z-[300] select-none"
+      style={{ touchAction: 'none', opacity: fade }}
+    >
+      {/* Backdrop — solid base + blurred copy of the image filling the
+          letterbox (iOS Photos style). It dims as the image is dragged down,
+          revealing the page behind, exactly like the Photos app. */}
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ opacity: backdropOpacity }}>
+        <div className="absolute inset-0 bg-neutral-950" />
+        <img
+          key={`bg-${index}`}
+          src={item.src}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover scale-125 blur-3xl opacity-60"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/70" />
+      </motion.div>
 
-      {/* Zoomable image */}
-      <TransformWrapper
-        key={`zoom-${index}`}
-        initialScale={1}
-        minScale={1}
-        maxScale={6}
-        centerOnInit
-        doubleClick={{ mode: 'zoomIn', step: 1.4 }}
-        wheel={{ step: 0.12 }}
-        pinch={{ step: 6 }}
-        panning={{ velocityDisabled: true }}
+      {/* Zoomable image — draggable down to dismiss while not zoomed. */}
+      <motion.div
+        className="absolute inset-0"
+        style={{ y, scale: dragScale }}
+        drag={zoomed ? false : 'y'}
+        dragConstraints={{ top: 0, bottom: 0 }}
+        dragElastic={{ top: 0.08, bottom: 0.55 }}
+        dragMomentum={false}
+        onDragEnd={(_, info) => {
+          if (info.offset.y > 110 || info.velocity.y > 600) requestClose(true);
+          else animate(y, 0, { type: 'spring', stiffness: 420, damping: 34 });
+        }}
       >
-        <TransformComponent
-          wrapperStyle={{ width: '100%', height: '100%' }}
-          contentStyle={{ width: '100%', height: '100%' }}
+        <TransformWrapper
+          key={`zoom-${index}`}
+          initialScale={1}
+          minScale={1}
+          maxScale={6}
+          centerOnInit
+          doubleClick={{ mode: 'zoomIn', step: 1.4 }}
+          wheel={{ step: 0.12 }}
+          pinch={{ step: 6 }}
+          panning={{ disabled: !zoomed, velocityDisabled: true }}
+          onTransformed={(_, state) => setZoomed(state.scale > 1.02)}
         >
-          {/* The fit box leaves a small margin for the top counter and the
-              caption panel. Kept tight so the image stays large and sits just
-              above the caption — no dead gap between them. */}
-          <div className="w-screen h-screen flex items-center justify-center px-3 pt-14 pb-24">
-            <img
-              src={item.src}
-              alt={item.title}
-              draggable={false}
-              className="max-w-full max-h-full object-contain"
-            />
-          </div>
-        </TransformComponent>
-      </TransformWrapper>
+          <TransformComponent
+            wrapperStyle={{ width: '100%', height: '100%' }}
+            contentStyle={{ width: '100%', height: '100%' }}
+          >
+            {/* The fit box leaves a small margin for the top counter and the
+                caption panel. Kept tight so the image stays large and sits just
+                above the caption — no dead gap between them. The keyed remount
+                per photo re-runs the little spring, giving each image the
+                Photos-app settle. */}
+            <motion.div
+              className="w-screen h-screen flex items-center justify-center px-3 pt-14 pb-24"
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 34, mass: 0.9 }}
+            >
+              <img
+                src={item.src}
+                alt={item.title}
+                draggable={false}
+                className="max-w-full max-h-full object-contain"
+              />
+            </motion.div>
+          </TransformComponent>
+        </TransformWrapper>
+      </motion.div>
 
       {/* Top bar: counter + close */}
-      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-3 safe-top pointer-events-none">
+      <motion.div style={{ opacity: chromeOpacity }} className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-3 safe-top pointer-events-none">
         <span className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white text-sm font-medium tabular-nums">
           {index + 1} / {items.length}
         </span>
         <button
-          onClick={onClose}
+          onClick={() => requestClose()}
           aria-label={t('common.close')}
           className="pointer-events-auto w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"
         >
           <X className="w-5 h-5 text-white" />
         </button>
-      </div>
+      </motion.div>
 
-      {/* Navigation arrows */}
+      {/* Navigation arrows + caption fade together with the drag */}
+      <motion.div style={{ opacity: chromeOpacity }} className="absolute inset-0 z-10 pointer-events-none">
       {hasPrev && (
         <button
           onClick={() => go(-1)}
           aria-label={t('common.previous')}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"
+          className="pointer-events-auto absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"
         >
           <ChevronLeft className="w-6 h-6 text-white" />
         </button>
@@ -137,7 +200,7 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
         <button
           onClick={() => go(1)}
           aria-label={t('common.next')}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"
+          className="pointer-events-auto absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"
         >
           <ChevronRight className="w-6 h-6 text-white" />
         </button>
@@ -146,7 +209,7 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
       {/* Caption panel — always visible, editorial. Letterspaced kind label
           over a serif name and italic Latin, category dots, and a Details
           action. Solid-enough scrim so it reads as a cohesive panel. */}
-      <div className="absolute inset-x-0 bottom-0 z-10 pt-20 px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] bg-gradient-to-t from-black via-black/85 to-transparent">
+      <div className="pointer-events-auto absolute inset-x-0 bottom-0 z-10 pt-20 px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] bg-gradient-to-t from-black via-black/85 to-transparent">
         <div className="max-w-3xl mx-auto flex items-end justify-between gap-4 sm:gap-6">
           <div className="min-w-0">
             {item.kind && (
@@ -180,7 +243,8 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
           )}
         </div>
       </div>
-    </div>,
+      </motion.div>
+    </motion.div>,
     document.body
   );
 }
