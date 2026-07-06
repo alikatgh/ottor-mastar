@@ -1,8 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Leaf, Search } from 'lucide-react';
+import { Leaf } from 'lucide-react';
 import LanguageSwitcher from '../common/LanguageSwitcher';
+
+const NAV_ITEMS = [
+  { path: '/', labelKey: 'nav.gallery' },
+  { path: '/catalog', labelKey: 'nav.catalog' },
+  { path: '/search', labelKey: 'nav.search' },
+  { path: '/about', labelKey: 'nav.about' },
+];
 
 export default function Header() {
   const { t } = useTranslation();
@@ -33,38 +40,50 @@ export default function Header() {
       className={`
         fixed top-0 left-0 right-0 z-200 safe-top
         backdrop-blur-header
-        border-b border-black/5
+        border-b border-hairline
         transition-transform duration-300 ease-[var(--ease-ios)]
         ${hidden ? '-translate-y-full' : 'translate-y-0'}
         ${isViewer ? 'hidden' : ''}
       `}
     >
       <div className="flex items-center justify-between px-4 h-14 max-w-7xl mx-auto">
-        {/* Logo + Title */}
-        <Link to="/" className="flex items-center gap-2 no-underline">
-          <div className="w-8 h-8 rounded-lg bg-forest flex items-center justify-center">
-            <Leaf className="w-4.5 h-4.5 text-white" strokeWidth={2.5} />
-          </div>
+        {/* Wordmark */}
+        <Link to="/" className="flex items-center gap-2.5 no-underline">
+          <Leaf className="w-5 h-5 text-forest" strokeWidth={1.75} />
           <div className="flex flex-col">
             <span className="font-heading text-base font-semibold text-ink leading-tight">
               {t('app.title')}
             </span>
-            <span className="text-[10px] text-ink-muted leading-tight tracking-wide">
+            <span className="overline-label !text-[9px] leading-tight whitespace-nowrap">
               {t('app.subtitle')}
             </span>
           </div>
         </Link>
 
-        {/* Right side: language + search */}
-        <div className="flex items-center gap-3">
-          <LanguageSwitcher />
-          <button
-            className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-black/5 transition-colors"
-            aria-label={t('nav.search')}
-          >
-            <Search className="w-[18px] h-[18px] text-ink-muted" />
-          </button>
-        </div>
+        {/* Desktop nav — the bottom tab bar is mobile-only, so every section
+            must be reachable from here on larger screens. Active state is a
+            reserved underline: geometry never changes, only the color. */}
+        <nav className="hidden md:flex items-center gap-6 mr-auto ml-10">
+          {NAV_ITEMS.map(({ path, labelKey }) => (
+            <NavLink
+              key={path}
+              to={path}
+              end={path === '/'}
+              className={({ isActive }) => `
+                text-sm no-underline py-1
+                border-b-[1.5px] transition-colors duration-200
+                ${isActive
+                  ? 'text-ink border-forest'
+                  : 'text-ink-muted border-transparent hover:text-ink'
+                }
+              `}
+            >
+              {t(labelKey)}
+            </NavLink>
+          ))}
+        </nav>
+
+        <LanguageSwitcher />
       </div>
     </header>
   );

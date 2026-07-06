@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { LANGUAGES } from '../../i18n';
 
-export default function LanguageSwitcher({ variant = 'light' }) {
+export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
 
   return (

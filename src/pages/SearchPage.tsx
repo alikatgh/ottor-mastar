@@ -8,7 +8,7 @@ import { plants, getImagePath } from '../data/plants';
 
 export default function SearchPage() {
   const { t, i18n } = useTranslation();
-    const lang = i18n.language as Language;
+  const lang = i18n.language as Language;
   const [query, setQuery] = useState('');
 
   const results = useMemo(() => {
@@ -25,7 +25,7 @@ export default function SearchPage() {
   }, [query, lang]);
 
   return (
-    <div className="min-h-screen pt-16 pb-20 sm:pb-6">
+    <div className="min-h-screen pt-16 pb-20 md:pb-6">
       <div className="max-w-2xl mx-auto px-4 py-8">
         {/* Big search input */}
         <div className="relative mb-8">
@@ -38,37 +38,37 @@ export default function SearchPage() {
             autoFocus
             className="
               w-full pl-12 pr-5 py-4
-              bg-cream-dark rounded-2xl
-              border-none outline-none
+              bg-card rounded-2xl
+              border border-hairline outline-none
               text-base text-ink
               placeholder:text-ink-muted
-              focus:ring-2 focus:ring-forest/30
-              transition-shadow
+              focus:border-forest/50 focus:ring-2 focus:ring-forest/20
+              transition-colors
             "
           />
         </div>
 
         {/* Results */}
         {query.trim() && (
-          <div className="space-y-1">
-            {results.length === 0 ? (
-              <p className="text-center text-ink-muted py-8">{t('catalog.noResults')}</p>
-            ) : (
-              results.map((plant, index) => {
+          results.length === 0 ? (
+            <p className="text-center text-ink-muted py-8">{t('catalog.noResults')}</p>
+          ) : (
+            <div className="divide-y divide-hairline border-t border-b border-hairline">
+              {results.map((plant, index) => {
                 const imgSrc = getImagePath(plant, 'thumb');
 
                 return (
                   <motion.div
                     key={plant.id}
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.04, duration: 0.2 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index * 0.03, duration: 0.2 }}
                   >
                     <Link
                       to={`/plant/${plant.slug}`}
                       className="
-                        flex items-center gap-4 p-3
-                        rounded-xl hover:bg-cream-dark
+                        flex items-center gap-4 py-3 px-2 -mx-2
+                        hover:bg-cream-dark/50
                         transition-colors no-underline
                       "
                     >
@@ -80,7 +80,7 @@ export default function SearchPage() {
                         />
                       </div>
                       <div className="min-w-0">
-                        <h3 className="text-sm font-semibold text-ink truncate">
+                        <h3 className="text-[15px] font-semibold text-ink truncate">
                           {plant.names[lang]}
                         </h3>
                         <p className="text-xs text-ink-muted italic truncate">
@@ -90,9 +90,9 @@ export default function SearchPage() {
                     </Link>
                   </motion.div>
                 );
-              })
-            )}
-          </div>
+              })}
+            </div>
+          )
         )}
 
         {/* Empty state — browse prompt */}

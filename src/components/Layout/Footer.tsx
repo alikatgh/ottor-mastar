@@ -7,10 +7,10 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-black/5 mt-8">
-      <div className="max-w-2xl mx-auto px-5 pt-8 pb-24 sm:pb-10">
+    <footer className="border-t border-hairline mt-8">
+      <div className="max-w-2xl mx-auto px-5 pt-8 pb-24 md:pb-10">
         {/* Safety disclaimer — kept prominent near the content it applies to */}
-        <div className="flex items-start gap-2.5 rounded-xl bg-[#FFF7F2] border border-amber/20 p-4 mb-6">
+        <div className="flex items-start gap-2.5 rounded-xl bg-[#FFF7F2] border border-amber/25 p-4 mb-6">
           <Info className="w-4.5 h-4.5 text-amber-warm shrink-0 mt-0.5" />
           <p className="text-ink-light text-xs leading-relaxed">
             {t('common.disclaimerShort')}{' '}

@@ -2,7 +2,7 @@ import { Language } from "../types";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, MapPin, Calendar, Stethoscope, Globe, ZoomIn, Info } from 'lucide-react';
+import { ArrowLeft, ZoomIn, Info } from 'lucide-react';
 import { getPlantBySlug, getImagePath, getIllustrationPath } from '../data/plants';
 import CategoryBadge from '../components/common/CategoryBadge';
 import ImageViewer, { ViewerItem } from '../components/common/ImageViewer';
@@ -70,10 +70,9 @@ export default function PlantDetailPage() {
 
   const sections = [
     {
-      icon: Globe,
       title: t('plant.names'),
       content: (
-        <div className="space-y-2">
+        <div className="divide-y divide-hairline">
           <NameRow label={t('plant.yakutName')} value={plant.names.sah} />
           <NameRow label={t('plant.russianName')} value={plant.names.ru} />
           <NameRow label={t('plant.englishName')} value={plant.names.en} />
@@ -82,19 +81,16 @@ export default function PlantDetailPage() {
       ),
     },
     {
-      icon: Stethoscope,
       title: t('plant.medicinalUses'),
-      content: <p className="text-sm text-ink-light leading-relaxed">{plant.medicinalUses[lang]}</p>,
+      content: <p className="text-[15px] text-ink-light leading-relaxed">{plant.medicinalUses[lang]}</p>,
     },
     {
-      icon: MapPin,
       title: t('plant.habitat'),
-      content: <p className="text-sm text-ink-light leading-relaxed">{plant.habitat[lang]}</p>,
+      content: <p className="text-[15px] text-ink-light leading-relaxed">{plant.habitat[lang]}</p>,
     },
     {
-      icon: Calendar,
       title: t('plant.bloomingSeason'),
-      content: <p className="text-sm text-ink-light">{t(`seasons.${plant.bloomingSeason}`)}</p>,
+      content: <p className="text-[15px] text-ink-light">{t(`seasons.${plant.bloomingSeason}`)}</p>,
     },
   ];
 
@@ -220,27 +216,20 @@ export default function PlantDetailPage() {
             {plant.description[lang]}
           </p>
 
-          {/* Detail sections */}
-          <div className="space-y-6">
-            {sections.map(({ icon: Icon, title, content }) => (
-              <div key={title}>
-                <div className="flex items-center gap-2.5 mb-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-forest/8 flex items-center justify-center shrink-0">
-                    <Icon className="w-4 h-4 text-forest" />
-                  </div>
-                  <h2 className="text-base font-semibold text-ink">
-                    {title}
-                  </h2>
-                </div>
-                <div className="pl-[42px]">
-                  {content}
-                </div>
-              </div>
+          {/* Detail sections — encyclopedia style: letterspaced label over a hairline rule */}
+          <div className="space-y-8">
+            {sections.map(({ title, content }) => (
+              <section key={title}>
+                <h2 className="overline-label !font-body border-t border-hairline pt-3 mb-3">
+                  {title}
+                </h2>
+                {content}
+              </section>
             ))}
           </div>
 
           {/* Safety disclaimer — this page shows traditional medicinal uses */}
-          <div className="mt-8 rounded-xl bg-[#FFF7F2] border border-amber/20 p-3.5 flex items-start gap-2.5">
+          <div className="mt-8 rounded-xl bg-[#FFF7F2] border border-amber/25 p-3.5 flex items-start gap-2.5">
             <Info className="w-4 h-4 text-amber-warm shrink-0 mt-0.5" />
             <p className="text-xs text-ink-light leading-relaxed">
               {t('common.disclaimerShort')}{' '}
@@ -251,7 +240,7 @@ export default function PlantDetailPage() {
           </div>
 
           {/* Back to gallery */}
-          <div className="mt-6 pt-6 border-t border-black/5">
+          <div className="mt-6 pt-6 border-t border-hairline">
             <Link
               to="/"
               className="
@@ -282,7 +271,7 @@ export default function PlantDetailPage() {
 
 function NameRow({ label, value, italic = false }: { label: string, value: string, italic?: boolean }) {
   return (
-    <div className="flex items-baseline justify-between gap-4">
+    <div className="flex items-baseline justify-between gap-4 py-2 first:pt-0">
       <span className="text-sm text-ink-muted flex-shrink-0">{label}</span>
       <span className={`text-sm text-ink font-medium text-right ${italic ? 'italic font-normal' : ''}`}>{value}</span>
     </div>

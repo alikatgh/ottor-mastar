@@ -23,6 +23,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Catalog/Search/About unreachable on desktop; header search button dead
+- Symptom: at ≥640px the bottom tab bar is hidden and the header had no nav links; its search icon button had no onClick/href — desktop users could only browse the gallery.
+- Cause: nav lived only in mobile BottomNav (`sm:hidden`); Header shipped a decorative `<button>` with no handler. `src/components/Layout/Header.tsx`.
+- Fix: desktop NavLink row in Header (`hidden md:flex`), dead button removed; BottomNav/page paddings moved `sm:` → `md:` so the handoff has no gap. `src/components/Layout/Header.tsx:64`.
+- Lesson: every route must be reachable at every breakpoint — audit nav per breakpoint, and a button with no handler is a bug, not a placeholder.
+
 ### 2026-07-05 — `vite build` fails with EPERM copying public/images/*.jpeg
 - Symptom: `Error: EPERM: operation not permitted, copyfile public/images/WhatsApp*.jpeg -> dist/...`; `xattr -c` also denied.
 - Cause: the large WhatsApp source originals in `public/` carry an iCloud provenance xattr (Documents is synced) that blocks `copyFileSync`; vite copies all of publicDir into the build. They're unused at runtime (app serves `/plants/*.webp`).

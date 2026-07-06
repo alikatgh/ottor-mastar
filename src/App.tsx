@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import BottomNav from './components/Layout/BottomNav';
@@ -9,6 +11,14 @@ import AboutPage from './pages/AboutPage';
 import LegalPage from './pages/LegalPage';
 
 export default function App() {
+  const { i18n } = useTranslation();
+
+  // Keep <html lang> in sync with the chosen language (screen readers,
+  // hyphenation, and search engines all read it).
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
+
   return (
     <BrowserRouter>
       <div className="relative min-h-screen bg-cream">

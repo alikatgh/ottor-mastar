@@ -17,8 +17,8 @@ export default function BottomNav() {
       className="
         fixed bottom-0 left-0 right-0 z-200 safe-bottom
         backdrop-blur-header
-        border-t border-black/5
-        sm:hidden
+        border-t border-hairline
+        md:hidden
       "
     >
       <div className="flex items-center justify-around h-[52px] px-2">

@@ -155,7 +155,7 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
             {item.badges && item.badges.length > 0 && (
               <div className="flex flex-wrap gap-1.5 mt-2.5">
                 {item.badges.map((cat) => (
-                  <CategoryBadge key={cat} category={cat} />
+                  <CategoryBadge key={cat} category={cat} onDark />
                 ))}
               </div>
             )}

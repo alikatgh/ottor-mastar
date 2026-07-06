@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, ShieldAlert, Lock, FileText } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Language } from '../types';
 
 type Tri = Record<Language, string>;
@@ -85,20 +85,14 @@ const CONTENT = {
   } as TriList,
 };
 
-function Section({ icon: Icon, heading, paragraphs, tone = 'default' }: {
-  icon: typeof ShieldAlert;
+function Section({ heading, paragraphs, tone = 'default' }: {
   heading: string;
   paragraphs: string[];
   tone?: 'default' | 'warn';
 }) {
   return (
-    <section className={`rounded-2xl p-6 ${tone === 'warn' ? 'bg-[#FFF7F2] border border-amber/20' : 'bg-white shadow-card'}`}>
-      <div className="flex items-center gap-2.5 mb-4">
-        <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${tone === 'warn' ? 'bg-amber/15' : 'bg-forest/8'}`}>
-          <Icon className={`w-4.5 h-4.5 ${tone === 'warn' ? 'text-amber-warm' : 'text-forest'}`} />
-        </div>
-        <h2 className="font-heading text-lg font-semibold text-ink">{heading}</h2>
-      </div>
+    <section className={`rounded-2xl border p-6 ${tone === 'warn' ? 'bg-[#FFF7F2] border-amber/25' : 'bg-card border-hairline'}`}>
+      <h2 className="font-heading text-lg font-semibold text-ink mb-4">{heading}</h2>
       <div className="space-y-3">
         {paragraphs.map((p, i) => (
           <p key={i} className="text-ink-light text-[15px] leading-relaxed">{p}</p>
@@ -113,7 +107,7 @@ export default function LegalPage() {
   const lang = i18n.language as Language;
 
   return (
-    <div className="min-h-screen pt-16 pb-24 sm:pb-10">
+    <div className="min-h-screen pt-16 pb-24 md:pb-10">
       <div className="max-w-2xl mx-auto px-5 py-6">
         <Link
           to="/about"
@@ -128,9 +122,9 @@ export default function LegalPage() {
         <p className="text-ink-light text-[15px] leading-relaxed mb-8">{T.intro[lang]}</p>
 
         <div className="space-y-4">
-          <Section icon={ShieldAlert} tone="warn" heading={DISCLAIMER.heading[lang]} paragraphs={DISCLAIMER.body[lang]} />
-          <Section icon={Lock} heading={PRIVACY.heading[lang]} paragraphs={PRIVACY.body[lang]} />
-          <Section icon={FileText} heading={CONTENT.heading[lang]} paragraphs={CONTENT.body[lang]} />
+          <Section tone="warn" heading={DISCLAIMER.heading[lang]} paragraphs={DISCLAIMER.body[lang]} />
+          <Section heading={PRIVACY.heading[lang]} paragraphs={PRIVACY.body[lang]} />
+          <Section heading={CONTENT.heading[lang]} paragraphs={CONTENT.body[lang]} />
         </div>
       </div>
     </div>
