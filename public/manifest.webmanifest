@@ -1,0 +1,17 @@
+{
+  "name": "Оттор Мастар — Plants of Yakutia",
+  "short_name": "Оттор Мастар",
+  "description": "Botanical guide to the wild herbs and trees of Yakutia (Sakha).",
+  "lang": "sah",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F1E8",
+  "theme_color": "#2C5A2E",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

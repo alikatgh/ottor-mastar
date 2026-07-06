@@ -72,14 +72,17 @@ const CONTENT = {
   body: {
     sah: [
       'Ботаника ойуулара уонна хаартыскалара үөрэхтээһин уонна култуура сыалыгар туттуллаллар. Үүнээйилэр быһаарыылара уопсай ботаника билиитин уонна саха норуотун үгэстэрин холбууллар.',
+      'Ботаника ойуулара — көрдөрөр сыаллаах эрэ, көмпүүтэринэн оҥоһуллубут стильлээх ойуулар; кинилэргэ көстөр ааттар, дьыллар уонна ыйынньыктар киэргэтии эрэ буолаллар, туспа устуоруйалаах үлэлэри кытта сибээстэспэттэр.',
       '© 2026 Оттор Мастар.',
     ],
     ru: [
       'Ботанические иллюстрации и фотографии используются в образовательных и культурных целях. Описания растений сочетают общие ботанические сведения и якутскую (саха) народную традицию.',
+      'Ботанические иллюстрации представляют собой стилизованные, созданные цифровым способом изображения исключительно для наглядности; приведённые на них подписи, даты и ссылки носят декоративный характер и не отсылают к конкретным историческим изданиям.',
       '© 2026 Оттор Мастар.',
     ],
     en: [
       'Botanical illustrations and photographs are used for educational and cultural purposes. Plant descriptions combine general botanical knowledge with Yakut (Sakha) folk tradition.',
+      'The botanical illustrations are stylised, digitally-created plates for visual reference only; any captions, dates, or citations shown on them are decorative and are not references to specific historical works.',
       '© 2026 Ottor Mastar.',
     ],
   } as TriList,
