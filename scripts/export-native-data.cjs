@@ -21,7 +21,7 @@ const os = require('node:os');
 const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
-const IMAGE_HOST = 'https://ottormaastar.aulenor.com';
+const IMAGE_HOST = 'https://ottormastar.aulenor.com';
 
 // 1. Transpile the data modules (they are plain TS, no React) to CJS.
 const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ottor-data-'));

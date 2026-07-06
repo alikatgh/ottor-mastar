@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ORIGIN = 'https://ottormaastar.aulenor.com';
+const ORIGIN = 'https://ottormastar.aulenor.com';
 const LASTMOD = '2026-07-06'; // bump when content changes materially
 
 const src = fs.readFileSync(path.join(__dirname, '../src/data/plants.ts'), 'utf8');

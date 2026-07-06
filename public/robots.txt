@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ottormaastar.aulenor.com/sitemap.xml
+Sitemap: https://ottormastar.aulenor.com/sitemap.xml
