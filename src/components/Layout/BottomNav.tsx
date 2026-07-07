@@ -21,20 +21,26 @@ export default function BottomNav() {
         md:hidden
       "
     >
-      <div className="flex items-center justify-around h-[52px] px-2">
+      {/* min-h (not fixed h) + equal-width tabs: long Sakha labels like
+          "Биһиги туспутунан" wrap to two tight-leading lines instead of
+          being clipped at the bar's bottom edge. */}
+      <div className="flex items-stretch justify-around min-h-[52px] px-1">
         {NAV_ITEMS.map(({ path, icon: Icon, labelKey }) => (
           <NavLink
             key={path}
             to={path}
             end={path === '/'}
             className={({ isActive }) => `
-              flex flex-col items-center gap-0.5 px-3 py-1
+              flex flex-col items-center justify-center gap-0.5 px-1 py-1.5
+              flex-1 min-w-0
               no-underline transition-colors duration-200
               ${isActive ? 'text-forest' : 'text-ink-muted'}
             `}
           >
-            <Icon className="w-[22px] h-[22px]" strokeWidth={1.8} />
-            <span className="text-[10px] font-medium">{t(labelKey)}</span>
+            <Icon className="w-[22px] h-[22px] shrink-0" strokeWidth={1.8} />
+            <span className="text-[10px] font-medium leading-tight text-center max-w-full">
+              {t(labelKey)}
+            </span>
           </NavLink>
         ))}
       </div>

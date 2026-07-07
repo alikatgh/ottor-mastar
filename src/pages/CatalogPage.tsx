@@ -173,7 +173,9 @@ export default function CatalogPage() {
                           {plant.names.latin}
                         </p>
                       )}
-                      <div className="flex gap-1.5 mt-1.5">
+                      {/* flex-wrap: chips stay single-line pills and stack
+                          instead of overflowing the card (long Sakha labels). */}
+                      <div className="flex flex-wrap gap-1.5 mt-1.5">
                         {plant.categories.map((cat) => (
                           <CategoryBadge key={cat} category={cat} />
                         ))}

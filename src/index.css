@@ -409,6 +409,14 @@ p {
   letter-spacing: 0.02em;
   color: var(--color-ink-light);
   background: transparent;
+  /* A pill must never break into two lines — long Sakha labels ("Эмтээх
+     оттор") were wrapping inside tight card rows. Rows of chips should
+     flex-wrap instead; max-width+ellipsis is the last-resort guard so a
+     pathological label can never overflow its container. */
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .badge-dot {
