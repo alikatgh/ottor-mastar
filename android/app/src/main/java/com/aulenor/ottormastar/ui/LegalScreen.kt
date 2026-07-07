@@ -126,25 +126,25 @@ object LegalContent {
     fun title(l: Language) = when (l) {
         Language.SAH -> "Сокуон уонна тус кистэлэҥ"
         Language.RU -> "Правовая информация и конфиденциальность"
-        Language.EN -> "Legal & Privacy"
+        else -> "Legal & Privacy"
     }
 
     fun updated(l: Language) = when (l) {
         Language.SAH -> "Саҥардылынна: 2026 сыл"
         Language.RU -> "Обновлено: 2026 год"
-        Language.EN -> "Last updated: 2026"
+        else -> "Last updated: 2026"
     }
 
     fun intro(l: Language) = when (l) {
         Language.SAH -> "Оттор Мастар — үөрэхтээһин уонна култуура бырайыага. Бу сыһыарыыны туһаныаххыт иннинэ бу сирэйи ааҕыҥ."
         Language.RU -> "«Оттор Мастар» — образовательный и культурный проект. Пожалуйста, ознакомьтесь с этой страницей перед использованием приложения."
-        Language.EN -> "Ottor Mastar is an educational and cultural project. Please read this page before using the application."
+        else -> "Ottor Mastar is an educational and cultural project. Please read this page before using the application."
     }
 
     fun disclaimerHeading(l: Language) = when (l) {
         Language.SAH -> "Эппиэтинэһи сүкпэт буолуу"
         Language.RU -> "Отказ от ответственности"
-        Language.EN -> "Disclaimer"
+        else -> "Disclaimer"
     }
 
     fun disclaimerBody(l: Language): List<String> = when (l) {
@@ -162,7 +162,7 @@ object LegalContent {
             "Сведения о народном и традиционном применении приведены исключительно из культурного и исторического интереса и не являются рекомендацией. Перед любым применением растений в лечебных целях обязательно проконсультируйтесь с квалифицированным врачом.",
             "Авторы и участники проекта не несут никакой ответственности за любой ущерб, вред здоровью, болезнь, отравление или убытки, прямо или косвенно связанные с использованием информации из этого приложения или доверием к ней. Вы используете эту информацию исключительно на свой страх и риск.",
         )
-        Language.EN -> listOf(
+        else -> listOf(
             "All information in this application (names, descriptions, habitats, and notes on traditional or medicinal use) is provided for general educational and reference purposes only.",
             "It is NOT medical, health, or safety advice, and must not be used to identify, gather, prepare, or consume any plant.",
             "Many wild plants are toxic or deadly and closely resemble edible or medicinal species. Never eat, touch, or use any plant based on this application. Misidentification can cause serious injury or death.",
@@ -174,7 +174,7 @@ object LegalContent {
     fun privacyHeading(l: Language) = when (l) {
         Language.SAH -> "Тус дааннайдары харыстааһын"
         Language.RU -> "Политика конфиденциальности"
-        Language.EN -> "Privacy Policy"
+        else -> "Privacy Policy"
     }
 
     fun privacyBody(l: Language): List<String> = when (l) {
@@ -190,7 +190,7 @@ object LegalContent {
             "Отслеживающие cookie не используются. Аналитика, идентифицирующая вас, не собирается.",
             "Приложение не отправляет внешних сетевых запросов с вашими данными.",
         )
-        Language.EN -> listOf(
+        else -> listOf(
             "Ottor Mastar does not collect, store, or share any personal data. There are no user accounts, no sign-in, no advertising, and no third-party tracking.",
             "The only thing stored is your chosen interface language and settings, kept locally on your device so the app remembers your preference. This never leaves your device and can be cleared at any time.",
             "No tracking cookies are used. No analytics that identify you are collected.",
@@ -201,7 +201,7 @@ object LegalContent {
     fun contentHeading(l: Language) = when (l) {
         Language.SAH -> "Иһинээҕитэ уонна ааптар бырааба"
         Language.RU -> "Контент и авторские права"
-        Language.EN -> "Content & copyright"
+        else -> "Content & copyright"
     }
 
     fun contentBody(l: Language): List<String> = when (l) {
@@ -215,7 +215,7 @@ object LegalContent {
             "Ботанические иллюстрации представляют собой стилизованные, созданные цифровым способом изображения исключительно для наглядности; приведённые на них подписи, даты и ссылки носят декоративный характер и не отсылают к конкретным историческим изданиям.",
             "© 2026 Оттор Мастар.",
         )
-        Language.EN -> listOf(
+        else -> listOf(
             "Botanical illustrations and photographs are used for educational and cultural purposes. Plant descriptions combine general botanical knowledge with Yakut (Sakha) folk tradition.",
             "The botanical illustrations are stylised, digitally-created plates for visual reference only; any captions, dates, or citations shown on them are decorative and are not references to specific historical works.",
             "© 2026 Ottor Mastar.",

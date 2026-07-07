@@ -61,6 +61,8 @@ const data = {
   countries: Object.values(COUNTRIES).map((country) => ({
     id: country.id,
     imageBase: country.imageBase,
+    languages: country.languages,
+    defaultLanguage: country.defaultLanguage,
     plants: country.plants.map((p) => ({
       id: p.id,
       slug: p.slug,

@@ -50,8 +50,16 @@ class Settings(context: Context) {
             .getOrDefault(TileTap.VIEWER)
     )
 
+    // Clamped to the active country's language set: Yakutia offers sah/ru/en,
+    // Mongolia offers mn/zh/en. A stored language the current country doesn't
+    // offer resolves to that country's default — the UI is always in a language
+    // the collection actually provides. Web parity: SettingsContext's
+    // country→language effect.
     var language: Language
-        get() = languageState
+        get() {
+            val c = PlantStore.country(countryState)
+            return if (c.languageEnums.contains(languageState)) languageState else c.defaultLanguageEnum
+        }
         set(value) {
             languageState = value
             prefs.edit().putString("language", value.code).apply()
@@ -62,6 +70,13 @@ class Settings(context: Context) {
         set(value) {
             countryState = value
             prefs.edit().putString("country", value).apply()
+            // Keep language coherent with the new collection (Yakutia→sah,
+            // Mongolia→mn) and persist it so switching back is stable.
+            val c = PlantStore.country(value)
+            if (!c.languageEnums.contains(languageState)) {
+                languageState = c.defaultLanguageEnum
+                prefs.edit().putString("language", languageState.code).apply()
+            }
         }
 
     var showLatin: Boolean

@@ -43,6 +43,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — Per-country languages: Mongolia in Mongolian + Chinese (all platforms)
+- Feature: language sets are now per country — Yakutia keeps sah/ru/en (default sah); Mongolia offers mn/zh/en (default mn). Switching country moves the reader to that country's default if their language isn't offered; the switcher shows only the active country's languages; the plant names table lists the country's languages.
+- Web: `Language` gained mn/zh (optional on LocalizedString + `loc()` en-fallback so no call-site churn); countries.ts carries `languages`+`defaultLanguage`; SettingsContext keeps language↔country coherent; new mn.json/zh.json; machine-assisted mn+zh for all 24 Mongolia plants in `mongolia-translations.ts` merged at build time.
+- Native: mirrored — Language enum, nullable mn/zh with en fallback, per-country config in the exported JSON (added `languages`/`defaultLanguage` to export-native-data), clamped language getter + country-change switch, country-filtered picker, country-aware names table. Legal/About stat `when(lang)` became non-exhaustive → Legal falls back to English (sensitive text, not machine-translated); About stats use the (translated) locale keys.
+- Lesson: adding a language to a Kotlin enum breaks every exhaustive `when(lang)` — grep them before/after. Keeping mn/zh OPTIONAL with an en fallback (not required) meant the base sah/ru/en data and Yakutia plants needed zero changes.
+
 ### 2026-07-06 — Multi-agent fix fleet: native integration seams (iOS + Android)
 - Symptom: after the fix fleet, 2 of 16 agents (iOS-views, Android-core) died on server rate limits mid-edit, leaving native contract mismatches; neither platform compiled.
 - Causes & fixes: (1) Android — G16 removed the `country` param from `ViewerOverlay` (SP2-H01: each `ViewerItem` now carries its own `country`), but the dead agent left `country = country` on the call site → `No parameter with name 'country'`; removed it. Also finished SP2-M09 (home-viewer `kindLabel = loc.t("plant.photograph")`, was null). (2) iOS — G14's SP2-M11 empty-viewer guard made `ImageViewer.item` optional but left `caption` referencing `item.kindLabel/title/...` unwrapped → wrapped `caption` in `if let item` (same pattern `backdrop` already used). Both platforms then built (`assembleDebug`, `xcodebuild`) and launched without crashing.

@@ -28,7 +28,9 @@ struct SettingsView: View {
                             get: { settings.language.rawValue },
                             set: { settings.language = Language(rawValue: $0) ?? .sah }
                         ),
-                        options: Language.allCases.map { ($0.rawValue, $0.shortLabel) }
+                        // Only the active country's languages (Yakutia:
+                        // sah/ru/en; Mongolia: mn/zh/en), in the country's order.
+                        options: settings.country.languages.map { ($0.rawValue, $0.shortLabel) }
                     )
                 }
                 divider

@@ -67,7 +67,9 @@ fun SettingsScreen() {
         SettingRow(loc.t("settings.language")) {
             Segmented(
                 value = settings.language.code,
-                options = Language.entries.map { it.code to it.shortLabel },
+                // Only the active country's languages (Yakutia: sah/ru/en;
+                // Mongolia: mn/zh/en), in the country's order.
+                options = settings.country.languageEnums.map { it.code to it.shortLabel },
                 onChange = { settings.language = Language.from(it) },
             )
         }

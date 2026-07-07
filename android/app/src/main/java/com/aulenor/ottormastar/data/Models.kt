@@ -8,9 +8,13 @@ import kotlinx.serialization.json.Json
 // Regenerate after any edit to src/data/* — never hand-edit the JSON.
 
 enum class Language(val code: String, val label: String, val shortLabel: String) {
+    // sah/ru/en are the trilingual base; mn/zh are added for the Mongolia
+    // collection. Which subset a reader sees is decided per country.
     SAH("sah", "Саха", "Саха"),
     RU("ru", "Русский", "Рус"),
-    EN("en", "English", "Eng");
+    EN("en", "English", "Eng"),
+    MN("mn", "Монгол", "Мон"),
+    ZH("zh", "中文", "中");
 
     companion object {
         fun from(code: String): Language = entries.firstOrNull { it.code == code } ?: SAH
@@ -18,20 +22,39 @@ enum class Language(val code: String, val label: String, val shortLabel: String)
 }
 
 @Serializable
-data class LocalizedText(val sah: String, val ru: String, val en: String) {
+data class LocalizedText(
+    val sah: String,
+    val ru: String,
+    val en: String,
+    val mn: String? = null,
+    val zh: String? = null,
+) {
+    // Requested language, or English as the universal fallback (mn/zh are
+    // absent on Yakutia plants and never queried there).
     operator fun get(lang: Language): String = when (lang) {
         Language.SAH -> sah
         Language.RU -> ru
         Language.EN -> en
+        Language.MN -> mn ?: en
+        Language.ZH -> zh ?: en
     }
 }
 
 @Serializable
-data class PlantNames(val sah: String, val ru: String, val en: String, val latin: String) {
+data class PlantNames(
+    val sah: String,
+    val ru: String,
+    val en: String,
+    val latin: String,
+    val mn: String? = null,
+    val zh: String? = null,
+) {
     operator fun get(lang: Language): String = when (lang) {
         Language.SAH -> sah
         Language.RU -> ru
         Language.EN -> en
+        Language.MN -> mn ?: en
+        Language.ZH -> zh ?: en
     }
 }
 
@@ -81,7 +104,18 @@ object SeasonOrder {
 fun plateNumeral(index: Int): String = "%02d".format(index + 1)
 
 @Serializable
-data class Country(val id: String, val imageBase: String, val plants: List<Plant>)
+data class Country(
+    val id: String,
+    val imageBase: String,
+    val plants: List<Plant>,
+    /** Language codes this collection offers, in switcher order, plus its default. */
+    val languages: List<String> = listOf("sah", "ru", "en"),
+    val defaultLanguage: String = "sah",
+) {
+    /** Offered languages as enum values, resolving codes → Language. */
+    val languageEnums: List<Language> get() = languages.map { Language.from(it) }
+    val defaultLanguageEnum: Language get() = Language.from(defaultLanguage)
+}
 
 @Serializable
 data class PlantData(

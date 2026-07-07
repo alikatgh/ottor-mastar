@@ -47,11 +47,12 @@ fun AboutScreen(
     val plants = settings.country.plants
 
     val medicinal = plants.count { it.categories.contains("medicinal") }
-    val statLabels = when (lang) {
-        Language.SAH -> Triple("Айылҕа үүнээйилэрэ", "Эмтээх оттор", "Тыллар: саха, нуучча, ангылычаан")
-        Language.RU -> Triple("Дикорастущих растений", "Лекарственных трав", "Языка: якутский, русский, английский")
-        Language.EN -> Triple("Wild plants", "Medicinal herbs", "Languages: Yakut, Russian, English")
-    }
+    // Localized stat labels (present in all five locales) — proper mn/zh copy.
+    val statLabels = Triple(
+        loc.t("about.statPlants"),
+        loc.t("about.statMedicinal"),
+        loc.t("about.statLanguages"),
+    )
     val stats = listOf(
         "${plants.size}" to statLabels.first,
         "$medicinal" to statLabels.second,

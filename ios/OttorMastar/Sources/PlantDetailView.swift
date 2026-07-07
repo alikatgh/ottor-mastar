@@ -202,16 +202,26 @@ struct PlantDetailView: View {
 
     /// Names table — one row per language plus the Latin binomial.
     private var namesSection: some View {
+        // Vernacular rows follow the active collection's languages (Yakutia:
+        // Yakut/Russian/English; Mongolia: Mongolian/Chinese/English), then Latin.
         section(loc.t("plant.names")) {
             VStack(spacing: 0) {
-                nameRow(loc.t("plant.yakutName"), plant.names.sah)
-                Rectangle().fill(Color.hairline).frame(height: 1)
-                nameRow(loc.t("plant.russianName"), plant.names.ru)
-                Rectangle().fill(Color.hairline).frame(height: 1)
-                nameRow(loc.t("plant.englishName"), plant.names.en)
-                Rectangle().fill(Color.hairline).frame(height: 1)
+                ForEach(country.languages, id: \.self) { l in
+                    nameRow(loc.t(Self.nameLabelKey(l)), plant.names[l])
+                    Rectangle().fill(Color.hairline).frame(height: 1)
+                }
                 nameRow(loc.t("plant.latinName"), plant.names.latin, italic: true)
             }
+        }
+    }
+
+    private static func nameLabelKey(_ lang: Language) -> String {
+        switch lang {
+        case .sah: return "plant.yakutName"
+        case .ru: return "plant.russianName"
+        case .en: return "plant.englishName"
+        case .mn: return "plant.mongolianName"
+        case .zh: return "plant.chineseName"
         }
     }
 

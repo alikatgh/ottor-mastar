@@ -275,7 +275,7 @@ fun DetailScreen(
                     color = InkLight,
                 )
 
-                NamesTable(plant, loc.t("plant.names"), lang)
+                NamesTable(plant, loc.t("plant.names"))
                 MedicinalSection(plant, lang)
                 Section(loc.t("plant.habitat")) {
                     Text(
@@ -336,19 +336,28 @@ private fun Section(title: String, content: @Composable () -> Unit) {
 }
 
 @Composable
-private fun NamesTable(plant: Plant, title: String, lang: Language) {
+private fun NamesTable(plant: Plant, title: String) {
     val loc = rememberL10n()
+    val settings = LocalSettings.current
     Section(title) {
+        // Vernacular rows follow the active collection's languages (Yakutia:
+        // Yakut/Russian/English; Mongolia: Mongolian/Chinese/English), then Latin.
         Column {
-            NameRow(loc.t("plant.yakutName"), plant.names.sah)
-            Box(Modifier.fillMaxWidth().height(1.dp).background(Hairline))
-            NameRow(loc.t("plant.russianName"), plant.names.ru)
-            Box(Modifier.fillMaxWidth().height(1.dp).background(Hairline))
-            NameRow(loc.t("plant.englishName"), plant.names.en)
-            Box(Modifier.fillMaxWidth().height(1.dp).background(Hairline))
+            settings.country.languageEnums.forEach { l ->
+                NameRow(loc.t(nameLabelKey(l)), plant.names[l])
+                Box(Modifier.fillMaxWidth().height(1.dp).background(Hairline))
+            }
             NameRow(loc.t("plant.latinName"), plant.names.latin, italic = true)
         }
     }
+}
+
+private fun nameLabelKey(lang: Language): String = when (lang) {
+    Language.SAH -> "plant.yakutName"
+    Language.RU -> "plant.russianName"
+    Language.EN -> "plant.englishName"
+    Language.MN -> "plant.mongolianName"
+    Language.ZH -> "plant.chineseName"
 }
 
 @Composable

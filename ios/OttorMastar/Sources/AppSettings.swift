@@ -40,14 +40,31 @@ final class AppSettings: ObservableObject {
         }
     }
 
+    // Clamped to the active country's language set: Yakutia offers sah/ru/en,
+    // Mongolia offers mn/zh/en. A stored language the current country doesn't
+    // offer (after a country switch, or a device language it lacks) resolves to
+    // that country's default — so the UI is always in a language the collection
+    // actually provides. Web parity: SettingsContext's country→language effect.
     var language: Language {
-        get { Language(rawValue: storedLanguage) ?? .sah }
+        get {
+            let country = PlantStore.country(storedCountry)
+            let stored = Language(rawValue: storedLanguage) ?? country.defaultLanguage
+            return country.languages.contains(stored) ? stored : country.defaultLanguage
+        }
         set { objectWillChange.send(); storedLanguage = newValue.rawValue }
     }
 
     var countryId: String {
         get { storedCountry }
-        set { objectWillChange.send(); storedCountry = newValue }
+        set {
+            objectWillChange.send()
+            storedCountry = newValue
+            // Persist a coherent language too, so switching back is stable.
+            let country = PlantStore.country(newValue)
+            if !country.languages.contains(Language(rawValue: storedLanguage) ?? country.defaultLanguage) {
+                storedLanguage = country.defaultLanguage.rawValue
+            }
+        }
     }
 
     var catalogSort: CatalogSort {
