@@ -2,17 +2,8 @@
 // Botanical-plate slugs that have optimized image files in public/plants/.
 // Regenerate with: node scripts/gen-illustration-manifest.cjs (or npm run optimize).
 export const AVAILABLE_ILLUSTRATIONS: string[] = [
-  "mongolia-01-ill",
-  "mongolia-02-ill",
-  "mongolia-03-ill",
-  "mongolia-04-ill",
-  "mongolia-05-ill",
-  "mongolia-06-ill",
   "mongolia-07-ill",
-  "mongolia-08-ill",
-  "mongolia-09-ill",
   "mongolia-10-ill",
-  "mongolia-11-ill",
   "plant-01-ill",
   "plant-02-ill",
   "plant-03-ill",

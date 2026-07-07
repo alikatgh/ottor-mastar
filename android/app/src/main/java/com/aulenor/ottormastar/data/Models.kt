@@ -77,8 +77,11 @@ data class Plant(
      * strategy as the web (sah name for sah wiki, Latin binomial elsewhere).
      */
     fun wikipediaUrl(lang: Language): String {
-        val query = if (lang == Language.SAH) {
-            names.sah.replace(Regex("""\s*\([^)]*\)\s*"""), " ").trim()
+        // Always the reader's own Wikipedia subdomain. Native-language wikis
+        // (Sakha/Mongolian/Chinese) resolve best from the plant's own name;
+        // Russian/English from the Latin binomial.
+        val query = if (lang == Language.SAH || lang == Language.MN || lang == Language.ZH) {
+            names[lang].replace(Regex("""\s*\([^)]*\)\s*"""), " ").trim()
         } else {
             names.latin
         }

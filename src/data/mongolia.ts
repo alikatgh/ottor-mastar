@@ -13,11 +13,15 @@ import { MONGOLIA_I18N } from './mongolia-translations';
  * - To add more: drop the picks into the script's IMAGE_MAP, run it, then add a
  *   Plant entry here with the same imageId. Slugs must stay unique ACROSS
  *   countries (see findPlantBySlug in countries.ts).
- * - Botanical plates: the first 11 species (mongolia-01…11) have genuine plates
- *   in the shared AVAILABLE_ILLUSTRATIONS manifest, so hasIllustration() is true
- *   for them; the rest render photo-only until their plates are optimized in.
- *   To add a plate, drop its source into the illustration pipeline and run
- *   `npm run optimize` — no edit here is needed.
+ * - Botanical plates: the original AI-generated Mongolia plates depicted
+ *   UNRELATED species (Salsola, Gentiana, Stipa…) with fabricated captions, so
+ *   they were removed (see docs/audits/2026-07-06-illustration-species-audit.md).
+ *   Only two Mongolia species also occur in Yakutia and reuse that collection's
+ *   correct plate: yarrow (Achillea millefolium → mongolia-10-ill) and bedstraw
+ *   (Galium verum → mongolia-07-ill). Every other Mongolia plant renders
+ *   photo-only until a genuine, species-matched plate is added. hasIllustration()
+ *   reads the manifest, so dropping a correct plate + `npm run optimize` lights
+ *   it up — no edit here needed.
  *
  * The Mongolia option in Settings enables itself once this array is non-empty.
  *

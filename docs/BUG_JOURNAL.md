@@ -43,6 +43,17 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-06 — All 11 Mongolia botanical plates depicted the wrong species
+- Symptom: user reported illustrations linked to wrong images. Audit (labeled contact sheets, read each plate's printed Latin caption vs the assigned plant): Yakutia 23/23 correct; Mongolia 0/11 — every AI-generated Mongolia plate depicted an UNRELATED species (Salsola, Arnebia, Gentiana, Caragana, Rosularia, Stipa, Aconitum, a fern, Saussurea, Achnatherum, Caryopteris), none of which is even in the dataset. See docs/audits/2026-07-06-illustration-species-audit.md.
+- Cause: the Mongolia plates were generic AI art with fabricated captions, assigned by imageId order — not species-matched. Not a re-ordering issue (no plate matched any plant).
+- Fix: removed the 9 wrong plates (those plants → photo-only); reused the correct Yakutia plate for the 2 species shared with Yakutia (bedstraw Galium verum → mongolia-07-ill, yarrow Achillea → mongolia-10-ill); regenerated the manifest; export-native-data now cleans dest image roots so removed assets don't linger.
+- Lesson: extends the top pattern — audit plate↔species by READING the plate's own caption, not trusting filename order. Also: an incremental asset-copy export must clean its destination, or deletions never propagate to bundles.
+
+### 2026-07-06 — Wikipedia "Further reading" now targets the reader's own wiki incl. mn/zh
+- Symptom: Mongolian/Chinese readers should reach mn/zh Wikipedia articles; the query strategy only special-cased Sakha.
+- Fix: getWikipediaUrl (web + iOS + Android) uses the native plant name for sah/mn/zh (best for native-language articles) and the Latin binomial for ru/en; domain is always `<lang>.wikipedia.org`.
+- Lesson: the link target language must follow i18n.language, and native-language wikis resolve better from the native name than from Latin.
+
 ### 2026-07-06 — Per-country languages: Mongolia in Mongolian + Chinese (all platforms)
 - Feature: language sets are now per country — Yakutia keeps sah/ru/en (default sah); Mongolia offers mn/zh/en (default mn). Switching country moves the reader to that country's default if their language isn't offered; the switcher shows only the active country's languages; the plant names table lists the country's languages.
 - Web: `Language` gained mn/zh (optional on LocalizedString + `loc()` en-fallback so no call-site churn); countries.ts carries `languages`+`defaultLanguage`; SettingsContext keeps language↔country coherent; new mn.json/zh.json; machine-assisted mn+zh for all 24 Mongolia plants in `mongolia-translations.ts` merged at build time.

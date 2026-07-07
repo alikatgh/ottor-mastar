@@ -89,9 +89,12 @@ struct Plant: Decodable, Identifiable, Hashable {
     /// Special:Search never 404s — it lands on the article or a same-language
     /// results page.
     func wikipediaURL(for lang: Language) -> URL? {
+        // Always the reader's own Wikipedia subdomain. Native-language wikis
+        // (Sakha/Mongolian/Chinese) resolve best from the plant's own name;
+        // Russian/English from the Latin binomial.
         let query: String
-        if lang == .sah {
-            query = names.sah
+        if lang == .sah || lang == .mn || lang == .zh {
+            query = names[lang]
                 .replacingOccurrences(of: #"\s*\([^)]*\)\s*"#, with: " ", options: .regularExpression)
                 .trimmingCharacters(in: .whitespaces)
         } else {

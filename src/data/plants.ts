@@ -823,9 +823,14 @@ export function getPlantsSortedByName(lang: import('../types').Language = 'sah')
  * and on a same-language results page otherwise — so the link is never a 404.
  */
 export function getWikipediaUrl(plant: Plant, lang: import('../types').Language): string {
+  // The link always points at the reader's own Wikipedia (sah/ru/en/mn/zh
+  // subdomain). Native-language wikis (Sakha, Mongolian, Chinese) resolve best
+  // from the plant's own name; Russian and English resolve most reliably from
+  // the Latin binomial. Parenthetical glosses are stripped for a clean query.
+  const nativeName = plant.names[lang];
   const query =
-    lang === 'sah'
-      ? plant.names.sah.replace(/\s*\([^)]*\)\s*/g, ' ').trim()
+    (lang === 'sah' || lang === 'mn' || lang === 'zh') && nativeName
+      ? nativeName.replace(/\s*\([^)]*\)\s*/g, ' ').trim()
       : plant.names.latin;
   return `https://${lang}.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(query)}`;
 }

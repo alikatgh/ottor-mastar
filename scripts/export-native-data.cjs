@@ -112,6 +112,15 @@ for (const lang of ['sah', 'ru', 'en', 'mn', 'zh']) {
 // 5. Bundle thumb + medium images (~16 MB) so the apps are fully offline —
 //    this is a field guide; assume no signal. `full` stays remote-only
 //    (28 MB) and lights up for deep zoom once the site is deployed.
+// Clean the destination image roots first, so assets removed from public/
+// (e.g. rejected plates) don't linger stale in the native bundles.
+for (const destRoot of [
+  'ios/OttorMastar/Resources/PlantImages',
+  'android/app/src/main/assets/images',
+]) {
+  fs.rmSync(path.join(ROOT, destRoot), { recursive: true, force: true });
+}
+
 let copied = 0;
 for (const country of Object.values(COUNTRIES)) {
   const base = country.imageBase.replace(/^\//, ''); // 'plants' | 'mongolia'
