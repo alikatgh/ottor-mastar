@@ -43,6 +43,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-07 — Per-country-language loose ends: hero, search, settings picker, Legal, iOS locales
+- Symptom: 5 gaps left by the per-country-language work — (1) iOS bundled no locale-mn/zh so Mongolia mode showed raw keys; (2) home hero used `plants.last`/`.lastOrNull()`, an arbitrary plant, not the country's cover; (3) search haystacks omitted mn/zh names, so a Mongolia plant wasn't findable by its Mongolian/Chinese name; (4) web Settings language picker listed all 5 languages regardless of country; (5) web Legal rendered blank under mn/zh (content keyed sah/ru/en only).
+- Fix: (1) added locale-mn/zh to ios/project.yml resources; (2) `heroSlug` now flows through export-native-data → native Country gained `heroSlug`+`heroPlant` helper (web already had getHeroPlant); home cover resolves the country's hero (Sardaana / marigold); (3) added `names.mn`/`names.zh` (optional, `?? ''`) to every search haystack (web plantSearch.ts, iOS Search/CatalogView, Android Search/CatalogScreen); (4) SettingsPage language Segmented maps over `COUNTRIES[country].languages`; (5) LegalPage clamps mn/zh → en at the top (one const), matching native's English-fallback policy for sensitive legal text.
+- Verify: web tsc+vite build ✓, Android assembleDebug ✓, iOS BUILD SUCCEEDED ✓; browser-verified Mongolia mode — marigold hero, Мон/中/Eng-only pickers, Legal shows English not blank.
+- Lesson: a per-country config field (heroSlug) is useless to native until it's added to the export shape too — the JSON bridge is the easy thing to forget. Optional mn/zh names must be `?? ''`-guarded in every haystack (Swift `[String]`, Kotlin `List<String>`), not just the base four.
+
 ### 2026-07-06 — All 11 Mongolia botanical plates depicted the wrong species
 - Symptom: user reported illustrations linked to wrong images. Audit (labeled contact sheets, read each plate's printed Latin caption vs the assigned plant): Yakutia 23/23 correct; Mongolia 0/11 — every AI-generated Mongolia plate depicted an UNRELATED species (Salsola, Arnebia, Gentiana, Caragana, Rosularia, Stipa, Aconitum, a fern, Saussurea, Achnatherum, Caryopteris), none of which is even in the dataset. See docs/audits/2026-07-06-illustration-species-audit.md.
 - Cause: the Mongolia plates were generic AI art with fabricated captions, assigned by imageId order — not species-matched. Not a re-ordering issue (no plate matched any plant).

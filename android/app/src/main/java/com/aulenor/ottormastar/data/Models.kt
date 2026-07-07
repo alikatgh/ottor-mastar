@@ -111,6 +111,9 @@ data class Country(
     val id: String,
     val imageBase: String,
     val plants: List<Plant>,
+    /** Slug of the collection's cover plant (Sardaana for Yakutia, marigold for
+     *  Mongolia) — the finest plate, not an arbitrary entry. */
+    val heroSlug: String = "",
     /** Language codes this collection offers, in switcher order, plus its default. */
     val languages: List<String> = listOf("sah", "ru", "en"),
     val defaultLanguage: String = "sah",
@@ -118,6 +121,10 @@ data class Country(
     /** Offered languages as enum values, resolving codes → Language. */
     val languageEnums: List<Language> get() = languages.map { Language.from(it) }
     val defaultLanguageEnum: Language get() = Language.from(defaultLanguage)
+
+    /** The cover plant, resolved from [heroSlug]; falls back to the last entry
+     *  so the hero is never null when the collection is non-empty. */
+    val heroPlant: Plant? get() = plants.firstOrNull { it.slug == heroSlug } ?: plants.lastOrNull()
 }
 
 @Serializable

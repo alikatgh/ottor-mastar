@@ -18,6 +18,9 @@ struct SearchView: View {
         return country.plants.filter { plant in
             let haystacks = [
                 plant.names.sah, plant.names.ru, plant.names.en, plant.names.latin,
+                // Optional Mongolian/Chinese names, so a Mongolia plant is
+                // findable by its mn/zh name too, not just sah/ru/en/latin.
+                plant.names.mn ?? "", plant.names.zh ?? "",
                 plant.description[lang], plant.medicinalUses[lang],
             ]
             return haystacks.contains {

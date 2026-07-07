@@ -42,7 +42,12 @@ export function filterPlants(
   if (!q) return plants;
 
   return plants.filter((p) => {
-    const haystacks = [p.names.sah, p.names.ru, p.names.en, p.names.latin];
+    // All name forms, including the optional Mongolian/Chinese ones so a
+    // Mongolia plant is findable by its mn/zh name, not just sah/ru/en/latin.
+    const haystacks = [
+      p.names.sah, p.names.ru, p.names.en, p.names.latin,
+      p.names.mn ?? '', p.names.zh ?? '',
+    ];
     if (deep) {
       haystacks.push(p.description[lang] ?? '', p.medicinalUses[lang] ?? '');
     }

@@ -86,8 +86,10 @@ struct HomeView: View {
 
     private var cover: some View {
         VStack(spacing: 0) {
-            // Plate panel first, like the web's mobile order.
-            if let hero = plants.last {
+            // Plate panel first, like the web's mobile order. The cover is the
+            // country's explicit hero plate (Sardaana / marigold), not an
+            // arbitrary last entry.
+            if let hero = country.heroPlant {
                 Button {
                     pushDetail(hero)
                 } label: {

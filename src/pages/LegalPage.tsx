@@ -107,7 +107,12 @@ function Section({ heading, paragraphs, tone = 'default' }: {
 
 export default function LegalPage() {
   const { t, i18n } = useTranslation();
-  const lang = i18n.language as Language;
+  // The legal / privacy copy is authored in Sakha/Russian/English only and is
+  // deliberately NOT machine-translated (sensitive text). Mongolian and Chinese
+  // readers get the English version — same policy as the native apps — instead
+  // of a blank page from a missing key.
+  const rawLang = i18n.language as Language;
+  const lang: Language = rawLang === 'mn' || rawLang === 'zh' ? 'en' : rawLang;
 
   return (
     <div className="min-h-screen bg-bg-surface flex flex-col">

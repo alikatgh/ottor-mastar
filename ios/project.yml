@@ -33,6 +33,10 @@ targets:
         buildPhase: resources
       - path: OttorMastar/Resources/locale-en.json
         buildPhase: resources
+      - path: OttorMastar/Resources/locale-mn.json
+        buildPhase: resources
+      - path: OttorMastar/Resources/locale-zh.json
+        buildPhase: resources
     info:
       path: OttorMastar/Info.plist
       properties:

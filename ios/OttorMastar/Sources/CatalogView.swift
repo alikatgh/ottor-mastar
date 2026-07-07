@@ -33,7 +33,8 @@ struct CatalogView: View {
         let q = query.trimmingCharacters(in: .whitespaces)
         if !q.isEmpty {
             result = result.filter { plant in
-                [plant.names.sah, plant.names.ru, plant.names.en, plant.names.latin]
+                [plant.names.sah, plant.names.ru, plant.names.en, plant.names.latin,
+                 plant.names.mn ?? "", plant.names.zh ?? ""]
                     .contains { $0.range(of: q, options: [.caseInsensitive, .diacriticInsensitive]) != nil }
             }
         }

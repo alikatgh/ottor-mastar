@@ -68,7 +68,9 @@ fun HomeScreen(
     val country = settings.country
     val plants = country.plants
     val plated = plants.filter { it.hasIllustration }
-    val hero = plants.lastOrNull()
+    // Cover = the country's explicit hero plate (Sardaana / marigold), not an
+    // arbitrary last entry.
+    val hero = country.heroPlant
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         // ===== Cover: plate panel =====

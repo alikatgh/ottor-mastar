@@ -112,10 +112,19 @@ struct Plant: Decodable, Identifiable, Hashable {
 struct Country: Decodable, Identifiable {
     let id: String
     let imageBase: String
+    /// Slug of the collection's cover plant (Sardaana for Yakutia, marigold for
+    /// Mongolia). The cover of an encyclopedia is its finest plate.
+    let heroSlug: String
     /// Languages this collection offers, in switcher order, plus its default.
     let languages: [Language]
     let defaultLanguage: Language
     let plants: [Plant]
+
+    /// The cover plant, resolved from `heroSlug`; falls back to the last entry
+    /// if the slug ever fails to match, so the hero is never nil.
+    var heroPlant: Plant? {
+        plants.first { $0.slug == heroSlug } ?? plants.last
+    }
 }
 
 struct PlantData: Decodable {

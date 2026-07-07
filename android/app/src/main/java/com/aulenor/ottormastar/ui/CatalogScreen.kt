@@ -80,8 +80,10 @@ fun CatalogScreen(onOpenPlant: (Plant) -> Unit) {
         // Fold the query once; diacritic-insensitive to match iOS (SP2-M02).
         val qFolded = q.foldDiacritics()
         filtered = filtered.filter { plant ->
-            listOf(plant.names.sah, plant.names.ru, plant.names.en, plant.names.latin)
-                .any { it.foldDiacritics().contains(qFolded) }
+            listOf(
+                plant.names.sah, plant.names.ru, plant.names.en, plant.names.latin,
+                plant.names.mn ?: "", plant.names.zh ?: "",
+            ).any { it.foldDiacritics().contains(qFolded) }
         }
     }
 

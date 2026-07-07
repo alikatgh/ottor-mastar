@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRight, ChevronsRight } from 'lucide-react';
 import { getImagePath, getIllustrationPath, hasIllustration } from '../data/plants';
 import { usePlants, useSettings } from '../context/SettingsContext';
+import { getHeroPlant } from '../data/countries';
 import GalleryGrid from '../components/Gallery/GalleryGrid';
 import Footer from '../components/Layout/Footer';
 import { Language } from '../types';
@@ -18,10 +19,11 @@ export default function HomePage() {
   // has no specific one (WEB-M01/R-W03).
   const subtitle = t([`app.subtitle_${settings.country}`, 'app.subtitle']);
 
-  // Cover plant = the collection's last entry (Sardaana for Yakutia — the most
-  // iconic). The cover of an encyclopedia is its finest plate, not a snapshot;
-  // collections without plates yet fall back to the field photo.
-  const HERO_PLANT = plants[plants.length - 1];
+  // Cover plant = the collection's explicit hero (Sardaana for Yakutia, marigold
+  // for Mongolia), resolved from the country's `heroSlug`; falls back to the
+  // last entry if that ever fails to match. The cover of an encyclopedia is its
+  // finest plate, not an arbitrary snapshot.
+  const HERO_PLANT = getHeroPlant(settings.country) ?? plants[plants.length - 1];
   const HERO_PLATE =
     getIllustrationPath(HERO_PLANT, 'medium') ?? getImagePath(HERO_PLANT, 'medium');
   const PLATED = useMemo(() => plants.filter(hasIllustration), [plants]);

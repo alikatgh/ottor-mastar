@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSettings, Settings } from '../context/SettingsContext';
-import { COUNTRY_IDS, isCountryAvailable } from '../data/countries';
+import { COUNTRIES, COUNTRY_IDS, isCountryAvailable } from '../data/countries';
 import { LANGUAGES } from '../i18n';
 
 /**
@@ -157,7 +157,13 @@ export default function SettingsPage() {
             <Row label={t('settings.language')}>
               <Segmented
                 value={i18n.language}
-                options={LANGUAGES.map((l) => ({ value: l.code, label: l.shortLabel }))}
+                // Only the active country's languages (Yakutia: sah/ru/en;
+                // Mongolia: mn/zh/en), in the country's order — matching the
+                // header switcher.
+                options={COUNTRIES[settings.country].languages.map((code) => {
+                  const l = LANGUAGES.find((x) => x.code === code);
+                  return { value: code, label: l?.shortLabel ?? code };
+                })}
                 onChange={(code) => i18n.changeLanguage(code)}
               />
             </Row>
