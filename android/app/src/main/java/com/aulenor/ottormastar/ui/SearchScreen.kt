@@ -8,12 +8,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
@@ -72,8 +75,17 @@ fun SearchScreen(onOpenPlant: (Plant) -> Unit) {
 
     LaunchedEffect(Unit) { focusRequester.requestFocus() }
 
-    LazyColumn(Modifier.fillMaxSize()) {
-        item {
+    // Adaptive grid — 1 column on phone, 2–3 on tablet / large window (parity
+    // with the web search results). Search field + states span the full row;
+    // results are bordered cards.
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 340.dp),
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        item(span = { GridItemSpan(maxLineSpan) }) {
             OutlinedTextField(
                 value = query,
                 onValueChange = { query = it },
@@ -90,13 +102,13 @@ fun SearchScreen(onOpenPlant: (Plant) -> Unit) {
                 shape = RoundedCornerShape(16.dp),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 28.dp, bottom = 24.dp)
+                    .padding(top = 28.dp, bottom = 20.dp)
                     .focusRequester(focusRequester),
             )
         }
 
         if (q.isEmpty()) {
-            item {
+            item(span = { GridItemSpan(maxLineSpan) }) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(14.dp),
@@ -111,28 +123,27 @@ fun SearchScreen(onOpenPlant: (Plant) -> Unit) {
                 }
             }
         } else if (results.isEmpty()) {
-            item {
+            item(span = { GridItemSpan(maxLineSpan) }) {
                 Box(Modifier.fillMaxWidth().padding(vertical = 40.dp), contentAlignment = Alignment.Center) {
                     Text(loc.t("catalog.noResults"), color = InkMuted)
                 }
             }
         } else {
-            item {
-                Box(Modifier.fillMaxWidth().padding(horizontal = 16.dp).height(1.dp).background(Hairline))
-            }
-            items(results.size) { index ->
-                val plant = results[index]
+            itemsIndexed(results, key = { _, p -> p.slug }) { _, plant ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(14.dp),
                     modifier = Modifier
                         .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Card)
+                        .border(1.dp, Hairline, RoundedCornerShape(12.dp))
                         .clickable { onOpenPlant(plant) }
-                        .padding(horizontal = 16.dp, vertical = 10.dp),
+                        .padding(12.dp),
                 ) {
                     Box(
                         Modifier
-                            .size(48.dp)
+                            .size(52.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .background(Parchment)
                             .border(1.dp, Hairline, RoundedCornerShape(8.dp)),
@@ -165,7 +176,6 @@ fun SearchScreen(onOpenPlant: (Plant) -> Unit) {
                         }
                     }
                 }
-                Box(Modifier.fillMaxWidth().padding(horizontal = 16.dp).height(1.dp).background(Hairline))
             }
         }
     }

@@ -71,14 +71,26 @@ struct CatalogView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 48)
                 } else {
-                    LazyVStack(spacing: 0) {
-                        Rectangle().fill(Color.hairline).frame(height: 1)
+                    // Adaptive grid: 1 column on iPhone width, 2–3 on iPad /
+                    // large windows, so the browsable index uses the space
+                    // instead of a narrow column (parity with the web catalog).
+                    LazyVGrid(
+                        columns: [GridItem(.adaptive(minimum: 340), spacing: 12)],
+                        spacing: 12
+                    ) {
                         ForEach(Array(filtered.enumerated()), id: \.element.slug) { index, plant in
                             NavigationLink(value: plant) {
                                 CatalogRow(plant: plant, country: country, index: index)
+                                    .padding(.horizontal, 12)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(Color.card)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                            .strokeBorder(Color.hairline, lineWidth: 1)
+                                    )
                             }
                             .buttonStyle(.plain)
-                            Rectangle().fill(Color.hairline).frame(height: 1)
                         }
                     }
                     .padding(.horizontal, 16)

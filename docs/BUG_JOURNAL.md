@@ -43,6 +43,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-07 — Native catalog + search: adaptive grid for iPad / large windows (parity)
+- Change: iOS `CatalogView`/`SearchView` and Android `CatalogScreen`/`SearchScreen` were single divided-list columns — the same wasted-space problem on iPad landscape / large windows. Converted the result lists to adaptive grids of bordered cards: iOS `LazyVGrid(columns: [.adaptive(minimum: 340)])`, Android `LazyVerticalGrid(GridCells.Adaptive(minSize = 340.dp))` with the header + empty/no-results as full-span items (`GridItemSpan(maxLineSpan)`). Rows became `Card`-background + hairline-border cards; dividers removed.
+- Why `.adaptive` over an explicit size-class branch: one `minSize=340` rule yields 1 column on phone width and 2–3 on tablet/large automatically — the native analog of the web's `md:/xl:` breakpoints — without a second layout branch to maintain.
+- Verify: `xcodebuild` BUILD SUCCEEDED, `gradlew assembleDebug` BUILD SUCCESSFUL. Build-verified only (agreed) — not iPad-screenshot-verified.
+- Lesson: `LazyVGrid`/`LazyVerticalGrid` with an adaptive `minSize` is the drop-in replacement for a `LazyVStack`/`LazyColumn` list when you want it to grow columns on wide screens; keep section headers as full-span items so only the entries flow into columns.
+
 ### 2026-07-07 — Search results wasted desktop space (same pattern as catalog)
 - Symptom: `/search` results were a single divided list in `max-w-2xl` — the same wasted-desktop-space pattern flagged for the catalog, applied proactively per the user's "use ALL space" principle.
 - Fix: container `max-w-2xl` → `max-w-5xl`; results become the same responsive card grid (`grid-cols-1 md:grid-cols-2 xl:grid-cols-3`); the search input stays centered/comfortable (`max-w-2xl mx-auto`) as the page's focal point while results fan out to full width.

@@ -46,14 +46,25 @@ struct SearchView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 40)
                 } else {
-                    LazyVStack(spacing: 0) {
-                        Rectangle().fill(Color.hairline).frame(height: 1)
+                    // Adaptive grid — 1 column on iPhone, 2–3 on iPad / large
+                    // windows (parity with the web search results).
+                    LazyVGrid(
+                        columns: [GridItem(.adaptive(minimum: 340), spacing: 12)],
+                        spacing: 12
+                    ) {
                         ForEach(results) { plant in
                             NavigationLink(value: plant) {
                                 SearchRow(plant: plant, country: country)
+                                    .padding(.horizontal, 12)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(Color.card)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                            .strokeBorder(Color.hairline, lineWidth: 1)
+                                    )
                             }
                             .buttonStyle(.plain)
-                            Rectangle().fill(Color.hairline).frame(height: 1)
                         }
                     }
                     .padding(.horizontal, 16)

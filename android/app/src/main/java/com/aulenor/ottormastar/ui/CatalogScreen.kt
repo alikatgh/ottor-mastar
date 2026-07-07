@@ -9,13 +9,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -87,79 +91,82 @@ fun CatalogScreen(onOpenPlant: (Plant) -> Unit) {
         }
     }
 
-    LazyColumn(Modifier.fillMaxSize()) {
-        item {
-            Row(
-                verticalAlignment = Alignment.Bottom,
-                modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 16.dp, bottom = 20.dp),
-            ) {
-                Text(
-                    loc.t("catalog.title"),
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = Ink,
-                    modifier = Modifier.weight(1f),
-                )
-                Text(
-                    "${filtered.size}",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = InkMuted,
-                )
-            }
-            OutlinedTextField(
-                value = query,
-                onValueChange = { query = it },
-                placeholder = { Text(loc.t("catalog.searchPlaceholder"), color = InkMuted) },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Card,
-                    unfocusedContainerColor = Card,
-                    focusedBorderColor = Forest.copy(alpha = 0.5f),
-                    unfocusedBorderColor = Hairline,
-                ),
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-            )
-            Spacer(Modifier.height(16.dp))
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 20.dp),
-            ) {
-                for (key in CATEGORY_FILTERS) {
-                    val active = activeCategory == key
+    // Adaptive grid: 1 column on phone width, 2–3 on tablet / large window,
+    // so the browsable index uses the space (parity with the web catalog).
+    // The header + empty state span the full row; entries are bordered cards.
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 340.dp),
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        item(span = { GridItemSpan(maxLineSpan) }) {
+            Column {
+                Row(
+                    verticalAlignment = Alignment.Bottom,
+                    modifier = Modifier.padding(top = 16.dp, bottom = 20.dp),
+                ) {
                     Text(
-                        if (key == "all") loc.t("gallery.allPlants") else loc.t("categories.$key"),
-                        style = MaterialTheme.typography.labelLarge,
-                        color = if (active) Color.White else InkLight,
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .background(if (active) Forest else Color.Transparent)
-                            .border(1.dp, if (active) Forest else Hairline, CircleShape)
-                            .clickable { activeCategory = key }
-                            .padding(horizontal = 16.dp, vertical = 10.dp),
+                        loc.t("catalog.title"),
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = Ink,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Text(
+                        "${filtered.size}",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = InkMuted,
                     )
                 }
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { query = it },
+                    placeholder = { Text(loc.t("catalog.searchPlaceholder"), color = InkMuted) },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = Card,
+                        unfocusedContainerColor = Card,
+                        focusedBorderColor = Forest.copy(alpha = 0.5f),
+                        unfocusedBorderColor = Hairline,
+                    ),
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Spacer(Modifier.height(16.dp))
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.horizontalScroll(rememberScrollState()),
+                ) {
+                    for (key in CATEGORY_FILTERS) {
+                        val active = activeCategory == key
+                        Text(
+                            if (key == "all") loc.t("gallery.allPlants") else loc.t("categories.$key"),
+                            style = MaterialTheme.typography.labelLarge,
+                            color = if (active) Color.White else InkLight,
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .background(if (active) Forest else Color.Transparent)
+                                .border(1.dp, if (active) Forest else Hairline, CircleShape)
+                                .clickable { activeCategory = key }
+                                .padding(horizontal = 16.dp, vertical = 10.dp),
+                        )
+                    }
+                }
+                Spacer(Modifier.height(8.dp))
             }
-            Spacer(Modifier.height(20.dp))
         }
 
         if (filtered.isEmpty()) {
-            item {
+            item(span = { GridItemSpan(maxLineSpan) }) {
                 Box(Modifier.fillMaxWidth().padding(vertical = 48.dp), contentAlignment = Alignment.Center) {
                     Text(loc.t("catalog.noResults"), color = InkMuted)
                 }
             }
         } else {
-            item {
-                Box(Modifier.fillMaxWidth().padding(horizontal = 16.dp).height(1.dp).background(Hairline))
-            }
-            items(filtered.size) { index ->
-                CatalogRow(filtered[index], index, onOpenPlant)
-                Box(Modifier.fillMaxWidth().padding(horizontal = 16.dp).height(1.dp).background(Hairline))
+            itemsIndexed(filtered, key = { _, p -> p.slug }) { index, plant ->
+                CatalogRow(plant, index, onOpenPlant)
             }
         }
     }
@@ -175,8 +182,11 @@ private fun CatalogRow(plant: Plant, index: Int, onOpenPlant: (Plant) -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         modifier = Modifier
             .fillMaxWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(Card)
+            .border(1.dp, Hairline, RoundedCornerShape(12.dp))
             .clickable { onOpenPlant(plant) }
-            .padding(horizontal = 16.dp, vertical = 10.dp),
+            .padding(12.dp),
     ) {
         Text(
             plateNumeral(index),
