@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Ottor Mastar — Android app</title>
+  <meta name="description" content="Download the Ottor Mastar Android app." />
+  <meta name="theme-color" content="#2C5A2E" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    :root { --forest:#2C5A2E; --forest-dark:#1E4020; --cream:#F8F6F0; --ink:#1A1A1A; --ink-muted:#6B6B6B; --hair:rgba(0,0,0,.09); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html,body { background:var(--cream); color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased; }
+    body { min-height:100dvh; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .card { width:100%; max-width:26rem; text-align:center; }
+    .icon { width:88px; height:88px; border-radius:22px; margin:0 auto 22px;
+      box-shadow:0 8px 28px rgba(0,0,0,.14); display:block; }
+    .overline { font-size:.72rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-muted); }
+    h1 { font-family:Georgia,"Playfair Display",serif; font-size:2.2rem; font-weight:700; margin:.35rem 0 .3rem; }
+    .meta { color:var(--ink-muted); font-size:.95rem; margin-bottom:1.7rem; }
+    .btn { display:flex; align-items:center; justify-content:center; gap:.6rem;
+      width:100%; padding:1rem 1.25rem; border-radius:14px; background:var(--forest); color:#fff;
+      font-size:1.05rem; font-weight:600; text-decoration:none; border:none;
+      box-shadow:0 6px 18px rgba(44,90,46,.28); transition:background .15s, transform .05s; }
+    .btn:active { transform:scale(.99); background:var(--forest-dark); }
+    .btn svg { width:22px; height:22px; }
+    .note { margin-top:1rem; font-size:.85rem; color:var(--ink-muted); line-height:1.5; }
+    .steps { margin:2rem 0 0; text-align:left; }
+    .steps h2 { font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:.9rem; }
+    .step { display:flex; gap:.8rem; align-items:flex-start; padding:.55rem 0; border-top:1px solid var(--hair); }
+    .step:first-of-type { border-top:none; }
+    .num { flex:none; width:26px; height:26px; border-radius:50%; background:rgba(44,90,46,.1); color:var(--forest);
+      font-weight:700; font-size:.9rem; display:flex; align-items:center; justify-content:center; }
+    .step p { font-size:.95rem; line-height:1.45; padding-top:2px; }
+    .foot { margin-top:2rem; font-size:.8rem; }
+    .foot a { color:var(--forest); text-decoration:none; }
+    .hide { display:none !important; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img class="icon" alt="Ottor Mastar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232C5A2E'/%3E%3Cpath d='M16 6C16 6 10 12 10 18C10 22 12.5 26 16 26C19.5 26 22 22 22 18C22 12 16 6 16 6Z' fill='%234A8C3F' opacity='.7'/%3E%3Cpath d='M16 8C16 8 12 13 12 18C12 21 13.5 24 16 24C18.5 24 20 21 20 18C20 13 16 8 16 8Z' fill='%236BAF5E'/%3E%3Cline x1='16' y1='14' x2='16' y2='24' stroke='%232C5A2E' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <p class="overline" data-i="over"></p>
+    <h1>Ottor Mastar</h1>
+    <p class="meta" data-i="meta"></p>
+
+    <a id="dl" class="btn" href="https://dl.ottormastar.aulenor.com/OttorMastar.apk" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+      <span data-i="btn"></span>
+    </a>
+    <p id="notAndroid" class="note hide" data-i="notAndroid"></p>
+
+    <section class="steps">
+      <h2 data-i="howto"></h2>
+      <div class="step"><span class="num">1</span><p data-i="s1"></p></div>
+      <div class="step"><span class="num">2</span><p data-i="s2"></p></div>
+      <div class="step"><span class="num">3</span><p data-i="s3"></p></div>
+    </section>
+
+    <p class="foot"><a href="/" data-i="web"></a></p>
+  </main>
+
+  <script>
+    // Lightweight localization — Russian for ru* browsers, else English.
+    var STR = {
+      en: { over:"Android app", meta:"Version 1.0 · ~27 MB", btn:"Download for Android",
+        notAndroid:"This is an Android app. Open this page on your Android phone to install it.",
+        howto:"How to install", s1:"Tap “Download for Android” above.",
+        s2:"Open the downloaded file (check your Downloads or the notification).",
+        s3:"If your phone asks, allow installing from this source, then tap Install.",
+        web:"← Open the website instead" },
+      ru: { over:"Приложение для Android", meta:"Версия 1.0 · ~27 МБ", btn:"Скачать для Android",
+        notAndroid:"Это приложение для Android. Откройте эту страницу на телефоне Android, чтобы установить.",
+        howto:"Как установить", s1:"Нажмите «Скачать для Android» выше.",
+        s2:"Откройте загруженный файл (в «Загрузках» или в уведомлении).",
+        s3:"Если телефон спросит — разрешите установку из этого источника и нажмите «Установить».",
+        web:"← Открыть сайт вместо этого" }
+    };
+    var lang = (navigator.language || "en").toLowerCase().indexOf("ru") === 0 ? "ru" : "en";
+    document.documentElement.lang = lang;
+    var d = STR[lang];
+    document.querySelectorAll("[data-i]").forEach(function(el){ el.textContent = d[el.getAttribute("data-i")] || ""; });
+    // Gentle nudge if opened on a non-Android device (button still works).
+    if (!/android/i.test(navigator.userAgent)) document.getElementById("notAndroid").classList.remove("hide");
+  </script>
+</body>
+</html>
