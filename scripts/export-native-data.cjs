@@ -93,7 +93,7 @@ for (const rel of targets) {
 }
 
 // 4. Locale strings — copied verbatim so all three platforms share one source.
-for (const lang of ['sah', 'ru', 'en']) {
+for (const lang of ['sah', 'ru', 'en', 'mn', 'zh']) {
   const src = path.join(ROOT, 'src', 'i18n', 'locales', `${lang}.json`);
   for (const destRel of [
     `ios/OttorMastar/Resources/locale-${lang}.json`,

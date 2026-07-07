@@ -1,7 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useMemo, useState, ReactNode } from 'react';
 import { MotionConfig } from 'framer-motion';
-import { Plant } from '../types';
+import i18n from '../i18n';
+import { Plant, Language } from '../types';
 import { COUNTRIES, COUNTRY_IDS, DEFAULT_COUNTRY, isCountryAvailable, CountryId } from '../data/countries';
 
 /**
@@ -115,6 +116,18 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     document.documentElement.dataset.textSize = settings.textSize;
     document.documentElement.dataset.reduceMotion = String(settings.reduceMotion);
   }, [settings.textSize, settings.reduceMotion]);
+
+  // Keep the interface language coherent with the country. Each collection
+  // offers its own languages (Yakutia: sah/ru/en; Mongolia: mn/zh/en). When the
+  // reader switches country — or lands with a detected language the current
+  // country doesn't offer — move them to that country's default language.
+  // Runs on mount and whenever country changes.
+  useEffect(() => {
+    const { languages, defaultLanguage } = COUNTRIES[settings.country];
+    if (!languages.includes(i18n.language as Language)) {
+      i18n.changeLanguage(defaultLanguage);
+    }
+  }, [settings.country]);
 
   const value = useMemo<SettingsContextValue>(
     () => ({

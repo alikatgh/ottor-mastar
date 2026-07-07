@@ -1,0 +1,135 @@
+{
+  "app": {
+    "title": "Ottor Mastar",
+    "subtitle": "雅库特植物",
+    "subtitle_mongolia": "蒙古植物",
+    "description": "雅库特的草木——野花、药用植物与泰加林之美",
+    "description_mongolia": "蒙古的草木与花卉——草原野花与栽培花卉"
+  },
+  "nav": {
+    "gallery": "图库",
+    "catalog": "目录",
+    "search": "搜索",
+    "about": "关于"
+  },
+  "gallery": {
+    "title": "植物图库",
+    "allPlants": "全部",
+    "photoCount_one": "{{count}} 张照片",
+    "photoCount_other": "{{count}} 张照片"
+  },
+  "home": {
+    "cta": "浏览目录",
+    "platesTitle": "植物图版",
+    "plateCount_one": "{{count}} 幅图版",
+    "plateCount_other": "{{count}} 幅图版",
+    "photosTitle": "实地照片",
+    "swipeHint": "滑动"
+  },
+  "settings": {
+    "title": "设置",
+    "storageNote": "设置仅保存在本设备上。",
+    "sectionRegion": "国家与语言",
+    "sectionLanguage": "语言",
+    "sectionCountry": "国家",
+    "language": "语言",
+    "country": "国家",
+    "countryNote": "默认雅库特。新增地区将随其藏品加入而解锁。",
+    "country_yakutia": "雅库特",
+    "country_mongolia": "蒙古",
+    "comingSoon": "即将推出",
+    "sectionContent": "目录与内容",
+    "showLatin": "列表中显示拉丁名",
+    "catalogSort": "目录排序",
+    "sortName": "按字母顺序",
+    "sortSeason": "按花期",
+    "leadImage": "植物页首图",
+    "leadPlate": "图版",
+    "leadPhoto": "照片",
+    "sectionDisplay": "阅读与显示",
+    "textSize": "文字大小",
+    "textSmall": "小",
+    "textDefault": "默认",
+    "textLarge": "大",
+    "reduceMotion": "减弱动效",
+    "sectionGallery": "图库",
+    "tileLabels": "照片上显示名称",
+    "tileTap": "点击照片时",
+    "tapViewer": "全屏",
+    "tapDetail": "植物页面",
+    "sectionData": "数据",
+    "reset": "重置所有设置"
+  },
+  "catalog": {
+    "title": "植物目录",
+    "searchPlaceholder": "搜索植物…",
+    "noResults": "未找到植物",
+    "sortByName": "按字母顺序",
+    "categories": "分类"
+  },
+  "plant": {
+    "names": "名称",
+    "yakutName": "雅库特语",
+    "russianName": "俄语",
+    "englishName": "英语",
+    "latinName": "拉丁语",
+    "mongolianName": "蒙古语",
+    "chineseName": "汉语",
+    "description": "描述",
+    "medicinalUses": "药用",
+    "habitat": "生境",
+    "bloomingSeason": "花期",
+    "backToGallery": "返回图库",
+    "details": "详情",
+    "illustration": "植物图版",
+    "photograph": "照片",
+    "medicinalDisclaimerLabel": "关于本节",
+    "medicinalDisclaimer": "以下为仅供参考的传统与民间说法——并非用法说明、剂量或医疗建议。切勿据此采集、制备或食用任何植物；许多植物有毒且极易误认。使用前请务必咨询专业人士。您须自行承担使用本信息的一切风险及后果。",
+    "furtherReading": "延伸阅读",
+    "readOnWikipedia": "在维基百科上阅读",
+    "notFound": "未找到植物",
+    "notFoundBody": "找不到该植物。它可能已被移除，或链接有误。"
+  },
+  "categories": {
+    "medicinal": "药用",
+    "edible": "可食",
+    "ornamental": "观赏",
+    "poisonous": "有毒"
+  },
+  "seasons": {
+    "spring": "春季",
+    "summer": "夏季",
+    "autumn": "秋季",
+    "may-june": "5–6月",
+    "june-july": "6–7月",
+    "june-august": "6–8月",
+    "july-august": "7–8月",
+    "may-july": "5–7月"
+  },
+  "about": {
+    "title": "关于 Ottor Mastar",
+    "intro": "「Ottor Mastar」是一个致力于雅库特（萨哈共和国）野生草木的项目。",
+    "intro_mongolia": "「Ottor Mastar」是一个致力于蒙古野生草木的项目。",
+    "mission": "我们的使命是向人们介绍蒙古非凡的植物世界——它的美丽与益处。",
+    "statPlants": "野生植物",
+    "statMedicinal": "药用植物",
+    "statLanguages": "语言：蒙古语、汉语、英语"
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "body": "您访问的页面不存在。返回图库浏览植物。",
+    "home": "首页",
+    "catalog": "浏览目录"
+  },
+  "common": {
+    "loading": "加载中…",
+    "error": "错误",
+    "close": "关闭",
+    "next": "下一个",
+    "previous": "上一个",
+    "viewAll": "查看全部",
+    "legal": "法律与隐私",
+    "disclaimerShort": "仅供教育用途——非医疗或安全建议。切勿依据本应用采集、制备或使用任何植物；许多植物有毒。请咨询专业人士。",
+    "readDisclaimer": "阅读完整免责声明"
+  }
+}

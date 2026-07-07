@@ -1,5 +1,6 @@
 import { Plant } from '../types';
 import { CATEGORIES } from './plants';
+import { MONGOLIA_I18N } from './mongolia-translations';
 
 /**
  * Mongolia dataset — plants photographed in Mongolia (city parks + steppe edge
@@ -26,7 +27,7 @@ import { CATEGORIES } from './plants';
  * Species IDs are best-effort from the photographs; the app-wide disclaimer and
  * the per-entry (?) note on medicinal uses apply.
  */
-export const mongoliaPlants: Omit<Plant, 'imageBase'>[] = [
+const RAW: Omit<Plant, 'imageBase'>[] = [
   {
     id: 'mn-marigold',
     slug: 'mn-marigold',
@@ -724,3 +725,21 @@ export const mongoliaPlants: Omit<Plant, 'imageBase'>[] = [
     color: '#F07B1D',
   },
 ];
+
+/**
+ * Fold the machine-assisted Mongolian + Chinese translations into each plant's
+ * localized fields. The base sah/ru/en stays authored in RAW above; mn/zh live
+ * in mongolia-translations.ts and are merged here so both the web app and the
+ * native export get the full five-language dataset from one source.
+ */
+export const mongoliaPlants: Omit<Plant, 'imageBase'>[] = RAW.map((p) => {
+  const t = MONGOLIA_I18N[p.id];
+  if (!t) return p;
+  return {
+    ...p,
+    names: { ...p.names, mn: t.names.mn, zh: t.names.zh },
+    description: { ...p.description, mn: t.description.mn, zh: t.description.zh },
+    medicinalUses: { ...p.medicinalUses, mn: t.medicinalUses.mn, zh: t.medicinalUses.zh },
+    habitat: { ...p.habitat, mn: t.habitat.mn, zh: t.habitat.zh },
+  };
+});

@@ -7,6 +7,7 @@ import { getImagePath, getIllustrationPath, CATEGORIES } from '../data/plants';
 import { usePlants, useSettings } from '../context/SettingsContext';
 import CategoryBadge from '../components/common/CategoryBadge';
 import { filterPlants } from '../utils/plantSearch';
+import { loc } from '../types';
 
 // Blooming-season sort: earliest start first, longest season breaking ties.
 const SEASON_ORDER = [
@@ -42,13 +43,13 @@ export default function CatalogPage() {
 
   const filtered = useMemo(() => {
     let result = [...plants].sort((a, b) =>
-      a.names[lang].localeCompare(b.names[lang], lang)
+      loc(a.names, lang).localeCompare(loc(b.names, lang), lang)
     );
     if (settings.catalogSort === 'season') {
       result.sort(
         (a, b) =>
           seasonRank(a.bloomingSeason) - seasonRank(b.bloomingSeason) ||
-          a.names[lang].localeCompare(b.names[lang], lang)
+          loc(a.names, lang).localeCompare(loc(b.names, lang), lang)
       );
     }
 

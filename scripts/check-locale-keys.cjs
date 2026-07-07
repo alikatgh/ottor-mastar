@@ -50,7 +50,7 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const SRC_DIR = path.join(ROOT, 'src');
 const LOCALE_DIR = path.join(SRC_DIR, 'i18n', 'locales');
-const LOCALES = ['en', 'ru', 'sah'];
+const LOCALES = ['en', 'ru', 'sah', 'mn', 'zh'];
 
 /** i18next plural category suffixes. A base key is "covered" by any of these. */
 const PLURAL_SUFFIXES = ['zero', 'one', 'two', 'few', 'many', 'other'];

@@ -52,7 +52,7 @@ export const IMAGE_MAP: Record<string, string> = {
   'plant-23': 'WhatsApp Image 2026-07-04 at 12.36.38.jpeg',
 };
 
-import { Plant } from '../types';
+import { Plant, loc } from '../types';
 import { AVAILABLE_ILLUSTRATIONS } from './available-illustrations';
 
 const AVAILABLE_ILLUSTRATION_SET = new Set(AVAILABLE_ILLUSTRATIONS);
@@ -801,7 +801,7 @@ export function getPlantsByCategory(category: string) {
  */
 export function getPlantsSortedByName(lang: import('../types').Language = 'sah') {
   return [...plants].sort((a, b) =>
-    a.names[lang].localeCompare(b.names[lang], lang)
+    loc(a.names, lang).localeCompare(loc(b.names, lang), lang)
   );
 }
 

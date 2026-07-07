@@ -1,4 +1,4 @@
-import { Language } from "../types";
+import { Language, loc } from "../types";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useRef, useEffect, useId, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
@@ -6,7 +6,16 @@ import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ZoomIn, Info, HelpCircle, ExternalLink, ArrowUpRight } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { getImagePath, getIllustrationPath, getWikipediaUrl } from '../data/plants';
-import { findPlantBySlug } from '../data/countries';
+import { findPlantBySlug, COUNTRIES } from '../data/countries';
+
+// Vernacular name-row label per language, for the country-aware names table.
+const NAME_LABEL_KEY: Record<Language, string> = {
+  sah: 'plant.yakutName',
+  ru: 'plant.russianName',
+  en: 'plant.englishName',
+  mn: 'plant.mongolianName',
+  zh: 'plant.chineseName',
+};
 import { useSettings } from '../context/SettingsContext';
 import CategoryBadge from '../components/common/CategoryBadge';
 import type { ViewerItem } from '../components/common/ImageViewer';
@@ -111,7 +120,7 @@ export default function PlantDetailPage() {
   const plateItem: ViewerItem[] = fullIll
     ? [{
         src: fullIll,
-        title: plant.names[lang],
+        title: loc(plant.names, lang),
         subtitle: plant.names.latin,
         kind: t('plant.illustration'),
         badges: plant.categories,
@@ -119,7 +128,7 @@ export default function PlantDetailPage() {
     : [];
   const photoItem: ViewerItem[] = [{
     src: getImagePath(plant, 'full'),
-    title: plant.names[lang],
+    title: loc(plant.names, lang),
     subtitle: plant.names.latin,
     kind: t('plant.photograph'),
     badges: plant.categories,
@@ -154,10 +163,13 @@ export default function PlantDetailPage() {
     {
       title: t('plant.names'),
       content: (
+        // The vernacular name rows follow the active collection's languages
+        // (Yakutia: Yakut/Russian/English; Mongolia: Mongolian/Chinese/English),
+        // then the Latin binomial.
         <div className="divide-y divide-hairline">
-          <NameRow label={t('plant.yakutName')} value={plant.names.sah} />
-          <NameRow label={t('plant.russianName')} value={plant.names.ru} />
-          <NameRow label={t('plant.englishName')} value={plant.names.en} />
+          {COUNTRIES[settings.country].languages.map((l) => (
+            <NameRow key={l} label={t(NAME_LABEL_KEY[l])} value={loc(plant.names, l)} />
+          ))}
           <NameRow label={t('plant.latinName')} value={plant.names.latin} italic />
         </div>
       ),

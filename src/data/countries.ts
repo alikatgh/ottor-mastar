@@ -1,4 +1,4 @@
-import { Plant } from '../types';
+import { Plant, Language } from '../types';
 import { plants as yakutiaPlants } from './plants';
 import { mongoliaPlants } from './mongolia';
 
@@ -18,6 +18,14 @@ export interface Country {
    * plate (falling back to the field photo) is the encyclopedia frontispiece.
    */
   heroSlug: string;
+  /**
+   * UI + content languages offered for this collection, in switcher order.
+   * Yakutia is the original Sakha/Russian/English; Mongolia swaps in
+   * Mongolian + Chinese and keeps English. Switching country moves the reader
+   * to `defaultLanguage` when their current language isn't in this set.
+   */
+  languages: Language[];
+  defaultLanguage: Language;
   plants: Plant[];
 }
 
@@ -29,6 +37,8 @@ interface CountryDef {
   id: CountryId;
   imageBase: string;
   heroSlug: string;
+  languages: Language[];
+  defaultLanguage: Language;
   /** Datasets omit `imageBase`; it is stamped on during normalization below. */
   plants: Omit<Plant, 'imageBase'>[];
 }
@@ -39,12 +49,16 @@ const COUNTRY_DEFS: Record<CountryId, CountryDef> = {
     imageBase: '/plants',
     // Sardaana (Siberian Lily) — the most iconic Yakutian plate.
     heroSlug: 'daylily',
+    languages: ['sah', 'ru', 'en'],
+    defaultLanguage: 'sah',
     plants: yakutiaPlants,
   },
   mongolia: {
     id: 'mongolia',
     imageBase: '/mongolia',
     heroSlug: 'mn-marigold',
+    languages: ['mn', 'zh', 'en'],
+    defaultLanguage: 'mn',
     plants: mongoliaPlants,
   },
 };
@@ -63,6 +77,8 @@ export const COUNTRIES: Record<CountryId, Country> = Object.fromEntries(
       id: def.id,
       imageBase: def.imageBase,
       heroSlug: def.heroSlug,
+      languages: def.languages,
+      defaultLanguage: def.defaultLanguage,
       plants: def.plants.map((p) => ({ ...p, imageBase: def.imageBase })),
     },
   ])
