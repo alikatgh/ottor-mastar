@@ -339,13 +339,14 @@ export default function PlantDetailPage() {
           {/* Detail sections — encyclopedia style: letterspaced label over a hairline rule */}
           <div className="space-y-8">
             {sections.map(({ title, content, hint }) => (
-              <section key={title}>
-                <h2 className="overline-label !font-body border-t border-hairline pt-3 mb-3 flex items-center gap-2">
-                  {title}
-                  {hint && <InfoTip text={hint} label={t('plant.medicinalDisclaimerLabel')} />}
-                </h2>
+              <DetailSection
+                key={title}
+                title={title}
+                hint={hint}
+                hintLabel={t('plant.medicinalDisclaimerLabel')}
+              >
                 {content}
-              </section>
+              </DetailSection>
             ))}
 
             {/* Further reading — a language-matched Wikipedia lookup so readers
@@ -429,67 +430,75 @@ function NameRow({ label, value, italic = false }: { label: string, value: strin
 }
 
 /**
- * A (?) affordance that toggles a short legal note under a section heading.
- * Used on "Medicinal uses" to make explicit that the content is informational,
- * carries no instructions, and shifts all responsibility to the reader.
+ * A detail section whose heading carries an optional (?) that reveals a short
+ * legal note. The note renders as an in-flow block BELOW the heading (full
+ * content width) rather than a floating popover — so it can never overflow the
+ * viewport and get clipped, as the old right-anchored tooltip did on narrow
+ * screens. Used on "Medicinal uses" to make explicit that the content is
+ * informational, carries no instructions, and shifts responsibility to the reader.
  */
-function InfoTip({ text, label }: { text: string; label: string }) {
-  const [open, setOpen] = useState(false);
-  // Stable id tying the trigger to its tooltip for assistive tech (WEB-M14).
+function DetailSection({
+  title,
+  hint,
+  hintLabel,
+  children,
+}: {
+  title: string;
+  hint?: string;
+  hintLabel: string;
+  children: React.ReactNode;
+}) {
+  const [showHint, setShowHint] = useState(false);
   const tipId = useId();
 
   // Close on Escape while open, so keyboard users can dismiss it (WEB-M14).
   useEffect(() => {
-    if (!open) return;
+    if (!showHint) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') setShowHint(false);
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, [open]);
+  }, [showHint]);
 
   return (
-    <span className="relative inline-flex">
-      <button
-        type="button"
-        aria-label={label}
-        aria-expanded={open}
-        aria-describedby={open ? tipId : undefined}
-        onClick={() => setOpen((v) => !v)}
-        className="text-ink-muted/70 hover:text-forest transition-colors"
-      >
-        <HelpCircle className="w-3.5 h-3.5" strokeWidth={2} />
-      </button>
-      <AnimatePresence>
-        {open && (
-          <>
-            {/* click-away layer */}
-            <button
-              aria-hidden
-              tabIndex={-1}
-              onClick={() => setOpen(false)}
-              className="fixed inset-0 z-20 cursor-default"
-            />
-            <motion.span
-              id={tipId}
-              role="tooltip"
-              initial={{ opacity: 0, y: 4, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 4, scale: 0.98 }}
-              transition={{ duration: 0.16, ease: [0.32, 0.72, 0, 1] }}
-              style={{ transformOrigin: 'top right' }}
-              className="
-                absolute right-0 top-6 z-30 w-[min(19rem,calc(100vw-2.5rem))]
-                rounded-xl border border-hairline bg-white shadow-lg
-                p-3 text-[11px] leading-relaxed font-body normal-case tracking-normal
-                text-ink-light
-              "
-            >
-              {text}
-            </motion.span>
-          </>
+    <section>
+      <h2 className="overline-label !font-body border-t border-hairline pt-3 mb-3 flex items-center gap-2">
+        {title}
+        {hint && (
+          <button
+            type="button"
+            aria-label={hintLabel}
+            aria-expanded={showHint}
+            aria-controls={showHint ? tipId : undefined}
+            onClick={() => setShowHint((v) => !v)}
+            className="text-ink-muted/70 hover:text-forest transition-colors"
+          >
+            <HelpCircle className="w-3.5 h-3.5" strokeWidth={2} />
+          </button>
+        )}
+      </h2>
+      <AnimatePresence initial={false}>
+        {hint && showHint && (
+          <motion.p
+            key="hint"
+            id={tipId}
+            role="note"
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.16, ease: [0.32, 0.72, 0, 1] }}
+            className="
+              mb-3 rounded-xl border border-hairline bg-cream-dark/30
+              p-3 text-[12px] leading-relaxed font-body normal-case tracking-normal
+              text-ink-light
+            "
+          >
+            {hint}
+          </motion.p>
         )}
       </AnimatePresence>
-    </span>
+      {children}
+    </section>
   );
 }
