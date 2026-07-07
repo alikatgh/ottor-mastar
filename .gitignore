@@ -39,3 +39,6 @@ android/app/src/main/assets/
 # Xcode project is generated from ios/project.yml with: cd ios && xcodegen
 ios/OttorMastar.xcodeproj/
 ios/OttorMastar/Info.plist
+
+# Built app binaries
+builds/
