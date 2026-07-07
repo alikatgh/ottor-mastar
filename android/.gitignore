@@ -7,3 +7,8 @@ local.properties
 captures/
 .externalNativeBuild/
 .cxx/
+
+# Android signing — keep these OUT of git
+keystore.properties
+*.jks
+*.keystore

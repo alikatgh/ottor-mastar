@@ -6,6 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +30,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
@@ -160,7 +163,29 @@ fun CategoryBadge(category: String, onDark: Boolean = false) {
             loc.t("categories.$category"),
             style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
             color = if (onDark) Color.White.copy(alpha = 0.85f) else InkLight,
+            // A pill must never break into two lines — long Sakha labels
+            // ("Эмтээх оттор") were wrapping inside tight card rows.
+            maxLines = 1,
+            softWrap = false,
+            overflow = TextOverflow.Ellipsis,
         )
+    }
+}
+
+/**
+ * Chip row for category badges: wraps whole pills onto the next line instead
+ * of letting a long Sakha label overflow the card (mirrors the web fix —
+ * chips never break internally, the ROW wraps).
+ */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun BadgeRow(categories: List<String>, onDark: Boolean = false, modifier: Modifier = Modifier) {
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = modifier,
+    ) {
+        for (cat in categories) CategoryBadge(cat, onDark = onDark)
     }
 }
 

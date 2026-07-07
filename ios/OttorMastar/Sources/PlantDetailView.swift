@@ -147,12 +147,8 @@ struct PlantDetailView: View {
                     Text(plant.names.latin)
                         .font(.body.italic())
                         .foregroundStyle(.inkMuted)
-                    HStack(spacing: 6) {
-                        ForEach(plant.categories, id: \.self) { cat in
-                            CategoryBadge(category: cat)
-                        }
-                    }
-                    .padding(.top, 8)
+                    BadgeRow(categories: plant.categories)
+                        .padding(.top, 8)
                 }
 
                 Text(plant.description[lang])

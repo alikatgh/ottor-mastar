@@ -46,6 +46,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -149,7 +150,17 @@ private fun AppRoot() {
                             }
                         },
                         icon = { Icon(tab.icon, contentDescription = null) },
-                        label = { Text(loc.t(tab.labelKey)) },
+                        label = {
+                            // Long Sakha labels ("Биһиги туспутунан") wrap to
+                            // two tight centered lines instead of clipping.
+                            Text(
+                                loc.t(tab.labelKey),
+                                textAlign = TextAlign.Center,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                                lineHeight = MaterialTheme.typography.labelMedium.fontSize * 1.15,
+                            )
+                        },
                         colors = NavigationBarItemDefaults.colors(
                             selectedIconColor = Forest,
                             selectedTextColor = Forest,

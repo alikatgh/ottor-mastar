@@ -298,9 +298,7 @@ fun ViewerOverlay(
                                 style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
                                 color = Color.White.copy(alpha = 0.65f),
                             )
-                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                                for (cat in current.plant.categories) CategoryBadge(cat, onDark = true)
-                            }
+                            BadgeRow(current.plant.categories, onDark = true)
                         }
                         Row(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -411,12 +409,11 @@ private fun PlacardPanel(
             modifier = Modifier.padding(top = 8.dp),
         )
         if (item.plant.categories.isNotEmpty()) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            BadgeRow(
+                item.plant.categories,
+                onDark = true,
                 modifier = Modifier.padding(top = 22.dp),
-            ) {
-                for (cat in item.plant.categories) CategoryBadge(cat, onDark = true)
-            }
+            )
         }
 
         Spacer(Modifier.size(28.dp))

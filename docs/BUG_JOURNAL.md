@@ -43,6 +43,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-08 — Long Sakha strings broke pills + clipped nav labels on ALL platforms
+- Symptom: category chips ("Эмтээх оттор") wrapped into broken two-line pills; bottom-nav "Биһиги туспутунан" clipped. Same on web, Android, iOS — the components were written against short EN strings.
+- Cause: chip text had no single-line constraint; chip rows were non-wrapping Row/HStack/flex; nav bar had fixed height.
+- Fix: (web) .badge nowrap+ellipsis, chip rows flex-wrap, nav min-h + flex-1 two-line labels; (Android) CategoryBadge maxLines=1/softWrap=false + shared BadgeRow(FlowRow), nav label maxLines=2 centered; (iOS) .lineLimit(1) + FlowLayout/BadgeRow in Theme.swift. All three build-verified; web DOM-audited across all 7 routes at 375px (0 findings).
+- Lesson: pills never wrap internally — the ROW wraps; never fix a nav bar's height under localized labels. Test UI with the LONGEST locale (Sakha), not English. A shared chip component means one fix covers every screen — keep chips shared.
+
 ### 2026-07-07 — Native catalog + search: adaptive grid for iPad / large windows (parity)
 - Change: iOS `CatalogView`/`SearchView` and Android `CatalogScreen`/`SearchScreen` were single divided-list columns — the same wasted-space problem on iPad landscape / large windows. Converted the result lists to adaptive grids of bordered cards: iOS `LazyVGrid(columns: [.adaptive(minimum: 340)])`, Android `LazyVerticalGrid(GridCells.Adaptive(minSize = 340.dp))` with the header + empty/no-results as full-span items (`GridItemSpan(maxLineSpan)`). Rows became `Card`-background + hairline-border cards; dividers removed.
 - Why `.adaptive` over an explicit size-class branch: one `minSize=340` rule yields 1 column on phone width and 2–3 on tablet/large automatically — the native analog of the web's `md:/xl:` breakpoints — without a second layout branch to maintain.

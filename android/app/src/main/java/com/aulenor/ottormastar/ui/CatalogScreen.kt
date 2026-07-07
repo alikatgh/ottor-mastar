@@ -228,9 +228,7 @@ private fun CatalogRow(plant: Plant, index: Int, onOpenPlant: (Plant) -> Unit) {
                 )
             }
             Spacer(Modifier.height(6.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                for (cat in plant.categories) CategoryBadge(cat)
-            }
+            BadgeRow(plant.categories)
         }
     }
 }

@@ -228,12 +228,8 @@ struct ImageViewer: View {
                         .lineLimit(1)
                 }
                 if !item.badges.isEmpty {
-                    HStack(spacing: 6) {
-                        ForEach(item.badges, id: \.self) { cat in
-                            CategoryBadge(category: cat, onDark: true)
-                        }
-                    }
-                    .padding(.top, 6)
+                    BadgeRow(categories: item.badges, onDark: true)
+                        .padding(.top, 6)
                 }
             }
             Spacer(minLength: 0)
@@ -313,12 +309,8 @@ struct ImageViewer: View {
                             .padding(.top, 8)
                     }
                     if !item.badges.isEmpty {
-                        HStack(spacing: 6) {
-                            ForEach(item.badges, id: \.self) { cat in
-                                CategoryBadge(category: cat, onDark: true)
-                            }
-                        }
-                        .padding(.top, 22)
+                        BadgeRow(categories: item.badges, onDark: true)
+                            .padding(.top, 22)
                     }
 
                     if item.plant.wikipediaURL(for: lang) != nil

@@ -196,12 +196,8 @@ struct CatalogRow: View {
                         .foregroundStyle(.inkMuted)
                         .lineLimit(1)
                 }
-                HStack(spacing: 6) {
-                    ForEach(plant.categories, id: \.self) { cat in
-                        CategoryBadge(category: cat)
-                    }
-                }
-                .padding(.top, 4)
+                BadgeRow(categories: plant.categories)
+                    .padding(.top, 4)
             }
 
             Spacer(minLength: 0)

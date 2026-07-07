@@ -106,6 +106,9 @@ struct CategoryBadge: View {
             Text(settings.loc.t("categories.\(category)"))
                 .font(.caption2.weight(.medium))
                 .foregroundStyle(onDark ? Color.white.opacity(0.85) : .inkLight)
+                // A pill must never break into two lines — long Sakha labels
+                // ("Эмтээх оттор") were wrapping inside tight rows.
+                .lineLimit(1)
         }
         .padding(.horizontal, 9)
         .padding(.vertical, 4)
@@ -113,6 +116,57 @@ struct CategoryBadge: View {
             Capsule().strokeBorder(
                 onDark ? Color.white.opacity(0.3) : Color.hairline, lineWidth: 1)
         )
+    }
+}
+
+/// Minimal flow layout: children keep their intrinsic size and wrap onto the
+/// next line when the row is full — so category pills stay whole instead of
+/// compressing/overflowing in an HStack (mirrors the web/Android chip rows).
+struct FlowLayout: Layout {
+    var spacing: CGFloat = 6
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let maxWidth = proposal.width ?? .infinity
+        var x: CGFloat = 0, y: CGFloat = 0, rowHeight: CGFloat = 0, maxX: CGFloat = 0
+        for view in subviews {
+            let size = view.sizeThatFits(.unspecified)
+            if x > 0, x + spacing + size.width > maxWidth {
+                x = 0; y += rowHeight + spacing; rowHeight = 0
+            }
+            if x > 0 { x += spacing }
+            x += size.width
+            maxX = max(maxX, x)
+            rowHeight = max(rowHeight, size.height)
+        }
+        return CGSize(width: proposal.width ?? maxX, height: y + rowHeight)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        var x: CGFloat = 0, y: CGFloat = 0, rowHeight: CGFloat = 0
+        for view in subviews {
+            let size = view.sizeThatFits(.unspecified)
+            if x > 0, x + spacing + size.width > bounds.width {
+                x = 0; y += rowHeight + spacing; rowHeight = 0
+            }
+            if x > 0 { x += spacing }
+            view.place(at: CGPoint(x: bounds.minX + x, y: bounds.minY + y), proposal: .unspecified)
+            x += size.width
+            rowHeight = max(rowHeight, size.height)
+        }
+    }
+}
+
+/// Chip row for category badges: whole pills that wrap to the next line.
+struct BadgeRow: View {
+    let categories: [String]
+    var onDark: Bool = false
+
+    var body: some View {
+        FlowLayout(spacing: 6) {
+            ForEach(categories, id: \.self) { cat in
+                CategoryBadge(category: cat, onDark: onDark)
+            }
+        }
     }
 }
 

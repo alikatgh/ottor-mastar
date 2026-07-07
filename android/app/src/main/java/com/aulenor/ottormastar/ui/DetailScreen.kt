@@ -264,9 +264,7 @@ fun DetailScreen(
                         color = InkMuted,
                     )
                     Spacer(Modifier.height(12.dp))
-                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        for (cat in plant.categories) CategoryBadge(cat)
-                    }
+                    BadgeRow(plant.categories)
                 }
 
                 Text(
