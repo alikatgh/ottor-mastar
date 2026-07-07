@@ -43,6 +43,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-07 — Search results wasted desktop space (same pattern as catalog)
+- Symptom: `/search` results were a single divided list in `max-w-2xl` — the same wasted-desktop-space pattern flagged for the catalog, applied proactively per the user's "use ALL space" principle.
+- Fix: container `max-w-2xl` → `max-w-5xl`; results become the same responsive card grid (`grid-cols-1 md:grid-cols-2 xl:grid-cols-3`); the search input stays centered/comfortable (`max-w-2xl mx-auto`) as the page's focal point while results fan out to full width.
+- Verify: browser — 3-col results @1280, input stays centered, no console errors.
+- Lesson: the "reading-width for prose, wide grid for a browsable index" rule (below) is systematic — fix every index screen at once, don't wait to be shown each one.
+
 ### 2026-07-07 — Catalog wasted desktop space (single narrow column in a sea of empty)
 - Symptom: `/catalog` was a single divided list locked to `max-w-3xl` (768px), so on a wide desktop the right ~half of the viewport was empty. User: "there is plenty of space, we must use all space super carefully."
 - Fix: widened the container to `max-w-6xl` and made the entry list a responsive grid — `grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3` — with each entry now a hairline-bordered card (`rounded-xl border border-hairline bg-card`, `h-full` so cards in a row align) instead of a divider row. Search capped at `max-w-3xl` so it doesn't stretch. Plate numbers still read in order across the grid.

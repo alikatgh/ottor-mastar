@@ -22,9 +22,10 @@ export default function SearchPage() {
 
   return (
     <div className="min-h-screen pt-16 pb-20 md:pb-6">
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        {/* Big search input */}
-        <div className="relative mb-8">
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        {/* Big search input — stays centered and comfortable; results below
+            fan out into the full width. */}
+        <div className="relative mb-8 max-w-2xl mx-auto">
           <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-muted" />
           <input
             type="text"
@@ -49,7 +50,7 @@ export default function SearchPage() {
           results.length === 0 ? (
             <p className="text-center text-ink-muted py-8">{t('catalog.noResults')}</p>
           ) : (
-            <div className="divide-y divide-hairline border-t border-b border-hairline">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
               {results.map((plant, index) => {
                 const platePath = getIllustrationPath(plant, 'thumb');
                 const hasPlate = !!platePath;
@@ -60,17 +61,18 @@ export default function SearchPage() {
                     key={plant.id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: index * 0.03, duration: 0.2 }}
+                    transition={{ delay: Math.min(index * 0.03, 0.25), duration: 0.2 }}
                   >
                     <Link
                       to={`/plant/${plant.slug}`}
                       className="
-                        flex items-center gap-4 py-3 px-2 -mx-2
-                        hover:bg-cream-dark/50
+                        flex items-center gap-4 p-3 h-full
+                        rounded-xl border border-hairline bg-card
+                        hover:bg-cream-dark/50 hover:border-hairline-strong
                         transition-colors no-underline
                       "
                     >
-                      <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 border border-hairline bg-parchment">
+                      <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-hairline bg-parchment">
                         <img
                           src={imgSrc}
                           alt={plant.names[lang]}
