@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import PlantCard from './PlantCard';
 import type { ViewerItem } from '../common/ImageViewer';
-import { getImagePath } from '../../data/plants';
+import { getImagePath, getWikipediaUrl } from '../../data/plants';
 import { useSettings } from '../../context/SettingsContext';
 import { Plant, Language } from '../../types';
 
@@ -12,7 +12,7 @@ import { Plant, Language } from '../../types';
 const ImageViewer = lazy(() => import('../common/ImageViewer'));
 
 export default function GalleryGrid({ plants }: { plants: Plant[] }) {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const lang = i18n.language as Language;
   const { settings } = useSettings();
@@ -33,9 +33,11 @@ export default function GalleryGrid({ plants }: { plants: Plant[] }) {
         src: getImagePath(p, 'full'),
         title: p.names[lang] || p.names.sah,
         subtitle: p.names.latin,
+        kind: t('plant.photograph'),
         badges: p.categories,
+        href: getWikipediaUrl(p, lang),
       })),
-    [plants, lang]
+    [plants, lang, t]
   );
 
   return (

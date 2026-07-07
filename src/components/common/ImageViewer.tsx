@@ -2,7 +2,7 @@ import { useEffect, useCallback, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ArrowUpRight, ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import CategoryBadge from './CategoryBadge';
 import { useSettings } from '../../context/SettingsContext';
@@ -15,6 +15,8 @@ export interface ViewerItem {
   badges?: string[];
   /** Small label above the title, e.g. "Illustration" / "Photograph". */
   kind?: string;
+  /** Optional external link (the language-matched Wikipedia article). */
+  href?: string;
 }
 
 interface ImageViewerProps {
@@ -29,6 +31,15 @@ interface ImageViewerProps {
 /**
  * Full-screen image viewer with native-feel zoom and iOS-Photos motion.
  *
+ * Layout is responsive around the same zoom/drag core:
+ * - Mobile: image fills the screen; an editorial caption panel floats at the
+ *   bottom (name / Latin / badges / actions).
+ * - Desktop (md+): a "museum placard" — the image sits in the left region and
+ *   a metadata panel fills the space beside it (kind label, serif name, Latin,
+ *   category badges, Wikipedia link, Details action, plate counter), so a
+ *   portrait photo no longer floats in a sea of blurred backdrop.
+ *
+ * Interaction:
  * - Pinch, double-tap, and wheel zoom + drag-to-pan (react-zoom-pan-pinch).
  * - Springy scale-up on open; swipe DOWN (when not zoomed) drags the image
  *   with the finger while the backdrop and chrome fade — release past the
@@ -36,10 +47,9 @@ interface ImageViewerProps {
  * - A blurred copy of the image fills the letterbox instead of black bars
  *   (iOS Photos style), so portrait shots don't leave a narrow image in a
  *   sea of black.
- * - The caption (name / latin / badges) is always visible and high-contrast.
  */
 export default function ImageViewer({ items, index, onIndexChange, onClose, onOpenDetail }: ImageViewerProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { settings } = useSettings();
   const item = items[index];
   const hasPrev = index > 0;
@@ -148,6 +158,8 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
 
   if (!item) return null;
 
+  const counter = `${index + 1} / ${items.length}`;
+
   return createPortal(
     <motion.div
       ref={overlayRef}
@@ -167,67 +179,153 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
           src={item.src}
           alt=""
           aria-hidden
-          className="absolute inset-0 w-full h-full object-cover scale-125 blur-3xl opacity-60"
+          className="absolute inset-0 w-full h-full object-cover scale-125 blur-3xl opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/70" />
       </motion.div>
 
-      {/* Zoomable image — draggable down to dismiss while not zoomed. */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ y, scale: dragScale }}
-        drag={zoomed ? false : 'y'}
-        dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={{ top: 0.08, bottom: 0.55 }}
-        dragMomentum={false}
-        onDragEnd={(_, info) => {
-          if (info.offset.y > 110 || info.velocity.y > 600) requestClose(true);
-          else animate(y, 0, { type: 'spring', stiffness: 420, damping: 34 });
-        }}
-      >
-        <TransformWrapper
-          key={`zoom-${index}`}
-          initialScale={1}
-          minScale={1}
-          maxScale={6}
-          centerOnInit
-          doubleClick={{ mode: 'zoomIn', step: 1.4 }}
-          wheel={{ step: 0.12 }}
-          pinch={{ step: 6 }}
-          panning={{ disabled: !zoomed, velocityDisabled: true }}
-          onTransform={(_ref, state) => setZoomed(state.scale > 1.02)}
-        >
-          <TransformComponent
-            wrapperStyle={{ width: '100%', height: '100%' }}
-            contentStyle={{ width: '100%', height: '100%' }}
+      {/* Content: image region (+ desktop museum-placard panel). */}
+      <div className="absolute inset-0 flex flex-col md:flex-row">
+        {/* Image region — holds the zoom/drag machinery. min-* so the flex
+            child can shrink and object-contain has a bounded box. */}
+        <div className="relative flex-1 min-h-0 min-w-0">
+          {/* Zoomable image — draggable down to dismiss while not zoomed. */}
+          <motion.div
+            className="absolute inset-0"
+            style={{ y, scale: dragScale }}
+            drag={zoomed ? false : 'y'}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={{ top: 0.08, bottom: 0.55 }}
+            dragMomentum={false}
+            onDragEnd={(_, info) => {
+              if (info.offset.y > 110 || info.velocity.y > 600) requestClose(true);
+              else animate(y, 0, { type: 'spring', stiffness: 420, damping: 34 });
+            }}
           >
-            {/* The fit box leaves a small margin for the top counter and the
-                caption panel. Kept tight so the image stays large and sits just
-                above the caption — no dead gap between them. The keyed remount
-                per photo re-runs the little spring, giving each image the
-                Photos-app settle. */}
-            <motion.div
-              className="w-screen h-screen flex items-center justify-center px-3 pt-14 pb-24"
-              initial={{ scale: 0.94, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 380, damping: 34, mass: 0.9 }}
+            <TransformWrapper
+              key={`zoom-${index}`}
+              initialScale={1}
+              minScale={1}
+              maxScale={6}
+              centerOnInit
+              doubleClick={{ mode: 'zoomIn', step: 1.4 }}
+              wheel={{ step: 0.12 }}
+              pinch={{ step: 6 }}
+              panning={{ disabled: !zoomed, velocityDisabled: true }}
+              onTransform={(_ref, state) => setZoomed(state.scale > 1.02)}
             >
-              <img
-                src={item.src}
-                alt={item.title}
-                draggable={false}
-                className="max-w-full max-h-full object-contain"
-              />
-            </motion.div>
-          </TransformComponent>
-        </TransformWrapper>
-      </motion.div>
+              <TransformComponent
+                wrapperStyle={{ width: '100%', height: '100%' }}
+                contentStyle={{ width: '100%', height: '100%' }}
+              >
+                {/* Fit box. Mobile reserves room for the top counter and the
+                    floating caption; desktop reserves only the top bar since
+                    the metadata lives in the placard panel. The keyed remount
+                    per photo re-runs the little spring — the Photos-app settle. */}
+                <motion.div
+                  className="w-full h-full flex items-center justify-center px-3 pt-14 pb-28 md:px-8 lg:px-12 md:pt-16 md:pb-10"
+                  initial={{ scale: 0.94, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 34, mass: 0.9 }}
+                >
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    draggable={false}
+                    className="max-w-full max-h-full object-contain drop-shadow-2xl"
+                  />
+                </motion.div>
+              </TransformComponent>
+            </TransformWrapper>
+          </motion.div>
 
-      {/* Top bar: counter + close */}
-      <motion.div style={{ opacity: chromeOpacity }} className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between p-3 safe-top pointer-events-none">
-        <span className="px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white text-sm font-medium tabular-nums">
-          {index + 1} / {items.length}
+          {/* Navigation arrows — inside the image region, so on desktop the
+              right arrow sits at the image/panel boundary rather than under
+              the panel; on mobile they hug the screen edges. */}
+          <motion.div style={{ opacity: chromeOpacity }} className="absolute inset-0 z-10 pointer-events-none">
+            {hasPrev && (
+              <button
+                onClick={() => go(-1)}
+                aria-label={t('common.previous')}
+                className="pointer-events-auto absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"
+              >
+                <ChevronLeft className="w-6 h-6 text-white" />
+              </button>
+            )}
+            {hasNext && (
+              <button
+                onClick={() => go(1)}
+                aria-label={t('common.next')}
+                className="pointer-events-auto absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"
+              >
+                <ChevronRight className="w-6 h-6 text-white" />
+              </button>
+            )}
+          </motion.div>
+        </div>
+
+        {/* Museum-placard panel (desktop only). A frosted dark column filling
+            the space beside the image with the specimen's editorial metadata. */}
+        <aside className="hidden md:flex md:flex-col md:justify-center shrink-0 w-[340px] lg:w-[400px] h-full border-l border-white/10 bg-neutral-950/55 backdrop-blur-2xl px-8 lg:px-10 py-16 overflow-y-auto">
+          {item.kind && <p className="overline-label !text-white/50">{item.kind}</p>}
+          <h2 className="font-heading font-semibold text-white leading-[1.06] mt-3 text-[2rem] lg:text-[2.6rem]">
+            {item.title}
+          </h2>
+          {item.subtitle && (
+            <p className="text-white/60 italic mt-2 text-lg">{item.subtitle}</p>
+          )}
+          {item.badges && item.badges.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-6">
+              {item.badges.map((cat) => (
+                <CategoryBadge key={cat} category={cat} onDark />
+              ))}
+            </div>
+          )}
+
+          {(item.href || onOpenDetail) && (
+            <div className="mt-8 pt-8 border-t border-white/10 flex flex-col gap-2.5">
+              {item.href && (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-xl border border-white/15 bg-white/[0.04] px-4 py-3 no-underline hover:bg-white/10 transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4 text-white/70 shrink-0" strokeWidth={1.9} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-medium text-white">{t('plant.readOnWikipedia')}</span>
+                    <span className="block text-xs text-white/45 truncate tabular-nums">
+                      {i18n.language}.wikipedia.org
+                    </span>
+                  </span>
+                  <ArrowUpRight className="w-4 h-4 text-white/40 shrink-0" />
+                </a>
+              )}
+              {onOpenDetail && (
+                <button
+                  onClick={() => onOpenDetail(index)}
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-white text-ink text-sm font-semibold hover:bg-white/90 transition-colors motion-safe:active:scale-[0.98]"
+                >
+                  {t('plant.details')}
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          )}
+
+          <p className="mt-8 text-white/35 text-xs tabular-nums tracking-[0.15em]">
+            {String(index + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
+          </p>
+        </aside>
+      </div>
+
+      {/* Top bar: counter (mobile only — the placard carries it on desktop)
+          and close (always). */}
+      <motion.div style={{ opacity: chromeOpacity }} className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between p-3 safe-top pointer-events-none">
+        <span className="md:hidden px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-sm text-white text-sm font-medium tabular-nums">
+          {counter}
         </span>
+        <span aria-hidden className="hidden md:block" />
         <button
           ref={closeButtonRef}
           onClick={() => requestClose()}
@@ -238,64 +336,54 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
         </button>
       </motion.div>
 
-      {/* Navigation arrows + caption fade together with the drag */}
-      <motion.div style={{ opacity: chromeOpacity }} className="absolute inset-0 z-10 pointer-events-none">
-      {hasPrev && (
-        <button
-          onClick={() => go(-1)}
-          aria-label={t('common.previous')}
-          className="pointer-events-auto absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"
-        >
-          <ChevronLeft className="w-6 h-6 text-white" />
-        </button>
-      )}
-      {hasNext && (
-        <button
-          onClick={() => go(1)}
-          aria-label={t('common.next')}
-          className="pointer-events-auto absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-sm flex items-center justify-center transition-colors"
-        >
-          <ChevronRight className="w-6 h-6 text-white" />
-        </button>
-      )}
+      {/* Mobile caption panel — always visible, editorial. Hidden on desktop,
+          where the placard takes over. */}
+      <motion.div style={{ opacity: chromeOpacity }} className="md:hidden absolute inset-x-0 bottom-0 z-10 pointer-events-none">
+        <div className="pointer-events-auto pt-20 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] bg-gradient-to-t from-black via-black/85 to-transparent">
+          <div className="max-w-3xl mx-auto flex items-end justify-between gap-4">
+            <div className="min-w-0">
+              {item.kind && (
+                <p className="overline-label !text-white/55 mb-2">{item.kind}</p>
+              )}
+              <h2 className="font-heading text-[1.6rem] leading-[1.1] font-semibold text-white">
+                {item.title}
+              </h2>
+              {item.subtitle && (
+                <p className="text-white/65 text-sm italic mt-1.5 truncate">{item.subtitle}</p>
+              )}
+              {item.badges && item.badges.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mt-3.5">
+                  {item.badges.map((cat) => (
+                    <CategoryBadge key={cat} category={cat} onDark />
+                  ))}
+                </div>
+              )}
+            </div>
 
-      {/* Caption panel — always visible, editorial. Letterspaced kind label
-          over a serif name and italic Latin, category dots, and a Details
-          action. Solid-enough scrim so it reads as a cohesive panel. */}
-      <div className="pointer-events-auto absolute inset-x-0 bottom-0 z-10 pt-20 px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] bg-gradient-to-t from-black via-black/85 to-transparent">
-        <div className="max-w-3xl mx-auto flex items-end justify-between gap-4 sm:gap-6">
-          <div className="min-w-0">
-            {item.kind && (
-              <p className="overline-label !text-white/55 mb-2">{item.kind}</p>
-            )}
-            <h3 className="font-heading text-[1.6rem] leading-[1.1] sm:text-3xl font-semibold text-white">
-              {item.title}
-            </h3>
-            {item.subtitle && (
-              <p className="text-white/65 text-sm sm:text-base italic mt-1.5 truncate">
-                {item.subtitle}
-              </p>
-            )}
-            {item.badges && item.badges.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-3.5">
-                {item.badges.map((cat) => (
-                  <CategoryBadge key={cat} category={cat} onDark />
-                ))}
-              </div>
-            )}
+            <div className="flex items-center gap-2 shrink-0">
+              {item.href && (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t('plant.readOnWikipedia')}
+                  className="w-11 h-11 rounded-full border border-white/25 bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-black/50 transition-colors"
+                >
+                  <ExternalLink className="w-5 h-5 text-white" strokeWidth={1.9} />
+                </a>
+              )}
+              {onOpenDetail && (
+                <button
+                  onClick={() => onOpenDetail(index)}
+                  className="inline-flex items-center gap-1.5 pl-4 pr-3.5 py-2.5 rounded-full bg-white text-ink text-sm font-semibold hover:bg-white/90 transition-colors motion-safe:active:scale-[0.97]"
+                >
+                  {t('plant.details')}
+                  <ArrowUpRight className="w-4 h-4" />
+                </button>
+              )}
+            </div>
           </div>
-
-          {onOpenDetail && (
-            <button
-              onClick={() => onOpenDetail(index)}
-              className="flex-shrink-0 inline-flex items-center gap-1.5 pl-4 pr-3.5 py-2.5 rounded-full bg-white text-ink text-sm font-semibold hover:bg-white/90 transition-colors motion-safe:active:scale-[0.97]"
-            >
-              {t('plant.details')}
-              <ArrowUpRight className="w-4 h-4" />
-            </button>
-          )}
         </div>
-      </div>
       </motion.div>
     </motion.div>,
     document.body

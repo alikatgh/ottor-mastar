@@ -117,6 +117,7 @@ export default function PlantDetailPage() {
 
   // Full-resolution items for the zoom viewer, in the same order as the slides.
   const fullIll = getIllustrationPath(plant, 'full');
+  const wikipediaHref = getWikipediaUrl(plant, lang);
   const plateItem: ViewerItem[] = fullIll
     ? [{
         src: fullIll,
@@ -124,6 +125,7 @@ export default function PlantDetailPage() {
         subtitle: plant.names.latin,
         kind: t('plant.illustration'),
         badges: plant.categories,
+        href: wikipediaHref,
       }]
     : [];
   const photoItem: ViewerItem[] = [{
@@ -132,6 +134,7 @@ export default function PlantDetailPage() {
     subtitle: plant.names.latin,
     kind: t('plant.photograph'),
     badges: plant.categories,
+    href: wikipediaHref,
   }];
   const viewerItems: ViewerItem[] =
     settings.leadImage === 'photo'
