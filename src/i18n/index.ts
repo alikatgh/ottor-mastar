@@ -18,8 +18,15 @@ export const LANGUAGES = [
   { code: 'zh', label: '中文', shortLabel: '中' },
 ];
 
+// Sakha-first: new visitors default to Sakha (Yakut). Returning visitors keep
+// their stored choice; the browser language is intentionally NOT used as the
+// default. `fallbackLng` (English) still governs missing-key fallback — this
+// only sets the initial language when nothing is stored.
+const languageDetector = new LanguageDetector();
+languageDetector.addDetector({ name: 'sahDefault', lookup: () => 'sah' });
+
 i18n
-  .use(LanguageDetector)
+  .use(languageDetector)
   .use(initReactI18next)
   .init({
     resources: {
@@ -42,7 +49,7 @@ i18n
       escapeValue: false,
     },
     detection: {
-      order: ['localStorage', 'navigator'],
+      order: ['localStorage', 'sahDefault'],
       caches: ['localStorage'],
       // Strip region suffix so 'en-US' → 'en', 'ru-RU' → 'ru'. This makes
       // i18n.language exactly match the data keys used for plant.xxx[lang].

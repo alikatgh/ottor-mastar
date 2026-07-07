@@ -162,13 +162,11 @@ class Settings(context: Context) {
 
     companion object {
         /**
-         * Mirror the web detector: system language if it's one of ours,
-         * otherwise fall back to Sakha (the project's first language).
+         * Default UI language. The app is Sakha-first: it always opens in Sakha
+         * (Yakut) until the reader picks another language in Settings. (Mirrors
+         * the web default detector.)
          */
-        fun detectLanguage(): String {
-            val sys = Locale.getDefault().language
-            return if (Language.entries.any { it.code == sys }) sys else Language.SAH.code
-        }
+        fun detectLanguage(): String = Language.SAH.code
     }
 }
 
