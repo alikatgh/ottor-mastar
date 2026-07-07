@@ -13,12 +13,15 @@ struct AboutView: View {
     private var stats: [(value: String, label: String)] {
         let medicinal = plants.filter { $0.categories.contains("medicinal") }.count
         let labels: [Language: (String, String, String)] = [
-            .sah: ("Айылҕа үүнээйилэрэ", "Эмтээх оттор", "Тыллар: саха, нуучча, ангылычаан"),
-            .ru: ("Дикорастущих растений", "Лекарственных трав", "Языка: якутский, русский, английский"),
-            .en: ("Wild plants", "Medicinal herbs", "Languages: Yakut, Russian, English"),
+            .sah: ("Айылҕа үүнээйилэрэ", "Эмтээх оттор", "Тыллар"),
+            .ru: ("Дикорастущих растений", "Лекарственных трав", "Языки"),
+            .en: ("Wild plants", "Medicinal herbs", "Languages"),
         ]
-        let l = labels[lang]!
-        return [(String(plants.count), l.0), (String(medicinal), l.1), ("3", l.2)]
+        // Fall back to English labels for Mongolia's mn/zh UI — `labels` has no
+        // mn/zh key, so force-unwrapping labels[lang] there would crash the page.
+        let l = labels[lang] ?? labels[.en]!
+        // Real per-country language count, not a hardcoded "3".
+        return [(String(plants.count), l.0), (String(medicinal), l.1), (String(settings.country.languages.count), l.2)]
     }
 
     var body: some View {

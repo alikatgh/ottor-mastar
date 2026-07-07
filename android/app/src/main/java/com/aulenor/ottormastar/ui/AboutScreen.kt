@@ -56,7 +56,8 @@ fun AboutScreen(
     val stats = listOf(
         "${plants.size}" to statLabels.first,
         "$medicinal" to statLabels.second,
-        "3" to statLabels.third,
+        // Real per-country language count, not a hardcoded "3".
+        "${settings.country.languages.size}" to statLabels.third,
     )
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {

@@ -30,7 +30,11 @@ _src_originals/mongolia/
 # Native apps — generated artifacts.
 # Bundled data/images regenerate with: node scripts/export-native-data.cjs
 shared/
-ios/OttorMastar/Resources/
+# Ignore the exported data (direct children) but KEEP source assets under
+# Resources/ tracked (app icon catalog + privacy manifest).
+ios/OttorMastar/Resources/*
+!ios/OttorMastar/Resources/Assets.xcassets
+!ios/OttorMastar/Resources/PrivacyInfo.xcprivacy
 android/app/src/main/assets/
 # Xcode project is generated from ios/project.yml with: cd ios && xcodegen
 ios/OttorMastar.xcodeproj/
