@@ -14,15 +14,22 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.util.VelocityTracker
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -98,6 +105,8 @@ fun ViewerOverlay(
     val settings = LocalSettings.current
     val loc = rememberL10n()
     val scope = rememberCoroutineScope()
+    val uriHandler = LocalUriHandler.current
+    val lang = settings.language
 
     val pagerState = rememberPagerState(initialPage = initialIndex, pageCount = { items.size })
     var zoomed by remember { mutableStateOf(false) }
@@ -132,7 +141,12 @@ fun ViewerOverlay(
         onDismissRequest = { close() },
         properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false),
     ) {
-        Box(Modifier.fillMaxSize().alpha(fade.value)) {
+        BoxWithConstraints(Modifier.fillMaxSize().alpha(fade.value)) {
+            // Wide layouts (tablet / large window / landscape) get the "museum
+            // placard" two-column treatment — image beside a metadata panel,
+            // 1:1 with the web desktop viewer. Phones keep the bottom caption.
+            val isWide = maxWidth >= 600.dp
+            val panelWidth = 360.dp
             // Backdrop: near-black base + blurred copy of the image (iOS
             // Photos letterbox fill), dimming as the image is dragged down.
             Box(Modifier.fillMaxSize().alpha(backdropAlpha)) {
@@ -171,6 +185,8 @@ fun ViewerOverlay(
                 beyondViewportPageCount = 1,
                 modifier = Modifier
                     .fillMaxSize()
+                    // Wide mode: keep the image clear of the placard panel.
+                    .padding(end = if (isWide) panelWidth else 0.dp)
                     .graphicsLayer {
                         translationY = dragY
                         scaleX = dragScale
@@ -206,7 +222,9 @@ fun ViewerOverlay(
                     item = item,
                     onZoomChange = { zoomed = it },
                     reduceMotion = settings.reduceMotion,
-                    modifier = Modifier.padding(top = 56.dp, bottom = 150.dp),
+                    // Wide mode's metadata is in the side panel, so the image
+                    // only needs the top-bar reserve, not the caption reserve.
+                    modifier = Modifier.padding(top = 56.dp, bottom = if (isWide) 40.dp else 150.dp),
                 )
             }
 
@@ -219,14 +237,18 @@ fun ViewerOverlay(
                     .padding(horizontal = 14.dp, vertical = 40.dp)
                     .alpha(chromeAlpha),
             ) {
-                Text(
-                    "${pagerState.currentPage + 1} / ${items.size}",
-                    style = MaterialTheme.typography.labelLarge,
-                    color = Color.White,
-                    modifier = Modifier
-                        .background(Color.Black.copy(alpha = 0.4f), CircleShape)
-                        .padding(horizontal = 12.dp, vertical = 6.dp),
-                )
+                // Wide mode carries the counter in the placard, so the top bar
+                // stays clean with just the close button (matches web desktop).
+                if (!isWide) {
+                    Text(
+                        "${pagerState.currentPage + 1} / ${items.size}",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = Color.White,
+                        modifier = Modifier
+                            .background(Color.Black.copy(alpha = 0.4f), CircleShape)
+                            .padding(horizontal = 12.dp, vertical = 6.dp),
+                    )
+                }
                 Spacer(Modifier.weight(1f))
                 Text(
                     "✕",
@@ -240,65 +262,216 @@ fun ViewerOverlay(
                 )
             }
 
-            // Caption panel.
-            Column(
-                verticalArrangement = Arrangement.spacedBy(6.dp),
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(Color.Transparent, Color.Black.copy(alpha = 0.85f), Color.Black)
+            // Caption panel (compact) — replaced by the placard on wide layouts.
+            if (!isWide) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(Color.Transparent, Color.Black.copy(alpha = 0.85f), Color.Black)
+                            )
                         )
-                    )
-                    .padding(start = 20.dp, end = 20.dp, top = 60.dp, bottom = 40.dp)
-                    .alpha(chromeAlpha),
-            ) {
-                current.kindLabel?.let {
-                    Text(
-                        it.uppercase(),
-                        style = MaterialTheme.typography.labelSmall.copy(
-                            fontWeight = FontWeight.SemiBold, letterSpacing = 1.4.sp),
-                        color = Color.White.copy(alpha = 0.55f),
-                    )
-                }
-                Row(verticalAlignment = Alignment.Bottom) {
-                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        .padding(start = 20.dp, end = 20.dp, top = 60.dp, bottom = 40.dp)
+                        .alpha(chromeAlpha),
+                ) {
+                    current.kindLabel?.let {
                         Text(
-                            current.plant.names[settings.language],
-                            style = MaterialTheme.typography.headlineMedium.copy(
-                                fontWeight = FontWeight.SemiBold),
-                            color = Color.White,
+                            it.uppercase(),
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                fontWeight = FontWeight.SemiBold, letterSpacing = 1.4.sp),
+                            color = Color.White.copy(alpha = 0.55f),
                         )
-                        Text(
-                            current.plant.names.latin,
-                            style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
-                            color = Color.White.copy(alpha = 0.65f),
-                        )
-                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                            for (cat in current.plant.categories) CategoryBadge(cat, onDark = true)
-                        }
                     }
-                    if (current.detailSlug != null && onOpenDetail != null) {
-                        Text(
-                            loc.t("plant.details") + " ↗",
-                            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
-                            color = Ink,
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .background(Color.White)
-                                .pointerInput(current.detailSlug) {
-                                    detectTapGestures {
-                                        onDismiss()
-                                        onOpenDetail(current.detailSlug)
+                    Row(verticalAlignment = Alignment.Bottom) {
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text(
+                                current.plant.names[settings.language],
+                                style = MaterialTheme.typography.headlineMedium.copy(
+                                    fontWeight = FontWeight.SemiBold),
+                                color = Color.White,
+                            )
+                            Text(
+                                current.plant.names.latin,
+                                style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
+                                color = Color.White.copy(alpha = 0.65f),
+                            )
+                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                                for (cat in current.plant.categories) CategoryBadge(cat, onDark = true)
+                            }
+                        }
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            // Wikipedia — round icon button, mirrors web mobile.
+                            Text(
+                                "↗",
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                                color = Color.White,
+                                modifier = Modifier
+                                    .clip(CircleShape)
+                                    .background(Color.Black.copy(alpha = 0.3f))
+                                    .border(1.dp, Color.White.copy(alpha = 0.25f), CircleShape)
+                                    .pointerInput(current.plant.slug) {
+                                        detectTapGestures { uriHandler.openUri(current.plant.wikipediaUrl(lang)) }
                                     }
-                                }
-                                .padding(horizontal = 18.dp, vertical = 13.dp),
-                        )
+                                    .padding(horizontal = 14.dp, vertical = 12.dp),
+                            )
+                            if (current.detailSlug != null && onOpenDetail != null) {
+                                Text(
+                                    loc.t("plant.details") + " ↗",
+                                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                                    color = Ink,
+                                    modifier = Modifier
+                                        .clip(CircleShape)
+                                        .background(Color.White)
+                                        .pointerInput(current.detailSlug) {
+                                            detectTapGestures {
+                                                onDismiss()
+                                                onOpenDetail(current.detailSlug)
+                                            }
+                                        }
+                                        .padding(horizontal = 18.dp, vertical = 13.dp),
+                                )
+                            }
+                        }
                     }
                 }
             }
+
+            // Museum placard (wide layouts) — metadata column beside the image.
+            if (isWide) {
+                PlacardPanel(
+                    item = current,
+                    index = pagerState.currentPage,
+                    total = items.size,
+                    langCode = lang.name.lowercase(),
+                    plantName = current.plant.names[settings.language],
+                    onWikipedia = { uriHandler.openUri(current.plant.wikipediaUrl(lang)) },
+                    onDetails = if (current.detailSlug != null && onOpenDetail != null) {
+                        { onDismiss(); onOpenDetail(current.detailSlug) }
+                    } else null,
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .width(panelWidth)
+                        .fillMaxHeight()
+                        .alpha(chromeAlpha),
+                )
+            }
         }
+    }
+}
+
+/**
+ * The wide-layout "museum placard" — the metadata column beside the image:
+ * kind overline, serif name, italic Latin, category badges, a
+ * language-matched Wikipedia link, an optional Details action, and the
+ * plate counter. 1:1 with the web desktop viewer's panel.
+ */
+@Composable
+private fun PlacardPanel(
+    item: ViewerItem,
+    index: Int,
+    total: Int,
+    langCode: String,
+    plantName: String,
+    onWikipedia: () -> Unit,
+    onDetails: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+) {
+    val loc = rememberL10n()
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier
+            .background(Color.Black.copy(alpha = 0.55f))
+            .border(width = 1.dp, color = Color.White.copy(alpha = 0.1f), shape = RoundedCornerShape(0.dp))
+            .padding(horizontal = 36.dp),
+    ) {
+        item.kindLabel?.let {
+            Text(
+                it.uppercase(),
+                style = MaterialTheme.typography.labelMedium.copy(
+                    fontWeight = FontWeight.SemiBold, letterSpacing = 1.6.sp),
+                color = Color.White.copy(alpha = 0.5f),
+            )
+            Spacer(Modifier.size(12.dp))
+        }
+        Text(
+            plantName,
+            style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.SemiBold),
+            color = Color.White,
+        )
+        Text(
+            item.plant.names.latin,
+            style = MaterialTheme.typography.titleMedium.copy(fontStyle = FontStyle.Italic),
+            color = Color.White.copy(alpha = 0.6f),
+            modifier = Modifier.padding(top = 8.dp),
+        )
+        if (item.plant.categories.isNotEmpty()) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                modifier = Modifier.padding(top = 22.dp),
+            ) {
+                for (cat in item.plant.categories) CategoryBadge(cat, onDark = true)
+            }
+        }
+
+        Spacer(Modifier.size(28.dp))
+        Box(Modifier.fillMaxWidth().height(1.dp).background(Color.White.copy(alpha = 0.1f)))
+        Spacer(Modifier.size(20.dp))
+
+        // Wikipedia — a bordered link row (name + language-matched domain).
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
+                .background(Color.White.copy(alpha = 0.05f))
+                .border(1.dp, Color.White.copy(alpha = 0.15f), RoundedCornerShape(12.dp))
+                .pointerInput(item.plant.slug) { detectTapGestures { onWikipedia() } }
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    loc.t("plant.readOnWikipedia"),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium),
+                    color = Color.White,
+                )
+                Text(
+                    "$langCode.wikipedia.org",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Color.White.copy(alpha = 0.45f),
+                )
+            }
+            Text("↗", style = MaterialTheme.typography.bodyMedium, color = Color.White.copy(alpha = 0.4f))
+        }
+
+        if (onDetails != null) {
+            Spacer(Modifier.size(10.dp))
+            Text(
+                loc.t("plant.details") + " ↗",
+                style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
+                color = Ink,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(Color.White)
+                    .pointerInput(Unit) { detectTapGestures { onDetails() } }
+                    .padding(vertical = 14.dp),
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+            )
+        }
+
+        Spacer(Modifier.size(28.dp))
+        Text(
+            "%02d / %02d".format(index + 1, total),
+            style = MaterialTheme.typography.labelMedium.copy(letterSpacing = 2.sp),
+            color = Color.White.copy(alpha = 0.35f),
+        )
     }
 }
 

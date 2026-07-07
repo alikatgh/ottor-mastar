@@ -66,7 +66,7 @@ export default function CatalogPage() {
 
   return (
     <div className="min-h-screen pt-16 pb-20 md:pb-6">
-      <div className="max-w-3xl mx-auto px-4 py-6">
+      <div className="max-w-6xl mx-auto px-4 py-6">
         {/* Title */}
         <div className="flex items-baseline justify-between mb-6">
           <h1 className="font-heading text-3xl font-semibold text-ink">
@@ -75,8 +75,8 @@ export default function CatalogPage() {
           <span className="text-sm text-ink-muted">{filtered.length}</span>
         </div>
 
-        {/* Search bar */}
-        <div className="relative mb-5">
+        {/* Search bar — capped so it stays readable in the wider container */}
+        <div className="relative mb-5 max-w-3xl">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-[18px] h-[18px] text-ink-muted" />
           <input
             type="text"
@@ -123,7 +123,7 @@ export default function CatalogPage() {
             <p>{t('catalog.noResults')}</p>
           </div>
         ) : (
-          <div className="divide-y divide-hairline border-t border-b border-hairline">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
             {filtered.map((plant, index) => {
               // Index entries show the plate, like an encyclopedia's plate list;
               // the field photo appears on the entry's own page.
@@ -141,8 +141,9 @@ export default function CatalogPage() {
                   <Link
                     to={`/plant/${plant.slug}`}
                     className="
-                      flex items-center gap-4 py-3 px-2 -mx-2
-                      hover:bg-cream-dark/50
+                      flex items-center gap-4 p-3 h-full
+                      rounded-xl border border-hairline bg-card
+                      hover:bg-cream-dark/50 hover:border-hairline-strong
                       transition-colors duration-200
                       no-underline
                     "

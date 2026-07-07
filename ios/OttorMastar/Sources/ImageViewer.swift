@@ -26,6 +26,8 @@ struct ViewerItem: Identifiable {
 struct ImageViewer: View {
     @EnvironmentObject var settings: AppSettings
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
+    @Environment(\.horizontalSizeClass) private var hSizeClass
 
     let items: [ViewerItem]
     @State var index: Int
@@ -37,6 +39,11 @@ struct ImageViewer: View {
 
     private var loc: L10n { settings.loc }
     private var reduceMotion: Bool { settings.reduceMotion }
+    private var lang: Language { settings.language }
+    /// Regular width (iPad, large multitasking) shows the "museum placard"
+    /// two-column layout — image beside a metadata panel, 1:1 with the web
+    /// desktop viewer. Compact (iPhone) keeps the single-column bottom caption.
+    private var isWide: Bool { hSizeClass == .regular }
     /// Nil only if presented with no items — the body dismisses in that case,
     /// so downstream chrome never indexes an empty array.
     private var item: ViewerItem? {
@@ -52,7 +59,15 @@ struct ImageViewer: View {
         ZStack {
             if item != nil {
                 backdrop
-                pager
+                if isWide {
+                    // Museum placard: image region + metadata panel beside it.
+                    HStack(spacing: 0) {
+                        pager
+                        placardPanel
+                    }
+                } else {
+                    pager
+                }
                 chrome
             } else {
                 // Defensive: never present the viewer with no images.
@@ -108,10 +123,15 @@ struct ImageViewer: View {
                 )
                 .tag(i)
                 .padding(.top, 56)
-                .padding(.bottom, 120)
+                // Wide mode's metadata lives in the side panel, so the image
+                // only needs the top-bar reserve, not the caption reserve.
+                .padding(.bottom, isWide ? 40 : 120)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
+        // Fill the remaining width so, beside the fixed-width placard in the
+        // wide HStack, the TabView doesn't collapse or over-size.
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .offset(y: dragY)
         .scaleEffect(dragScale)
         .simultaneousGesture(zoomed ? nil : dismissDrag)
@@ -153,12 +173,16 @@ struct ImageViewer: View {
     private var chrome: some View {
         VStack {
             HStack {
-                Text("\(index + 1) / \(items.count)")
-                    .font(.subheadline.weight(.medium).monospacedDigit())
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(.black.opacity(0.4), in: Capsule())
+                // Wide mode carries the counter in the placard, so the top bar
+                // stays clean with just the close button (matches web desktop).
+                if !isWide {
+                    Text("\(index + 1) / \(items.count)")
+                        .font(.subheadline.weight(.medium).monospacedDigit())
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(.black.opacity(0.4), in: Capsule())
+                }
                 Spacer()
                 Button {
                     close()
@@ -176,7 +200,7 @@ struct ImageViewer: View {
 
             Spacer()
 
-            caption
+            if !isWide { caption }
         }
         .opacity(chromeOpacity)
     }
@@ -213,20 +237,37 @@ struct ImageViewer: View {
                 }
             }
             Spacer(minLength: 0)
-            if let slug = item.detailSlug, let onOpenDetail {
-                Button {
-                    dismiss()
-                    onOpenDetail(slug)
-                } label: {
-                    HStack(spacing: 5) {
-                        Text(loc.t("plant.details"))
-                        Image(systemName: "arrow.up.right")
+            HStack(spacing: 8) {
+                // Wikipedia — a compact round icon button, mirroring the web
+                // mobile caption. Opens the language-matched article.
+                if let wiki = item.plant.wikipediaURL(for: lang) {
+                    Button {
+                        openURL(wiki)
+                    } label: {
+                        Image(systemName: "arrow.up.right.square")
+                            .font(.title3.weight(.semibold))
+                            .foregroundStyle(.white)
+                            .frame(width: 44, height: 44)
+                            .background(.black.opacity(0.3), in: Circle())
+                            .overlay(Circle().stroke(.white.opacity(0.25), lineWidth: 1))
                     }
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.ink)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 10)
-                    .background(.white, in: Capsule())
+                    .accessibilityLabel(loc.t("plant.readOnWikipedia"))
+                }
+                if let slug = item.detailSlug, let onOpenDetail {
+                    Button {
+                        dismiss()
+                        onOpenDetail(slug)
+                    } label: {
+                        HStack(spacing: 5) {
+                            Text(loc.t("plant.details"))
+                            Image(systemName: "arrow.up.right")
+                        }
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.ink)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 10)
+                        .background(.white, in: Capsule())
+                    }
                 }
             }
         }
@@ -242,6 +283,115 @@ struct ImageViewer: View {
             .ignoresSafeArea(edges: .bottom)
         )
         .animation(.easeOut(duration: 0.2), value: index)
+            }
+        }
+    }
+
+    // MARK: Placard panel (wide layouts) — the metadata column beside the image
+
+    private var placardPanel: some View {
+        Group {
+            if let item {
+                VStack(alignment: .leading, spacing: 0) {
+                    Spacer(minLength: 0)
+
+                    if let kindLabel = item.kindLabel {
+                        Text(kindLabel.uppercased())
+                            .font(.caption.weight(.semibold))
+                            .tracking(1.6)
+                            .foregroundStyle(.white.opacity(0.5))
+                            .padding(.bottom, 12)
+                    }
+                    Text(item.title)
+                        .font(.system(size: 42, weight: .semibold, design: .serif))
+                        .foregroundStyle(.white)
+                        .fixedSize(horizontal: false, vertical: true)
+                    if let subtitle = item.subtitle {
+                        Text(subtitle)
+                            .font(.title3.italic())
+                            .foregroundStyle(.white.opacity(0.6))
+                            .padding(.top, 8)
+                    }
+                    if !item.badges.isEmpty {
+                        HStack(spacing: 6) {
+                            ForEach(item.badges, id: \.self) { cat in
+                                CategoryBadge(category: cat, onDark: true)
+                            }
+                        }
+                        .padding(.top, 22)
+                    }
+
+                    if item.plant.wikipediaURL(for: lang) != nil
+                        || (item.detailSlug != nil && onOpenDetail != nil) {
+                        Rectangle()
+                            .fill(.white.opacity(0.1))
+                            .frame(height: 1)
+                            .padding(.top, 28)
+                            .padding(.bottom, 20)
+
+                        if let wiki = item.plant.wikipediaURL(for: lang) {
+                            Button { openURL(wiki) } label: {
+                                HStack(spacing: 12) {
+                                    Image(systemName: "arrow.up.right.square")
+                                        .font(.body.weight(.medium))
+                                        .foregroundStyle(.white.opacity(0.7))
+                                    VStack(alignment: .leading, spacing: 1) {
+                                        Text(loc.t("plant.readOnWikipedia"))
+                                            .font(.subheadline.weight(.medium))
+                                            .foregroundStyle(.white)
+                                        Text("\(lang.rawValue).wikipedia.org")
+                                            .font(.caption.monospacedDigit())
+                                            .foregroundStyle(.white.opacity(0.45))
+                                    }
+                                    Spacer(minLength: 0)
+                                    Image(systemName: "arrow.up.right")
+                                        .font(.caption)
+                                        .foregroundStyle(.white.opacity(0.4))
+                                }
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 12)
+                                .background(.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 12))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(.white.opacity(0.15), lineWidth: 1)
+                                )
+                            }
+                        }
+                        if let slug = item.detailSlug, let onOpenDetail {
+                            Button {
+                                dismiss()
+                                onOpenDetail(slug)
+                            } label: {
+                                HStack(spacing: 6) {
+                                    Text(loc.t("plant.details"))
+                                    Image(systemName: "arrow.up.right")
+                                }
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(.ink)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 13)
+                                .background(.white, in: RoundedRectangle(cornerRadius: 12))
+                            }
+                            .padding(.top, 10)
+                        }
+                    }
+
+                    Text("\(String(format: "%02d", index + 1)) / \(String(format: "%02d", items.count))")
+                        .font(.caption.monospacedDigit())
+                        .tracking(2)
+                        .foregroundStyle(.white.opacity(0.35))
+                        .padding(.top, 28)
+
+                    Spacer(minLength: 0)
+                }
+                .frame(width: 360, alignment: .leading)
+                .frame(maxHeight: .infinity)
+                .padding(.horizontal, 36)
+                .background(.black.opacity(0.55))
+                .overlay(alignment: .leading) {
+                    Rectangle().fill(.white.opacity(0.1)).frame(width: 1)
+                }
+                .ignoresSafeArea()
             }
         }
     }
