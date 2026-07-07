@@ -99,7 +99,7 @@ function DocumentMeta() {
     // Country-aware subtitle, falling back to the generic one (WEB-M01/R-W03).
     const subtitle = t([`app.subtitle_${country}`, 'app.subtitle']);
     const siteTitle = `${t('app.title')} — ${subtitle}`;
-    const siteDescription = t('app.description');
+    const siteDescription = t([`app.description_${country}`, 'app.description']);
 
     // On a plant route, lead the shared/bookmarked card with the plant itself
     // (WEB-M11); everywhere else use the site title/description. Best-effort —

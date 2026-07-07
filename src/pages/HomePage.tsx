@@ -62,7 +62,7 @@ export default function HomePage() {
                 {t('app.title')}
               </h1>
               <p className="text-ink-light text-lg lg:text-xl font-light leading-snug mb-9">
-                {t('app.description')}
+                {t([`app.description_${settings.country}`, 'app.description'])}
               </p>
               <div className="flex items-center gap-5">
                 <Link

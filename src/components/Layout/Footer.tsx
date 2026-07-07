@@ -36,7 +36,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-xs text-ink-muted mt-2.5 leading-relaxed">
-              {t('app.description')}
+              {t([`app.description_${settings.country}`, 'app.description'])}
             </p>
           </div>
 
