@@ -58,7 +58,11 @@
     "tapViewer": "Full screen",
     "tapDetail": "Plant page",
     "sectionData": "Data",
-    "reset": "Reset all settings"
+    "reset": "Reset all settings",
+    "theme": "Appearance",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark"
   },
   "catalog": {
     "title": "Plant Catalog",
@@ -131,5 +135,21 @@
     "legal": "Legal & Privacy",
     "disclaimerShort": "For educational use only — not medical or safety advice. Never gather, prepare, or use a plant based on this app; many are poisonous. Consult a professional.",
     "readDisclaimer": "Read the full disclaimer"
+  },
+  "help": {
+    "title": "Help",
+    "intro": "A quick guide to the herbarium.",
+    "browseTitle": "Browsing",
+    "browseBody": "The Gallery shows every plant as a photo tile. The Catalog is an alphabetical index with search and category filters — search also looks inside descriptions.",
+    "viewerTitle": "Viewing images",
+    "viewerBody": "Tap any image to open it full screen. Pinch or double-tap to zoom, drag to pan, swipe down to close. On a plant page, swipe sideways (or use the dots) to switch between the botanical plate and the field photo.",
+    "langTitle": "Languages & collections",
+    "langBody": "Switch the interface language with the buttons in the header. In Settings you can also switch the collection (country); each collection offers its own languages.",
+    "appTitle": "Using the app offline",
+    "appBody": "In the Android app every plant, picture and text works without an internet connection.",
+    "appLink": "Get the Android app",
+    "safetyTitle": "Safety",
+    "safetyBody": "Everything here is for education only — never gather or use plants based on this app.",
+    "safetyLink": "Read the full disclaimer"
   }
 }

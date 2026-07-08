@@ -8,6 +8,13 @@
       "port": 5173
     },
     {
+      "name": "ottor-dev-alt",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "5176", "--strictPort"],
+      "port": 5176,
+      "autoPort": false
+    },
+    {
       "name": "ottor-preview",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "preview", "--", "--port", "4173"],

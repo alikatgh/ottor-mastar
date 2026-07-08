@@ -77,6 +77,19 @@ export default function AboutPage() {
             <ChevronRight className="w-4 h-4 text-ink-muted/60 flex-shrink-0" />
           </Link>
           <Link
+            to="/help"
+            className="
+              flex items-center gap-3 border border-hairline rounded-2xl bg-card p-5
+              no-underline hover:bg-cream-dark/40 transition-colors
+            "
+          >
+            <div className="flex-1 min-w-0">
+              <h3 className="text-sm font-semibold text-ink font-body">{t('help.title')}</h3>
+              <p className="text-xs text-ink-muted mt-0.5">{t('help.intro')}</p>
+            </div>
+            <ChevronRight className="w-4 h-4 text-ink-muted/60 flex-shrink-0" />
+          </Link>
+          <Link
             to="/legal"
             className="
               flex items-center gap-3 border border-hairline rounded-2xl bg-card p-5

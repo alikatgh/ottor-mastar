@@ -67,7 +67,7 @@ export default function PlantDetailPage() {
     // in a country that is not the active dataset). Offer a genuine way out
     // rather than a bare "no results" line meant for empty search (WEB-H06).
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center px-6">
+      <div className="min-h-screen bg-card flex items-center justify-center px-6">
         <div className="max-w-md text-center">
           <h1 className="font-heading text-2xl font-bold text-ink mb-2">
             {t('plant.notFound')}
@@ -193,7 +193,7 @@ export default function PlantDetailPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white md:h-screen md:flex md:overflow-hidden">
+    <div className="min-h-screen bg-card md:h-screen md:flex md:overflow-hidden">
       {/* Floating back button — mobile only (over the image, which is on top) */}
       <button
         type="button"
@@ -263,7 +263,7 @@ export default function PlantDetailPage() {
             On mobile the info sheet overlaps this panel by 24px, so the chip
             rides at bottom-12 to stay fully clear of the sheet edge. */}
         {slides.length > 1 && (
-          <div className="absolute bottom-12 md:bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-1 px-1.5 py-1 rounded-full bg-white/70 backdrop-blur-sm shadow-sm">
+          <div className="absolute bottom-12 md:bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-1 px-1.5 py-1 rounded-full bg-card/70 backdrop-blur-sm shadow-sm">
             {slides.map((slide, i) => (
               /* Real controls: keyboard-focusable, labelled, and jump to the
                  slide on activation (WEB-M07). The 32px hit target satisfies the
@@ -290,7 +290,7 @@ export default function PlantDetailPage() {
       {/* ============ INFO PANEL — below on mobile, left on desktop ============ */}
       <motion.div
         className="
-          relative z-10 bg-white
+          relative z-10 bg-card
           -mt-6 rounded-t-[1.75rem] md:mt-0 md:rounded-none
           md:order-1 md:w-1/2 md:h-screen md:overflow-y-auto
           pb-24 md:pb-16
@@ -378,7 +378,7 @@ export default function PlantDetailPage() {
           </div>
 
           {/* Safety disclaimer — this page shows traditional medicinal uses */}
-          <div className="mt-8 rounded-xl bg-[#FFF7F2] border border-amber/25 p-3.5 flex items-start gap-2.5">
+          <div className="mt-8 rounded-xl bg-amber-tint border border-amber/25 p-3.5 flex items-start gap-2.5">
             <Info className="w-4 h-4 text-amber-warm shrink-0 mt-0.5" />
             <p className="text-xs text-ink-light leading-relaxed">
               {t('common.disclaimerShort')}{' '}

@@ -94,7 +94,7 @@ function Section({ heading, paragraphs, tone = 'default' }: {
   tone?: 'default' | 'warn';
 }) {
   return (
-    <section className={`rounded-2xl border p-6 ${tone === 'warn' ? 'bg-[#FFF7F2] border-amber/25' : 'bg-card border-hairline'}`}>
+    <section className={`rounded-2xl border p-6 ${tone === 'warn' ? 'bg-amber-tint border-amber/25' : 'bg-card border-hairline'}`}>
       <h2 className="font-heading text-lg font-semibold text-ink mb-4">{heading}</h2>
       <div className="space-y-3">
         {paragraphs.map((p, i) => (

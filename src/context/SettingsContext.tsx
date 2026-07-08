@@ -17,6 +17,8 @@ export interface Settings {
   showLatin: boolean;
   /** Default ordering of the catalog index. */
   catalogSort: 'name' | 'season';
+  /** Color theme; 'system' follows the OS preference live. */
+  theme: 'system' | 'light' | 'dark';
   /** Root text scale — every rem-based size in the app follows it. */
   textSize: 'small' | 'default' | 'large';
   /** Calms framer-motion and CSS animation/scroll effects. */
@@ -33,6 +35,7 @@ export const DEFAULT_SETTINGS: Settings = {
   country: DEFAULT_COUNTRY,
   showLatin: true,
   catalogSort: 'name',
+  theme: 'system',
   textSize: 'default',
   reduceMotion: false,
   leadImage: 'plate',
@@ -44,6 +47,7 @@ const STORAGE_KEY = 'om_settings_v1';
 
 // Allowed values per enum setting — the single source the validator clamps to.
 const CATALOG_SORTS = ['name', 'season'] as const;
+const THEMES = ['system', 'light', 'dark'] as const;
 const TEXT_SIZES = ['small', 'default', 'large'] as const;
 const LEAD_IMAGES = ['plate', 'photo'] as const;
 const TILE_TAPS = ['viewer', 'detail'] as const;
@@ -73,6 +77,7 @@ function validateSettings(input: unknown): Settings {
     country: isCountryAvailable(country) ? country : DEFAULT_COUNTRY,
     showLatin: bool(raw.showLatin, DEFAULT_SETTINGS.showLatin),
     catalogSort: oneOf(raw.catalogSort, CATALOG_SORTS, DEFAULT_SETTINGS.catalogSort),
+    theme: oneOf(raw.theme, THEMES, DEFAULT_SETTINGS.theme),
     textSize: oneOf(raw.textSize, TEXT_SIZES, DEFAULT_SETTINGS.textSize),
     reduceMotion: bool(raw.reduceMotion, DEFAULT_SETTINGS.reduceMotion),
     leadImage: oneOf(raw.leadImage, LEAD_IMAGES, DEFAULT_SETTINGS.leadImage),
@@ -116,6 +121,25 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     document.documentElement.dataset.textSize = settings.textSize;
     document.documentElement.dataset.reduceMotion = String(settings.reduceMotion);
   }, [settings.textSize, settings.reduceMotion]);
+
+  // Theme: stamp the RESOLVED value ('system' → the OS preference, tracked
+  // live) so the CSS only ever deals with light|dark. Also sync the browser
+  // chrome color (<meta name="theme-color">) to the canvas.
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const apply = () => {
+      const resolved =
+        settings.theme === 'system' ? (media.matches ? 'dark' : 'light') : settings.theme;
+      document.documentElement.dataset.theme = resolved;
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', resolved === 'dark' ? '#1A1914' : '#2D5F2D');
+    };
+    apply();
+    if (settings.theme === 'system') {
+      media.addEventListener('change', apply);
+      return () => media.removeEventListener('change', apply);
+    }
+  }, [settings.theme]);
 
   // Keep the interface language coherent with the country. Each collection
   // offers its own languages (Yakutia: sah/ru/en; Mongolia: mn/zh/en). When the

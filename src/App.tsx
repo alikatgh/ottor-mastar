@@ -16,6 +16,7 @@ const PlantDetailPage = lazy(() => import('./pages/PlantDetailPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const LegalPage = lazy(() => import('./pages/LegalPage'));
+const HelpPage = lazy(() => import('./pages/HelpPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
@@ -66,6 +67,7 @@ function AppRoutes() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/legal" element={<LegalPage />} />
+          <Route path="/help" element={<HelpPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

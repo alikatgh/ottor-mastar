@@ -16,7 +16,7 @@ export default function Footer() {
     <footer className="border-t border-hairline mt-12">
       <div className="max-w-3xl mx-auto px-5 pt-10 pb-28 md:pb-12">
         {/* Safety disclaimer — kept prominent near the content it applies to */}
-        <div className="flex items-start gap-2.5 rounded-xl bg-[#FFF7F2] border border-amber/25 p-4 mb-10">
+        <div className="flex items-start gap-2.5 rounded-xl bg-amber-tint border border-amber/25 p-4 mb-10">
           <Info className="w-4.5 h-4.5 text-amber-warm shrink-0 mt-0.5" />
           <p className="text-ink-light text-xs leading-relaxed">
             {t('common.disclaimerShort')}{' '}
@@ -47,6 +47,9 @@ export default function Footer() {
             </Link>
             <Link to="/settings" className="text-ink-light hover:text-forest no-underline transition-colors">
               {t('settings.title')}
+            </Link>
+            <Link to="/help" className="text-ink-light hover:text-forest no-underline transition-colors">
+              {t('help.title')}
             </Link>
             <Link to="/legal" className="text-ink-light hover:text-forest no-underline transition-colors">
               {t('common.legal')}

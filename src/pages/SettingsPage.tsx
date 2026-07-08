@@ -83,6 +83,16 @@ const SECTIONS: SectionDef[] = [
     items: [
       {
         kind: 'enum',
+        key: 'theme',
+        labelKey: 'settings.theme',
+        options: [
+          { value: 'system', labelKey: 'settings.themeSystem' },
+          { value: 'light', labelKey: 'settings.themeLight' },
+          { value: 'dark', labelKey: 'settings.themeDark' },
+        ],
+      },
+      {
+        kind: 'enum',
         key: 'textSize',
         labelKey: 'settings.textSize',
         options: [

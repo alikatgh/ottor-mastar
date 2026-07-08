@@ -58,7 +58,11 @@
     "tapViewer": "全屏",
     "tapDetail": "植物页面",
     "sectionData": "数据",
-    "reset": "重置所有设置"
+    "reset": "重置所有设置",
+    "theme": "外观",
+    "themeSystem": "跟随系统",
+    "themeLight": "浅色",
+    "themeDark": "深色"
   },
   "catalog": {
     "title": "植物目录",
@@ -131,5 +135,21 @@
     "legal": "法律与隐私",
     "disclaimerShort": "仅供教育用途——非医疗或安全建议。切勿依据本应用采集、制备或使用任何植物；许多植物有毒。请咨询专业人士。",
     "readDisclaimer": "阅读完整免责声明"
+  },
+  "help": {
+    "title": "帮助",
+    "intro": "植物标本馆使用简明指南。",
+    "browseTitle": "浏览",
+    "browseBody": "“图库”以照片方块展示所有植物。“目录”是带搜索和分类筛选的字母索引；搜索也会匹配描述内容。",
+    "viewerTitle": "查看图片",
+    "viewerBody": "点按任意图片即可全屏查看。双指捏合或双击缩放，拖动平移，向下滑动关闭。在植物页面左右滑动（或使用圆点）可在植物图版与实地照片之间切换。",
+    "langTitle": "语言与合集",
+    "langBody": "使用页眉中的按钮切换界面语言。在设置中还可以切换合集（国家）；每个合集提供各自的语言。",
+    "appTitle": "离线使用",
+    "appBody": "在 Android 应用中，所有植物、图片和文字均可离线使用。",
+    "appLink": "下载 Android 应用",
+    "safetyTitle": "安全提示",
+    "safetyBody": "此处所有内容仅供教育参考——切勿依据本应用采集或使用植物。",
+    "safetyLink": "阅读完整免责声明"
   }
 }

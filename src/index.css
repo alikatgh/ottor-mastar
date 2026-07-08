@@ -28,6 +28,7 @@
   /* Warning tint (safety disclaimers only) */
   --color-amber: #E8963E;
   --color-amber-warm: #B4691E;
+  --color-amber-tint: #FFF7F2;   /* disclaimer box fill */
 
   /* Category signal colors — used ONLY as 6px status dots, never as washes */
   --color-cat-medicinal: #3E7B3E;
@@ -71,6 +72,57 @@
   --z-overlay: 290;
   --z-viewer: 300;
   --z-toast: 9999;
+}
+
+/* ============================================
+   Dark theme — same herbarium language after dusk: warm near-black paper,
+   parchment-toned ink, the forest accent lifted for contrast. Every token the
+   light theme defines is re-declared here, so all Tailwind utilities and
+   component CSS flip with zero per-component work. `data-theme` is stamped on
+   <html> by SettingsProvider ('system' resolves to light/dark and live-tracks
+   the OS preference).
+   ============================================ */
+
+html[data-theme='dark'] {
+  /* Surfaces — warm dark paper, canvas below card */
+  --color-cream: #1A1914;
+  --color-cream-dark: #2A2820;
+  --color-card: #23211B;
+  --color-parchment: #26231B;
+
+  /* Ink scale — warm off-whites */
+  --color-ink: #ECE8DC;
+  --color-ink-light: #C7C2B2;
+  --color-ink-muted: #928C7B;
+
+  /* Brand accent lifted for dark-surface contrast */
+  --color-forest: #7DB380;
+  --color-forest-light: #98C79A;
+  --color-forest-dark: #5E9861;
+
+  /* Warning tint */
+  --color-amber: #E8A35C;
+  --color-amber-warm: #DFA05B;
+  --color-amber-tint: #2C2318;
+
+  /* Category dots brightened one step */
+  --color-cat-medicinal: #6FAE6F;
+  --color-cat-edible: #D9A452;
+  --color-cat-ornamental: #A796D8;
+  --color-cat-poisonous: #D97A6C;
+
+  /* Hairlines — light ink at low alpha */
+  --color-hairline: rgba(236, 232, 220, 0.14);
+  --color-hairline-strong: rgba(236, 232, 220, 0.26);
+
+  /* Overlay shadow needs more weight on dark */
+  --shadow-elevated: 0 8px 32px rgba(0, 0, 0, 0.55);
+
+  color-scheme: dark;
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
 }
 
 /* ============================================
@@ -200,12 +252,12 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--color-hairline);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--color-hairline-strong);
 }
 
 /* Fully hidden scrollbar (used by the plant-detail hero carousel) */
@@ -314,7 +366,8 @@ p {
 .backdrop-blur-header {
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
-  background: rgba(244, 241, 232, 0.78);
+  /* Translucent canvas color so the frosted bars follow the theme */
+  background: color-mix(in srgb, var(--color-cream) 78%, transparent);
 }
 
 /* ============================================
