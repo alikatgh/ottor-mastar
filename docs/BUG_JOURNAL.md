@@ -43,6 +43,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-08 — Dark/light/system theme + Help section, all three platforms
+- Change: full dark palette (warm near-black paper, lifted forest accent) + a system|light|dark Appearance setting, and a /help guide (5 languages) linked from About + footer.
+- Arch: the token layer did all the work — web: re-declare every `--color-*` var under `html[data-theme=dark]` (SettingsProvider stamps the RESOLVED value; 'system' live-tracks the media query; meta theme-color synced). Android: top-level color `val`s became `@Composable get()` over a `LocalDarkTheme` CompositionLocal — zero call-site changes (only `Modifier.plateCard()` needed @Composable). iOS: `static let` Colors became dynamic `UIColor { trait }` providers — zero call-site changes; setting applied via `.preferredColorScheme` (nil = system).
+- Help copy lives once, in the web `help.*` locale keys — the native apps consume it through `data:export`.
+- Lesson: keep EVERY color behind the token layer and theming is a one-file change per platform; hardcoded one-offs (`bg-white`, `#FFF7F2`) are what cost sweep time. Composable-getter tokens (Android) and dynamic UIColor providers (iOS) are the minimal-diff bridges when tokens started life as constants.
+
 ### 2026-07-08 — Long Sakha strings broke pills + clipped nav labels on ALL platforms
 - Symptom: category chips ("Эмтээх оттор") wrapped into broken two-line pills; bottom-nav "Биһиги туспутунан" clipped. Same on web, Android, iOS — the components were written against short EN strings.
 - Cause: chip text had no single-line constraint; chip rows were non-wrapping Row/HStack/flex; nav bar had fixed height.

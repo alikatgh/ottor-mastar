@@ -134,7 +134,9 @@ fun OverlineLabel(text: String, modifier: Modifier = Modifier, trailing: String?
     }
 }
 
-/** Hairline-bordered parchment surface for botanical plates. */
+/** Hairline-bordered parchment surface for botanical plates.
+ *  @Composable because the tokens resolve against the active theme. */
+@Composable
 fun Modifier.plateCard(): Modifier =
     clip(RoundedCornerShape(12.dp))
         .background(Parchment)

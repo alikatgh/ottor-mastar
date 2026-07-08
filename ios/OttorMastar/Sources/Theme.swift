@@ -1,8 +1,24 @@
 import SwiftUI
 
-// Herbarium tokens — the same palette as src/index.css @theme on the web.
-// Hierarchy lives in weight + size, not color; ONE forest accent; hairline
-// borders instead of shadows; category colors appear ONLY as 6pt dots.
+// Herbarium tokens — the same palette as src/index.css @theme on the web,
+// in light AND dark. Hierarchy lives in weight + size, not color; ONE forest
+// accent; hairline borders instead of shadows; category colors appear ONLY as
+// 6pt dots.
+//
+// Every token is a dynamic color resolved per trait collection, so the whole
+// app flips with the system (or the in-app Appearance setting, applied as
+// .preferredColorScheme at the root) with zero call-site changes.
+extension UIColor {
+    convenience init(hex: UInt32, alpha: CGFloat = 1) {
+        self.init(
+            red: CGFloat((hex >> 16) & 0xFF) / 255,
+            green: CGFloat((hex >> 8) & 0xFF) / 255,
+            blue: CGFloat(hex & 0xFF) / 255,
+            alpha: alpha
+        )
+    }
+}
+
 extension Color {
     init(hex: UInt32) {
         self.init(
@@ -12,31 +28,43 @@ extension Color {
         )
     }
 
-    static let cream = Color(hex: 0xF4F1E8)        // canvas
-    static let creamDark = Color(hex: 0xE9E4D5)    // input fill / pressed tint
-    static let card = Color.white
-    static let parchment = Color(hex: 0xF9F4E9)    // botanical-plate backdrop
+    /// Trait-resolved token: light/dark hex (+ per-mode alpha for hairlines).
+    private static func dynamic(
+        _ light: UInt32, _ dark: UInt32,
+        lightAlpha: CGFloat = 1, darkAlpha: CGFloat = 1
+    ) -> Color {
+        Color(UIColor { trait in
+            trait.userInterfaceStyle == .dark
+                ? UIColor(hex: dark, alpha: darkAlpha)
+                : UIColor(hex: light, alpha: lightAlpha)
+        })
+    }
 
-    static let ink = Color(hex: 0x201E19)
-    static let inkLight = Color(hex: 0x4C4940)
-    static let inkMuted = Color(hex: 0x837E70)
+    static let cream = dynamic(0xF4F1E8, 0x1A1914)        // canvas
+    static let creamDark = dynamic(0xE9E4D5, 0x2A2820)    // input fill / pressed tint
+    static let card = dynamic(0xFFFFFF, 0x23211B)
+    static let parchment = dynamic(0xF9F4E9, 0x26231B)    // botanical-plate backdrop
 
-    static let forest = Color(hex: 0x2C5A2E)
-    static let forestDark = Color(hex: 0x1E421F)
+    static let ink = dynamic(0x201E19, 0xECE8DC)
+    static let inkLight = dynamic(0x4C4940, 0xC7C2B2)
+    static let inkMuted = dynamic(0x837E70, 0x928C7B)
 
-    static let amber = Color(hex: 0xE8963E)
-    static let amberWarm = Color(hex: 0xB4691E)
-    static let warnBg = Color(hex: 0xFFF7F2)
+    static let forest = dynamic(0x2C5A2E, 0x7DB380)
+    static let forestDark = dynamic(0x1E421F, 0x5E9861)
 
-    static let hairline = Color(hex: 0x201E19).opacity(0.12)
-    static let hairlineStrong = Color(hex: 0x201E19).opacity(0.22)
+    static let amber = dynamic(0xE8963E, 0xE8A35C)
+    static let amberWarm = dynamic(0xB4691E, 0xDFA05B)
+    static let warnBg = dynamic(0xFFF7F2, 0x2C2318)
+
+    static let hairline = dynamic(0x201E19, 0xECE8DC, lightAlpha: 0.12, darkAlpha: 0.14)
+    static let hairlineStrong = dynamic(0x201E19, 0xECE8DC, lightAlpha: 0.22, darkAlpha: 0.26)
 
     static func category(_ id: String) -> Color {
         switch id {
-        case "medicinal": return Color(hex: 0x3E7B3E)
-        case "edible": return Color(hex: 0xB87A1F)
-        case "ornamental": return Color(hex: 0x7C64AE)
-        case "poisonous": return Color(hex: 0xB23B2E)
+        case "medicinal": return dynamic(0x3E7B3E, 0x6FAE6F)
+        case "edible": return dynamic(0xB87A1F, 0xD9A452)
+        case "ornamental": return dynamic(0x7C64AE, 0xA796D8)
+        case "poisonous": return dynamic(0xB23B2E, 0xD97A6C)
         default: return .inkMuted
         }
     }

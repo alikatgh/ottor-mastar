@@ -11,6 +11,9 @@ struct OttorMastarApp: App {
                 .tint(.forest)
                 // Root text scale — the web's data-text-size equivalent.
                 .dynamicTypeSize(settings.dynamicTypeSize)
+                // Appearance setting: nil follows the system; the Theme.swift
+                // tokens are trait-resolved, so the whole app flips with this.
+                .preferredColorScheme(settings.colorScheme)
         }
     }
 }

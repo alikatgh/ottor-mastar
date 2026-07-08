@@ -45,6 +45,7 @@ struct HomeView: View {
         .navigationDestination(for: PushedPage.self) { page in
             switch page {
             case .legal: LegalView()
+            case .help: HelpView()
             case .settings: SettingsView()
             }
         }
@@ -443,6 +444,7 @@ struct FooterView: View {
 /// Non-plant destinations pushed within a tab's NavigationStack.
 enum PushedPage: Hashable {
     case legal
+    case help
     case settings
 }
 

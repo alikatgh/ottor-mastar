@@ -35,6 +35,7 @@ import com.aulenor.ottormastar.data.LeadImage
 import com.aulenor.ottormastar.data.LocalSettings
 import com.aulenor.ottormastar.data.PlantStore
 import com.aulenor.ottormastar.data.TextSizeOpt
+import com.aulenor.ottormastar.data.ThemeOpt
 import com.aulenor.ottormastar.data.TileTap
 
 /**
@@ -112,6 +113,18 @@ fun SettingsScreen() {
 
         Spacer(Modifier.height(36.dp))
         SectionHeader(loc.t("settings.sectionDisplay"))
+        SettingRow(loc.t("settings.theme")) {
+            Segmented(
+                value = settings.theme.name,
+                options = listOf(
+                    ThemeOpt.SYSTEM.name to loc.t("settings.themeSystem"),
+                    ThemeOpt.LIGHT.name to loc.t("settings.themeLight"),
+                    ThemeOpt.DARK.name to loc.t("settings.themeDark"),
+                ),
+                onChange = { settings.theme = ThemeOpt.valueOf(it) },
+            )
+        }
+        RowDivider()
         SettingRow(loc.t("settings.textSize")) {
             Segmented(
                 value = settings.textSize.name,

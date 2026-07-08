@@ -16,6 +16,7 @@ enum class CatalogSort { NAME, SEASON }
 enum class TextSizeOpt(val scale: Float) { SMALL(0.9f), DEFAULT(1f), LARGE(1.12f) }
 enum class LeadImage { PLATE, PHOTO }
 enum class TileTap { VIEWER, DETAIL }
+enum class ThemeOpt { SYSTEM, LIGHT, DARK }
 
 class Settings(context: Context) {
     private val appContext = context.applicationContext
@@ -38,6 +39,10 @@ class Settings(context: Context) {
     private var textSizeState by mutableStateOf(
         runCatching { TextSizeOpt.valueOf(prefs.getString("textSize", "DEFAULT")!!) }
             .getOrDefault(TextSizeOpt.DEFAULT)
+    )
+    private var themeState by mutableStateOf(
+        runCatching { ThemeOpt.valueOf(prefs.getString("theme", "SYSTEM")!!) }
+            .getOrDefault(ThemeOpt.SYSTEM)
     )
     private var reduceMotionState by mutableStateOf(prefs.getBoolean("reduceMotion", false))
     private var leadImageState by mutableStateOf(
@@ -100,6 +105,13 @@ class Settings(context: Context) {
             prefs.edit().putString("textSize", value.name).apply()
         }
 
+    var theme: ThemeOpt
+        get() = themeState
+        set(value) {
+            themeState = value
+            prefs.edit().putString("theme", value.name).apply()
+        }
+
     // Honor the OS-level "remove animations" accessibility switch in addition
     // to the in-app toggle: when the system animator duration scale is 0, the
     // device is asking every app to drop motion, mirroring the web's
@@ -154,6 +166,7 @@ class Settings(context: Context) {
         showLatinState = true
         catalogSortState = CatalogSort.NAME
         textSizeState = TextSizeOpt.DEFAULT
+        themeState = ThemeOpt.SYSTEM
         reduceMotionState = false
         leadImageState = LeadImage.PLATE
         tileLabelsState = true

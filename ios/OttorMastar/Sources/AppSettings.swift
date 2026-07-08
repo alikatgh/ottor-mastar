@@ -8,6 +8,7 @@ enum CatalogSort: String, CaseIterable { case name, season }
 enum TextSize: String, CaseIterable { case small, `default`, large }
 enum LeadImage: String, CaseIterable { case plate, photo }
 enum TileTap: String, CaseIterable { case viewer, detail }
+enum ThemeOpt: String, CaseIterable { case system, light, dark }
 
 final class AppSettings: ObservableObject {
     private var reduceMotionObserver: NSObjectProtocol?
@@ -17,6 +18,7 @@ final class AppSettings: ObservableObject {
     @AppStorage("showLatin") var showLatin: Bool = true
     @AppStorage("catalogSort") private var storedCatalogSort: String = CatalogSort.name.rawValue
     @AppStorage("textSize") private var storedTextSize: String = TextSize.default.rawValue
+    @AppStorage("theme") private var storedTheme: String = ThemeOpt.system.rawValue
     @AppStorage("reduceMotion") var reduceMotionSetting: Bool = false
     @AppStorage("leadImage") private var storedLeadImage: String = LeadImage.plate.rawValue
     @AppStorage("tileLabels") var tileLabels: Bool = true
@@ -77,6 +79,21 @@ final class AppSettings: ObservableObject {
         set { objectWillChange.send(); storedTextSize = newValue.rawValue }
     }
 
+    var theme: ThemeOpt {
+        get { ThemeOpt(rawValue: storedTheme) ?? .system }
+        set { objectWillChange.send(); storedTheme = newValue.rawValue }
+    }
+
+    /// Applied as .preferredColorScheme at the root; nil = follow the system.
+    /// The Theme.swift tokens are trait-resolved, so they flip with this.
+    var colorScheme: ColorScheme? {
+        switch theme {
+        case .system: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
+
     var leadImage: LeadImage {
         get { LeadImage(rawValue: storedLeadImage) ?? .plate }
         set { objectWillChange.send(); storedLeadImage = newValue.rawValue }
@@ -108,14 +125,11 @@ final class AppSettings: ObservableObject {
         }
     }
 
-    /// Mirror the web detector: system language if it's one of ours,
-    /// otherwise fall back to Sakha (the project's first language).
+    /// Default UI language. The app is Sakha-first: it always opens in Sakha
+    /// (Yakut) until the reader picks another language in Settings. (Mirrors
+    /// the web and Android defaults.)
     static func detectLanguage() -> String {
-        for pref in Locale.preferredLanguages {
-            let code = pref.components(separatedBy: "-")[0]
-            if Language(rawValue: code) != nil { return code }
-        }
-        return Language.sah.rawValue
+        Language.sah.rawValue
     }
 
     func reset() {
@@ -125,6 +139,7 @@ final class AppSettings: ObservableObject {
         showLatin = true
         storedCatalogSort = CatalogSort.name.rawValue
         storedTextSize = TextSize.default.rawValue
+        storedTheme = ThemeOpt.system.rawValue
         reduceMotionSetting = false
         storedLeadImage = LeadImage.plate.rawValue
         tileLabels = true

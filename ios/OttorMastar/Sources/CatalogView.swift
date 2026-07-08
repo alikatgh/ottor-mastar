@@ -106,6 +106,7 @@ struct CatalogView: View {
         .navigationDestination(for: PushedPage.self) { page in
             switch page {
             case .legal: LegalView()
+            case .help: HelpView()
             case .settings: SettingsView()
             }
         }

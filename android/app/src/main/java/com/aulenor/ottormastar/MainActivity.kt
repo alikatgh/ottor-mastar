@@ -68,6 +68,7 @@ import com.aulenor.ottormastar.ui.Forest
 import com.aulenor.ottormastar.ui.HomeScreen
 import com.aulenor.ottormastar.ui.Ink
 import com.aulenor.ottormastar.ui.InkMuted
+import com.aulenor.ottormastar.ui.HelpScreen
 import com.aulenor.ottormastar.ui.LegalScreen
 import com.aulenor.ottormastar.ui.OttorMastarTheme
 import com.aulenor.ottormastar.ui.SearchScreen
@@ -224,10 +225,17 @@ private fun AppRoot() {
             composable("about") {
                 AboutScreen(
                     onOpenSettings = { nav.navigate("settings") { launchSingleTop = true } },
+                    onOpenHelp = { nav.navigate("help") { launchSingleTop = true } },
                     onOpenLegal = { nav.navigate("legal") { launchSingleTop = true } },
                 )
             }
             composable("settings") { SettingsScreen() }
+            composable("help") {
+                HelpScreen(
+                    onBack = { nav.popBackStack() },
+                    onOpenLegal = { nav.navigate("legal") { launchSingleTop = true } },
+                )
+            }
             composable("legal") { LegalScreen(onBack = { nav.popBackStack() }) }
             composable(
                 "plant/{slug}",

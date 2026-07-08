@@ -78,6 +78,20 @@ struct SettingsView: View {
                 }
 
                 sectionHeader(loc.t("settings.sectionDisplay")).padding(.top, 36)
+                row(loc.t("settings.theme")) {
+                    Segmented(
+                        selection: Binding(
+                            get: { settings.theme.rawValue },
+                            set: { settings.theme = ThemeOpt(rawValue: $0) ?? .system }
+                        ),
+                        options: [
+                            (ThemeOpt.system.rawValue, loc.t("settings.themeSystem")),
+                            (ThemeOpt.light.rawValue, loc.t("settings.themeLight")),
+                            (ThemeOpt.dark.rawValue, loc.t("settings.themeDark")),
+                        ]
+                    )
+                }
+                divider
                 row(loc.t("settings.textSize")) {
                     Segmented(
                         selection: Binding(

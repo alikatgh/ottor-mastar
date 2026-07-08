@@ -39,6 +39,7 @@ import com.aulenor.ottormastar.data.LocalSettings
 @Composable
 fun AboutScreen(
     onOpenSettings: () -> Unit,
+    onOpenHelp: () -> Unit,
     onOpenLegal: () -> Unit,
 ) {
     val settings = LocalSettings.current
@@ -124,6 +125,7 @@ fun AboutScreen(
             Spacer(Modifier.height(36.dp))
 
             EntryCard(loc.t("settings.title"), loc.t("settings.storageNote"), onOpenSettings)
+            EntryCard(loc.t("help.title"), loc.t("help.intro"), onOpenHelp)
             Spacer(Modifier.height(12.dp))
             EntryCard(loc.t("common.legal"), loc.t("common.readDisclaimer"), onOpenLegal)
         }

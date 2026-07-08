@@ -58,6 +58,12 @@ struct AboutView: View {
                     )
                     .padding(.bottom, 12)
                     entryCard(
+                        title: loc.t("help.title"),
+                        note: loc.t("help.intro"),
+                        value: PushedPage.help
+                    )
+                    .padding(.bottom, 12)
+                    entryCard(
                         title: loc.t("common.legal"),
                         note: loc.t("common.readDisclaimer"),
                         value: PushedPage.legal
@@ -74,6 +80,7 @@ struct AboutView: View {
         .navigationDestination(for: PushedPage.self) { page in
             switch page {
             case .legal: LegalView()
+            case .help: HelpView()
             case .settings: SettingsView()
             }
         }
