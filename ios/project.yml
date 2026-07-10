@@ -58,6 +58,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.aulenor.ottormastar
+        DEVELOPMENT_TEAM: 9M2B2P4KSA
         # 6 = Mac (Catalyst "Optimize for Mac" idiom): 100% scale, crisp text,
         # native control metrics — instead of the blurry scaled-iPad rendering.
         TARGETED_DEVICE_FAMILY: "1,2,6"
