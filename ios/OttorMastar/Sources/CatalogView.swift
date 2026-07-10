@@ -52,6 +52,10 @@ struct CatalogView: View {
                     Text("\(filtered.count)")
                         .font(.footnote.monospacedDigit())
                         .foregroundStyle(.inkMuted)
+                        .contentTransition(.numericText())
+                        .animation(
+                            settings.reduceMotion ? nil : .snappy(duration: 0.25),
+                            value: filtered.count)
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 16)
@@ -139,18 +143,16 @@ struct CatalogView: View {
                 ForEach(Self.categoryFilters, id: \.self) { key in
                     let active = activeCategory == key
                     Button {
-                        activeCategory = key
+                        withAnimation(settings.reduceMotion ? nil : .snappy(duration: 0.28)) {
+                            activeCategory = key
+                        }
                     } label: {
                         Text(key == "all" ? loc.t("gallery.allPlants") : loc.t("categories.\(key)"))
                             .font(.footnote.weight(.medium))
                             .foregroundStyle(active ? .white : .inkLight)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
-                            .background(active ? Color.forest : .clear, in: Capsule())
-                            .overlay(
-                                Capsule().strokeBorder(
-                                    active ? Color.forest : Color.hairline, lineWidth: 1)
-                            )
+                            .modifier(FilterChipBackground(active: active))
                     }
                     .buttonStyle(.plain)
                 }

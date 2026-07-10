@@ -147,7 +147,6 @@ struct SettingsView: View {
         .background(Color.cream)
         .navigationTitle(loc.t("settings.title"))
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(Color.cream, for: .navigationBar)
     }
 
     private var divider: some View {
@@ -169,51 +168,75 @@ struct SettingsView: View {
     private func row<Content: View>(
         _ label: String, note: String? = nil, @ViewBuilder control: () -> Content
     ) -> some View {
-        HStack(alignment: .center, spacing: 16) {
-            VStack(alignment: .leading, spacing: 3) {
-                Text(label)
-                    .font(.subheadline)
-                    .foregroundStyle(.ink)
-                if let note {
-                    Text(note)
-                        .font(.caption)
-                        .foregroundStyle(.inkMuted)
-                        .lineSpacing(2)
-                }
+        // Label beside the control while both fit on one line; otherwise the
+        // control drops below the label (long Sakha segment labels would
+        // otherwise crush the title into a ragged column).
+        let labelBlock = VStack(alignment: .leading, spacing: 3) {
+            Text(label)
+                .font(.subheadline)
+                .foregroundStyle(.ink)
+            if let note {
+                Text(note)
+                    .font(.caption)
+                    .foregroundStyle(.inkMuted)
+                    .lineSpacing(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            Spacer(minLength: 8)
-            control()
+        }
+        let ctrl = control()
+        return ViewThatFits(in: .horizontal) {
+            HStack(alignment: .center, spacing: 16) {
+                labelBlock
+                Spacer(minLength: 8)
+                ctrl
+            }
+            VStack(alignment: .leading, spacing: 12) {
+                labelBlock
+                ctrl
+            }
         }
         .padding(.vertical, 14)
     }
 }
 
 /// Pill segmented control — active state changes only color, never geometry.
+/// The forest highlight is one shared capsule that slides between segments
+/// (matched geometry), the native-iOS way a picker thumb moves.
 struct Segmented: View {
     @EnvironmentObject var settings: AppSettings
     @Binding var selection: String
     let options: [(value: String, label: String)]
+    @Namespace private var highlightNS
 
     var body: some View {
         HStack(spacing: 0) {
             ForEach(options, id: \.value) { option in
                 let active = selection == option.value
                 Button {
-                    withAnimation(settings.reduceMotion ? nil : .easeOut(duration: 0.18)) {
+                    withAnimation(settings.reduceMotion ? nil : .snappy(duration: 0.28)) {
                         selection = option.value
                     }
                 } label: {
                     Text(option.label)
                         .font(.caption.weight(.medium))
                         .foregroundStyle(active ? .white : .inkLight)
+                        // Segments never wrap internally (bug-journal rule);
+                        // the row itself falls back to stacked layout instead.
+                        .lineLimit(1)
+                        .fixedSize()
                         .padding(.horizontal, 12)
                         .padding(.vertical, 7)
-                        .background(active ? Color.forest : .clear)
+                        .background {
+                            if active {
+                                Capsule()
+                                    .fill(Color.forest)
+                                    .matchedGeometryEffect(id: "segment-highlight", in: highlightNS)
+                            }
+                        }
                 }
                 .buttonStyle(.plain)
             }
         }
-        .clipShape(Capsule())
         .overlay(Capsule().strokeBorder(Color.hairline, lineWidth: 1))
     }
 }

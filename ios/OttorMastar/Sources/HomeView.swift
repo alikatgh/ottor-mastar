@@ -59,6 +59,22 @@ struct HomeView: View {
                 }
             )
         }
+        .onAppear {
+            // Debug/screenshot hooks (no effect without the flag):
+            // `simctl launch ... -viewer <index>` opens the viewer on that photo;
+            // `simctl launch ... -plant <slug>` pushes that plant's detail page.
+            let args = ProcessInfo.processInfo.arguments
+            if let i = args.firstIndex(of: "-viewer"), i + 1 < args.count,
+                let idx = Int(args[i + 1]), plants.indices.contains(idx)
+            {
+                viewer = ViewerState(index: idx)
+            }
+            if let i = args.firstIndex(of: "-plant"), i + 1 < args.count,
+                let plant = PlantStore.findPlant(slug: args[i + 1])?.0
+            {
+                pushDetail(plant)
+            }
+        }
     }
 
     /// Guarded push — ignored while a detail push is already in flight, so a
@@ -160,14 +176,9 @@ struct HomeView: View {
                             Text(loc.t("home.cta"))
                             Image(systemName: "arrow.right")
                         }
-                        .font(.subheadline.weight(.medium))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 11)
-                        .background(Color.forest)
-                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .fixedSize()
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(ProminentPillButtonStyle())
 
                     Text(
                         plated.isEmpty

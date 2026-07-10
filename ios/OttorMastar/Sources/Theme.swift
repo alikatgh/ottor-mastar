@@ -184,48 +184,118 @@ struct FlowLayout: Layout {
     }
 }
 
+// MARK: Liquid Glass adapters (iOS 26+, graceful fallback below)
+
+extension View {
+    /// Liquid Glass chrome in `shape` on iOS 26; below that, `fallback` (or
+    /// ultra-thin material when nil). `tint` colors the glass for prominent
+    /// actions; `interactive` adds the touch response for tappable chrome.
+    @ViewBuilder
+    func glassChrome<S: Shape>(
+        in shape: S,
+        tint: Color? = nil,
+        interactive: Bool = false,
+        fallback: Color? = nil
+    ) -> some View {
+        if #available(iOS 26.0, *) {
+            glassEffect(.chrome(tint: tint, interactive: interactive), in: shape)
+        } else if let fallback {
+            background(fallback, in: shape)
+        } else {
+            background(.ultraThinMaterial, in: shape)
+        }
+    }
+}
+
+@available(iOS 26.0, *)
+extension Glass {
+    static func chrome(tint: Color?, interactive: Bool) -> Glass {
+        var glass: Glass = .regular
+        if let tint { glass = glass.tint(tint) }
+        if interactive { glass = glass.interactive() }
+        return glass
+    }
+}
+
 // MARK: Button design system
 // All tappable chrome uses these two styles (never the platform default —
 // on Mac Catalyst the system bezel would override custom backgrounds and
 // render gray blobs). Pills never change geometry on press, only tint.
+// On iOS 26 both render as Liquid Glass capsules.
 
-/// Secondary action: hairline capsule, ink text, pressed tint.
+/// Secondary action: Liquid Glass capsule (26+) / hairline capsule with
+/// pressed tint below.
 struct PillButtonStyle: ButtonStyle {
     var onDark: Bool = false
 
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
+        let label = configuration.label
             .font(.subheadline.weight(.medium))
             .foregroundStyle(onDark ? Color.white : Color.ink)
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
-            .background(
-                Capsule().fill(
-                    onDark
-                        ? Color.white.opacity(configuration.isPressed ? 0.22 : 0.10)
-                        : Color.creamDark.opacity(configuration.isPressed ? 1 : 0)
-                )
-            )
-            .overlay(
-                Capsule().strokeBorder(
-                    onDark ? Color.white.opacity(0.28) : Color.hairline, lineWidth: 1)
-            )
-            .contentShape(Capsule())
+        return Group {
+            if #available(iOS 26.0, *) {
+                label.glassEffect(.chrome(tint: nil, interactive: true), in: Capsule())
+            } else {
+                label
+                    .background(
+                        Capsule().fill(
+                            onDark
+                                ? Color.white.opacity(configuration.isPressed ? 0.22 : 0.10)
+                                : Color.creamDark.opacity(configuration.isPressed ? 1 : 0)
+                        )
+                    )
+                    .overlay(
+                        Capsule().strokeBorder(
+                            onDark ? Color.white.opacity(0.28) : Color.hairline, lineWidth: 1)
+                    )
+            }
+        }
+        .contentShape(Capsule())
     }
 }
 
-/// Primary action: forest capsule, white text.
+/// Primary action: forest-tinted Liquid Glass capsule (26+) / solid forest
+/// capsule below, white text on both.
 struct ProminentPillButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
+        let label = configuration.label
             .font(.subheadline.weight(.semibold))
             .foregroundStyle(.white)
             .padding(.horizontal, 18)
             .padding(.vertical, 11)
-            .background(
-                Capsule().fill(configuration.isPressed ? Color.forestDark : Color.forest)
-            )
-            .contentShape(Capsule())
+        return Group {
+            if #available(iOS 26.0, *) {
+                label.glassEffect(.chrome(tint: .forest, interactive: true), in: Capsule())
+            } else {
+                label.background(
+                    Capsule().fill(configuration.isPressed ? Color.forestDark : Color.forest)
+                )
+            }
+        }
+        .contentShape(Capsule())
+    }
+}
+
+/// Catalog filter chip background: forest-tinted Liquid Glass when active,
+/// clear interactive glass when idle (26+); forest fill / hairline outline
+/// below. Selection changes tint only — never geometry.
+struct FilterChipBackground: ViewModifier {
+    let active: Bool
+
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.glassEffect(
+                .chrome(tint: active ? .forest : nil, interactive: true), in: Capsule())
+        } else {
+            content
+                .background(active ? Color.forest : .clear, in: Capsule())
+                .overlay(
+                    Capsule().strokeBorder(
+                        active ? Color.forest : Color.hairline, lineWidth: 1)
+                )
+        }
     }
 }
 

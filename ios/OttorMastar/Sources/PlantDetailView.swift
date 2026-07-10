@@ -138,10 +138,11 @@ struct PlantDetailView: View {
                 }
                 .padding(.horizontal, 10)
                 .padding(.vertical, 6)
-                // Card-toned (not white) so the chip doesn't glare in dark mode.
-                .background(Color.card.opacity(0.85), in: Capsule())
+                // Liquid Glass on 26; card-toned (not white) below so the chip
+                // doesn't glare in dark mode.
+                .glassChrome(in: Capsule(), fallback: Color.card.opacity(0.85))
                 .padding(.bottom, 40)
-                .animation(.easeOut(duration: 0.2), value: slide)
+                .animation(settings.reduceMotion ? nil : .snappy(duration: 0.25), value: slide)
             }
         }
         .frame(height: fixedHeight)
@@ -151,7 +152,7 @@ struct PlantDetailView: View {
                 .font(.footnote)
                 .foregroundStyle(.white)
                 .frame(width: 36, height: 36)
-                .background(.black.opacity(0.3), in: Circle())
+                .glassChrome(in: Circle(), fallback: .black.opacity(0.3))
                 .padding(.top, 60)
                 .padding(.trailing, 16)
                 .allowsHitTesting(false)

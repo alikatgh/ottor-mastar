@@ -42,3 +42,5 @@ ios/OttorMastar/Info.plist
 
 # Built app binaries
 builds/
+# Xcode derived data from CLI builds (xcodebuild -derivedDataPath build)
+ios/build/

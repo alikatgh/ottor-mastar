@@ -43,6 +43,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-10 — Liquid Glass adoption (iOS 26) + two screen bugs caught in the sweep
+- Change: Liquid Glass across iOS — `glassChrome` adapter in Theme.swift (`glassEffect` on 26, material/solid fallback on 17), glass pill buttons, filter chips, viewer chrome, native `Tab(role: .search)` bar with `.tabBarMinimizeBehavior(.onScrollDown)`; springs/`.snappy` + numericText counters everywhere (reduceMotion-gated).
+- Bug 1: viewer "Сиһилии" pill wrapped to two lines when the caption title squeezed it → `.fixedSize()` on the pill label (ImageViewer.swift caption). Pills never wrap — same 2026-07-08 lesson, new call site.
+- Bug 2: Settings segments wrapped internally ("Монголи/я", 3-line "Сибэккилэнэр кэминэн") → `.lineLimit(1).fixedSize()` on segment text + `ViewThatFits` row that stacks the control under the label when too wide (SettingsView.swift).
+- Ops: an Xcode update (26.3) deletes ALL simulator runtimes — `simctl list devices` empty is a missing-runtime signal, not a broken project; `xcodebuild -downloadPlatform iOS` (~8 GB) restores. Screenshot hooks now cover every screen: `-tab`, `-viewer <i>`, `-plant <slug>`, `-page settings|help|legal`.
+
 ### 2026-07-08 — Dark/light/system theme + Help section, all three platforms
 - Change: full dark palette (warm near-black paper, lifted forest accent) + a system|light|dark Appearance setting, and a /help guide (5 languages) linked from About + footer.
 - Arch: the token layer did all the work — web: re-declare every `--color-*` var under `html[data-theme=dark]` (SettingsProvider stamps the RESOLVED value; 'system' live-tracks the media query; meta theme-color synced). Android: top-level color `val`s became `@Composable get()` over a `LocalDarkTheme` CompositionLocal — zero call-site changes (only `Modifier.plateCard()` needed @Composable). iOS: `static let` Colors became dynamic `UIColor { trait }` providers — zero call-site changes; setting applied via `.preferredColorScheme` (nil = system).

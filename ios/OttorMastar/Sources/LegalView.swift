@@ -41,7 +41,6 @@ struct LegalView: View {
         .background(Color.cream)
         .navigationTitle(LegalContent.title[lang] ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(Color.cream, for: .navigationBar)
     }
 
     private func sectionCard(heading: String, paragraphs: [String], warn: Bool = false) -> some View {

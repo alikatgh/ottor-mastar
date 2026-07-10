@@ -45,6 +45,54 @@ struct RootView: View {
     }
 
     var body: some View {
+        Group {
+            if #available(iOS 26.0, *) {
+                modernTabs
+            } else {
+                legacyTabs
+            }
+        }
+        .onAppear {
+            if let launchTab = Self.launchTab { tab = launchTab }
+            #if targetEnvironment(macCatalyst)
+            // A desktop window smaller than this collapses the layouts; the
+            // regular-width two-column detail needs the room.
+            for scene in UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }) {
+                scene.sizeRestrictions?.minimumSize = CGSize(width: 980, height: 700)
+                scene.titlebar?.titleVisibility = .hidden
+            }
+            #endif
+        }
+    }
+
+    /// iOS 26: native Liquid Glass tab bar — Search separated into its own
+    /// floating glass pill (`role: .search`), and the bar minimizes away on
+    /// scroll so the herbarium content keeps the full screen.
+    @available(iOS 26.0, *)
+    private var modernTabs: some View {
+        TabView(selection: $tab) {
+            Tab(settings.loc.t("nav.gallery"), systemImage: "photo.on.rectangle", value: RootTab.gallery) {
+                NavigationStack { HomeView(tab: $tab, zoomNamespace: zoomNamespace) }
+            }
+            Tab(settings.loc.t("nav.catalog"), systemImage: "book", value: RootTab.catalog) {
+                NavigationStack { CatalogView() }
+            }
+            Tab(settings.loc.t("nav.about"), systemImage: "info.circle", value: RootTab.about) {
+                NavigationStack { AboutView() }
+            }
+            #if targetEnvironment(macCatalyst)
+            Tab(settings.loc.t("settings.title"), systemImage: "gearshape", value: RootTab.settings) {
+                NavigationStack { SettingsView() }
+            }
+            #endif
+            Tab(settings.loc.t("nav.search"), systemImage: "magnifyingglass", value: RootTab.search, role: .search) {
+                NavigationStack { SearchView() }
+            }
+        }
+        .tabBarMinimizeBehavior(.onScrollDown)
+    }
+
+    private var legacyTabs: some View {
         TabView(selection: $tab) {
             NavigationStack { HomeView(tab: $tab, zoomNamespace: zoomNamespace) }
                 .tabItem { Label(settings.loc.t("nav.gallery"), systemImage: "photo.on.rectangle") }
@@ -65,17 +113,6 @@ struct RootView: View {
             NavigationStack { SettingsView() }
                 .tabItem { Label(settings.loc.t("settings.title"), systemImage: "gearshape") }
                 .tag(RootTab.settings)
-            #endif
-        }
-        .onAppear {
-            if let launchTab = Self.launchTab { tab = launchTab }
-            #if targetEnvironment(macCatalyst)
-            // A desktop window smaller than this collapses the layouts; the
-            // regular-width two-column detail needs the room.
-            for scene in UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }) {
-                scene.sizeRestrictions?.minimumSize = CGSize(width: 980, height: 700)
-                scene.titlebar?.titleVisibility = .hidden
-            }
             #endif
         }
     }

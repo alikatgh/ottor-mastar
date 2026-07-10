@@ -78,7 +78,9 @@ struct ImageViewer: View {
         .opacity(appeared || reduceMotion ? 1 : 0)
         .onAppear {
             guard item != nil else { dismiss(); return }
-            withAnimation(reduceMotion ? nil : .easeOut(duration: 0.2)) { appeared = true }
+            withAnimation(reduceMotion ? nil : .spring(response: 0.35, dampingFraction: 0.85)) {
+                appeared = true
+            }
         }
         // Paging to another image resets any pinch-zoom, so the swipe-down
         // dismiss gesture re-arms on the fresh page.
@@ -175,7 +177,7 @@ struct ImageViewer: View {
                 .font(.title3.weight(.semibold))
                 .foregroundStyle(.white)
                 .frame(width: 44, height: 44)
-                .background(.black.opacity(0.4), in: Circle())
+                .glassChrome(in: Circle(), interactive: true, fallback: .black.opacity(0.4))
         }
         .buttonStyle(.plain)
         .padding(.horizontal, 16)
@@ -222,9 +224,11 @@ struct ImageViewer: View {
                     Text("\(index + 1) / \(items.count)")
                         .font(.subheadline.weight(.medium).monospacedDigit())
                         .foregroundStyle(.white)
+                        .contentTransition(.numericText())
+                        .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: index)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(.black.opacity(0.4), in: Capsule())
+                        .glassChrome(in: Capsule(), fallback: .black.opacity(0.4))
                 }
                 Spacer()
                 Button {
@@ -234,7 +238,7 @@ struct ImageViewer: View {
                         .font(.body.weight(.semibold))
                         .foregroundStyle(.white)
                         .frame(width: 40, height: 40)
-                        .background(.black.opacity(0.4), in: Circle())
+                        .glassChrome(in: Circle(), interactive: true, fallback: .black.opacity(0.4))
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(loc.t("common.close"))
@@ -288,8 +292,7 @@ struct ImageViewer: View {
                             .font(.title3.weight(.semibold))
                             .foregroundStyle(.white)
                             .frame(width: 44, height: 44)
-                            .background(.black.opacity(0.3), in: Circle())
-                            .overlay(Circle().stroke(.white.opacity(0.25), lineWidth: 1))
+                            .glassChrome(in: Circle(), interactive: true, fallback: .black.opacity(0.3))
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(loc.t("plant.readOnWikipedia"))
@@ -301,8 +304,12 @@ struct ImageViewer: View {
                     } label: {
                         HStack(spacing: 5) {
                             Text(loc.t("plant.details"))
+                                .lineLimit(1)
                             Image(systemName: "arrow.up.right")
                         }
+                        // Never let the pill wrap ("Сиһилии" was breaking onto
+                        // two lines when the caption title squeezed the row).
+                        .fixedSize()
                     }
                     .buttonStyle(ProminentPillButtonStyle())
                 }

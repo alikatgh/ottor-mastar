@@ -5,6 +5,8 @@ import SwiftUI
 /// Legal entry cards, followed by the colophon footer.
 struct AboutView: View {
     @EnvironmentObject var settings: AppSettings
+    /// Debug/screenshot hook target — see the `-page` launch argument below.
+    @State private var debugPage: PushedPage?
 
     private var loc: L10n { settings.loc }
     private var lang: Language { settings.language }
@@ -86,6 +88,26 @@ struct AboutView: View {
         }
         .navigationDestination(for: Plant.self) { plant in
             PlantDetailView(plant: plant, country: settings.country)
+        }
+        .navigationDestination(item: $debugPage) { page in
+            switch page {
+            case .legal: LegalView()
+            case .help: HelpView()
+            case .settings: SettingsView()
+            }
+        }
+        .onAppear {
+            // Debug/screenshot hook: `simctl launch ... -tab about -page
+            // settings|help|legal` pushes that page. No effect without the flag.
+            let args = ProcessInfo.processInfo.arguments
+            if let i = args.firstIndex(of: "-page"), i + 1 < args.count {
+                switch args[i + 1] {
+                case "settings": debugPage = .settings
+                case "help": debugPage = .help
+                case "legal": debugPage = .legal
+                default: break
+                }
+            }
         }
     }
 
