@@ -159,8 +159,10 @@ struct ImageViewer: View {
                 .tag(i)
                 .padding(.top, 56)
                 // Wide mode's metadata lives in the side panel, so the image
-                // only needs the top-bar reserve, not the caption reserve.
-                .padding(.bottom, isWide ? 40 : 120)
+                // only needs the top-bar reserve. Compact reserves the whole
+                // filmstrip + caption zone so the photo never underlaps the
+                // scrubber (thumbs over a bright photo are unreadable).
+                .padding(.bottom, isWide ? 40 : (items.count > 1 ? 196 : 140))
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
@@ -261,9 +263,16 @@ struct ImageViewer: View {
                     if items.count > 1 { filmstrip }
                     caption
                 }
+                // Top inset gives the scrim room to ramp up before the
+                // filmstrip, so thumbs never melt into a bright photo.
+                .padding(.top, 28)
                 .background(
                     LinearGradient(
-                        colors: [.clear, .black.opacity(0.75), .black.opacity(0.92)],
+                        stops: [
+                            .init(color: .clear, location: 0),
+                            .init(color: .black.opacity(0.55), location: 0.28),
+                            .init(color: .black.opacity(0.92), location: 1),
+                        ],
                         startPoint: .top, endPoint: .bottom
                     )
                     .ignoresSafeArea(edges: .bottom)
@@ -317,70 +326,71 @@ struct ImageViewer: View {
         // renders chrome only when non-nil, so unwrap once here.
         Group {
             if let item {
-                HStack(alignment: .bottom, spacing: 16) {
-            VStack(alignment: .leading, spacing: 6) {
-                if let kindLabel = item.kindLabel {
-                    Text(kindLabel.uppercased())
-                        .font(.caption2.weight(.semibold))
-                        .tracking(1.4)
-                        .foregroundStyle(.white.opacity(0.55))
-                }
-                Text(item.title)
-                    .font(.system(.title2, design: .serif).weight(.semibold))
-                    .foregroundStyle(.white)
-                if let subtitle = item.subtitle {
-                    Text(subtitle)
-                        .font(.subheadline.italic())
-                        .foregroundStyle(.white.opacity(0.65))
-                        .lineLimit(1)
-                }
-                if !item.badges.isEmpty {
-                    BadgeRow(categories: item.badges, onDark: true)
-                        .padding(.top, 6)
-                }
-            }
-            Spacer(minLength: 0)
-            GlassGroup(spacing: 8) {
-            HStack(spacing: 8) {
-                // Wikipedia — a compact round icon button, mirroring the web
-                // mobile caption. Opens the language-matched article.
-                if let wiki = item.plant.wikipediaURL(for: lang) {
-                    Button {
-                        openURL(wiki)
-                    } label: {
-                        Image(systemName: "arrow.up.right.square")
-                            .font(.title3.weight(.semibold))
-                            .foregroundStyle(.white)
-                            .frame(width: 44, height: 44)
-                            .glassChrome(in: Circle(), interactive: true, fallback: .black.opacity(0.3))
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(loc.t("plant.readOnWikipedia"))
-                }
-                if let slug = item.detailSlug, let onOpenDetail {
-                    Button {
-                        dismiss()
-                        onOpenDetail(slug)
-                    } label: {
-                        HStack(spacing: 5) {
-                            Text(loc.t("plant.details"))
-                                .lineLimit(1)
-                            Image(systemName: "arrow.up.right")
+                HStack(alignment: .center, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 5) {
+                        if let kindLabel = item.kindLabel {
+                            Text(kindLabel.uppercased())
+                                .font(.caption2.weight(.semibold))
+                                .tracking(1.4)
+                                .foregroundStyle(.white.opacity(0.55))
+                                .padding(.bottom, 3)
                         }
-                        // Never let the pill wrap ("Сиһилии" was breaking onto
-                        // two lines when the caption title squeezed the row).
-                        .fixedSize()
+                        Text(item.title)
+                            .font(.system(.title2, design: .serif).weight(.semibold))
+                            .foregroundStyle(.white)
+                        if let subtitle = item.subtitle {
+                            Text(subtitle)
+                                .font(.subheadline.italic())
+                                .foregroundStyle(.white.opacity(0.65))
+                                .lineLimit(1)
+                        }
+                        if !item.badges.isEmpty {
+                            BadgeRow(categories: item.badges, onDark: true)
+                                .padding(.top, 9)
+                        }
                     }
-                    .buttonStyle(ProminentPillButtonStyle())
+
+                    Spacer(minLength: 12)
+
+                    // ONE action, centered beside the text — two stacked arrow
+                    // buttons on the baseline read as duplicates and crowded
+                    // the bottom edge. Details wins; the Wikipedia pill only
+                    // appears where Details isn't available (detail-page
+                    // viewer, where Wikipedia lives on the page below anyway).
+                    if let slug = item.detailSlug, let onOpenDetail {
+                        Button {
+                            dismiss()
+                            onOpenDetail(slug)
+                        } label: {
+                            HStack(spacing: 5) {
+                                Text(loc.t("plant.details"))
+                                    .lineLimit(1)
+                                Image(systemName: "arrow.up.right")
+                            }
+                            // A pill never wraps ("Сиһилии" was breaking in two).
+                            .fixedSize()
+                        }
+                        .buttonStyle(ProminentPillButtonStyle())
+                    } else if let wiki = item.plant.wikipediaURL(for: lang) {
+                        Button {
+                            openURL(wiki)
+                        } label: {
+                            HStack(spacing: 5) {
+                                Text(verbatim: "Wikipedia")
+                                    .lineLimit(1)
+                                Image(systemName: "arrow.up.right")
+                            }
+                            .fixedSize()
+                        }
+                        .buttonStyle(PillButtonStyle(onDark: true))
+                        .accessibilityLabel(loc.t("plant.readOnWikipedia"))
+                    }
                 }
-            }
-            }
-        }
-        .padding(.horizontal, 20)
-        .padding(.bottom, 28)
-        .padding(.top, 14)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .animation(.easeOut(duration: 0.2), value: index)
+                .padding(.horizontal, 20)
+                .padding(.top, 16)
+                .padding(.bottom, 36)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .animation(.easeOut(duration: 0.2), value: index)
             }
         }
     }

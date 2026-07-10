@@ -60,6 +60,7 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 - Bug: viewer's X "didn't close" — only in app instances launched with `-viewer N`: HomeView.onAppear re-fires when the cover dismisses, so the hook re-opened it instantly (looked like a dead button). Fix: one-shot static guard (`launchHooksConsumed`) in HomeView/AboutView (ios/OttorMastar/Sources/HomeView.swift).
 - Lesson: launch-argument hooks must consume ONCE PER PROCESS — `onAppear` re-runs on every dismiss/pop, so an unguarded hook re-presents forever.
 - UI: CatalogRow/SearchRow → full-bleed leading-image cards (plate fills the card's left edge, index stamp top-right, badges bottom); plates get 1.14× zoom so scan margins never show as side bands. Viewer: thumbnail filmstrip scrubber sharing the caption scrim, paging haptics, GlassEffectContainer morph groups.
+- Caption redesign: ONE action pill (Details, else Wikipedia) centered beside the text — two stacked arrow buttons on the bottom baseline read as duplicates and crowded the edge; image reserves the full strip+caption zone so thumbs never sit over a bright photo.
 - Icon: generic flat leaf → square crop of the Sardaana plate blooms + museum double-frame, generated from the real plate asset (scripts/gen-app-icons.cjs, re-runnable).
 
 ### 2026-07-10 — Liquid Glass adoption (iOS 26) + two screen bugs caught in the sweep
