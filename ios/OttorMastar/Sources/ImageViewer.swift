@@ -106,14 +106,21 @@ struct ImageViewer: View {
 
     private var backdrop: some View {
         ZStack {
+            // The blurred fill hangs off an .overlay of the Color so its
+            // scaledToFill size can NEVER inflate this ZStack's layout —
+            // an unclipped fill here grew the whole viewer past the screen
+            // bounds on iPad, shoving the top chrome (close button) offscreen.
             Color(white: 0.04)
-            if let item {
-                BundledPlantImage(item: item, size: .medium)
-                    .scaledToFill()
-                    .scaleEffect(1.25)
-                    .blur(radius: 60)
-                    .opacity(0.6)
-            }
+                .overlay {
+                    if let item {
+                        BundledPlantImage(item: item, size: .medium)
+                            .scaledToFill()
+                            .scaleEffect(1.25)
+                            .blur(radius: 60)
+                            .opacity(0.6)
+                    }
+                }
+                .clipped()
             LinearGradient(
                 stops: [
                     .init(color: .black.opacity(0.45), location: 0),

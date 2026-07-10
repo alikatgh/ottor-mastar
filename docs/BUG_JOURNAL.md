@@ -50,11 +50,11 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
-### 2026-07-11 — iPad viewer shipped with NO close button (chrome invisible on regular width)
-- Symptom: full-screen image viewer on iPad had no close button / counter — chrome simply absent; fine on iPhone.
-- Cause: `chrome` was a plain ZStack sibling of the pager; on regular width it silently failed to render (GlassGroup container also collapsed the bar — two stacked causes). ImageViewer.swift:68.
-- Fix: chrome rides `.overlay { }` pinned to container bounds; top bar is a plain HStack (counter+close sit at opposite edges — nothing for a glass container to morph). Also PlantDetailView wideBody: info column now respects the top safe area so the title clears iPadOS's top tab bar (image column alone ignores it).
-- Lesson (generalizes): test EVERY size class before release — a layout that renders nothing (not wrong, absent) on the other size class is silent; and never wrap edge-pinned bars in a morphing container.
+### 2026-07-11 — iPad viewer shipped with NO close button (chrome laid out OFFSCREEN on regular width)
+- Symptom: full-screen viewer on iPad had no close button/counter; fine on iPhone. Chrome's `onAppear` fired with opacity=1 — mounted, invisible.
+- Cause: backdrop's `BundledPlantImage().scaledToFill()` had no clip/frame — a fill REPORTS its inflated size to layout, growing the whole viewer ZStack past the screen on iPad's 4:3 (tall plates), so the chrome overlay pinned to inflated bounds sat above the physical screen. iPhone's aspect ≈ plate aspect → overflow ≈ 0 → "iPad-only". ImageViewer.swift:107.
+- Fix: hang the fill off `Color.overlay { … }.clipped()` — overlay content can never inflate layout. (Earlier suspects — ZStack-sibling vs .overlay chrome, GlassGroup — were red herrings; kept the .overlay + plain HStack anyway.) Also PlantDetailView wideBody: info column respects the top safe area so the title clears iPadOS's top tab bar.
+- Lesson (generalizes): `scaledToFill` without `.frame`+`.clipped()` (or hung off an `.overlay`) silently inflates the parent's LAYOUT bounds, not just paint — anything edge-pinned in that container lands offscreen. If onAppear fires but nothing paints, suspect geometry before opacity/z-order. And verify fixes ON THE AFFECTED SIZE CLASS before committing — the first "fix" here shipped unverified and was wrong.
 
 ### 2026-07-10 — Viewer stranded in half-dismissed limbo (photo offset, chrome half-faded, caption clipped)
 - Symptom: viewer frozen mid-state — image pushed down + scaled, top chrome invisible, caption fragments.
