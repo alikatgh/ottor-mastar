@@ -69,12 +69,32 @@ struct PlantDetailView: View {
     private var compactBody: some View {
         ScrollView {
             VStack(spacing: 0) {
-                imagePanel(fixedHeight: 420)
+                // Parallax hero: pulling down stretches the image (anchored to
+                // the top); scrolling up moves it at ~40% of scroll speed, so
+                // the info sheet slides OVER what reads as a fixed background
+                // — the image itself is never cropped or altered.
+                GeometryReader { geo in
+                    let minY = geo.frame(in: .named("detail-scroll")).minY
+                    let stretch = max(0, minY)
+                    let parallax = settings.reduceMotion ? 0 : min(0, minY) * 0.6
+                    imagePanel(fixedHeight: nil)
+                        .frame(width: geo.size.width, height: 420 + stretch)
+                        .overlay(
+                            // Dim as the sheet rises, like a receding backdrop.
+                            Color.black
+                                .opacity(min(0.28, Double(-min(0, minY)) / 650))
+                                .allowsHitTesting(false)
+                        )
+                        .offset(y: -stretch - parallax)
+                }
+                .frame(height: 420)
+
                 infoSheet(wide: false)
                     .offset(y: sheetUp || settings.reduceMotion ? 0 : 28)
                     .opacity(sheetUp || settings.reduceMotion ? 1 : 0)
             }
         }
+        .coordinateSpace(name: "detail-scroll")
         .ignoresSafeArea(edges: .top)
     }
 

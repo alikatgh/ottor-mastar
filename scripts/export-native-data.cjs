@@ -122,28 +122,46 @@ for (const destRoot of [
   fs.rmSync(path.join(ROOT, destRoot), { recursive: true, force: true });
 }
 
-let copied = 0;
-for (const country of Object.values(COUNTRIES)) {
-  const base = country.imageBase.replace(/^\//, ''); // 'plants' | 'mongolia'
-  for (const size of ['thumb', 'medium']) {
-    const srcDir = path.join(ROOT, 'public', base, size);
-    if (!fs.existsSync(srcDir)) continue;
-    for (const destRel of [
-      `ios/OttorMastar/Resources/PlantImages/${base}/${size}`,
-      `android/app/src/main/assets/images/${base}/${size}`,
-    ]) {
-      const destDir = path.join(ROOT, destRel);
-      fs.mkdirSync(destDir, { recursive: true });
+// Plate scans (*-ill.webp) carry a flat neutral margin around the aged-paper
+// sheet; trim it at the source so native layouts get the paper edge-to-edge
+// (the in-app zoom hacks that compensated for the margin are gone). Photos
+// copy verbatim. Trim runs once per source file, then fans out to both apps.
+const sharp = require('sharp');
+
+(async () => {
+  let copied = 0;
+  for (const country of Object.values(COUNTRIES)) {
+    const base = country.imageBase.replace(/^\//, ''); // 'plants' | 'mongolia'
+    for (const size of ['thumb', 'medium']) {
+      const srcDir = path.join(ROOT, 'public', base, size);
+      if (!fs.existsSync(srcDir)) continue;
+      const destDirs = [
+        `ios/OttorMastar/Resources/PlantImages/${base}/${size}`,
+        `android/app/src/main/assets/images/${base}/${size}`,
+      ].map((rel) => {
+        const dir = path.join(ROOT, rel);
+        fs.mkdirSync(dir, { recursive: true });
+        return dir;
+      });
       for (const f of fs.readdirSync(srcDir)) {
         if (!f.endsWith('.webp')) continue;
-        fs.copyFileSync(path.join(srcDir, f), path.join(destDir, f));
-        copied++;
+        const src = path.join(srcDir, f);
+        if (f.endsWith('-ill.webp')) {
+          const trimmed = await sharp(src)
+            .trim({ threshold: 25 })
+            .webp({ quality: 88 })
+            .toBuffer();
+          for (const dir of destDirs) fs.writeFileSync(path.join(dir, f), trimmed);
+        } else {
+          for (const dir of destDirs) fs.copyFileSync(src, path.join(dir, f));
+        }
+        copied += destDirs.length;
       }
     }
   }
-}
-console.log(`copied ${copied} image files into app bundles`);
+  console.log(`copied ${copied} image files into app bundles (plates trimmed)`);
 
-fs.rmSync(outDir, { recursive: true, force: true });
-const total = data.countries.reduce((n, c) => n + c.plants.length, 0);
-console.log(`done — ${total} plants across ${data.countries.length} countries`);
+  fs.rmSync(outDir, { recursive: true, force: true });
+  const total = data.countries.reduce((n, c) => n + c.plants.length, 0);
+  console.log(`done — ${total} plants across ${data.countries.length} countries`);
+})().catch((e) => { console.error(e); process.exit(1); });

@@ -178,9 +178,6 @@ struct CatalogRow: View {
                 kind: plant.hasIllustration ? .plate : .photo
             )
             .frame(width: 112)
-            // Plate scans keep narrow neutral margins; a slight zoom pushes
-            // the aged paper to the panel edges so the bleed is truly full.
-            .scaleEffect(plant.hasIllustration ? 1.14 : 1)
             .clipped()
 
             VStack(alignment: .leading, spacing: 3) {

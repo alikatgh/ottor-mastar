@@ -186,15 +186,11 @@ fun PlantImage(
 }
 
 /**
- * Web `.plate-thumb`: source plates are square scans with wide aged-paper
- * margins — zoom into the figure (1.34×, origin slightly above center).
- * Apply to an already-clipped container.
+ * No-op since the export pipeline trims plate margins at the source
+ * (export-native-data.cjs) — bundled plates are already paper-edge-to-edge.
+ * Kept so call sites need no churn; delete once all screens drop it.
  */
-fun Modifier.plateThumbCrop(): Modifier = graphicsLayer {
-    scaleX = 1.34f
-    scaleY = 1.34f
-    transformOrigin = TransformOrigin(0.5f, 0.38f)
-}
+fun Modifier.plateThumbCrop(): Modifier = this
 
 /**
  * Letterspaced-uppercase section label over a hairline rule — the app's one

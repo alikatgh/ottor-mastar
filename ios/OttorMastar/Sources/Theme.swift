@@ -111,13 +111,6 @@ struct PlateCard: ViewModifier {
 
 extension View {
     func plateCard() -> some View { modifier(PlateCard()) }
-
-    /// Web `.plate-thumb`: source plates are square scans with wide aged-paper
-    /// margins, so a plain fill leaves the drawing small and floaty. Zoom into
-    /// the figure (1.34×, origin slightly above center) inside the clip.
-    func plateThumbCrop() -> some View {
-        scaleEffect(1.34, anchor: UnitPoint(x: 0.5, y: 0.38)).clipped()
-    }
 }
 
 /// Category chip: hairline border + 6pt status dot; color carries the

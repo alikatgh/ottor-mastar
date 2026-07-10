@@ -134,7 +134,6 @@ private struct SearchRow: View {
                 kind: plant.hasIllustration ? .plate : .photo
             )
             .frame(width: 88)
-            .scaleEffect(plant.hasIllustration ? 1.14 : 1)
             .clipped()
 
             VStack(alignment: .leading, spacing: 3) {

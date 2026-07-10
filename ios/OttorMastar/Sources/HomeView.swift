@@ -250,12 +250,10 @@ struct HomeView: View {
 
     private func plateTile(_ plant: Plant, index: Int) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Square plate window with the web's 1.34× figure crop.
+            // Square plate window — bundled plates are pre-trimmed to the
+            // paper's edges, so a plain fill shows the figure large.
             PlantImageView(country: country, plant: plant, size: .thumb, kind: .plate)
-                .aspectRatio(1, contentMode: .fit)
                 .frame(width: 180, height: 180)
-                .plateThumbCrop()
-                .background(Color.parchment)
                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 .overlay(
                     RoundedRectangle(cornerRadius: 8, style: .continuous)

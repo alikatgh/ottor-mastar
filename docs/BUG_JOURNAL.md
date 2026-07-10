@@ -55,6 +55,11 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 - Arch: SharedTransitionScope + each destination's AnimatedContentScope published via CompositionLocals (`LocalSharedTransition`/`LocalNavAnimation`) so tiles opt in with one modifier — zero signature threading.
 - Key lesson: shared-element keys must be namespaced by the ORIGIN element, not just the entity — the same plant is visible twice on Home (hero + shelf), and duplicate keys in one scope are undefined behavior. The `?src=` arg lets the destination join exactly the element that was tapped.
 
+### 2026-07-10 — Plate margins trimmed at the SOURCE; detail hero became a true parallax background
+- Change: export-native-data.cjs now `sharp().trim({threshold:25})`s every `*-ill.webp` into the native bundles (paper edge-to-edge), so the per-platform zoom hacks died: iOS `plateThumbCrop` (deleted) + catalog/search `scaleEffect(1.14)`; Android `plateThumbCrop` → no-op kept for call-site compat. Web untouched (uses un-trimmed public/ + its own CSS crop).
+- Lesson: when N platforms each carry a crop/zoom hack compensating for the same asset flaw, fix the ASSET in the shared pipeline and delete the hacks — but do it in ONE commit, or un-hacked platforms over-zoom.
+- Detail page: compact hero is now a stretchy-parallax background (GeometryReader in named scroll space: pull-down stretches anchored-top; scroll-up moves it at 0.6× with a dim ramp, sheet slides OVER it). reduceMotion drops the parallax. Simulator note: synthetic computer-use drags fling with huge velocity — use stepped mouse_move drags to test scroll physics.
+
 ### 2026-07-10 — Viewer caption hugged the system nav bar + invisible "Details" pill (Android)
 - Symptom: full-screen viewer's caption/buttons sat flush against the bottom system bar; the white "Сиһилии" pill text was unreadable.
 - Cause: `ViewerScreen.kt` dialog is edge-to-edge (`decorFitsSystemWindows=false`) → ZERO automatic insets, but padding was fixed guesses (bottom 40dp, top 40dp). Pill text used themed `Ink` — near-white in dark mode, on a white capsule.
