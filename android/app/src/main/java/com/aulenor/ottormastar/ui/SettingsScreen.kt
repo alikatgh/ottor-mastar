@@ -45,9 +45,34 @@ import com.aulenor.ottormastar.data.TileTap
  * tile tap behavior, and reset.
  */
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(onBack: () -> Unit) {
     val settings = LocalSettings.current
     val loc = rememberL10n()
+
+    Column(Modifier.fillMaxSize()) {
+        // Compact header with back affordance, matching Help/Legal.
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Cream)
+                .padding(horizontal = 8.dp, vertical = 6.dp),
+        ) {
+            Text(
+                "←",
+                style = MaterialTheme.typography.titleLarge,
+                color = InkLight,
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .clickable { onBack() }
+                    .padding(12.dp),
+            )
+            Text(
+                loc.t("settings.title"),
+                style = MaterialTheme.typography.titleMedium,
+                color = Ink,
+            )
+        }
 
     Column(
         Modifier
@@ -55,14 +80,8 @@ fun SettingsScreen() {
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
     ) {
-        Text(
-            loc.t("settings.title"),
-            style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
-            color = Ink,
-        )
-        Spacer(Modifier.height(6.dp))
         Text(loc.t("settings.storageNote"), style = MaterialTheme.typography.bodySmall, color = InkMuted)
-        Spacer(Modifier.height(36.dp))
+        Spacer(Modifier.height(28.dp))
 
         SectionHeader(loc.t("settings.sectionRegion"))
         SettingRow(loc.t("settings.language")) {
@@ -172,6 +191,7 @@ fun SettingsScreen() {
                 .padding(horizontal = 16.dp, vertical = 9.dp),
         )
         Spacer(Modifier.height(24.dp))
+    }
     }
 }
 

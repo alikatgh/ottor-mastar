@@ -40,6 +40,13 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
   hand-roll `awaitEachGesture`: consume only multi-finger events, or single
   finger while zoomed (scale > 1); otherwise let the pager/dismiss gestures
   have the pointer. Same idea anywhere two gesture owners share a surface.
+- **Nav-Compose tab click with `popUpTo(saveState=true)+restoreState=true`
+  round-trips pushed children** — tapping Home from a plant page saves the
+  plant into Home's state and instantly restores it: the button looks dead.
+  When on a child route, `popBackStack(tab.route,false)` first, and disable
+  save/restore for that navigate. Also: child routes match NO tab — keep the
+  owning tab lit via a remembered `lastTabRoute` (web: explicit `isTabActive`
+  route→tab map; iOS: per-tab `NavigationPath` + re-tap pops to root).
 
 ## Chronological log
 
@@ -48,6 +55,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 - Bug 1: viewer "Сиһилии" pill wrapped to two lines when the caption title squeezed it → `.fixedSize()` on the pill label (ImageViewer.swift caption). Pills never wrap — same 2026-07-08 lesson, new call site.
 - Bug 2: Settings segments wrapped internally ("Монголи/я", 3-line "Сибэккилэнэр кэминэн") → `.lineLimit(1).fixedSize()` on segment text + `ViewThatFits` row that stacks the control under the label when too wide (SettingsView.swift).
 - Ops: an Xcode update (26.3) deletes ALL simulator runtimes — `simctl list devices` empty is a missing-runtime signal, not a broken project; `xcodebuild -downloadPlatform iOS` (~8 GB) restores. Screenshot hooks now cover every screen: `-tab`, `-viewer <i>`, `-plant <slug>`, `-page settings|help|legal`.
+### 2026-07-10 — "Home button stops working" from a plant page (Android) + navbar state audit
+- Symptom: tap a nav tab while a plant page is open → nothing happens; also no tab highlighted on child routes (plant/settings/help/legal), on Android AND web.
+- Cause: `MainActivity.kt` tab onClick used `popUpTo(saveState=true)+restoreState=true` — the pushed plant was saved into the tab's state and restored immediately (a visual no-op). Highlight: child routes simply match no tab.
+- Fix: MainActivity.kt — on a child route try `popBackStack(tab.route,false)` first and pass `saveState/restoreState = !onChild`; owning-tab highlight via rememberSaveable `lastTabRoute`. Web: `BottomNav.tsx isTabActive()` + same inline logic in `Header.tsx`. iOS: per-tab `NavigationPath`, re-tap pops to root (`OttorMastarApp.swift`).
+- Also: Settings gained a back header + `onBack` (SettingsScreen.kt), About entry cards gained leading icons (AboutScreen.kt, AboutView.swift).
+- Lesson: promoted to native pattern list — save/restore state round-trips pushed children; device-verify tab taps FROM a child route, not just from roots.
 
 ### 2026-07-08 — Dark/light/system theme + Help section, all three platforms
 - Change: full dark palette (warm near-black paper, lifted forest accent) + a system|light|dark Appearance setting, and a /help guide (5 languages) linked from About + footer.

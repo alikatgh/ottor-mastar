@@ -30,6 +30,35 @@ struct RootView: View {
     @State private var tab: RootTab = .gallery
     @Namespace private var zoomNamespace
 
+    // One navigation path per tab so re-tapping the active tab can pop its
+    // stack to the root — otherwise a pushed plant page makes the tab button
+    // feel dead ("Home stops working").
+    @State private var galleryPath = NavigationPath()
+    @State private var catalogPath = NavigationPath()
+    @State private var searchPath = NavigationPath()
+    @State private var aboutPath = NavigationPath()
+    @State private var settingsPath = NavigationPath()
+
+    private var tabSelection: Binding<RootTab> {
+        Binding(
+            get: { tab },
+            set: { newValue in
+                if newValue == tab { popToRoot(newValue) }
+                tab = newValue
+            }
+        )
+    }
+
+    private func popToRoot(_ t: RootTab) {
+        switch t {
+        case .gallery: galleryPath = NavigationPath()
+        case .catalog: catalogPath = NavigationPath()
+        case .search: searchPath = NavigationPath()
+        case .about: aboutPath = NavigationPath()
+        case .settings: settingsPath = NavigationPath()
+        }
+    }
+
     /// Debug/screenshot hook: `simctl launch ... -tab catalog|search|about`
     /// opens on that tab. No effect without the argument.
     private static var launchTab: RootTab? {
@@ -68,49 +97,52 @@ struct RootView: View {
     /// iOS 26: native Liquid Glass tab bar — Search separated into its own
     /// floating glass pill (`role: .search`), and the bar minimizes away on
     /// scroll so the herbarium content keeps the full screen.
+    /// iOS 26: native Liquid Glass tab bar — Search separated into its own
+    /// floating glass pill (`role: .search`), and the bar minimizes away on
+    /// scroll so the herbarium content keeps the full screen.
     @available(iOS 26.0, *)
     private var modernTabs: some View {
-        TabView(selection: $tab) {
+        TabView(selection: tabSelection) {
             Tab(settings.loc.t("nav.gallery"), systemImage: "photo.on.rectangle", value: RootTab.gallery) {
-                NavigationStack { HomeView(tab: $tab, zoomNamespace: zoomNamespace) }
+                NavigationStack(path: $galleryPath) { HomeView(tab: $tab, zoomNamespace: zoomNamespace) }
             }
             Tab(settings.loc.t("nav.catalog"), systemImage: "book", value: RootTab.catalog) {
-                NavigationStack { CatalogView() }
+                NavigationStack(path: $catalogPath) { CatalogView() }
             }
             Tab(settings.loc.t("nav.about"), systemImage: "info.circle", value: RootTab.about) {
-                NavigationStack { AboutView() }
+                NavigationStack(path: $aboutPath) { AboutView() }
             }
             #if targetEnvironment(macCatalyst)
             Tab(settings.loc.t("settings.title"), systemImage: "gearshape", value: RootTab.settings) {
-                NavigationStack { SettingsView() }
+                NavigationStack(path: $settingsPath) { SettingsView() }
             }
             #endif
             Tab(settings.loc.t("nav.search"), systemImage: "magnifyingglass", value: RootTab.search, role: .search) {
-                NavigationStack { SearchView() }
+                NavigationStack(path: $searchPath) { SearchView() }
             }
         }
         .tabBarMinimizeBehavior(.onScrollDown)
     }
 
     private var legacyTabs: some View {
-        TabView(selection: $tab) {
-            NavigationStack { HomeView(tab: $tab, zoomNamespace: zoomNamespace) }
+        TabView(selection: tabSelection) {
+            NavigationStack(path: $galleryPath) { HomeView(tab: $tab, zoomNamespace: zoomNamespace) }
                 .tabItem { Label(settings.loc.t("nav.gallery"), systemImage: "photo.on.rectangle") }
                 .tag(RootTab.gallery)
-            NavigationStack { CatalogView() }
+            NavigationStack(path: $catalogPath) { CatalogView() }
                 .tabItem { Label(settings.loc.t("nav.catalog"), systemImage: "book") }
                 .tag(RootTab.catalog)
-            NavigationStack { SearchView() }
+            NavigationStack(path: $searchPath) { SearchView() }
                 .tabItem { Label(settings.loc.t("nav.search"), systemImage: "magnifyingglass") }
                 .tag(RootTab.search)
-            NavigationStack { AboutView() }
+            NavigationStack(path: $aboutPath) { AboutView() }
                 .tabItem { Label(settings.loc.t("nav.about"), systemImage: "info.circle") }
                 .tag(RootTab.about)
             #if targetEnvironment(macCatalyst)
             // Dedicated Settings destination on the Mac (text size, appearance,
             // language, country, …) — desktop users expect it in the toolbar,
             // not buried behind About.
-            NavigationStack { SettingsView() }
+            NavigationStack(path: $settingsPath) { SettingsView() }
                 .tabItem { Label(settings.loc.t("settings.title"), systemImage: "gearshape") }
                 .tag(RootTab.settings)
             #endif

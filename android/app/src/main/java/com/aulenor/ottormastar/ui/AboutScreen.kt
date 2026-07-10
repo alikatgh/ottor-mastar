@@ -22,8 +22,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.HelpOutline
+import androidx.compose.material.icons.outlined.PrivacyTip
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Icon
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -124,10 +131,11 @@ fun AboutScreen(
             }
             Spacer(Modifier.height(36.dp))
 
-            EntryCard(loc.t("settings.title"), loc.t("settings.storageNote"), onOpenSettings)
-            EntryCard(loc.t("help.title"), loc.t("help.intro"), onOpenHelp)
+            EntryCard(Icons.Outlined.Settings, loc.t("settings.title"), loc.t("settings.storageNote"), onOpenSettings)
             Spacer(Modifier.height(12.dp))
-            EntryCard(loc.t("common.legal"), loc.t("common.readDisclaimer"), onOpenLegal)
+            EntryCard(Icons.AutoMirrored.Outlined.HelpOutline, loc.t("help.title"), loc.t("help.intro"), onOpenHelp)
+            Spacer(Modifier.height(12.dp))
+            EntryCard(Icons.Outlined.PrivacyTip, loc.t("common.legal"), loc.t("common.readDisclaimer"), onOpenLegal)
         }
 
         FooterBlock(onOpenLegal)
@@ -135,7 +143,7 @@ fun AboutScreen(
 }
 
 @Composable
-private fun EntryCard(title: String, note: String, onClick: () -> Unit) {
+private fun EntryCard(icon: ImageVector, title: String, note: String, onClick: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -147,6 +155,7 @@ private fun EntryCard(title: String, note: String, onClick: () -> Unit) {
             .clickable { onClick() }
             .padding(18.dp),
     ) {
+        Icon(icon, contentDescription = null, tint = Forest, modifier = Modifier.size(22.dp))
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(
                 title,

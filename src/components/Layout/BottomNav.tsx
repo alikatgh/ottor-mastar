@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Images, BookOpen, Search, Info } from 'lucide-react';
 
@@ -9,8 +9,27 @@ const NAV_ITEMS = [
   { path: '/about', icon: Info, labelKey: 'nav.about' },
 ];
 
+/**
+ * Which tab a pathname belongs to. Child pages keep their owning tab lit:
+ * Settings/Help/Legal live under About; a plant page belongs to the Gallery.
+ * Without this, no tab is active on those routes and the bar looks broken.
+ */
+function isTabActive(tabPath: string, pathname: string): boolean {
+  switch (tabPath) {
+    case '/':
+      return pathname === '/' || pathname.startsWith('/plant/');
+    case '/about':
+      return ['/about', '/settings', '/help', '/legal'].some(
+        (p) => pathname === p || pathname.startsWith(`${p}/`)
+      );
+    default:
+      return pathname === tabPath || pathname.startsWith(`${tabPath}/`);
+  }
+}
+
 export default function BottomNav() {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
 
   return (
     <nav
@@ -29,12 +48,11 @@ export default function BottomNav() {
           <NavLink
             key={path}
             to={path}
-            end={path === '/'}
-            className={({ isActive }) => `
+            className={`
               flex flex-col items-center justify-center gap-0.5 px-1 py-1.5
               flex-1 min-w-0
               no-underline transition-colors duration-200
-              ${isActive ? 'text-forest' : 'text-ink-muted'}
+              ${isTabActive(path, pathname) ? 'text-forest' : 'text-ink-muted'}
             `}
           >
             <Icon className="w-[22px] h-[22px] shrink-0" strokeWidth={1.8} />

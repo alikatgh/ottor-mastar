@@ -34,9 +34,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -125,6 +127,17 @@ private fun AppRoot() {
 
     val backStack by nav.currentBackStackEntryAsState()
     val currentRoute = backStack?.destination?.route
+
+    // Child screens (plant/settings/help/legal) are top-level routes, so on
+    // them `currentRoute == tab.route` is false for every tab and the bar
+    // would show NO selection. Remember which tab we're "inside" so its icon
+    // stays lit on children too.
+    val tabRoutes = remember { setOf("home", "catalog", "search", "about") }
+    var lastTabRoute by rememberSaveable { mutableStateOf("home") }
+    LaunchedEffect(currentRoute) {
+        if (currentRoute in tabRoutes) lastTabRoute = currentRoute!!
+    }
+    val activeTabRoute = if (currentRoute in tabRoutes) currentRoute else lastTabRoute
     // launchSingleTop everywhere: a double-tap (mouse users double-click by
     // habit) must never push the same screen twice — that makes Back appear
     // broken.
@@ -142,12 +155,25 @@ private fun AppRoot() {
             NavigationBar(containerColor = Cream) {
                 for (tab in tabs) {
                     NavigationBarItem(
-                        selected = currentRoute == tab.route,
+                        selected = activeTabRoute == tab.route,
                         onClick = {
-                            nav.navigate(tab.route) {
-                                popUpTo(nav.graph.findStartDestination().id) { saveState = true }
-                                launchSingleTop = true
-                                restoreState = true
+                            // From a child screen (plant/settings/help/legal) a
+                            // tab tap must LEAVE the child. The plain
+                            // popUpTo(saveState) + restoreState combo captured
+                            // the child into the tab's saved state and then
+                            // restored it immediately — the "Home button does
+                            // nothing" bug. Pop back to the tab if it's beneath
+                            // us; otherwise navigate WITHOUT save/restore so
+                            // the child can never round-trip back.
+                            val onChild = currentRoute != null && currentRoute !in tabRoutes
+                            if (!(onChild && nav.popBackStack(tab.route, false))) {
+                                nav.navigate(tab.route) {
+                                    popUpTo(nav.graph.findStartDestination().id) {
+                                        saveState = !onChild
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = !onChild
+                                }
                             }
                         },
                         icon = { Icon(tab.icon, contentDescription = null) },
@@ -229,7 +255,7 @@ private fun AppRoot() {
                     onOpenLegal = { nav.navigate("legal") { launchSingleTop = true } },
                 )
             }
-            composable("settings") { SettingsScreen() }
+            composable("settings") { SettingsScreen(onBack = { nav.popBackStack() }) }
             composable("help") {
                 HelpScreen(
                     onBack = { nav.popBackStack() },

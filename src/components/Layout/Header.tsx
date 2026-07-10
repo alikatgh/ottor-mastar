@@ -66,23 +66,35 @@ export default function Header() {
             must be reachable from here on larger screens. Active state is a
             reserved underline: geometry never changes, only the color. */}
         <nav className="hidden md:flex items-center gap-6 mr-auto ml-10">
-          {NAV_ITEMS.map(({ path, labelKey }) => (
-            <NavLink
-              key={path}
-              to={path}
-              end={path === '/'}
-              className={({ isActive }) => `
-                text-sm no-underline py-1
-                border-b-[1.5px] transition-colors duration-200
-                ${isActive
-                  ? 'text-ink border-forest'
-                  : 'text-ink-muted border-transparent hover:text-ink'
-                }
-              `}
-            >
-              {t(labelKey)}
-            </NavLink>
-          ))}
+          {NAV_ITEMS.map(({ path, labelKey }) => {
+            // Child pages keep their owning tab lit (plant → Gallery;
+            // settings/help/legal → About) — mirrors BottomNav.isTabActive.
+            const p = location.pathname;
+            const active =
+              path === '/'
+                ? p === '/' || p.startsWith('/plant/')
+                : path === '/about'
+                  ? ['/about', '/settings', '/help', '/legal'].some(
+                      (r) => p === r || p.startsWith(`${r}/`)
+                    )
+                  : p === path || p.startsWith(`${path}/`);
+            return (
+              <NavLink
+                key={path}
+                to={path}
+                className={`
+                  text-sm no-underline py-1
+                  border-b-[1.5px] transition-colors duration-200
+                  ${active
+                    ? 'text-ink border-forest'
+                    : 'text-ink-muted border-transparent hover:text-ink'
+                  }
+                `}
+              >
+                {t(labelKey)}
+              </NavLink>
+            );
+          })}
         </nav>
 
         <div className="flex items-center gap-1.5">

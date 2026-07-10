@@ -54,18 +54,21 @@ struct AboutView: View {
                     statsCard.padding(.bottom, 36)
 
                     entryCard(
+                        icon: "gearshape",
                         title: loc.t("settings.title"),
                         note: loc.t("settings.storageNote"),
                         value: PushedPage.settings
                     )
                     .padding(.bottom, 12)
                     entryCard(
+                        icon: "questionmark.circle",
                         title: loc.t("help.title"),
                         note: loc.t("help.intro"),
                         value: PushedPage.help
                     )
                     .padding(.bottom, 12)
                     entryCard(
+                        icon: "shield",
                         title: loc.t("common.legal"),
                         note: loc.t("common.readDisclaimer"),
                         value: PushedPage.legal
@@ -138,9 +141,13 @@ struct AboutView: View {
         )
     }
 
-    private func entryCard(title: String, note: String, value: PushedPage) -> some View {
+    private func entryCard(icon: String, title: String, note: String, value: PushedPage) -> some View {
         NavigationLink(value: value) {
             HStack(spacing: 12) {
+                Image(systemName: icon)
+                    .font(.body.weight(.medium))
+                    .foregroundStyle(.forest)
+                    .frame(width: 24)
                 VStack(alignment: .leading, spacing: 3) {
                     Text(title)
                         .font(.footnote.weight(.semibold))
