@@ -43,6 +43,32 @@ final class ImageMemoryCache {
     static let shared = NSCache<NSString, UIImage>()
 }
 
+/// "Ambient" letterbox fill (Photos/Music treatment): the dead space around
+/// an aspect-fit image is filled with a blurred, scaled copy of the SAME
+/// artwork, so panel margins inherit the plate's own palette instead of
+/// sitting flat. The foreground image itself is never cropped or altered —
+/// use this as the `.background(...)` of the fitted image.
+struct AmbientImageFill: View {
+    let country: Country
+    let plant: Plant
+    var kind: ImageKind = .photo
+    /// Extra wash on top of the blur so foreground captions stay readable.
+    var wash: Double = 0.2
+
+    var body: some View {
+        ZStack {
+            Color.parchment
+            PlantImageView(country: country, plant: plant, size: .thumb, kind: kind)
+                .scaleEffect(1.35)
+                .blur(radius: 44)
+                .saturation(1.05)
+                .opacity(0.85)
+            Color.parchment.opacity(wash)
+        }
+        .clipped()
+    }
+}
+
 /// Async-loading plant image: bundled file decoded off-main, remote fallback,
 /// gentle fade-in. Placeholder is a bare parchment tone (no spinners in lists).
 struct PlantImageView: View {

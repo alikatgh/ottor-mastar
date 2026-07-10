@@ -129,7 +129,11 @@ struct HomeView: View {
                         .padding(.bottom, 36)
                         .frame(maxWidth: .infinity)
                         .frame(height: 380)
-                        .background(Color.parchment)
+                        .background(
+                            AmbientImageFill(
+                                country: country, plant: hero,
+                                kind: hero.hasIllustration ? .plate : .photo)
+                        )
                         .shadow(color: .black.opacity(0.14), radius: 12, y: 6)
 
                         // Frontispiece figure caption.

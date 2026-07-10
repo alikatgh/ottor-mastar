@@ -107,7 +107,9 @@ struct PlantDetailView: View {
                             .padding(.horizontal, 16)
                             .padding(.top, 60)
                             .padding(.bottom, 56)
-                            .background(Color.parchment)
+                            .background(
+                                AmbientImageFill(country: country, plant: plant, kind: .plate)
+                            )
                             .shadow(color: .black.opacity(0.15), radius: 10, y: 5)
                         } else {
                             PlantImageView(country: country, plant: plant, size: .medium)

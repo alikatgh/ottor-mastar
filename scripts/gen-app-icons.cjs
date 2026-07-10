@@ -23,6 +23,12 @@ const sharp = require('sharp');
 
 const ROOT = path.join(__dirname, '..');
 
+// Hand-made master wins: drop a generated/designed 1024×1024 PNG here
+// (e.g. from Gemini/Midjourney) and re-run this script — it is resized,
+// flattened, and copied to every platform. The plate-crop below is only
+// the fallback when no master exists.
+const MASTER = path.join(ROOT, 'design/app-icon-1024.png');
+
 // Source plate: 800×800, blooms clustered in the upper half.
 const PLATE = path.join(ROOT, 'public/plants/medium/plant-23-ill.webp');
 // Square crop framing the bloom cluster (left, top, size in source pixels).
@@ -44,6 +50,14 @@ const FRAME = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
 </svg>`;
 
 async function renderIcon(outFile) {
+  if (fs.existsSync(MASTER)) {
+    await sharp(MASTER)
+      .resize(1024, 1024)
+      .flatten({ background: '#F4EDDC' })
+      .png()
+      .toFile(outFile);
+    return;
+  }
   await sharp(PLATE)
     .extract(CROP)
     .resize(1024, 1024)
