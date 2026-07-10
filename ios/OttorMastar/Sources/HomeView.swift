@@ -124,17 +124,16 @@ struct HomeView: View {
                             kind: hero.hasIllustration ? .plate : .photo,
                             contentMode: .fit
                         )
+                        .shadow(color: .black.opacity(0.12), radius: 9, y: 4)
                         .padding(.horizontal, 24)
                         .padding(.top, 24)
                         .padding(.bottom, 36)
                         .frame(maxWidth: .infinity)
                         .frame(height: 380)
-                        .background(
-                            AmbientImageFill(
-                                country: country, plant: hero,
-                                kind: hero.hasIllustration ? .plate : .photo)
-                        )
-                        .shadow(color: .black.opacity(0.14), radius: 12, y: 6)
+                        // Flat parchment, deliberately: blurred ambient casts
+                        // read as stains on near-white surfaces (they only
+                        // work over the viewer's dark backdrop).
+                        .background(Color.parchment)
 
                         // Frontispiece figure caption.
                         Group {

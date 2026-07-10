@@ -124,15 +124,14 @@ struct PlantDetailView: View {
                                 country: country, plant: plant, size: .medium,
                                 kind: .plate, contentMode: .fit
                             )
-                            // Shadow belongs to the paper sheet only — on the
-                            // composite it smudged the ambient fill's edges.
+                            // Shadow belongs to the paper sheet only; flat
+                            // parchment behind — ambient casts read as stains
+                            // on light surfaces.
                             .shadow(color: .black.opacity(0.14), radius: 9, y: 4)
                             .padding(.horizontal, 16)
                             .padding(.top, 60)
                             .padding(.bottom, 56)
-                            .background(
-                                AmbientImageFill(country: country, plant: plant, kind: .plate)
-                            )
+                            .background(Color.parchment)
                         } else {
                             PlantImageView(country: country, plant: plant, size: .medium)
                                 .clipped()
