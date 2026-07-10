@@ -50,6 +50,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-10 — Viewer stranded in half-dismissed limbo (photo offset, chrome half-faded, caption clipped)
+- Symptom: viewer frozen mid-state — image pushed down + scaled, top chrome invisible, caption fragments.
+- Cause: dismiss gesture attached as `zoomed ? nil : dismissDrag` — when zoom flips mid-drag the gesture DETACHES without onEnded, so `dragY` freezes at its last value. ImageViewer.swift.
+- Fix: gesture always attached, guards on `zoomed` inside; `onChange(of: zoomed)` springs any leftover dragY home. Plus Photos rule: chrome fully hides while zoomed; caption gets `.id(item)` so text never frame-morphs across pages.
+- Lesson (generalizes): NEVER conditionally detach a gesture that owns transient state — a live gesture removed mid-flight skips onEnded and strands its state. Guard inside the closures instead.
+
 ### 2026-07-10 — Android motion pass (shared elements, staggered entrances, animated lists)
 - Change: a "motion kit" in Components.kt — `sharedPlantImage()` (SharedTransitionLayout tile→detail hero morph, keys namespaced by ORIGIN: hero-/shelf-/tile-/catalog-/search-{slug}, detail picks its key from a `?src=` nav arg), `riseIn(index)` staggered entrances, `scaledClickable()` spring press (no ripples — design language). Plus: catalog/search rows `animateItem()` glide on filter/sort, tweened filter chips & Settings segments, sliding PillToggle thumb, pager-dot pill stretch, nav-icon selection bounce. All no-op under Reduce motion.
 - Arch: SharedTransitionScope + each destination's AnimatedContentScope published via CompositionLocals (`LocalSharedTransition`/`LocalNavAnimation`) so tiles opt in with one modifier — zero signature threading.
