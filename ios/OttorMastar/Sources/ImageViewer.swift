@@ -68,11 +68,16 @@ struct ImageViewer: View {
                 } else {
                     pager
                 }
-                chrome
             } else {
                 // Defensive: never present the viewer with no images.
                 Color.black.ignoresSafeArea()
             }
+        }
+        // Chrome rides as an overlay pinned to the container's bounds — as a
+        // plain ZStack sibling it silently failed to render on regular width
+        // (the iPad viewer shipped with no close button).
+        .overlay {
+            if item != nil { chrome }
         }
         .statusBarHidden()
         .opacity(appeared || reduceMotion ? 1 : 0)
@@ -232,7 +237,10 @@ struct ImageViewer: View {
 
     private var chrome: some View {
         VStack {
-            GlassGroup(spacing: 12) {
+            // Plain HStack, deliberately not a GlassEffectContainer: the
+            // counter and close sit at opposite screen edges (nothing to
+            // morph), and the container collapsed the bar on regular width —
+            // the iPad viewer shipped with NO close button.
             HStack {
                 // Wide mode carries the counter in the placard, so the top bar
                 // stays clean with just the close button (matches web desktop).
@@ -261,7 +269,6 @@ struct ImageViewer: View {
             }
             .padding(.horizontal, 14)
             .padding(.top, 8)
-            }
 
             Spacer()
 

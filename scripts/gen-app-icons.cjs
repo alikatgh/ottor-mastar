@@ -50,20 +50,21 @@ const FRAME = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
 </svg>`;
 
 async function renderIcon(outFile) {
-  if (fs.existsSync(MASTER)) {
-    await sharp(MASTER)
-      .resize(1024, 1024)
-      .flatten({ background: '#F4EDDC' })
-      .png()
-      .toFile(outFile);
-    return;
-  }
-  await sharp(PLATE)
-    .extract(CROP)
-    .resize(1024, 1024)
-    .modulate({ saturation: 1.14, brightness: 1.03 })
-    .composite([{ input: Buffer.from(FRAME) }])
+  const composed = fs.existsSync(MASTER)
+    ? await sharp(MASTER).resize(1024, 1024).png().toBuffer()
+    : await sharp(PLATE)
+        .extract(CROP)
+        .resize(1024, 1024)
+        .modulate({ saturation: 1.14, brightness: 1.03 })
+        .composite([{ input: Buffer.from(FRAME) }])
+        .png()
+        .toBuffer();
+  // Second pass on a fresh instance: sharp runs `composite` late in its fixed
+  // pipeline (after flatten/removeAlpha), so alpha must be stripped here.
+  // App Store Connect rejects app icons that carry an alpha channel.
+  await sharp(composed)
     .flatten({ background: '#F4EDDC' })
+    .removeAlpha()
     .png()
     .toFile(outFile);
 }

@@ -50,6 +50,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-11 — iPad viewer shipped with NO close button (chrome invisible on regular width)
+- Symptom: full-screen image viewer on iPad had no close button / counter — chrome simply absent; fine on iPhone.
+- Cause: `chrome` was a plain ZStack sibling of the pager; on regular width it silently failed to render (GlassGroup container also collapsed the bar — two stacked causes). ImageViewer.swift:68.
+- Fix: chrome rides `.overlay { }` pinned to container bounds; top bar is a plain HStack (counter+close sit at opposite edges — nothing for a glass container to morph). Also PlantDetailView wideBody: info column now respects the top safe area so the title clears iPadOS's top tab bar (image column alone ignores it).
+- Lesson (generalizes): test EVERY size class before release — a layout that renders nothing (not wrong, absent) on the other size class is silent; and never wrap edge-pinned bars in a morphing container.
+
 ### 2026-07-10 — Viewer stranded in half-dismissed limbo (photo offset, chrome half-faded, caption clipped)
 - Symptom: viewer frozen mid-state — image pushed down + scaled, top chrome invisible, caption fragments.
 - Cause: dismiss gesture attached as `zoomed ? nil : dismissDrag` — when zoom flips mid-drag the gesture DETACHES without onEnded, so `dragY` freezes at its last value. ImageViewer.swift.
