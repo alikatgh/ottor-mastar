@@ -97,9 +97,6 @@ struct RootView: View {
     /// iOS 26: native Liquid Glass tab bar — Search separated into its own
     /// floating glass pill (`role: .search`), and the bar minimizes away on
     /// scroll so the herbarium content keeps the full screen.
-    /// iOS 26: native Liquid Glass tab bar — Search separated into its own
-    /// floating glass pill (`role: .search`), and the bar minimizes away on
-    /// scroll so the herbarium content keeps the full screen.
     @available(iOS 26.0, *)
     private var modernTabs: some View {
         TabView(selection: tabSelection) {
