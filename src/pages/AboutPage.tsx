@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ChevronRight } from 'lucide-react';
 import { CATEGORIES } from '../data/plants';
 import { usePlants, useSettings } from '../context/SettingsContext';
-import { LANGUAGES } from '../i18n';
+import { COUNTRIES } from '../data/countries';
 import Footer from '../components/Layout/Footer';
 
 export default function AboutPage() {
@@ -20,12 +20,13 @@ export default function AboutPage() {
   const intro = t([`about.intro_${settings.country}`, 'about.intro']);
 
   // Numbers stay computed from the live data; only the labels are localized
-  // (WEB-M03). The language count is derived from the actual LANGUAGES list so
-  // it can never drift from what the app really ships.
+  // (WEB-M03). The language count is the ACTIVE COLLECTION's offer (Yakutia 3,
+  // Mongolia 3) — not the app-wide language list, which read as "5" beside a
+  // label naming three.
   const STATS: { value: string; label: string }[] = [
     { value: String(plants.length), label: t('about.statPlants') },
     { value: String(medicinalCount), label: t('about.statMedicinal') },
-    { value: String(LANGUAGES.length), label: t('about.statLanguages') },
+    { value: String(COUNTRIES[settings.country].languages.length), label: t('about.statLanguages') },
   ];
 
   return (
