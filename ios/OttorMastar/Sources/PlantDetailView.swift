@@ -40,17 +40,20 @@ struct PlantDetailView: View {
         }
     }
 
+    @Environment(\.horizontalSizeClass) private var hSize
+
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                imagePanel
-                infoSheet
-                    .offset(y: sheetUp || settings.reduceMotion ? 0 : 28)
-                    .opacity(sheetUp || settings.reduceMotion ? 1 : 0)
+        Group {
+            // Two-column on regular width (Mac Catalyst, iPad, large windows):
+            // info left, image right — the phone's stacked sheet wastes a
+            // desktop window (parity with the web's md: split).
+            if hSize == .regular {
+                wideBody
+            } else {
+                compactBody
             }
         }
-        .ignoresSafeArea(edges: .top)
-        .background(Color.white)
+        .background(Color.card)
         .toolbarBackground(.hidden, for: .navigationBar)
         .onAppear {
             withAnimation(.spring(response: 0.42, dampingFraction: 0.86)) { sheetUp = true }
@@ -63,9 +66,35 @@ struct PlantDetailView: View {
         }
     }
 
+    private var compactBody: some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                imagePanel(fixedHeight: 420)
+                infoSheet(wide: false)
+                    .offset(y: sheetUp || settings.reduceMotion ? 0 : 28)
+                    .opacity(sheetUp || settings.reduceMotion ? 1 : 0)
+            }
+        }
+        .ignoresSafeArea(edges: .top)
+    }
+
+    private var wideBody: some View {
+        GeometryReader { geo in
+            HStack(spacing: 0) {
+                ScrollView {
+                    infoSheet(wide: true)
+                }
+                .frame(width: geo.size.width * 0.55)
+                imagePanel(fixedHeight: nil)
+                    .frame(width: geo.size.width * 0.45)
+            }
+        }
+        .ignoresSafeArea(edges: .top)
+    }
+
     // MARK: Image panel — swipeable plate/photo pager
 
-    private var imagePanel: some View {
+    private func imagePanel(fixedHeight: CGFloat?) -> some View {
         ZStack(alignment: .bottom) {
             TabView(selection: $slide) {
                 ForEach(Array(slides.enumerated()), id: \.offset) { i, kind in
@@ -109,12 +138,14 @@ struct PlantDetailView: View {
                 }
                 .padding(.horizontal, 10)
                 .padding(.vertical, 6)
-                .background(.white.opacity(0.7), in: Capsule())
+                // Card-toned (not white) so the chip doesn't glare in dark mode.
+                .background(Color.card.opacity(0.85), in: Capsule())
                 .padding(.bottom, 40)
                 .animation(.easeOut(duration: 0.2), value: slide)
             }
         }
-        .frame(height: 420)
+        .frame(height: fixedHeight)
+        .frame(maxHeight: fixedHeight == nil ? .infinity : nil)
         .overlay(alignment: .topTrailing) {
             Image(systemName: "plus.magnifyingglass")
                 .font(.footnote)
@@ -129,14 +160,16 @@ struct PlantDetailView: View {
 
     // MARK: Info sheet
 
-    private var infoSheet: some View {
+    private func infoSheet(wide: Bool) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            // iOS sheet grabber.
-            Capsule()
-                .fill(Color.ink.opacity(0.15))
-                .frame(width: 40, height: 5)
-                .frame(maxWidth: .infinity)
-                .padding(.top, 10)
+            // iOS sheet grabber — only where the panel reads as a sheet.
+            if !wide {
+                Capsule()
+                    .fill(Color.ink.opacity(0.15))
+                    .frame(width: 40, height: 5)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 10)
+            }
 
             VStack(alignment: .leading, spacing: 32) {
                 // Title block.
@@ -177,16 +210,22 @@ struct PlantDetailView: View {
                             .buttonStyle(.plain)
                     )
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 26)
+            .padding(.horizontal, wide ? 40 : 24)
+            .padding(.top, wide ? 76 : 26)
             .padding(.bottom, 40)
         }
         .frame(maxWidth: .infinity)
         .background(
-            UnevenRoundedRectangle(topLeadingRadius: 28, topTrailingRadius: 28, style: .continuous)
-                .fill(Color.white)
+            Group {
+                if wide {
+                    Color.card
+                } else {
+                    UnevenRoundedRectangle(topLeadingRadius: 28, topTrailingRadius: 28, style: .continuous)
+                        .fill(Color.card)
+                }
+            }
         )
-        .offset(y: -24)
+        .offset(y: wide ? 0 : -24)
     }
 
     private func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
@@ -270,7 +309,7 @@ struct PlantDetailView: View {
                     .foregroundStyle(.inkLight)
                     .lineSpacing(3)
                     .padding(12)
-                    .background(Color.white)
+                    .background(Color.card)
                     .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                     .overlay(
                         RoundedRectangle(cornerRadius: 12, style: .continuous)

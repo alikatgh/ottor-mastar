@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Simple sprig — two leaves on a stem, forest on cream. -->
+<!-- The brand leaf mark — the SAME icon as iOS/macOS/web/desktop
+     (see scripts/gen-app-icons.cjs). Drawn in the 0..32 space of the source
+     SVG, scaled into the adaptive-icon safe zone. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <group android:translateX="27" android:translateY="24">
+    <group
+        android:scaleX="2.2"
+        android:scaleY="2.2"
+        android:translateX="18.8"
+        android:translateY="18.8">
         <path
-            android:fillColor="#2C5A2E"
-            android:pathData="M27,60 C27,44 27,30 27,14 C27,12 28,10 30,9 L31,11 C29,12 29,13 29,15 C29,30 29,44 29,60 Z" />
+            android:fillColor="#4A8C3F"
+            android:fillAlpha="0.7"
+            android:pathData="M16,6 C16,6 10,12 10,18 C10,22 12.5,26 16,26 C19.5,26 22,22 22,18 C22,12 16,6 16,6Z" />
         <path
-            android:fillColor="#3D7A3D"
-            android:pathData="M28,26 C20,24 14,18 13,9 C22,10 28,16 29,25 Z" />
+            android:fillColor="#6BAF5E"
+            android:pathData="M16,8 C16,8 12,13 12,18 C12,21 13.5,24 16,24 C18.5,24 20,21 20,18 C20,13 16,8 16,8Z" />
         <path
-            android:fillColor="#2C5A2E"
-            android:pathData="M29,38 C37,36 43,30 44,21 C35,22 29,28 28,37 Z" />
+            android:strokeColor="#2C5A2E"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:pathData="M16,14 L16,24" />
+        <path
+            android:strokeColor="#2C5A2E"
+            android:strokeWidth="1"
+            android:strokeLineCap="round"
+            android:pathData="M16,18 C14,16.5 12.5,17 12,18" />
+        <path
+            android:strokeColor="#2C5A2E"
+            android:strokeWidth="1"
+            android:strokeLineCap="round"
+            android:pathData="M16,20 C18,18.5 19.5,19 20,20" />
     </group>
 </vector>

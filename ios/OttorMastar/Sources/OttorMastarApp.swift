@@ -60,6 +60,14 @@ struct RootView: View {
         }
         .onAppear {
             if let launchTab = Self.launchTab { tab = launchTab }
+            #if targetEnvironment(macCatalyst)
+            // A desktop window smaller than this collapses the layouts; the
+            // regular-width two-column detail needs the room.
+            for scene in UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }) {
+                scene.sizeRestrictions?.minimumSize = CGSize(width: 980, height: 700)
+                scene.titlebar?.titleVisibility = .hidden
+            }
+            #endif
         }
     }
 }

@@ -30,7 +30,7 @@ const FULL_BLEED = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
 </svg>`;
 
 async function main() {
-  // ---- iOS: single 1024² app icon ----
+  // ---- iOS (and Mac Catalyst): single 1024² app icon ----
   const iosDir = path.join(ROOT, 'ios/OttorMastar/Resources/Assets.xcassets/AppIcon.appiconset');
   fs.mkdirSync(iosDir, { recursive: true });
   await sharp(Buffer.from(FULL_BLEED))
@@ -39,6 +39,18 @@ async function main() {
     .png()
     .toFile(path.join(iosDir, 'icon-1024.png'));
   console.log('iOS: wrote AppIcon.appiconset/icon-1024.png');
+
+  // ---- Desktop (Electron / electron-builder): build/icon.png ----
+  // electron-builder picks buildResources/icon.png up automatically and
+  // converts it per-platform (.ico for Windows, .icns for mac dmg).
+  const desktopDir = path.join(ROOT, 'desktop/build');
+  fs.mkdirSync(desktopDir, { recursive: true });
+  await sharp(Buffer.from(FULL_BLEED))
+    .resize(1024, 1024)
+    .flatten({ background: '#2C5A2E' })
+    .png()
+    .toFile(path.join(desktopDir, 'icon.png'));
+  console.log('Desktop: wrote desktop/build/icon.png');
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

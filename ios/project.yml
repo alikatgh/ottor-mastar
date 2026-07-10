@@ -58,7 +58,9 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.aulenor.ottormastar
-        TARGETED_DEVICE_FAMILY: "1,2"
+        # 6 = Mac (Catalyst "Optimize for Mac" idiom): 100% scale, crisp text,
+        # native control metrics — instead of the blurry scaled-iPad rendering.
+        TARGETED_DEVICE_FAMILY: "1,2,6"
         CODE_SIGN_STYLE: Automatic
         ENABLE_USER_SCRIPT_SANDBOXING: true
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
