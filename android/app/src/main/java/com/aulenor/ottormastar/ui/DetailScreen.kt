@@ -136,7 +136,7 @@ fun DetailScreen(
         }
     }
 
-    Column(Modifier.fillMaxSize().background(Color.White).verticalScroll(scrollState)) {
+    Column(Modifier.fillMaxSize().background(Card).verticalScroll(scrollState)) {
         // ===== Image panel =====
         Box(Modifier.fillMaxWidth().height(400.dp).background(Parchment)) {
             // beyondViewportPageCount keeps the second slide composed (no
@@ -210,7 +210,8 @@ fun DetailScreen(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .padding(bottom = 48.dp)
-                        .background(Color.White.copy(alpha = 0.7f), CircleShape)
+                        // Card-toned (not white) so the chip doesn't glare in dark mode.
+                        .background(Card.copy(alpha = 0.85f), CircleShape)
                         .padding(horizontal = 10.dp, vertical = 6.dp),
                 ) {
                     repeat(slides.size) { i ->
@@ -236,7 +237,7 @@ fun DetailScreen(
                 .alpha(sheetAlpha.value)
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp))
-                .background(Color.White),
+                .background(Card),
         ) {
             Box(
                 Modifier
@@ -437,7 +438,7 @@ private fun MedicinalSection(plant: Plant, lang: Language) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(12.dp))
-                    .background(Color.White)
+                    .background(Card)
                     .border(1.dp, Hairline, RoundedCornerShape(12.dp))
                     .padding(12.dp),
             )
