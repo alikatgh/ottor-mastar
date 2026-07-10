@@ -19,9 +19,10 @@ struct OttorMastarApp: App {
 }
 
 /// Same four destinations as the web's bottom nav: Gallery, Catalog, Search,
-/// About (Settings and Legal are pushed from About / footers).
+/// About (Settings and Legal are pushed from About / footers). On the Mac,
+/// Settings additionally gets its own dedicated tab in the window toolbar.
 enum RootTab: Hashable {
-    case gallery, catalog, search, about
+    case gallery, catalog, search, about, settings
 }
 
 struct RootView: View {
@@ -57,6 +58,14 @@ struct RootView: View {
             NavigationStack { AboutView() }
                 .tabItem { Label(settings.loc.t("nav.about"), systemImage: "info.circle") }
                 .tag(RootTab.about)
+            #if targetEnvironment(macCatalyst)
+            // Dedicated Settings destination on the Mac (text size, appearance,
+            // language, country, …) — desktop users expect it in the toolbar,
+            // not buried behind About.
+            NavigationStack { SettingsView() }
+                .tabItem { Label(settings.loc.t("settings.title"), systemImage: "gearshape") }
+                .tag(RootTab.settings)
+            #endif
         }
         .onAppear {
             if let launchTab = Self.launchTab { tab = launchTab }

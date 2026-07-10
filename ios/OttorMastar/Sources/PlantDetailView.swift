@@ -297,6 +297,7 @@ struct PlantDetailView: View {
                             .frame(width: 40, height: 40)
                             .contentShape(Rectangle())
                     }
+                    .buttonStyle(.plain)
                     .accessibilityLabel(loc.t("plant.medicinalDisclaimerLabel"))
                     Spacer()
                 }

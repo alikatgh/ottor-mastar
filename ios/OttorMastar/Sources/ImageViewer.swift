@@ -113,7 +113,36 @@ struct ImageViewer: View {
 
     // MARK: Pager — swipe between items, zoom within one, drag down to close
 
+    @ViewBuilder
     private var pager: some View {
+        #if targetEnvironment(macCatalyst)
+        // UIPageViewController paging (TabView .page) is broken under the Mac
+        // idiom — pages render mispositioned or not at all. Show the current
+        // item directly and page with arrow buttons / arrow keys instead.
+        ZStack {
+            if let item {
+                ZoomableImagePage(
+                    item: item,
+                    zoomed: $zoomed,
+                    appearSpring: !reduceMotion
+                )
+                .id(index) // fresh page (and zoom reset) per item
+                .padding(.top, 56)
+                .padding(.bottom, isWide ? 40 : 120)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .overlay(alignment: .leading) {
+            if index > 0 { pageArrow(systemName: "chevron.left") { index -= 1 } }
+        }
+        .overlay(alignment: .trailing) {
+            if index < items.count - 1 { pageArrow(systemName: "chevron.right") { index += 1 } }
+        }
+        .offset(y: dragY)
+        .scaleEffect(dragScale)
+        .simultaneousGesture(zoomed ? nil : dismissDrag)
+        .ignoresSafeArea()
+        #else
         TabView(selection: $index) {
             ForEach(Array(items.enumerated()), id: \.element.id) { i, entry in
                 ZoomableImagePage(
@@ -136,6 +165,20 @@ struct ImageViewer: View {
         .scaleEffect(dragScale)
         .simultaneousGesture(zoomed ? nil : dismissDrag)
         .ignoresSafeArea()
+        #endif
+    }
+
+    /// Round paging chevron (Mac pager). Plain style — never the system bezel.
+    private func pageArrow(systemName: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemName)
+                .font(.title3.weight(.semibold))
+                .foregroundStyle(.white)
+                .frame(width: 44, height: 44)
+                .background(.black.opacity(0.4), in: Circle())
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal, 16)
     }
 
     private var dismissDrag: some Gesture {
@@ -193,6 +236,7 @@ struct ImageViewer: View {
                         .frame(width: 40, height: 40)
                         .background(.black.opacity(0.4), in: Circle())
                 }
+                .buttonStyle(.plain)
                 .accessibilityLabel(loc.t("common.close"))
             }
             .padding(.horizontal, 14)
@@ -247,6 +291,7 @@ struct ImageViewer: View {
                             .background(.black.opacity(0.3), in: Circle())
                             .overlay(Circle().stroke(.white.opacity(0.25), lineWidth: 1))
                     }
+                    .buttonStyle(.plain)
                     .accessibilityLabel(loc.t("plant.readOnWikipedia"))
                 }
                 if let slug = item.detailSlug, let onOpenDetail {
@@ -258,12 +303,8 @@ struct ImageViewer: View {
                             Text(loc.t("plant.details"))
                             Image(systemName: "arrow.up.right")
                         }
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.ink)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 10)
-                        .background(.white, in: Capsule())
                     }
+                    .buttonStyle(ProminentPillButtonStyle())
                 }
             }
         }
@@ -348,6 +389,7 @@ struct ImageViewer: View {
                                         .stroke(.white.opacity(0.15), lineWidth: 1)
                                 )
                             }
+                            .buttonStyle(.plain)
                         }
                         if let slug = item.detailSlug, let onOpenDetail {
                             Button {
@@ -358,12 +400,9 @@ struct ImageViewer: View {
                                     Text(loc.t("plant.details"))
                                     Image(systemName: "arrow.up.right")
                                 }
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(.ink)
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 13)
-                                .background(.white, in: RoundedRectangle(cornerRadius: 12))
                             }
+                            .buttonStyle(ProminentPillButtonStyle())
                             .padding(.top, 10)
                         }
                     }
@@ -447,12 +486,39 @@ private struct ZoomableImagePage: View {
 }
 
 /// UIScrollView-backed pinch/double-tap zoom with correct centering.
+///
+/// Layout is FRAME-based inside `layoutSubviews`, not Auto Layout: pinning the
+/// image view to the scroll view's layout guides resolves against stale/zero
+/// bounds under Mac Catalyst, leaving the image tiny in the top-left corner.
+/// Frame-based sizing tracks every resize (including live window resizing on
+/// the Mac) and behaves identically on iOS.
+final class FitZoomScrollView: UIScrollView {
+    let imageView = UIImageView()
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // At rest (no zoom), the image view always fills the current bounds.
+        if zoomScale == 1, imageView.frame.size != bounds.size {
+            imageView.frame = CGRect(origin: .zero, size: bounds.size)
+            contentSize = bounds.size
+        }
+        centerContent()
+    }
+
+    /// Keep the (aspect-fit) content centered while it is smaller than bounds.
+    func centerContent() {
+        let dx = max(0, (bounds.width - contentSize.width) / 2)
+        let dy = max(0, (bounds.height - contentSize.height) / 2)
+        contentInset = UIEdgeInsets(top: dy, left: dx, bottom: dy, right: dx)
+    }
+}
+
 struct ZoomableScrollView: UIViewRepresentable {
     let image: UIImage
     @Binding var zoomed: Bool
 
     func makeUIView(context: Context) -> UIScrollView {
-        let scroll = UIScrollView()
+        let scroll = FitZoomScrollView()
         scroll.minimumZoomScale = 1
         scroll.maximumZoomScale = 6
         scroll.showsVerticalScrollIndicator = false
@@ -462,18 +528,10 @@ struct ZoomableScrollView: UIViewRepresentable {
         scroll.backgroundColor = .clear
         scroll.bouncesZoom = true
 
-        let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        scroll.addSubview(imageView)
-        context.coordinator.imageView = imageView
-
-        NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalTo: scroll.frameLayoutGuide.widthAnchor),
-            imageView.heightAnchor.constraint(equalTo: scroll.frameLayoutGuide.heightAnchor),
-            imageView.centerXAnchor.constraint(equalTo: scroll.contentLayoutGuide.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: scroll.contentLayoutGuide.centerYAnchor),
-        ])
+        scroll.imageView.image = image
+        scroll.imageView.contentMode = .scaleAspectFit
+        scroll.addSubview(scroll.imageView)
+        context.coordinator.imageView = scroll.imageView
 
         let doubleTap = UITapGestureRecognizer(
             target: context.coordinator, action: #selector(Coordinator.handleDoubleTap(_:)))
@@ -496,6 +554,7 @@ struct ZoomableScrollView: UIViewRepresentable {
         func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
 
         func scrollViewDidZoom(_ scrollView: UIScrollView) {
+            (scrollView as? FitZoomScrollView)?.centerContent()
             onZoomChange?(scrollView.zoomScale > 1.02)
         }
 

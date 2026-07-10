@@ -184,6 +184,51 @@ struct FlowLayout: Layout {
     }
 }
 
+// MARK: Button design system
+// All tappable chrome uses these two styles (never the platform default —
+// on Mac Catalyst the system bezel would override custom backgrounds and
+// render gray blobs). Pills never change geometry on press, only tint.
+
+/// Secondary action: hairline capsule, ink text, pressed tint.
+struct PillButtonStyle: ButtonStyle {
+    var onDark: Bool = false
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.subheadline.weight(.medium))
+            .foregroundStyle(onDark ? Color.white : Color.ink)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(
+                Capsule().fill(
+                    onDark
+                        ? Color.white.opacity(configuration.isPressed ? 0.22 : 0.10)
+                        : Color.creamDark.opacity(configuration.isPressed ? 1 : 0)
+                )
+            )
+            .overlay(
+                Capsule().strokeBorder(
+                    onDark ? Color.white.opacity(0.28) : Color.hairline, lineWidth: 1)
+            )
+            .contentShape(Capsule())
+    }
+}
+
+/// Primary action: forest capsule, white text.
+struct ProminentPillButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.white)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 11)
+            .background(
+                Capsule().fill(configuration.isPressed ? Color.forestDark : Color.forest)
+            )
+            .contentShape(Capsule())
+    }
+}
+
 /// Chip row for category badges: whole pills that wrap to the next line.
 struct BadgeRow: View {
     let categories: [String]
@@ -217,6 +262,7 @@ struct DisclaimerBox: View {
                     .lineSpacing(3)
                 if let onOpenLegal {
                     Button(settings.loc.t("common.readDisclaimer")) { onOpenLegal() }
+                        .buttonStyle(.plain)
                         .font(.caption.weight(.medium))
                         .foregroundStyle(.forest)
                 }
