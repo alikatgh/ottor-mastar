@@ -1,5 +1,6 @@
 package com.aulenor.ottormastar.ui
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -141,14 +142,22 @@ fun CatalogScreen(onOpenPlant: (Plant) -> Unit) {
                 ) {
                     for (key in CATEGORY_FILTERS) {
                         val active = activeCategory == key
+                        // Color-only state change (never geometry), but the
+                        // colors TWEEN instead of snapping.
+                        val chipBg by animateColorAsState(
+                            if (active) Forest else Color.Transparent, label = "chipBg")
+                        val chipBorder by animateColorAsState(
+                            if (active) Forest else Hairline, label = "chipBorder")
+                        val chipText by animateColorAsState(
+                            if (active) Color.White else InkLight, label = "chipText")
                         Text(
                             if (key == "all") loc.t("gallery.allPlants") else loc.t("categories.$key"),
                             style = MaterialTheme.typography.labelLarge,
-                            color = if (active) Color.White else InkLight,
+                            color = chipText,
                             modifier = Modifier
                                 .clip(CircleShape)
-                                .background(if (active) Forest else Color.Transparent)
-                                .border(1.dp, if (active) Forest else Hairline, CircleShape)
+                                .background(chipBg)
+                                .border(1.dp, chipBorder, CircleShape)
                                 .clickable { activeCategory = key }
                                 .padding(horizontal = 16.dp, vertical = 10.dp),
                         )
@@ -166,26 +175,36 @@ fun CatalogScreen(onOpenPlant: (Plant) -> Unit) {
             }
         } else {
             itemsIndexed(filtered, key = { _, p -> p.slug }) { index, plant ->
-                CatalogRow(plant, index, onOpenPlant)
+                // Rows glide to their new slots when the filter/sort/search
+                // changes instead of the list snapping to a new arrangement.
+                CatalogRow(
+                    plant, index, onOpenPlant,
+                    modifier = if (settings.reduceMotion) Modifier else Modifier.animateItem(),
+                )
             }
         }
     }
 }
 
 @Composable
-private fun CatalogRow(plant: Plant, index: Int, onOpenPlant: (Plant) -> Unit) {
+private fun CatalogRow(
+    plant: Plant,
+    index: Int,
+    onOpenPlant: (Plant) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     val settings = LocalSettings.current
     val country = settings.country
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(14.dp),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
             .background(Card)
             .border(1.dp, Hairline, RoundedCornerShape(12.dp))
-            .clickable { onOpenPlant(plant) }
+            .scaledClickable(scaleTo = 0.98f) { onOpenPlant(plant) }
             .padding(12.dp),
     ) {
         Text(
@@ -199,7 +218,8 @@ private fun CatalogRow(plant: Plant, index: Int, onOpenPlant: (Plant) -> Unit) {
                 .size(56.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .background(Parchment)
-                .border(1.dp, Hairline, RoundedCornerShape(8.dp)),
+                .border(1.dp, Hairline, RoundedCornerShape(8.dp))
+                .sharedPlantImage("catalog-${plant.slug}"),
         ) {
             PlantImage(
                 country, plant, ImgSize.THUMB,

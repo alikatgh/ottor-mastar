@@ -1,6 +1,21 @@
 package com.aulenor.ottormastar.ui
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.core.CubicBezierEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.scale
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,6 +54,83 @@ import com.aulenor.ottormastar.data.L10n
 import com.aulenor.ottormastar.data.LocalSettings
 import com.aulenor.ottormastar.data.Plant
 import com.aulenor.ottormastar.data.PlantStore
+
+// ============================== Motion kit ==============================
+// All motion helpers no-op under the Reduce-motion setting.
+
+/** The app's push easing — same curve as the web ([.32,.72,0,1]). */
+val MotionEase = CubicBezierEasing(0.32f, 0.72f, 0f, 1f)
+
+/**
+ * Shared-element plumbing: MainActivity's SharedTransitionLayout and each nav
+ * destination's AnimatedContentScope, published as locals so tiles/heroes can
+ * opt in without threading scopes through every screen signature.
+ */
+@OptIn(ExperimentalSharedTransitionApi::class)
+val LocalSharedTransition = compositionLocalOf<SharedTransitionScope?> { null }
+val LocalNavAnimation = compositionLocalOf<AnimatedVisibilityScope?> { null }
+
+/**
+ * Marks this element as one end of a plant-image shared-element transition.
+ * Keys are namespaced by origin ("shelf-", "tile-", "hero-", "catalog-",
+ * "search-" + slug) and the detail screen picks the matching key from its
+ * `src` nav argument — so the SAME plant visible in two places on one screen
+ * never produces a duplicate key.
+ */
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+fun Modifier.sharedPlantImage(key: String?): Modifier {
+    if (key == null || LocalSettings.current.reduceMotion) return this
+    val shared = LocalSharedTransition.current ?: return this
+    val anim = LocalNavAnimation.current ?: return this
+    return with(shared) {
+        this@sharedPlantImage.sharedBounds(
+            sharedContentState = rememberSharedContentState(key),
+            animatedVisibilityScope = anim,
+        )
+    }
+}
+
+/**
+ * One-shot entrance: fade + small rise, staggered by [index]. Runs when the
+ * element first enters composition — use on the hero/cover blocks and section
+ * headers, with small indexes (0–4), never raw list positions.
+ */
+@Composable
+fun Modifier.riseIn(index: Int = 0): Modifier {
+    if (LocalSettings.current.reduceMotion) return this
+    var shown by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) { shown = true }
+    val t by animateFloatAsState(
+        targetValue = if (shown) 1f else 0f,
+        animationSpec = tween(durationMillis = 420, delayMillis = 60 * index, easing = MotionEase),
+        label = "riseIn",
+    )
+    return graphicsLayer {
+        alpha = t
+        translationY = (1f - t) * 22.dp.toPx()
+    }
+}
+
+/**
+ * The app's press affordance: a springy scale-down while touched (no ripple —
+ * the design language uses geometry-stable tints and scale, never ink
+ * splashes). Replaces plain `.clickable {}` on cards, tiles and buttons.
+ */
+@Composable
+fun Modifier.scaledClickable(scaleTo: Float = 0.97f, onClick: () -> Unit): Modifier {
+    val reduce = LocalSettings.current.reduceMotion
+    val interaction = remember { MutableInteractionSource() }
+    val pressed by interaction.collectIsPressedAsState()
+    val s by animateFloatAsState(
+        targetValue = if (pressed && !reduce) scaleTo else 1f,
+        animationSpec = spring(dampingRatio = 0.6f, stiffness = 900f),
+        label = "pressScale",
+    )
+    return scale(s).clickable(interactionSource = interaction, indication = null) { onClick() }
+}
+
+// ========================================================================
 
 /** Current-language string table, cached per language. */
 @Composable

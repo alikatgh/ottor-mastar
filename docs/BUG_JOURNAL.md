@@ -50,6 +50,11 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-10 — Android motion pass (shared elements, staggered entrances, animated lists)
+- Change: a "motion kit" in Components.kt — `sharedPlantImage()` (SharedTransitionLayout tile→detail hero morph, keys namespaced by ORIGIN: hero-/shelf-/tile-/catalog-/search-{slug}, detail picks its key from a `?src=` nav arg), `riseIn(index)` staggered entrances, `scaledClickable()` spring press (no ripples — design language). Plus: catalog/search rows `animateItem()` glide on filter/sort, tweened filter chips & Settings segments, sliding PillToggle thumb, pager-dot pill stretch, nav-icon selection bounce. All no-op under Reduce motion.
+- Arch: SharedTransitionScope + each destination's AnimatedContentScope published via CompositionLocals (`LocalSharedTransition`/`LocalNavAnimation`) so tiles opt in with one modifier — zero signature threading.
+- Key lesson: shared-element keys must be namespaced by the ORIGIN element, not just the entity — the same plant is visible twice on Home (hero + shelf), and duplicate keys in one scope are undefined behavior. The `?src=` arg lets the destination join exactly the element that was tapped.
+
 ### 2026-07-10 — Viewer caption hugged the system nav bar + invisible "Details" pill (Android)
 - Symptom: full-screen viewer's caption/buttons sat flush against the bottom system bar; the white "Сиһилии" pill text was unreadable.
 - Cause: `ViewerScreen.kt` dialog is edge-to-edge (`decorFitsSystemWindows=false`) → ZERO automatic insets, but padding was fixed guesses (bottom 40dp, top 40dp). Pill text used themed `Ink` — near-white in dark mode, on a white capsule.

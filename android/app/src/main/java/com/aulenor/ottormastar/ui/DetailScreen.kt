@@ -1,8 +1,10 @@
 package com.aulenor.ottormastar.ui
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -81,6 +83,10 @@ fun DetailScreen(
     country: Country,
     onOpenViewer: (slides: List<Boolean>, index: Int) -> Unit,
     onOpenLegal: () -> Unit,
+    // Shared-element key of the element that opened this page (e.g.
+    // "shelf-sardaana") — the hero panel joins that transition. Null when the
+    // page was reached without a visual origin (deep link, viewer button).
+    sharedKey: String? = null,
 ) {
     val settings = LocalSettings.current
     val loc = rememberL10n()
@@ -138,7 +144,13 @@ fun DetailScreen(
 
     Column(Modifier.fillMaxSize().background(Card).verticalScroll(scrollState)) {
         // ===== Image panel =====
-        Box(Modifier.fillMaxWidth().height(400.dp).background(Parchment)) {
+        Box(
+            Modifier
+                .fillMaxWidth()
+                .height(400.dp)
+                .sharedPlantImage(sharedKey)
+                .background(Parchment),
+        ) {
             // beyondViewportPageCount keeps the second slide composed (no
             // decode jank on first swipe); tap via detectTapGestures instead
             // of clickable — no ripple, no press-delay, never fights the
@@ -215,14 +227,22 @@ fun DetailScreen(
                         .padding(horizontal = 10.dp, vertical = 6.dp),
                 ) {
                     repeat(slides.size) { i ->
+                        // Active dot stretches into a pill and tints in — the
+                        // paging position reads at a glance without a counter.
+                        val active = pagerState.currentPage == i
+                        val dotWidth by animateDpAsState(
+                            targetValue = if (active && !settings.reduceMotion) 20.dp else 8.dp,
+                            animationSpec = spring(dampingRatio = 0.75f, stiffness = 500f),
+                            label = "dotW",
+                        )
+                        val dotColor by animateColorAsState(
+                            targetValue = if (active) Forest else Forest.copy(alpha = 0.25f),
+                            label = "dotC",
+                        )
                         Box(
                             Modifier
-                                .size(8.dp)
-                                .background(
-                                    if (pagerState.currentPage == i) Forest
-                                    else Forest.copy(alpha = 0.25f),
-                                    CircleShape,
-                                )
+                                .size(width = dotWidth, height = 8.dp)
+                                .background(dotColor, CircleShape)
                         )
                     }
                 }
@@ -301,7 +321,7 @@ fun DetailScreen(
                             .clip(RoundedCornerShape(12.dp))
                             .background(Card)
                             .border(1.dp, Hairline, RoundedCornerShape(12.dp))
-                            .clickable { uriHandler.openUri(plant.wikipediaUrl(lang)) }
+                            .scaledClickable { uriHandler.openUri(plant.wikipediaUrl(lang)) }
                             .padding(horizontal = 16.dp, vertical = 14.dp),
                     ) {
                         Text("↗", color = Forest, style = MaterialTheme.typography.titleMedium)

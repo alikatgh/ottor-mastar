@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.animation.core.CubicBezierEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -43,6 +47,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -53,6 +58,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -72,6 +78,8 @@ import com.aulenor.ottormastar.ui.Ink
 import com.aulenor.ottormastar.ui.InkMuted
 import com.aulenor.ottormastar.ui.HelpScreen
 import com.aulenor.ottormastar.ui.LegalScreen
+import com.aulenor.ottormastar.ui.LocalNavAnimation
+import com.aulenor.ottormastar.ui.LocalSharedTransition
 import com.aulenor.ottormastar.ui.OttorMastarTheme
 import com.aulenor.ottormastar.ui.SearchScreen
 import com.aulenor.ottormastar.ui.SettingsScreen
@@ -110,6 +118,7 @@ private data class Tab(val route: String, val labelKey: String, val icon: ImageV
 /** Viewer request: which items, which starting index. */
 private data class ViewerRequest(val items: List<ViewerItem>, val index: Int)
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun AppRoot() {
     val nav = rememberNavController()
@@ -140,9 +149,10 @@ private fun AppRoot() {
     val activeTabRoute = if (currentRoute in tabRoutes) currentRoute else lastTabRoute
     // launchSingleTop everywhere: a double-tap (mouse users double-click by
     // habit) must never push the same screen twice — that makes Back appear
-    // broken.
-    val openPlant = { plant: Plant ->
-        nav.navigate("plant/${plant.slug}") { launchSingleTop = true }
+    // broken. `src` names the tapped element so the detail hero can join the
+    // matching shared-element key ("shelf-…", "catalog-…", …).
+    val openPlant = { plant: Plant, src: String ->
+        nav.navigate("plant/${plant.slug}?src=$src") { launchSingleTop = true }
     }
 
     // The web's page-enter motion: opacity + a small rise, ease [.32,.72,0,1].
@@ -176,7 +186,22 @@ private fun AppRoot() {
                                 }
                             }
                         },
-                        icon = { Icon(tab.icon, contentDescription = null) },
+                        icon = {
+                            // Selection pop: a low-damping spring overshoots
+                            // past 1.0 on the way up — the icon lands with a
+                            // small bounce instead of snapping.
+                            val selected = activeTabRoute == tab.route
+                            val iconScale by animateFloatAsState(
+                                targetValue = if (selected && !reduce) 1f else 0.92f,
+                                animationSpec = spring(dampingRatio = 0.45f, stiffness = 700f),
+                                label = "tabIcon",
+                            )
+                            Icon(
+                                tab.icon,
+                                contentDescription = null,
+                                modifier = Modifier.scale(if (reduce) 1f else iconScale),
+                            )
+                        },
                         label = {
                             // Long Sakha labels ("Биһиги туспутунан") wrap to
                             // two tight centered lines instead of clipping.
@@ -200,10 +225,14 @@ private fun AppRoot() {
             }
         },
     ) { padding ->
+        // SharedTransitionLayout hosts the tile→detail shared-element motion;
+        // the scope goes into a CompositionLocal so tiles opt in via
+        // Modifier.sharedPlantImage() without new parameters everywhere.
+        SharedTransitionLayout(Modifier.padding(padding)) {
+            CompositionLocalProvider(LocalSharedTransition provides this) {
         NavHost(
             navController = nav,
             startDestination = "home",
-            modifier = Modifier.padding(padding),
             enterTransition = {
                 if (reduce) fadeIn(tween(150))
                 else fadeIn(tween(320, easing = pushEase)) +
@@ -218,6 +247,7 @@ private fun AppRoot() {
             },
         ) {
             composable("home") {
+                CompositionLocalProvider(LocalNavAnimation provides this) {
                 HomeScreen(
                     onOpenPlant = openPlant,
                     onOpenViewer = { index ->
@@ -245,9 +275,18 @@ private fun AppRoot() {
                     },
                     onOpenLegal = { nav.navigate("legal") { launchSingleTop = true } },
                 )
+                }
             }
-            composable("catalog") { CatalogScreen(onOpenPlant = openPlant) }
-            composable("search") { SearchScreen(onOpenPlant = openPlant) }
+            composable("catalog") {
+                CompositionLocalProvider(LocalNavAnimation provides this) {
+                    CatalogScreen(onOpenPlant = { openPlant(it, "catalog") })
+                }
+            }
+            composable("search") {
+                CompositionLocalProvider(LocalNavAnimation provides this) {
+                    SearchScreen(onOpenPlant = { openPlant(it, "search") })
+                }
+            }
             composable("about") {
                 AboutScreen(
                     onOpenSettings = { nav.navigate("settings") { launchSingleTop = true } },
@@ -264,12 +303,14 @@ private fun AppRoot() {
             }
             composable("legal") { LegalScreen(onBack = { nav.popBackStack() }) }
             composable(
-                "plant/{slug}",
+                "plant/{slug}?src={src}",
+                arguments = listOf(navArgument("src") { defaultValue = "" }),
                 // The detail page owns its own entrance (sheet spring), like
                 // the web — no page-level rise on top of it.
                 enterTransition = { fadeIn(tween(if (reduce) 150 else 260, easing = pushEase)) },
             ) { entry ->
                 val slug = entry.arguments?.getString("slug")
+                val src = entry.arguments?.getString("src").orEmpty()
                 // A bad/stale slug (edited deep link, removed plant) must show a
                 // proper not-found screen with a way back — never a blank page.
                 val found = slug?.let { PlantStore.findPlant(it) }
@@ -290,9 +331,11 @@ private fun AppRoot() {
                 }
                 val (plant, plantCountry) = found
                 val kindLoc = rememberL10n()
+                CompositionLocalProvider(LocalNavAnimation provides this) {
                 DetailScreen(
                     plant = plant,
                     country = plantCountry,
+                    sharedKey = if (src.isEmpty()) null else "$src-${plant.slug}",
                     onOpenViewer = { slides, index ->
                         viewer = ViewerRequest(
                             slides.map { isPlate ->
@@ -313,6 +356,9 @@ private fun AppRoot() {
                     },
                     onOpenLegal = { nav.navigate("legal") { launchSingleTop = true } },
                 )
+                }
+            }
+        }
             }
         }
     }

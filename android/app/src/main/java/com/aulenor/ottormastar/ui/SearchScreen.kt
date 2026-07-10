@@ -133,12 +133,14 @@ fun SearchScreen(onOpenPlant: (Plant) -> Unit) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(14.dp),
-                    modifier = Modifier
+                    // Result rows glide to their new positions as the query
+                    // narrows/widens instead of the list snapping.
+                    modifier = (if (settings.reduceMotion) Modifier else Modifier.animateItem())
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(12.dp))
                         .background(Card)
                         .border(1.dp, Hairline, RoundedCornerShape(12.dp))
-                        .clickable { onOpenPlant(plant) }
+                        .scaledClickable(scaleTo = 0.98f) { onOpenPlant(plant) }
                         .padding(12.dp),
                 ) {
                     Box(
@@ -146,7 +148,8 @@ fun SearchScreen(onOpenPlant: (Plant) -> Unit) {
                             .size(52.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .background(Parchment)
-                            .border(1.dp, Hairline, RoundedCornerShape(8.dp)),
+                            .border(1.dp, Hairline, RoundedCornerShape(8.dp))
+                            .sharedPlantImage("search-${plant.slug}"),
                     ) {
                         PlantImage(
                             country, plant, ImgSize.THUMB,

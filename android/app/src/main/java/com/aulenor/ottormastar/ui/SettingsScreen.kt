@@ -1,10 +1,15 @@
 package com.aulenor.ottormastar.ui
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -254,10 +259,16 @@ fun Segmented(
     ) {
         for ((optValue, label) in options) {
             val active = value == optValue
+            // The selection TWEENS between cells (color only — geometry is
+            // state-invariant per the design rules).
+            val segBg by animateColorAsState(
+                if (active) Forest else Color.Transparent, label = "segBg")
+            val segText by animateColorAsState(
+                if (active) Color.White else InkLight, label = "segText")
             Box(
                 Modifier
                     .defaultMinSize(minHeight = 44.dp)
-                    .background(if (active) Forest else Color.Transparent)
+                    .background(segBg)
                     .clickable { onChange(optValue) }
                     .padding(horizontal = 14.dp),
                 contentAlignment = Alignment.Center,
@@ -265,7 +276,7 @@ fun Segmented(
                 Text(
                     label,
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium),
-                    color = if (active) Color.White else InkLight,
+                    color = segText,
                 )
             }
         }
@@ -287,17 +298,29 @@ fun PillToggle(checked: Boolean, onChange: (Boolean) -> Unit) {
             ) { onChange(!checked) },
         contentAlignment = Alignment.Center,
     ) {
+        // Thumb SLIDES with a spring and the track color tweens — a switch
+        // that snaps between ends reads as broken next to animated neighbors.
+        val trackColor by animateColorAsState(
+            if (checked) Forest else CreamDark, label = "track")
+        val borderColor by animateColorAsState(
+            if (checked) Forest else HairlineStrong, label = "trackBorder")
+        val thumbOffset by animateDpAsState(
+            targetValue = if (checked) 18.dp else 0.dp,
+            animationSpec = spring(dampingRatio = 0.7f, stiffness = 600f),
+            label = "thumb",
+        )
         Box(
             Modifier
                 .size(width = 44.dp, height = 26.dp)
                 .clip(CircleShape)
-                .background(if (checked) Forest else CreamDark)
-                .border(1.dp, if (checked) Forest else HairlineStrong, CircleShape),
+                .background(trackColor)
+                .border(1.dp, borderColor, CircleShape),
         ) {
             Box(
                 Modifier
-                    .align(if (checked) Alignment.CenterEnd else Alignment.CenterStart)
+                    .align(Alignment.CenterStart)
                     .padding(2.dp)
+                    .offset(x = thumbOffset)
                     .size(22.dp)
                     .background(Color.White, CircleShape)
             )

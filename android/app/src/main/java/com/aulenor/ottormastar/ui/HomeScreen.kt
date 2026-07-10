@@ -58,7 +58,9 @@ import com.aulenor.ottormastar.data.plateNumeral
  */
 @Composable
 fun HomeScreen(
-    onOpenPlant: (Plant) -> Unit,
+    // (plant, src): src names the tapped element ("hero"/"shelf"/"tile") so the
+    // detail hero joins the matching shared-element transition.
+    onOpenPlant: (Plant, String) -> Unit,
     onOpenViewer: (Int) -> Unit,
     onOpenCatalog: () -> Unit,
     onOpenLegal: () -> Unit,
@@ -80,7 +82,7 @@ fun HomeScreen(
                     Modifier
                         .fillMaxWidth()
                         .background(Parchment)
-                        .clickable { onOpenPlant(hero) },
+                        .scaledClickable(scaleTo = 0.985f) { onOpenPlant(hero, "hero") },
                 ) {
                     PlantImage(
                         country, hero, ImgSize.MEDIUM,
@@ -90,6 +92,7 @@ fun HomeScreen(
                             .fillMaxWidth()
                             .height(360.dp)
                             .padding(start = 24.dp, end = 24.dp, top = 24.dp, bottom = 36.dp)
+                            .sharedPlantImage("hero-${hero.slug}")
                             .graphicsLayer {
                                 shadowElevation = 18f
                                 shape = RoundedCornerShape(2.dp)
@@ -122,6 +125,7 @@ fun HomeScreen(
                     style = MaterialTheme.typography.labelMedium.copy(
                         fontWeight = FontWeight.SemiBold, letterSpacing = 1.6.sp),
                     color = InkMuted,
+                    modifier = Modifier.riseIn(0),
                 )
                 Spacer(Modifier.height(16.dp))
                 Text(
@@ -129,6 +133,7 @@ fun HomeScreen(
                     style = MaterialTheme.typography.displaySmall.copy(
                         fontSize = 44.sp, lineHeight = 46.sp, fontWeight = FontWeight.Bold),
                     color = Ink,
+                    modifier = Modifier.riseIn(1),
                 )
                 if (country.id == "yakutia") {
                     Spacer(Modifier.height(18.dp))
@@ -137,12 +142,14 @@ fun HomeScreen(
                         style = MaterialTheme.typography.bodyLarge.copy(
                             fontWeight = FontWeight.Light, lineHeight = 24.sp),
                         color = InkLight,
+                        modifier = Modifier.riseIn(2),
                     )
                 }
                 Spacer(Modifier.height(34.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(20.dp),
+                    modifier = Modifier.riseIn(3),
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -150,7 +157,7 @@ fun HomeScreen(
                         modifier = Modifier
                             .clip(RoundedCornerShape(10.dp))
                             .background(Forest)
-                            .clickable { onOpenCatalog() }
+                            .scaledClickable { onOpenCatalog() }
                             .padding(horizontal = 20.dp, vertical = 11.dp),
                     ) {
                         Text(
@@ -200,7 +207,7 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
                     items(plated.size) { index ->
-                        PlateTile(plated[index], index, onOpenPlant)
+                        PlateTile(plated[index], index) { onOpenPlant(it, "shelf") }
                     }
                 }
             }
@@ -240,7 +247,7 @@ fun HomeScreen(
                         plant = plant,
                         modifier = Modifier.weight(1f),
                         onClick = {
-                            if (settings.tileTap == TileTap.DETAIL) onOpenPlant(plant)
+                            if (settings.tileTap == TileTap.DETAIL) onOpenPlant(plant, "tile")
                             else onOpenViewer(flatIndex)
                         },
                     )
@@ -266,6 +273,7 @@ private fun GalleryTile(plant: Plant, modifier: Modifier, onClick: () -> Unit) {
             // Web PlantCard's whileTap scale 0.97.
             .scale(if (pressed && !settings.reduceMotion) 0.97f else 1f)
             .clip(RoundedCornerShape(0.dp))
+            .sharedPlantImage("tile-${plant.slug}")
             .clickable(interactionSource = interaction, indication = null) { onClick() },
     ) {
         PlantImage(country, plant, ImgSize.THUMB, modifier = Modifier.fillMaxSize())
@@ -302,13 +310,14 @@ private fun GalleryTile(plant: Plant, modifier: Modifier, onClick: () -> Unit) {
 private fun PlateTile(plant: Plant, index: Int, onOpenPlant: (Plant) -> Unit) {
     val settings = LocalSettings.current
     val country = settings.country
-    Column(Modifier.width(180.dp).clickable { onOpenPlant(plant) }) {
+    Column(Modifier.width(180.dp).scaledClickable { onOpenPlant(plant) }) {
         Box(
             Modifier
                 .size(180.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .background(Parchment)
-                .border(1.dp, Hairline, RoundedCornerShape(8.dp)),
+                .border(1.dp, Hairline, RoundedCornerShape(8.dp))
+                .sharedPlantImage("shelf-${plant.slug}"),
         ) {
             PlantImage(
                 country, plant, ImgSize.THUMB,

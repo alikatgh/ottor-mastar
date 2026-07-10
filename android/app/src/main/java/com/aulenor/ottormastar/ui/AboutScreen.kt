@@ -131,11 +131,11 @@ fun AboutScreen(
             }
             Spacer(Modifier.height(36.dp))
 
-            EntryCard(Icons.Outlined.Settings, loc.t("settings.title"), loc.t("settings.storageNote"), onOpenSettings)
+            EntryCard(Icons.Outlined.Settings, loc.t("settings.title"), loc.t("settings.storageNote"), 0, onOpenSettings)
             Spacer(Modifier.height(12.dp))
-            EntryCard(Icons.AutoMirrored.Outlined.HelpOutline, loc.t("help.title"), loc.t("help.intro"), onOpenHelp)
+            EntryCard(Icons.AutoMirrored.Outlined.HelpOutline, loc.t("help.title"), loc.t("help.intro"), 1, onOpenHelp)
             Spacer(Modifier.height(12.dp))
-            EntryCard(Icons.Outlined.PrivacyTip, loc.t("common.legal"), loc.t("common.readDisclaimer"), onOpenLegal)
+            EntryCard(Icons.Outlined.PrivacyTip, loc.t("common.legal"), loc.t("common.readDisclaimer"), 2, onOpenLegal)
         }
 
         FooterBlock(onOpenLegal)
@@ -143,16 +143,17 @@ fun AboutScreen(
 }
 
 @Composable
-private fun EntryCard(icon: ImageVector, title: String, note: String, onClick: () -> Unit) {
+private fun EntryCard(icon: ImageVector, title: String, note: String, index: Int, onClick: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier
+            .riseIn(index)
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
             .background(Card)
             .border(1.dp, Hairline, RoundedCornerShape(16.dp))
-            .clickable { onClick() }
+            .scaledClickable(scaleTo = 0.98f) { onClick() }
             .padding(18.dp),
     ) {
         Icon(icon, contentDescription = null, tint = Forest, modifier = Modifier.size(22.dp))
