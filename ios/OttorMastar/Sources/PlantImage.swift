@@ -53,16 +53,19 @@ struct AmbientImageFill: View {
     let plant: Plant
     var kind: ImageKind = .photo
     /// Extra wash on top of the blur so foreground captions stay readable.
-    var wash: Double = 0.2
+    var wash: Double = 0.32
 
     var body: some View {
         ZStack {
             Color.parchment
+            // Whisper-quiet: post-trim plates are dense artwork, and a strong
+            // blur of dark blooms reads as dirty shadows behind the paper —
+            // keep only a faint tonal cast of the artwork.
             PlantImageView(country: country, plant: plant, size: .thumb, kind: kind)
                 .scaleEffect(1.35)
-                .blur(radius: 44)
+                .blur(radius: 56)
                 .saturation(1.05)
-                .opacity(0.85)
+                .opacity(0.45)
             Color.parchment.opacity(wash)
         }
         .clipped()
