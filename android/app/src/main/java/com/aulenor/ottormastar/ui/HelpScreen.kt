@@ -33,12 +33,12 @@ fun HelpScreen(onBack: () -> Unit, onOpenLegal: () -> Unit) {
     val loc = rememberL10n()
 
     // The app-download section is web-specific (this IS the app) — here the
-    // offline note stands alone, no store link needed.
+    // platform-neutral offline note stands alone, no store link needed.
     val sections = listOf(
         loc.t("help.browseTitle") to loc.t("help.browseBody"),
         loc.t("help.viewerTitle") to loc.t("help.viewerBody"),
         loc.t("help.langTitle") to loc.t("help.langBody"),
-        loc.t("help.appTitle") to loc.t("help.appBody"),
+        loc.t("help.appTitle") to loc.t("help.appBodyNative"),
         loc.t("help.safetyTitle") to loc.t("help.safetyBody"),
     )
 

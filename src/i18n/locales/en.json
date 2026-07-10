@@ -150,6 +150,7 @@
     "appLink": "Get the Android app",
     "safetyTitle": "Safety",
     "safetyBody": "Everything here is for education only — never gather or use plants based on this app.",
-    "safetyLink": "Read the full disclaimer"
+    "safetyLink": "Read the full disclaimer",
+    "appBodyNative": "Everything in this app — every plant, picture and text — works without an internet connection."
   }
 }

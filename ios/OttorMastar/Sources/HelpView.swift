@@ -13,7 +13,10 @@ struct HelpView: View {
             (loc.t("help.browseTitle"), loc.t("help.browseBody")),
             (loc.t("help.viewerTitle"), loc.t("help.viewerBody")),
             (loc.t("help.langTitle"), loc.t("help.langBody")),
-            (loc.t("help.appTitle"), loc.t("help.appBody")),
+            // Platform-neutral offline note — App Review Guideline 2.3.10
+            // forbids referencing other mobile platforms; help.appBody (used on
+            // the web) names the Android app.
+            (loc.t("help.appTitle"), loc.t("help.appBodyNative")),
             (loc.t("help.safetyTitle"), loc.t("help.safetyBody")),
         ]
     }

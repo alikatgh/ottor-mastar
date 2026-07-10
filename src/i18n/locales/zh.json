@@ -150,6 +150,7 @@
     "appLink": "下载 Android 应用",
     "safetyTitle": "安全提示",
     "safetyBody": "此处所有内容仅供教育参考——切勿依据本应用采集或使用植物。",
-    "safetyLink": "阅读完整免责声明"
+    "safetyLink": "阅读完整免责声明",
+    "appBodyNative": "本应用中的所有内容——植物、图片和文字——均可在无网络连接时使用。"
   }
 }
