@@ -25,8 +25,11 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.platform.LocalUriHandler
@@ -73,6 +76,10 @@ import kotlin.math.abs
  * cross-collection entry resolves its images from the right imageBase — never
  * from `settings.country`.
  */
+/** Text on the viewer's white pills — always near-black, never the themed Ink
+ *  (dark-mode Ink is near-white and vanishes on the white capsule). */
+private val ViewerPillInk = Color(0xFF201E19)
+
 data class ViewerItem(
     val plant: Plant,
     val country: Country,
@@ -224,7 +231,11 @@ fun ViewerOverlay(
                     reduceMotion = settings.reduceMotion,
                     // Wide mode's metadata is in the side panel, so the image
                     // only needs the top-bar reserve, not the caption reserve.
-                    modifier = Modifier.padding(top = 56.dp, bottom = if (isWide) 40.dp else 150.dp),
+                    // The dialog is edge-to-edge (decorFitsSystemWindows=false),
+                    // so the reserves sit on TOP of the real system-bar insets.
+                    modifier = Modifier
+                        .systemBarsPadding()
+                        .padding(top = 56.dp, bottom = if (isWide) 40.dp else 150.dp),
                 )
             }
 
@@ -234,7 +245,10 @@ fun ViewerOverlay(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .fillMaxWidth()
-                    .padding(horizontal = 14.dp, vertical = 40.dp)
+                    // Real status-bar inset, not a guessed 40dp — edge-to-edge
+                    // dialogs get zero automatic insets.
+                    .statusBarsPadding()
+                    .padding(horizontal = 14.dp, vertical = 10.dp)
                     .alpha(chromeAlpha),
             ) {
                 // Wide mode carries the counter in the placard, so the top bar
@@ -274,7 +288,11 @@ fun ViewerOverlay(
                                 listOf(Color.Transparent, Color.Black.copy(alpha = 0.85f), Color.Black)
                             )
                         )
-                        .padding(start = 20.dp, end = 20.dp, top = 60.dp, bottom = 40.dp)
+                        // Gradient runs under the system nav bar (edge-to-edge),
+                        // but the content must clear it — inset BEFORE the
+                        // bottom padding, or the buttons hug the gesture bar.
+                        .navigationBarsPadding()
+                        .padding(start = 20.dp, end = 20.dp, top = 60.dp, bottom = 24.dp)
                         .alpha(chromeAlpha),
                 ) {
                     current.kindLabel?.let {
@@ -322,7 +340,10 @@ fun ViewerOverlay(
                                 Text(
                                     loc.t("plant.details") + " ↗",
                                     style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
-                                    color = Ink,
+                                    // Fixed near-black, NOT the themed Ink: the
+                                    // viewer chrome is always dark, and dark-mode
+                                    // Ink is near-white — white-on-white pill.
+                                    color = ViewerPillInk,
                                     modifier = Modifier
                                         .clip(CircleShape)
                                         .background(Color.White)
@@ -452,7 +473,7 @@ private fun PlacardPanel(
             Text(
                 loc.t("plant.details") + " ↗",
                 style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.SemiBold),
-                color = Ink,
+                color = ViewerPillInk,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(12.dp))

@@ -304,7 +304,7 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
               {onOpenDetail && (
                 <button
                   onClick={() => onOpenDetail(index)}
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-white text-ink text-sm font-semibold hover:bg-white/90 transition-colors motion-safe:active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-white text-[#201E19] text-sm font-semibold hover:bg-white/90 transition-colors motion-safe:active:scale-[0.98]"
                 >
                   {t('plant.details')}
                   <ArrowUpRight className="w-4 h-4" />
@@ -372,10 +372,12 @@ export default function ImageViewer({ items, index, onIndexChange, onClose, onOp
                   <ExternalLink className="w-5 h-5 text-white" strokeWidth={1.9} />
                 </a>
               )}
+              {/* Fixed near-black, not text-ink: the viewer is always a dark
+                  surface and dark-theme --color-ink is near-white. */}
               {onOpenDetail && (
                 <button
                   onClick={() => onOpenDetail(index)}
-                  className="inline-flex items-center gap-1.5 pl-4 pr-3.5 py-2.5 rounded-full bg-white text-ink text-sm font-semibold hover:bg-white/90 transition-colors motion-safe:active:scale-[0.97]"
+                  className="inline-flex items-center gap-1.5 pl-4 pr-3.5 py-2.5 rounded-full bg-white text-[#201E19] text-sm font-semibold hover:bg-white/90 transition-colors motion-safe:active:scale-[0.97]"
                 >
                   {t('plant.details')}
                   <ArrowUpRight className="w-4 h-4" />

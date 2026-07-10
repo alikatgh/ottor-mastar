@@ -50,6 +50,11 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-10 — Viewer caption hugged the system nav bar + invisible "Details" pill (Android)
+- Symptom: full-screen viewer's caption/buttons sat flush against the bottom system bar; the white "Сиһилии" pill text was unreadable.
+- Cause: `ViewerScreen.kt` dialog is edge-to-edge (`decorFitsSystemWindows=false`) → ZERO automatic insets, but padding was fixed guesses (bottom 40dp, top 40dp). Pill text used themed `Ink` — near-white in dark mode, on a white capsule.
+- Fix: `navigationBarsPadding()` after the caption gradient (gradient still runs under the bar), `statusBarsPadding()` for top chrome, `systemBarsPadding()` on page reserves; pill text = fixed `ViewerPillInk` (0xFF201E19).
+- Lesson (generalizes): edge-to-edge surface ⇒ every fixed top/bottom padding is a bug — use the insets APIs; chrome that lives on a FIXED dark backdrop must use FIXED colors, never theme tokens that invert in dark mode.
 ### 2026-07-10 — Liquid Glass adoption (iOS 26) + two screen bugs caught in the sweep
 - Change: Liquid Glass across iOS — `glassChrome` adapter in Theme.swift (`glassEffect` on 26, material/solid fallback on 17), glass pill buttons, filter chips, viewer chrome, native `Tab(role: .search)` bar with `.tabBarMinimizeBehavior(.onScrollDown)`; springs/`.snappy` + numericText counters everywhere (reduceMotion-gated).
 - Bug 1: viewer "Сиһилии" pill wrapped to two lines when the caption title squeezed it → `.fixedSize()` on the pill label (ImageViewer.swift caption). Pills never wrap — same 2026-07-08 lesson, new call site.
