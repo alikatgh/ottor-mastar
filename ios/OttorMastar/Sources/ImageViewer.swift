@@ -388,7 +388,9 @@ struct ImageViewer: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
-                .padding(.bottom, 36)
+                // Generous floor clearance — badges were grazing the screen
+                // edge whenever the title or badge row wrapped to two lines.
+                .padding(.bottom, 48)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .animation(.easeOut(duration: 0.2), value: index)
             }
