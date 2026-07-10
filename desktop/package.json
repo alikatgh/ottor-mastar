@@ -1,0 +1,30 @@
+{
+  "name": "ottor-mastar-desktop",
+  "productName": "Ottor Mastar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ottor Mastar — offline botanical encyclopedia of Yakutia and Mongolia (desktop)",
+  "author": "Aulenor",
+  "main": "main.cjs",
+  "scripts": {
+    "sync": "node sync-app.cjs",
+    "start": "npm run sync && electron .",
+    "smoke": "npm run sync && OM_SMOKE=1 electron .",
+    "dist:mac": "npm run sync && electron-builder --mac dmg",
+    "dist:win": "npm run sync && electron-builder --win nsis zip",
+    "dist:all": "npm run sync && electron-builder --mac dmg --win nsis zip"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.aulenor.ottormastar.desktop",
+    "productName": "Ottor Mastar",
+    "files": ["main.cjs", "app/**/*"],
+    "directories": { "output": "release" },
+    "mac": { "category": "public.app-category.reference", "target": ["dmg"] },
+    "win": { "target": ["nsis", "zip"] },
+    "nsis": { "oneClick": true, "deleteAppDataOnUninstall": true }
+  }
+}
