@@ -55,12 +55,11 @@ struct SearchView: View {
                         ForEach(results) { plant in
                             NavigationLink(value: plant) {
                                 SearchRow(plant: plant, country: country)
-                                    .padding(.horizontal, 12)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .background(Color.card)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .strokeBorder(Color.hairline, lineWidth: 1)
                                     )
                             }
@@ -121,41 +120,41 @@ struct SearchView: View {
     }
 }
 
+/// Same full-bleed leading-image card anatomy as CatalogRow, sized for the
+/// lighter search result (no index stamp, no badges).
 private struct SearchRow: View {
     @EnvironmentObject var settings: AppSettings
     let plant: Plant
     let country: Country
 
     var body: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: 0) {
             PlantImageView(
                 country: country, plant: plant, size: .thumb,
                 kind: plant.hasIllustration ? .plate : .photo
             )
-            .frame(width: 48, height: 48)
-            .modifier(ConditionalPlateThumb(isPlate: plant.hasIllustration))
-            .background(Color.parchment)
-            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .strokeBorder(Color.hairline, lineWidth: 1)
-            )
+            .frame(width: 88)
+            .scaleEffect(plant.hasIllustration ? 1.14 : 1)
+            .clipped()
 
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 3) {
                 Text(plant.names[settings.language])
-                    .font(.subheadline.weight(.semibold))
+                    .font(.headline.weight(.semibold))
                     .foregroundStyle(.ink)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.8)
                 if settings.showLatin {
                     Text(plant.names.latin)
-                        .font(.caption.italic())
+                        .font(.subheadline.italic())
                         .foregroundStyle(.inkMuted)
                         .lineLimit(1)
                 }
             }
+            .padding(.horizontal, 16)
+
             Spacer(minLength: 0)
         }
-        .padding(.vertical, 10)
+        .frame(height: 84)
         .contentShape(Rectangle())
     }
 }

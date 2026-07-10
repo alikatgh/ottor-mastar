@@ -7,6 +7,8 @@ struct AboutView: View {
     @EnvironmentObject var settings: AppSettings
     /// Debug/screenshot hook target — see the `-page` launch argument below.
     @State private var debugPage: PushedPage?
+    /// Launch-arg debug hooks fire once per process (see onAppear).
+    private static var launchHooksConsumed = false
 
     private var loc: L10n { settings.loc }
     private var lang: Language { settings.language }
@@ -101,7 +103,11 @@ struct AboutView: View {
         }
         .onAppear {
             // Debug/screenshot hook: `simctl launch ... -tab about -page
-            // settings|help|legal` pushes that page. No effect without the flag.
+            // settings|help|legal` pushes that page. No effect without the
+            // flag. One-shot per process — onAppear re-fires when the pushed
+            // page pops, which would re-push it forever.
+            guard !Self.launchHooksConsumed else { return }
+            Self.launchHooksConsumed = true
             let args = ProcessInfo.processInfo.arguments
             if let i = args.firstIndex(of: "-page"), i + 1 < args.count {
                 switch args[i + 1] {

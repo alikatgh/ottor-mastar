@@ -217,6 +217,21 @@ extension Glass {
     }
 }
 
+/// Groups adjacent Liquid Glass elements so they blend/morph as one fluid
+/// surface on iOS 26; transparent passthrough below.
+struct GlassGroup<Content: View>: View {
+    var spacing: CGFloat = 10
+    @ViewBuilder var content: Content
+
+    var body: some View {
+        if #available(iOS 26.0, *) {
+            GlassEffectContainer(spacing: spacing) { content }
+        } else {
+            content
+        }
+    }
+}
+
 // MARK: Button design system
 // All tappable chrome uses these two styles (never the platform default —
 // on Mac Catalyst the system bezel would override custom backgrounds and

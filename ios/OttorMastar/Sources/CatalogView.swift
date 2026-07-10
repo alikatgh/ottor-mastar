@@ -85,12 +85,11 @@ struct CatalogView: View {
                         ForEach(Array(filtered.enumerated()), id: \.element.slug) { index, plant in
                             NavigationLink(value: plant) {
                                 CatalogRow(plant: plant, country: country, index: index)
-                                    .padding(.horizontal, 12)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .background(Color.card)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
                                             .strokeBorder(Color.hairline, lineWidth: 1)
                                     )
                             }
@@ -162,6 +161,10 @@ struct CatalogView: View {
     }
 }
 
+/// Herbarium index card: the plate fills the card's full left edge (full
+/// bleed, clipped by the card's corners), the specimen number sits in the
+/// top-right corner like a catalog stamp, and the badges anchor the bottom —
+/// the standard iOS "leading image panel" card anatomy.
 struct CatalogRow: View {
     @EnvironmentObject var settings: AppSettings
     let plant: Plant
@@ -169,56 +172,45 @@ struct CatalogRow: View {
     let index: Int
 
     var body: some View {
-        HStack(spacing: 14) {
-            Text(plateNumeral(index))
-                .font(.caption.monospacedDigit())
-                .foregroundStyle(.inkMuted)
-                .frame(width: 28, alignment: .trailing)
-
+        HStack(spacing: 0) {
             PlantImageView(
                 country: country, plant: plant, size: .thumb,
                 kind: plant.hasIllustration ? .plate : .photo
             )
-            .frame(width: 56, height: 56)
-            .modifier(ConditionalPlateThumb(isPlate: plant.hasIllustration))
-            .background(Color.parchment)
-            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .strokeBorder(Color.hairline, lineWidth: 1)
-            )
+            .frame(width: 112)
+            // Plate scans keep narrow neutral margins; a slight zoom pushes
+            // the aged paper to the panel edges so the bleed is truly full.
+            .scaleEffect(plant.hasIllustration ? 1.14 : 1)
+            .clipped()
 
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 3) {
+                Text(plateNumeral(index))
+                    .font(.footnote.monospacedDigit())
+                    .foregroundStyle(.inkMuted)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+
+                Spacer(minLength: 0)
+
                 Text(plant.names[settings.language])
-                    .font(.subheadline.weight(.semibold))
+                    .font(.title3.weight(.semibold))
                     .foregroundStyle(.ink)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.8)
                 if settings.showLatin {
                     Text(plant.names.latin)
-                        .font(.caption.italic())
+                        .font(.subheadline.italic())
                         .foregroundStyle(.inkMuted)
                         .lineLimit(1)
                 }
+
+                Spacer(minLength: 0)
+
                 BadgeRow(categories: plant.categories)
-                    .padding(.top, 4)
             }
-
-            Spacer(minLength: 0)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
         }
-        .padding(.vertical, 10)
+        .frame(height: 124)
         .contentShape(Rectangle())
-    }
-}
-
-/// Applies the web's plate-thumb figure crop only to plates; photos fill.
-struct ConditionalPlateThumb: ViewModifier {
-    let isPlate: Bool
-
-    func body(content: Content) -> some View {
-        if isPlate {
-            content.plateThumbCrop()
-        } else {
-            content.clipped()
-        }
     }
 }

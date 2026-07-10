@@ -75,6 +75,8 @@ struct ImageViewer: View {
             }
         }
         .statusBarHidden()
+        // Soft tick when paging between items — Photos-style tactility.
+        .sensoryFeedback(.impact(weight: .light), trigger: index)
         .opacity(appeared || reduceMotion ? 1 : 0)
         .onAppear {
             guard item != nil else { dismiss(); return }
@@ -85,6 +87,8 @@ struct ImageViewer: View {
         // Paging to another image resets any pinch-zoom, so the swipe-down
         // dismiss gesture re-arms on the fresh page.
         .onChange(of: index) { zoomed = false }
+        // Photos-style paging tick.
+        .sensoryFeedback(.impact(weight: .light), trigger: index)
     }
 
     // MARK: Backdrop — blurred image letterbox fill
@@ -217,6 +221,7 @@ struct ImageViewer: View {
 
     private var chrome: some View {
         VStack {
+            GlassGroup(spacing: 12) {
             HStack {
                 // Wide mode carries the counter in the placard, so the top bar
                 // stays clean with just the close button (matches web desktop).
@@ -245,12 +250,66 @@ struct ImageViewer: View {
             }
             .padding(.horizontal, 14)
             .padding(.top, 8)
+            }
 
             Spacer()
 
-            if !isWide { caption }
+            if !isWide {
+                // Filmstrip + caption share one gradient scrim so the strip
+                // reads against busy photos instead of floating bare.
+                VStack(spacing: 2) {
+                    if items.count > 1 { filmstrip }
+                    caption
+                }
+                .background(
+                    LinearGradient(
+                        colors: [.clear, .black.opacity(0.75), .black.opacity(0.92)],
+                        startPoint: .top, endPoint: .bottom
+                    )
+                    .ignoresSafeArea(edges: .bottom)
+                )
+            }
         }
         .opacity(chromeOpacity)
+    }
+
+    /// Photos-style thumbnail scrubber: tap to jump, auto-centers on the
+    /// current page. Selection changes only opacity and ring — never geometry.
+    private var filmstrip: some View {
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 4) {
+                    ForEach(Array(items.enumerated()), id: \.element.id) { i, entry in
+                        Button {
+                            withAnimation(reduceMotion ? nil : .snappy(duration: 0.25)) {
+                                index = i
+                            }
+                        } label: {
+                            BundledPlantImage(item: entry, size: .thumb)
+                                .scaledToFill()
+                                .frame(width: 34, height: 46)
+                                .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+                                .opacity(index == i ? 1 : 0.45)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                        .strokeBorder(
+                                            .white.opacity(index == i ? 0.9 : 0), lineWidth: 1.5)
+                                )
+                        }
+                        .buttonStyle(.plain)
+                        .id(i)
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+            .frame(height: 50)
+            .onChange(of: index) {
+                withAnimation(reduceMotion ? nil : .snappy(duration: 0.3)) {
+                    proxy.scrollTo(index, anchor: .center)
+                }
+            }
+            .onAppear { proxy.scrollTo(index, anchor: .center) }
+        }
     }
 
     private var caption: some View {
@@ -281,6 +340,7 @@ struct ImageViewer: View {
                 }
             }
             Spacer(minLength: 0)
+            GlassGroup(spacing: 8) {
             HStack(spacing: 8) {
                 // Wikipedia — a compact round icon button, mirroring the web
                 // mobile caption. Opens the language-matched article.
@@ -314,18 +374,12 @@ struct ImageViewer: View {
                     .buttonStyle(ProminentPillButtonStyle())
                 }
             }
+            }
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 28)
-        .padding(.top, 60)
+        .padding(.top, 14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            LinearGradient(
-                colors: [.clear, .black.opacity(0.85), .black],
-                startPoint: .top, endPoint: .bottom
-            )
-            .ignoresSafeArea(edges: .bottom)
-        )
         .animation(.easeOut(duration: 0.2), value: index)
             }
         }

@@ -55,6 +55,13 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 - Cause: `ViewerScreen.kt` dialog is edge-to-edge (`decorFitsSystemWindows=false`) → ZERO automatic insets, but padding was fixed guesses (bottom 40dp, top 40dp). Pill text used themed `Ink` — near-white in dark mode, on a white capsule.
 - Fix: `navigationBarsPadding()` after the caption gradient (gradient still runs under the bar), `statusBarsPadding()` for top chrome, `systemBarsPadding()` on page reserves; pill text = fixed `ViewerPillInk` (0xFF201E19).
 - Lesson (generalizes): edge-to-edge surface ⇒ every fixed top/bottom padding is a bug — use the insets APIs; chrome that lives on a FIXED dark backdrop must use FIXED colors, never theme tokens that invert in dark mode.
+
+### 2026-07-10 — Catalog full-bleed cards + viewer filmstrip; launch-hook re-fire bug
+- Bug: viewer's X "didn't close" — only in app instances launched with `-viewer N`: HomeView.onAppear re-fires when the cover dismisses, so the hook re-opened it instantly (looked like a dead button). Fix: one-shot static guard (`launchHooksConsumed`) in HomeView/AboutView (ios/OttorMastar/Sources/HomeView.swift).
+- Lesson: launch-argument hooks must consume ONCE PER PROCESS — `onAppear` re-runs on every dismiss/pop, so an unguarded hook re-presents forever.
+- UI: CatalogRow/SearchRow → full-bleed leading-image cards (plate fills the card's left edge, index stamp top-right, badges bottom); plates get 1.14× zoom so scan margins never show as side bands. Viewer: thumbnail filmstrip scrubber sharing the caption scrim, paging haptics, GlassEffectContainer morph groups.
+- Icon: generic flat leaf → square crop of the Sardaana plate blooms + museum double-frame, generated from the real plate asset (scripts/gen-app-icons.cjs, re-runnable).
+
 ### 2026-07-10 — Liquid Glass adoption (iOS 26) + two screen bugs caught in the sweep
 - Change: Liquid Glass across iOS — `glassChrome` adapter in Theme.swift (`glassEffect` on 26, material/solid fallback on 17), glass pill buttons, filter chips, viewer chrome, native `Tab(role: .search)` bar with `.tabBarMinimizeBehavior(.onScrollDown)`; springs/`.snappy` + numericText counters everywhere (reduceMotion-gated).
 - Bug 1: viewer "Сиһилии" pill wrapped to two lines when the caption title squeezed it → `.fixedSize()` on the pill label (ImageViewer.swift caption). Pills never wrap — same 2026-07-08 lesson, new call site.

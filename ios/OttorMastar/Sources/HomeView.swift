@@ -18,6 +18,9 @@ struct HomeView: View {
     private var plants: [Plant] { country.plants }
     private var plated: [Plant] { plants.filter(\.hasIllustration) }
 
+    /// Launch-arg debug hooks fire once per process (see onAppear).
+    private static var launchHooksConsumed = false
+
     /// The plant's OWN country (falls back to the active country), so a
     /// cross-country entry opens with its own images.
     private func country(for plant: Plant) -> Country {
@@ -63,6 +66,11 @@ struct HomeView: View {
             // Debug/screenshot hooks (no effect without the flag):
             // `simctl launch ... -viewer <index>` opens the viewer on that photo;
             // `simctl launch ... -plant <slug>` pushes that plant's detail page.
+            // One-shot per process: onAppear re-fires when the presented
+            // viewer/detail dismisses, which would re-open it forever (the
+            // close button appears dead).
+            guard !Self.launchHooksConsumed else { return }
+            Self.launchHooksConsumed = true
             let args = ProcessInfo.processInfo.arguments
             if let i = args.firstIndex(of: "-viewer"), i + 1 < args.count,
                 let idx = Int(args[i + 1]), plants.indices.contains(idx)
