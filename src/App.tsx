@@ -67,6 +67,9 @@ function AppRoutes() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/legal" element={<LegalPage />} />
+          {/* Dedicated privacy-policy URL for App Store / Play Store listings —
+              same trilingual Legal & Privacy content. */}
+          <Route path="/privacy" element={<LegalPage />} />
           <Route path="/help" element={<HelpPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<NotFoundPage />} />
