@@ -50,6 +50,11 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
 
 ## Chronological log
 
+### 2026-07-12 — Mongolia botanical plates regenerated (photo-anchored, 24/24 correct)
+- Context: the 2026-07-06 audit deleted all 11 original Mongolia plates (each depicted an unrelated species under a fabricated "A. Petrov 1892" caption; 0/11 correct), leaving 22 species photo-only. This completes that audit's "Follow-up (not done)".
+- Fix: regenerated plates for all 24 species, ANCHORING each generation to the plant's own field photo (`public/mongolia/full/mongolia-NN.webp`) + per-species morphology, text-free. `_src_originals/illustrations/mongolia-*-ill.png` → `npm run optimize:illustrations` (manifest 25→47 slugs) → `npm run data:export`. Verified 24/24 by pairing each plate against its photo.
+- Lesson (generalizes): for AI species/botanical art the existing verified PHOTO is the ground-truth anchor — "generate from a name" invents plausible-but-wrong species (the 0/11 failure), "generate to match THIS photo" + a self-audit against it flips to 24/24. Never bake Latin captions into a generated image (misspellings read as fabrication) — render the name in-app.
+
 ### 2026-07-11 — iPad viewer shipped with NO close button (chrome laid out OFFSCREEN on regular width)
 - Symptom: full-screen viewer on iPad had no close button/counter; fine on iPhone. Chrome's `onAppear` fired with opacity=1 — mounted, invisible.
 - Cause: backdrop's `BundledPlantImage().scaledToFill()` had no clip/frame — a fill REPORTS its inflated size to layout, growing the whole viewer ZStack past the screen on iPad's 4:3 (tall plates), so the chrome overlay pinned to inflated bounds sat above the physical screen. iPhone's aspect ≈ plate aspect → overflow ≈ 0 → "iPad-only". ImageViewer.swift:107.
