@@ -15,78 +15,27 @@
  * Run after ANY edit to src/data/* or src/i18n/locales/*:
  *   node scripts/export-native-data.cjs
  */
-const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
-const os = require('node:os');
 const path = require('node:path');
+const { buildCatalog } = require('./lib/build-catalog.cjs');
 
 const ROOT = path.resolve(__dirname, '..');
-// IMAGE_HOST overrides the CDN origin baked into the export (e.g. a staging
-// deploy); defaults to the production host so an unset env is a no-op.
-const IMAGE_HOST = process.env.IMAGE_HOST ?? 'https://ottormastar.aulenor.com';
 
-// 1. Transpile the data modules (they are plain TS, no React) to CJS.
-const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ottor-data-'));
-const tsc = path.join(ROOT, 'node_modules', '.bin', 'tsc');
-execFileSync(
-  tsc,
-  [
-    'src/data/plants.ts',
-    'src/data/mongolia.ts',
-    'src/data/countries.ts',
-    'src/data/available-illustrations.ts',
-    'src/types/index.ts',
-    '--ignoreConfig',
-    '--module', 'commonjs',
-    '--target', 'es2020',
-    '--moduleResolution', 'node',
-    // TS 6 deprecates node10 resolution; it's exactly right for this one-off
-    // CJS transpile of extensionless-relative-import sources.
-    '--ignoreDeprecations', '6.0',
-    '--skipLibCheck',
-    '--outDir', outDir,
-  ],
-  { cwd: ROOT, stdio: 'inherit' }
-);
-
-const { COUNTRIES, DEFAULT_COUNTRY } = require(path.join(outDir, 'data', 'countries.js'));
-const { hasIllustration } = require(path.join(outDir, 'data', 'plants.js'));
-
-// 2. Shape the export — bake hasIllustration so apps never need the manifest.
-const data = {
-  version: 1,
-  generatedFrom: 'src/data (scripts/export-native-data.cjs)',
-  imageHost: IMAGE_HOST,
-  defaultCountry: DEFAULT_COUNTRY,
-  countries: Object.values(COUNTRIES).map((country) => ({
-    id: country.id,
-    imageBase: country.imageBase,
-    heroSlug: country.heroSlug,
-    languages: country.languages,
-    defaultLanguage: country.defaultLanguage,
-    plants: country.plants.map((p) => ({
-      id: p.id,
-      slug: p.slug,
-      imageId: p.imageId,
-      hasIllustration: hasIllustration(p),
-      names: p.names,
-      description: p.description,
-      medicinalUses: p.medicinalUses,
-      habitat: p.habitat,
-      bloomingSeason: p.bloomingSeason,
-      categories: p.categories,
-      color: p.color,
-    })),
-  })),
-};
+// 1. Build the canonical catalog (transpiles src/data). The shape lives in
+//    scripts/lib/build-catalog.cjs and is shared with the hosted
+//    public/catalog.json, so the two can never drift.
+const data = buildCatalog();
 
 const json = JSON.stringify(data, null, 2);
 
-// 3. Write everywhere the apps expect it.
+// 2. Write everywhere the apps expect it. `public/catalog.json` is the hosted
+//    copy the apps fetch at runtime for over-the-air content updates; it is
+//    byte-identical to the bundled snapshot, so both decode with one model.
 const targets = [
   'shared/plants.json',
   'ios/OttorMastar/Resources/plants.json',
   'android/app/src/main/assets/plants.json',
+  'public/catalog.json',
 ];
 for (const rel of targets) {
   const dest = path.join(ROOT, rel);
@@ -130,7 +79,7 @@ const sharp = require('sharp');
 
 (async () => {
   let copied = 0;
-  for (const country of Object.values(COUNTRIES)) {
+  for (const country of data.countries) {
     const base = country.imageBase.replace(/^\//, ''); // 'plants' | 'mongolia'
     for (const size of ['thumb', 'medium']) {
       const srcDir = path.join(ROOT, 'public', base, size);
@@ -161,7 +110,6 @@ const sharp = require('sharp');
   }
   console.log(`copied ${copied} image files into app bundles (plates trimmed)`);
 
-  fs.rmSync(outDir, { recursive: true, force: true });
   const total = data.countries.reduce((n, c) => n + c.plants.length, 0);
   console.log(`done — ${total} plants across ${data.countries.length} countries`);
 })().catch((e) => { console.error(e); process.exit(1); });

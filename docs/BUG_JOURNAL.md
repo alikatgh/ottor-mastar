@@ -37,6 +37,14 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
   badge/label row clips the title. Use `min-h-*` + grid `items-stretch` so the
   row grows to fit and stays uniform (keep the image panel `h-full`). Always
   verify localized layouts at the LONGEST language, not English.
+- **Offline-first OTA content: key the cache by app BUILD version, not a
+  timestamp.** For "fetch a hosted catalog, cache, fall back to bundled," the
+  hard case is "app updated → newer bundle vs older cached remote." A content
+  timestamp orders them but churns the committed JSON every export. Instead
+  store the cache under the current build number: a new binary's fresh bundle
+  always wins (cache key mismatches → ignored), and remote sync repopulates on
+  the next launch. Data needs no timestamp; the SCHEMA `version` stays separate
+  (structural compat only). Always keep the bundled baseline as the fallback.
 
 ## Patterns to scan for FIRST (native/Compose)
 
@@ -54,6 +62,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
   route→tab map; iOS: per-tab `NavigationPath` + re-tap pops to root).
 
 ## Chronological log
+
+### 2026-07-12 — Over-the-air catalog sync (hosted catalog.json + versioned cache, bundled fallback)
+- Change: apps can now get new plants WITHOUT an app-store release. `public/catalog.json` is emitted from the typed src/data by `scripts/gen-catalog-json.cjs` (wired into `prebuild`) and is byte-identical to the bundled `plants.json` — both come from the shared `scripts/lib/build-catalog.cjs`, so they can't drift. iOS `PlantStore` (Models.swift) + Android `PlantStore` (Models.kt) load cached-catalog-or-bundled at startup and `refresh()` in the background.
+- Freshness rule: the disk cache is keyed by the app BUILD version (iOS CFBundleVersion / Android longVersionCode), so after an app update the new binary's fresh bundle always wins; remote sync repopulates the cache for the next launch. Schema `version` (==1) gates structural compat; any fetch/decode failure silently keeps bundled data.
+- Scope/limitation: this syncs DATA only. New plants not in the binary render with a parchment placeholder for images until remote thumb/medium image fetch+cache is added (PlantImage.swift deliberately never networks for thumb/medium today) — that's the next step.
+- Verified: catalog.json served 200/application/json (v1, 47 plants); byte-identical to plants.json; iOS builds + launches (bundled fallback, since prod catalog.json is 404 until deployed); Android compiles.
 
 ### 2026-07-12 — Web catalog/search rows → iOS "leading-image panel"; fixed height clipped wrapped labels
 - Change: web CatalogPage/SearchPage rows rebuilt to match the iOS CatalogRow — full-bleed leading plate/photo (flush to the card's left edge, clipped by its corners), plate number as a top-right corner stamp, text cluster vertically centered. CatalogPage.tsx, SearchPage.tsx.

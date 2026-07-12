@@ -4,6 +4,13 @@ import SwiftUI
 struct OttorMastarApp: App {
     @StateObject private var settings = AppSettings()
 
+    init() {
+        // Best-effort over-the-air content sync: fetch the hosted catalog in the
+        // background and cache it for the NEXT launch (see PlantStore.refresh).
+        // The bundled snapshot renders this launch, so this never blocks startup.
+        PlantStore.refresh()
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()

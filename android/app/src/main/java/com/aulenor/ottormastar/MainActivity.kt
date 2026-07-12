@@ -91,6 +91,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PlantStore.load(applicationContext)
+        // Best-effort over-the-air content sync: fetch the hosted catalog in the
+        // background and cache it for the NEXT launch (see PlantStore.refresh).
+        // The bundled/cached snapshot already rendered, so this never blocks UI.
+        PlantStore.refresh(applicationContext)
         enableEdgeToEdge()
         setContent {
             val context = LocalContext.current
