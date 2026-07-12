@@ -32,6 +32,11 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
   (`bg-gradient-to-t from-black/80 … to-transparent`).
 - **Assets can be silent duplicates.** Before trusting a generated asset set,
   `md5` them — 6 of 23 "illustrations" were byte-for-byte copies of others.
+- **Fixed-height cards/rows clip once i18n labels wrap.** Sakha/Russian labels
+  run far longer than English; a fixed `h-*` on a card that stacks a wrapping
+  badge/label row clips the title. Use `min-h-*` + grid `items-stretch` so the
+  row grows to fit and stays uniform (keep the image panel `h-full`). Always
+  verify localized layouts at the LONGEST language, not English.
 
 ## Patterns to scan for FIRST (native/Compose)
 
@@ -49,6 +54,12 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
   route→tab map; iOS: per-tab `NavigationPath` + re-tap pops to root).
 
 ## Chronological log
+
+### 2026-07-12 — Web catalog/search rows → iOS "leading-image panel"; fixed height clipped wrapped labels
+- Change: web CatalogPage/SearchPage rows rebuilt to match the iOS CatalogRow — full-bleed leading plate/photo (flush to the card's left edge, clipped by its corners), plate number as a top-right corner stamp, text cluster vertically centered. CatalogPage.tsx, SearchPage.tsx.
+- Bug caught in browser verify: first pass used a fixed `h-[120px]`; cards whose long Sakha category labels wrapped to two badge lines (e.g. "Көннөрү бастыҥа") clipped the title at the top.
+- Fix: `min-h-[120px]` + grid `items-stretch` — rows grow to fit and stay uniform per row; the leading image is `h-full` so the full-bleed is preserved. Verified desktop 3-col + mobile 1-col, light theme, no console errors.
+- Lesson (generalizes): see the new top-section pattern — a fixed-height row clips the moment localized labels wrap; min-height + grid equalization, and verify at the longest language.
 
 ### 2026-07-12 — Mongolia botanical plates regenerated (photo-anchored, 24/24 correct)
 - Context: the 2026-07-06 audit deleted all 11 original Mongolia plates (each depicted an unrelated species under a fabricated "A. Petrov 1892" caption; 0/11 correct), leaving 22 species photo-only. This completes that audit's "Follow-up (not done)".

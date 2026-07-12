@@ -141,20 +141,17 @@ export default function CatalogPage() {
                   <Link
                     to={`/plant/${plant.slug}`}
                     className="
-                      flex items-center gap-4 p-3 h-full
-                      rounded-xl border border-hairline bg-card
+                      group relative flex h-full min-h-[120px] overflow-hidden
+                      rounded-2xl border border-hairline bg-card
                       hover:bg-cream-dark/50 hover:border-hairline-strong
                       transition-colors duration-200
                       no-underline
                     "
                   >
-                    {/* Plate number */}
-                    <span className="w-7 text-right text-xs text-ink-muted shrink-0">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-
-                    {/* Thumbnail */}
-                    <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-hairline bg-parchment">
+                    {/* Full-bleed leading plate/photo — fills the card's left
+                        edge, clipped by the card's corners (the iOS "leading
+                        image panel" card anatomy). */}
+                    <div className="w-28 h-full shrink-0 overflow-hidden bg-parchment">
                       <img
                         src={imgSrc}
                         alt={plant.names[lang]}
@@ -163,24 +160,30 @@ export default function CatalogPage() {
                       />
                     </div>
 
-                    {/* Info */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-[15px] font-semibold text-ink truncate">
+                    {/* Info — optically centered in the card; the plate number
+                        lives as a corner stamp so it never pushes the text down. */}
+                    <div className="flex-1 min-w-0 flex flex-col justify-center pl-4 pr-11 py-3">
+                      <h3 className="text-[17px] font-semibold text-ink truncate">
                         {plant.names[lang]}
                       </h3>
                       {settings.showLatin && (
-                        <p className="text-xs text-ink-muted italic truncate">
+                        <p className="text-sm text-ink-muted italic truncate mt-0.5">
                           {plant.names.latin}
                         </p>
                       )}
                       {/* flex-wrap: chips stay single-line pills and stack
                           instead of overflowing the card (long Sakha labels). */}
-                      <div className="flex flex-wrap gap-1.5 mt-1.5">
+                      <div className="flex flex-wrap gap-1.5 mt-2">
                         {plant.categories.map((cat) => (
                           <CategoryBadge key={cat} category={cat} />
                         ))}
                       </div>
                     </div>
+
+                    {/* Plate number — top-right catalog stamp (iOS parity). */}
+                    <span className="absolute top-2.5 right-3 text-xs text-ink-muted tabular-nums">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
                   </Link>
                 </motion.div>
               );

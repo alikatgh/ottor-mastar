@@ -66,25 +66,27 @@ export default function SearchPage() {
                     <Link
                       to={`/plant/${plant.slug}`}
                       className="
-                        flex items-center gap-4 p-3 h-full
-                        rounded-xl border border-hairline bg-card
+                        group relative flex h-full min-h-[96px] overflow-hidden
+                        rounded-2xl border border-hairline bg-card
                         hover:bg-cream-dark/50 hover:border-hairline-strong
                         transition-colors no-underline
                       "
                     >
-                      <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 border border-hairline bg-parchment">
+                      {/* Full-bleed leading plate/photo — iOS leading-image
+                          panel parity with the catalog rows. */}
+                      <div className="w-24 h-full shrink-0 overflow-hidden bg-parchment">
                         <img
                           src={imgSrc}
                           alt={plant.names[lang]}
                           className={hasPlate ? 'plate-thumb' : 'w-full h-full object-cover'}
                         />
                       </div>
-                      <div className="min-w-0">
-                        <h3 className="text-[15px] font-semibold text-ink truncate">
+                      <div className="flex-1 min-w-0 flex flex-col justify-center px-4 py-3">
+                        <h3 className="text-[17px] font-semibold text-ink truncate">
                           {plant.names[lang]}
                         </h3>
                         {settings.showLatin && (
-                          <p className="text-xs text-ink-muted italic truncate">
+                          <p className="text-sm text-ink-muted italic truncate mt-0.5">
                             {plant.names.latin}
                           </p>
                         )}
