@@ -24,7 +24,8 @@
     "plateCount_one": "{{count}} 幅图版",
     "plateCount_other": "{{count}} 幅图版",
     "photosTitle": "实地照片",
-    "swipeHint": "滑动"
+    "swipeHint": "滑动",
+    "appStoreNote": "免费 · 可离线使用"
   },
   "settings": {
     "title": "设置",
@@ -146,8 +147,8 @@
     "langTitle": "语言与合集",
     "langBody": "使用页眉中的按钮切换界面语言。在设置中还可以切换合集（国家）；每个合集提供各自的语言。",
     "appTitle": "离线使用",
-    "appBody": "在 Android 应用中，所有植物、图片和文字均可离线使用。",
-    "appLink": "下载 Android 应用",
+    "appBody": "《Ottor Mastar》iPhone 和 iPad 应用可离线查看所有植物、图片和文字——在 App Store 免费下载。",
+    "appLink": "获取应用",
     "safetyTitle": "安全提示",
     "safetyBody": "此处所有内容仅供教育参考——切勿依据本应用采集或使用植物。",
     "safetyLink": "阅读完整免责声明",

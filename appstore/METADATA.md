@@ -105,3 +105,56 @@ Interface language can be switched in Settings (Sakha default).
    - `cd ios && sed -i '' 's|<string>export</string>|<string>upload</string>|' ExportOptions.plist && xcodebuild -exportArchive -archivePath build/OttorMastar.xcarchive -exportOptionsPlist ExportOptions.plist -allowProvisioningUpdates`
 3. In ASC: fill the fields above, upload screenshots, answer age rating +
    privacy questionnaires, select the build, submit for review.
+
+---
+
+# macOS (Mac Catalyst) — v1.1, build 2 · added 2026-07-14
+
+Same app record (**6789648576**), same bundle id `com.aulenor.ottormastar` —
+the Catalyst build ships as a **universal purchase**. Archive:
+`ios/build/OttorMastar-macos.xcarchive` (universal arm64 + x86_64, macOS 14+,
+App Sandbox + outbound-network entitlements).
+
+## One-command rebuild + upload
+```
+cd ios && xcodegen \
+  && xcodebuild -project OttorMastar.xcodeproj -scheme OttorMastar \
+       -destination 'generic/platform=macOS,variant=Mac Catalyst' \
+       -archivePath build/OttorMastar-macos.xcarchive archive -allowProvisioningUpdates \
+  && xcodebuild -exportArchive -archivePath build/OttorMastar-macos.xcarchive \
+       -exportOptionsPlist ExportOptions.plist -allowProvisioningUpdates
+```
+
+## What's New (v1.1 — both platforms)
+
+en:
+```
+• New app icon — the Sardaana lily, the collection's signature bloom
+• Catalog updates now arrive automatically, no app update needed
+• First release for Mac
+```
+
+ru:
+```
+• Новая иконка приложения — сардаана, символ коллекции
+• Обновления каталога теперь приходят автоматически
+• Первый выпуск для Mac
+```
+
+## Screenshots (`appstore/screenshots/macos/`, 2880×1800 JPEG, no alpha)
+- 01-home (Sardaana frontispiece hero) · 02-catalog · 03-detail · 04-about
+- Captured from the real Catalyst app — light appearance, Sakha UI, Yakutia collection.
+
+## ASC steps for the macOS platform (user, in App Store Connect)
+1. My Apps → Ottor Mastar → left sidebar → **+ → macOS** (adds the platform;
+   the uploaded Catalyst build appears under it).
+2. Version 1.1: paste name/subtitle/description/keywords from the iOS listing
+   above (fields are per-platform but the copy is identical).
+3. Upload the 4 screenshots from `appstore/screenshots/macos/` (use the .jpg).
+4. Privacy policy URL per localization (same gotcha as iOS: the dialog has an
+   inner language dropdown — fill EVERY localization).
+5. Select build 1.1 (2), age rating + privacy carry over, submit for review.
+
+Note: iOS 1.1 (2) can be rebuilt/uploaded with the same commands minus the
+`-destination` (or Product → Archive) whenever you want the new icon live on
+iPhone/iPad too.

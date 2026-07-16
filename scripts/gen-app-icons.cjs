@@ -73,8 +73,17 @@ async function main() {
   // ---- iOS (and Mac Catalyst): single 1024² app icon ----
   const iosDir = path.join(ROOT, 'ios/OttorMastar/Resources/Assets.xcassets/AppIcon.appiconset');
   fs.mkdirSync(iosDir, { recursive: true });
-  await renderIcon(path.join(iosDir, 'icon-1024.png'));
+  const iosIcon = path.join(iosDir, 'icon-1024.png');
+  await renderIcon(iosIcon);
   console.log('iOS: wrote AppIcon.appiconset/icon-1024.png');
+
+  // ---- Google Play store icon: 512², opaque (downscaled from the flattened
+  // iOS 1024 so it stays 1:1 with the app icon and carries no alpha). ----
+  const playIcon = path.join(ROOT, 'appstore/play/icon-512.png');
+  if (fs.existsSync(path.dirname(playIcon))) {
+    await sharp(iosIcon).resize(512, 512).png().toFile(playIcon);
+    console.log('Play: wrote appstore/play/icon-512.png');
+  }
 
   // ---- Desktop (Electron / electron-builder): build/icon.png ----
   const desktopDir = path.join(ROOT, 'desktop/build');
