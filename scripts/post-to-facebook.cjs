@@ -72,19 +72,19 @@ async function graph(pathPart, body) {
 
 (async () => {
   // 1) Upload every frame unpublished (real photos first, plate last - the
-  //    voice rule), then publish one multi-photo feed post with the caption.
-  const urls = entry.imageUrls || [entry.imageUrl];
+  //    voice rule), then publish one feed post with the caption. Entries with
+  //    no images (Friday text statuses) post as message-only.
+  const urls = (entry.imageUrls || [entry.imageUrl]).filter(Boolean);
   const media = [];
   for (const url of urls) {
     const up = await graph(`${FB_PAGE_ID}/photos`, { url, published: false });
     media.push({ media_fbid: up.id });
   }
-  const feed = await graph(`${FB_PAGE_ID}/feed`, {
-    message: entry.caption,
-    attached_media: media,
-  });
+  const body = { message: entry.caption };
+  if (media.length) body.attached_media = media;
+  const feed = await graph(`${FB_PAGE_ID}/feed`, body);
   const postId = feed.id;
-  console.log(`Posted ${entry.slug} (${media.length} photos) → ${postId}`);
+  console.log(`Posted ${entry.slug} [${entry.format || 'plant'}] (${media.length} photos) → ${postId}`);
 
   // 2) Link as the first comment.
   if (postId && entry.firstComment) {

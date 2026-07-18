@@ -1,9 +1,9 @@
 # Plant-of-the-week calendar - mongolia
 
-_Generated from shared/plants.json - 30 posts, MN first._
+_Generated from shared/plants.json - 89 posts, MN first._
 
-## Week 1 · 2026-07-20 - mn-marigold
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-01.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-01-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-01-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-01-ill.webp
+## Week 1 · plant · 2026-07-20 - mn-marigold
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-01.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-01-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-01-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-01-ill.webp
 
 ```
 Хилэнцэр цэцэг · Tagetes erecta
@@ -20,8 +20,33 @@ African Marigold. An ornamental annual with large, ball-shaped orange-yellow blo
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-marigold  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 2 · 2026-07-27 - mn-cornflower
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-02.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-02-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-02-ill.webp
+## Week 1 · quiz · 2026-07-22 - mn-cornflower
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-02-2.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 1 · status · 2026-07-24 - mn-marigold
+```
+Мэдэх үү? Хилэнцэр цэцэг - ардын анагаахад цэцгийг ханиад болон үрэвслийн эсрэг хэрэглэж байсан; голдуу чимэглэлээр ургуулдаг.
+
+Та энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 2 · plant · 2026-07-27 - mn-cornflower
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-02.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-02-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-02-ill.webp
 
 ```
 Хөх ортууз цэцэг · Centaurea cyanus
@@ -38,8 +63,31 @@ Cornflower. A slender plant with vivid blue flower-heads.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-cornflower  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 3 · 2026-08-03 - mn-petunia
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-03.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-03-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-03-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-03-ill.webp
+## Week 2 · quiz · 2026-07-29 - mn-petunia
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-03-3.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 2 · status · 2026-07-31 - mn-cornflower
+```
+Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 3 · plant · 2026-08-03 - mn-petunia
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-03.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-03-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-03-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-03-ill.webp
 
 ```
 Петуни цэцэг · Petunia × atkinsiana
@@ -56,8 +104,33 @@ Petunia. An ornamental with large trumpet-shaped flowers in many colours.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-petunia  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 4 · 2026-08-10 - mn-pansy
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-04.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-04-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-04-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-04-ill.webp
+## Week 3 · quiz · 2026-08-05 - mn-pansy
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-04-3.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 3 · status · 2026-08-07 - mn-petunia
+```
+Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.
+
+App Store: https://apps.apple.com/app/id6789648576
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 4 · plant · 2026-08-10 - mn-pansy
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-04.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-04-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-04-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-04-ill.webp
 
 ```
 Гурван өнгийн виола · Viola × wittrockiana
@@ -74,8 +147,31 @@ Garden Pansy. A low plant with multicoloured “faced” flowers.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-pansy  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 5 · 2026-08-17 - mn-ornamental-kale
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-05.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-05-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-05-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-05-ill.webp
+## Week 4 · quiz · 2026-08-12 - mn-ornamental-kale
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-05-3.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 4 · status · 2026-08-14 - mn-pansy
+```
+Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 5 · plant · 2026-08-17 - mn-ornamental-kale
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-05.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-05-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-05-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-05-ill.webp
 
 ```
 Чимэглэлийн байцаа · Brassica oleracea
@@ -92,8 +188,33 @@ Ornamental Kale. A kale with frilled white-green or purple leaves in a rosette.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-ornamental-kale  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 6 · 2026-08-24 - mn-dusty-miller
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-06.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-06-ill.webp
+## Week 5 · quiz · 2026-08-19 - mn-dusty-miller
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-06.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 5 · status · 2026-08-21 - mn-ornamental-kale
+```
+Мэдэх үү? Чимэглэлийн байцаа - чимэглэлийн хэлбэрийг иддэггүй; мөн зүйлийн идэшний сортууд витаминаар баялаг.
+
+Та энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 6 · plant · 2026-08-24 - mn-dusty-miller
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-06.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-06-ill.webp
 
 ```
 Мөнгөлөг навчит цэцэг · Jacobaea maritima
@@ -110,8 +231,31 @@ Dusty Miller. An ornamental grown for its silvery, felted foliage.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-dusty-miller  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 7 · 2026-08-31 - mn-bedstraw
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-07.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-07-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-07-ill.webp
+## Week 6 · quiz · 2026-08-26 - mn-bedstraw
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-07-2.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 6 · status · 2026-08-28 - mn-dusty-miller
+```
+Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 7 · plant · 2026-08-31 - mn-bedstraw
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-07.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-07-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-07-ill.webp
 
 ```
 Шаргал ивлаг (өлөнгө) · Galium verum
@@ -128,8 +272,33 @@ Lady's Bedstraw. A plant with clouds of tiny, fragrant yellow flowers.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-bedstraw  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 8 · 2026-09-07 - mn-alfalfa
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-08.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-08-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-08-ill.webp
+## Week 7 · quiz · 2026-09-02 - mn-alfalfa
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-08-2.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 7 · status · 2026-09-04 - mn-bedstraw
+```
+Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.
+
+App Store: https://apps.apple.com/app/id6789648576
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 8 · plant · 2026-09-07 - mn-alfalfa
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-08.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-08-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-08-ill.webp
 
 ```
 Царгас · Medicago sativa
@@ -146,8 +315,31 @@ Alfalfa. A legume with blue-violet flower spikes.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-alfalfa  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 9 · 2026-09-14 - mn-rugosa-rose
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-09.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-09-ill.webp
+## Week 8 · quiz · 2026-09-09 - mn-rugosa-rose
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-09.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 8 · status · 2026-09-11 - mn-alfalfa
+```
+Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 9 · plant · 2026-09-14 - mn-rugosa-rose
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-09.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-09-ill.webp
 
 ```
 Үрчийсэн сарнай · Rosa rugosa
@@ -164,8 +356,33 @@ Rugosa Rose. A thorny shrub with large pink-purple flowers and wrinkled leaves.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-rugosa-rose  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 10 · 2026-09-21 - mn-yarrow
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-10.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-10-ill.webp
+## Week 9 · quiz · 2026-09-16 - mn-yarrow
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-10.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 9 · status · 2026-09-18 - mn-rugosa-rose
+```
+Мэдэх үү? Үрчийсэн сарнай - жимс (сарнайн жимс) нь С витаминаар онцгой баялаг; цай, чанамал хийдэг.
+
+Та энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 10 · plant · 2026-09-21 - mn-yarrow
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-10.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-10-ill.webp
 
 ```
 Түмэн навчит өвс · Achillea millefolium
@@ -182,8 +399,31 @@ Yarrow. A herb with flat white flower-clusters and feathery leaves.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-yarrow  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 11 · 2026-09-28 - mn-dahlia
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-11.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-11-ill.webp
+## Week 10 · quiz · 2026-09-23 - mn-dahlia
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-11.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 10 · status · 2026-09-25 - mn-yarrow
+```
+Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 11 · plant · 2026-09-28 - mn-dahlia
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-11.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-11-ill.webp
 
 ```
 Далия цэцэг · Dahlia pinnata
@@ -200,8 +440,33 @@ Dahlia. An ornamental with large, full blooms in many colours.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-dahlia  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 12 · 2026-10-05 - mn-blue-spruce
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-12.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-12-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-12-ill.webp
+## Week 11 · quiz · 2026-09-30 - mn-blue-spruce
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-12-2.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 11 · status · 2026-10-02 - mn-dahlia
+```
+Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.
+
+App Store: https://apps.apple.com/app/id6789648576
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 12 · plant · 2026-10-05 - mn-blue-spruce
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-12.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-12-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-12-ill.webp
 
 ```
 Хөх гацуур · Picea pungens
@@ -218,8 +483,31 @@ Blue Spruce. A conifer with stiff, silvery-blue needles.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-blue-spruce  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 13 · 2026-10-12 - mn-willow
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-13.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-13-ill.webp
+## Week 12 · quiz · 2026-10-07 - mn-willow
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-13.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 12 · status · 2026-10-09 - mn-blue-spruce
+```
+Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 13 · plant · 2026-10-12 - mn-willow
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-13.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-13-ill.webp
 
 ```
 Бургас · Salix
@@ -236,8 +524,33 @@ Willow. A tree or shrub with narrow leaves, growing by water.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-willow  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 14 · 2026-10-19 - mn-dandelion
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-14.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-14-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-14-ill.webp
+## Week 13 · quiz · 2026-10-14 - mn-dandelion
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-14-2.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 13 · status · 2026-10-16 - mn-willow
+```
+Мэдэх үү? Бургас - холтос нь салицин агуулдаг - эртнээс халуун бууруулах, өвчин намдаах (аспириний угшил) эмээр хэрэглэдэг.
+
+Та энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 14 · plant · 2026-10-19 - mn-dandelion
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-14.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-14-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-14-ill.webp
 
 ```
 Багваахай · Taraxacum officinale
@@ -254,8 +567,31 @@ Dandelion. The familiar plant with yellow heads and downy parachute seeds.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-dandelion  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 15 · 2026-10-26 - mn-wormwood
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-15.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-15-ill.webp
+## Week 14 · quiz · 2026-10-21 - mn-wormwood
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-15.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 14 · status · 2026-10-23 - mn-dandelion
+```
+Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 15 · plant · 2026-10-26 - mn-wormwood
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-15.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-15-ill.webp
 
 ```
 Шарилж · Artemisia
@@ -272,8 +608,33 @@ Wormwood. An aromatic herb with silvery, dissected leaves and a bitter scent.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-wormwood  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 16 · 2026-11-02 - mn-phlomis
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-16.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-16-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-16-ill.webp
+## Week 15 · quiz · 2026-10-28 - mn-phlomis
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-16-2.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 15 · status · 2026-10-30 - mn-wormwood
+```
+Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.
+
+App Store: https://apps.apple.com/app/id6789648576
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 16 · plant · 2026-11-02 - mn-phlomis
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-16.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-16-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-16-ill.webp
 
 ```
 Булцуут ширүүн өвс · Phlomoides tuberosa
@@ -290,8 +651,31 @@ Tuberous Jerusalem Sage. A steppe plant with pink-purple flowers set in whorls u
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-phlomis  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 17 · 2026-11-09 - mn-astragalus
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-17.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-17-ill.webp
+## Week 16 · quiz · 2026-11-04 - mn-astragalus
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-17.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 16 · status · 2026-11-06 - mn-phlomis
+```
+Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 17 · plant · 2026-11-09 - mn-astragalus
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-17.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-17-ill.webp
 
 ```
 Хунчир · Astragalus
@@ -308,8 +692,33 @@ Milkvetch. A legume with purple flower-clusters.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-astragalus  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 18 · 2026-11-16 - mn-cinquefoil
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-18.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-18-ill.webp
+## Week 17 · quiz · 2026-11-11 - mn-cinquefoil
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-18.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 17 · status · 2026-11-13 - mn-astragalus
+```
+Мэдэх үү? Хунчир - зарим зүйлийг дорнын анагаахад зүрх, дархлааны тонус болгож хэрэглэдэг.
+
+Та энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 18 · plant · 2026-11-16 - mn-cinquefoil
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-18.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-18-ill.webp
 
 ```
 Гичгэнэ · Potentilla
@@ -326,8 +735,31 @@ Cinquefoil. A plant with bright yellow five-petalled flowers.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-cinquefoil  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 19 · 2026-11-23 - mn-plantain
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-19.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-19-ill.webp
+## Week 18 · quiz · 2026-11-18 - mn-plantain
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-19.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 18 · status · 2026-11-20 - mn-cinquefoil
+```
+Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 19 · plant · 2026-11-23 - mn-plantain
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-19.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-19-ill.webp
 
 ```
 Тансаг өвс (замын) · Plantago major
@@ -344,8 +776,33 @@ Broadleaf Plantain. A plant with broad rosette leaves and slender flower-spikes.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-plantain  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 20 · 2026-11-30 - mn-ryegrass
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-20.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-20-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-20-ill.webp
+## Week 19 · quiz · 2026-11-25 - mn-ryegrass
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-20-2.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 19 · status · 2026-11-27 - mn-plantain
+```
+Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.
+
+App Store: https://apps.apple.com/app/id6789648576
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 20 · plant · 2026-11-30 - mn-ryegrass
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-20.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-20-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-20-ill.webp
 
 ```
 Хиаг · Leymus chinensis
@@ -362,8 +819,31 @@ Chinese Ryegrass. A blue-green sod-forming grass.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-ryegrass  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 21 · 2026-12-07 - mn-dragonhead
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-21.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-21-ill.webp
+## Week 20 · quiz · 2026-12-02 - mn-dragonhead
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-21.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 20 · status · 2026-12-04 - mn-ryegrass
+```
+Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 21 · plant · 2026-12-07 - mn-dragonhead
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-21.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-21-ill.webp
 
 ```
 Луугийн толгой цэцэг · Dracocephalum
@@ -380,8 +860,33 @@ Dragonhead. An aromatic steppe herb with blue-violet flowers.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-dragonhead  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 22 · 2026-12-14 - mn-guelder-rose
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-22.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-22-ill.webp
+## Week 21 · quiz · 2026-12-09 - mn-guelder-rose
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-22.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 21 · status · 2026-12-11 - mn-dragonhead
+```
+Мэдэх үү? Луугийн толгой цэцэг - хандыг тайвшруулах, ханиад, толгой өвдөхөд хэрэглэж байсан; цайнд анхилуун нэмэлт.
+
+Та энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 22 · plant · 2026-12-14 - mn-guelder-rose
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-22.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-22-ill.webp
 
 ```
 Балиус (тэхийн шээг) · Viburnum opulus
@@ -398,8 +903,31 @@ Guelder Rose. A shrub with white flower-clusters and red berries in autumn.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-guelder-rose  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 23 · 2026-12-21 - mn-hawksbeard
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-23.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-23-ill.webp
+## Week 22 · quiz · 2026-12-16 - mn-hawksbeard
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-23.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 22 · status · 2026-12-18 - mn-guelder-rose
+```
+Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 23 · plant · 2026-12-21 - mn-hawksbeard
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-23.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-23-ill.webp
 
 ```
 Шар багваахан (скерда) · Crepis
@@ -416,8 +944,33 @@ Hawksbeard. A plant with yellow, dandelion-like flower-heads.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-hawksbeard  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 24 · 2026-12-28 - mn-cosmos
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-24.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-24-ill.webp
+## Week 23 · quiz · 2026-12-23 - mn-cosmos
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-24.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 23 · status · 2026-12-25 - mn-hawksbeard
+```
+Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.
+
+App Store: https://apps.apple.com/app/id6789648576
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 24 · plant · 2026-12-28 - mn-cosmos
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-24.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-24-ill.webp
 
 ```
 Улбар шар космос · Cosmos sulphureus
@@ -434,8 +987,31 @@ Sulphur Cosmos. An ornamental with orange-yellow flowers and finely cut leaves.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-cosmos  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 25 · 2027-01-04 - mn-fireweed
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-25.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-25-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-25-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-25-ill.webp
+## Week 24 · quiz · 2026-12-30 - mn-fireweed
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-25-3.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 24 · status · 2027-01-01 - mn-cosmos
+```
+Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 25 · plant · 2027-01-04 - mn-fireweed
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-25.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-25-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-25-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-25-ill.webp
 
 ```
 Галт цэцэг · Chamerion angustifolium
@@ -452,8 +1028,33 @@ Fireweed. A tall perennial with a spike of rose-magenta flowers that open from t
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-fireweed  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 26 · 2027-01-11 - mn-thistle
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-26.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-26-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-26-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-26-4.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-26-ill.webp
+## Week 25 · quiz · 2027-01-06 - mn-thistle
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-26-4.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 25 · status · 2027-01-08 - mn-fireweed
+```
+Мэдэх үү? Галт цэцэг - исгэсэн навчнаас ургамлын цай («иван цай») хийдэг; ардын анагаахад үрэвслийн эсрэг, тайвшруулах хандаар хэрэглэж байжээ.
+
+Та энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 26 · plant · 2027-01-11 - mn-thistle
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-26.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-26-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-26-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-26-4.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-26-ill.webp
 
 ```
 Азгана · Cirsium arvense
@@ -470,8 +1071,31 @@ Creeping Thistle. A spiny perennial with rounded lilac-purple flowerheads.
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-thistle  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 27 · 2027-01-18 - mn-spurge
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-27.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-27-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-27-ill.webp
+## Week 26 · quiz · 2027-01-13 - mn-spurge
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-27-2.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 26 · status · 2027-01-15 - mn-thistle
+```
+Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 27 · plant · 2027-01-18 - mn-spurge
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-27.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-27-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-27-ill.webp
 
 ```
 Сүүт өвс · Euphorbia esula
@@ -488,8 +1112,33 @@ Leafy Spurge. An erect perennial with yellow-green flower clusters that bleeds a
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-spurge  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 28 · 2027-01-25 - mn-wild-onion
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-28.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-28-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-28-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-28-ill.webp
+## Week 27 · quiz · 2027-01-20 - mn-wild-onion
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-28-3.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 27 · status · 2027-01-22 - mn-spurge
+```
+Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.
+
+App Store: https://apps.apple.com/app/id6789648576
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 28 · plant · 2027-01-25 - mn-wild-onion
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-28.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-28-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-28-3.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-28-ill.webp
 
 ```
 Зэрлэг сонгино · Allium senescens
@@ -506,8 +1155,31 @@ Wild Onion. A grassy-leaved onion with a rounded umbel of pale-pink star flowers
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-wild-onion  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 29 · 2027-02-01 - mn-catchfly
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-29.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-29-ill.webp
+## Week 28 · quiz · 2027-01-27 - mn-catchfly
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-29.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 28 · status · 2027-01-29 - mn-wild-onion
+```
+Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 29 · plant · 2027-02-01 - mn-catchfly
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-29.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-29-ill.webp
 
 ```
 Мөлхөгч цацраа · Silene repens
@@ -524,8 +1196,33 @@ Creeping Catchfly. A slender plant with a striped inflated calyx and five notche
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-catchfly  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 30 · 2027-02-08 - mn-sardaana
-**Images (photos first, plate last):** https://ottormastar.aulenor.com/mongolia/full/mongolia-30.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-30-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-30-ill.webp
+## Week 29 · quiz · 2027-02-03 - mn-sardaana
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-30-2.webp
+
+```
+Энэ ямар ургамал вэ?
+
+Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.
+
+- English -
+Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.
+
+#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар
+```
+**First comment:** null
+
+## Week 29 · status · 2027-02-05 - mn-catchfly
+```
+Мэдэх үү? Мөлхөгч цацраа - silene төрлийн ургамалд сапонин агуулагддаг - чанамалыг заримдаа савангийн оронд хэрэглэдэг байв; эмийн хэрэглээ бага.
+
+Та энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
+
+## Week 30 · plant · 2027-02-08 - mn-sardaana
+**Images:** https://ottormastar.aulenor.com/mongolia/full/mongolia-30.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-30-2.webp  ·  https://ottormastar.aulenor.com/mongolia/full/mongolia-30-ill.webp
 
 ```
 Сарана цэцэг · Lilium pensylvanicum
@@ -541,4 +1238,12 @@ Siberian Lily. A vivid orange-red lily with recurved petals - the emblem flower 
 #Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #байгаль #Mongolia #Ulaanbaatar #plants #botanicalart
 ```
 **First comment:** https://ottormastar.aulenor.com/plant/mn-sardaana  ·  App Store: https://apps.apple.com/app/id6789648576
+
+## Week 30 · status · 2027-02-12 - mn-sardaana
+```
+Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.
+
+#Монгол #Улаанбаатар #ургамал #цэцэг
+```
+**First comment:** null
 

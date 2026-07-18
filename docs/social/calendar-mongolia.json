@@ -1,6 +1,7 @@
 [
   {
     "week": 1,
+    "format": "plant",
     "date": "2026-07-20",
     "slug": "mn-marigold",
     "imageUrls": [
@@ -13,7 +14,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-marigold  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 1,
+    "format": "quiz",
+    "date": "2026-07-22",
+    "slug": "mn-cornflower",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-02-2.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 1,
+    "format": "status",
+    "date": "2026-07-24",
+    "slug": "mn-marigold",
+    "imageUrls": [],
+    "caption": "Мэдэх үү? Хилэнцэр цэцэг - ардын анагаахад цэцгийг ханиад болон үрэвслийн эсрэг хэрэглэж байсан; голдуу чимэглэлээр ургуулдаг.\n\nТа энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 2,
+    "format": "plant",
     "date": "2026-07-27",
     "slug": "mn-cornflower",
     "imageUrls": [
@@ -25,7 +47,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-cornflower  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 2,
+    "format": "quiz",
+    "date": "2026-07-29",
+    "slug": "mn-petunia",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-03-3.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 2,
+    "format": "status",
+    "date": "2026-07-31",
+    "slug": "mn-cornflower",
+    "imageUrls": [],
+    "caption": "Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 3,
+    "format": "plant",
     "date": "2026-08-03",
     "slug": "mn-petunia",
     "imageUrls": [
@@ -38,7 +81,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-petunia  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 3,
+    "format": "quiz",
+    "date": "2026-08-05",
+    "slug": "mn-pansy",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-04-3.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 3,
+    "format": "status",
+    "date": "2026-08-07",
+    "slug": "mn-petunia",
+    "imageUrls": [],
+    "caption": "Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.\n\nApp Store: https://apps.apple.com/app/id6789648576\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 4,
+    "format": "plant",
     "date": "2026-08-10",
     "slug": "mn-pansy",
     "imageUrls": [
@@ -51,7 +115,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-pansy  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 4,
+    "format": "quiz",
+    "date": "2026-08-12",
+    "slug": "mn-ornamental-kale",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-05-3.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 4,
+    "format": "status",
+    "date": "2026-08-14",
+    "slug": "mn-pansy",
+    "imageUrls": [],
+    "caption": "Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 5,
+    "format": "plant",
     "date": "2026-08-17",
     "slug": "mn-ornamental-kale",
     "imageUrls": [
@@ -64,7 +149,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-ornamental-kale  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 5,
+    "format": "quiz",
+    "date": "2026-08-19",
+    "slug": "mn-dusty-miller",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-06.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 5,
+    "format": "status",
+    "date": "2026-08-21",
+    "slug": "mn-ornamental-kale",
+    "imageUrls": [],
+    "caption": "Мэдэх үү? Чимэглэлийн байцаа - чимэглэлийн хэлбэрийг иддэггүй; мөн зүйлийн идэшний сортууд витаминаар баялаг.\n\nТа энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 6,
+    "format": "plant",
     "date": "2026-08-24",
     "slug": "mn-dusty-miller",
     "imageUrls": [
@@ -75,7 +181,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-dusty-miller  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 6,
+    "format": "quiz",
+    "date": "2026-08-26",
+    "slug": "mn-bedstraw",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-07-2.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 6,
+    "format": "status",
+    "date": "2026-08-28",
+    "slug": "mn-dusty-miller",
+    "imageUrls": [],
+    "caption": "Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 7,
+    "format": "plant",
     "date": "2026-08-31",
     "slug": "mn-bedstraw",
     "imageUrls": [
@@ -87,7 +214,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-bedstraw  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 7,
+    "format": "quiz",
+    "date": "2026-09-02",
+    "slug": "mn-alfalfa",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-08-2.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 7,
+    "format": "status",
+    "date": "2026-09-04",
+    "slug": "mn-bedstraw",
+    "imageUrls": [],
+    "caption": "Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.\n\nApp Store: https://apps.apple.com/app/id6789648576\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 8,
+    "format": "plant",
     "date": "2026-09-07",
     "slug": "mn-alfalfa",
     "imageUrls": [
@@ -99,7 +247,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-alfalfa  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 8,
+    "format": "quiz",
+    "date": "2026-09-09",
+    "slug": "mn-rugosa-rose",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-09.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 8,
+    "format": "status",
+    "date": "2026-09-11",
+    "slug": "mn-alfalfa",
+    "imageUrls": [],
+    "caption": "Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 9,
+    "format": "plant",
     "date": "2026-09-14",
     "slug": "mn-rugosa-rose",
     "imageUrls": [
@@ -110,7 +279,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-rugosa-rose  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 9,
+    "format": "quiz",
+    "date": "2026-09-16",
+    "slug": "mn-yarrow",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-10.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 9,
+    "format": "status",
+    "date": "2026-09-18",
+    "slug": "mn-rugosa-rose",
+    "imageUrls": [],
+    "caption": "Мэдэх үү? Үрчийсэн сарнай - жимс (сарнайн жимс) нь С витаминаар онцгой баялаг; цай, чанамал хийдэг.\n\nТа энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 10,
+    "format": "plant",
     "date": "2026-09-21",
     "slug": "mn-yarrow",
     "imageUrls": [
@@ -121,7 +311,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-yarrow  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 10,
+    "format": "quiz",
+    "date": "2026-09-23",
+    "slug": "mn-dahlia",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-11.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 10,
+    "format": "status",
+    "date": "2026-09-25",
+    "slug": "mn-yarrow",
+    "imageUrls": [],
+    "caption": "Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 11,
+    "format": "plant",
     "date": "2026-09-28",
     "slug": "mn-dahlia",
     "imageUrls": [
@@ -132,7 +343,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-dahlia  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 11,
+    "format": "quiz",
+    "date": "2026-09-30",
+    "slug": "mn-blue-spruce",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-12-2.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 11,
+    "format": "status",
+    "date": "2026-10-02",
+    "slug": "mn-dahlia",
+    "imageUrls": [],
+    "caption": "Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.\n\nApp Store: https://apps.apple.com/app/id6789648576\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 12,
+    "format": "plant",
     "date": "2026-10-05",
     "slug": "mn-blue-spruce",
     "imageUrls": [
@@ -144,7 +376,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-blue-spruce  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 12,
+    "format": "quiz",
+    "date": "2026-10-07",
+    "slug": "mn-willow",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-13.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 12,
+    "format": "status",
+    "date": "2026-10-09",
+    "slug": "mn-blue-spruce",
+    "imageUrls": [],
+    "caption": "Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 13,
+    "format": "plant",
     "date": "2026-10-12",
     "slug": "mn-willow",
     "imageUrls": [
@@ -155,7 +408,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-willow  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 13,
+    "format": "quiz",
+    "date": "2026-10-14",
+    "slug": "mn-dandelion",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-14-2.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 13,
+    "format": "status",
+    "date": "2026-10-16",
+    "slug": "mn-willow",
+    "imageUrls": [],
+    "caption": "Мэдэх үү? Бургас - холтос нь салицин агуулдаг - эртнээс халуун бууруулах, өвчин намдаах (аспириний угшил) эмээр хэрэглэдэг.\n\nТа энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 14,
+    "format": "plant",
     "date": "2026-10-19",
     "slug": "mn-dandelion",
     "imageUrls": [
@@ -167,7 +441,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-dandelion  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 14,
+    "format": "quiz",
+    "date": "2026-10-21",
+    "slug": "mn-wormwood",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-15.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 14,
+    "format": "status",
+    "date": "2026-10-23",
+    "slug": "mn-dandelion",
+    "imageUrls": [],
+    "caption": "Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 15,
+    "format": "plant",
     "date": "2026-10-26",
     "slug": "mn-wormwood",
     "imageUrls": [
@@ -178,7 +473,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-wormwood  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 15,
+    "format": "quiz",
+    "date": "2026-10-28",
+    "slug": "mn-phlomis",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-16-2.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 15,
+    "format": "status",
+    "date": "2026-10-30",
+    "slug": "mn-wormwood",
+    "imageUrls": [],
+    "caption": "Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.\n\nApp Store: https://apps.apple.com/app/id6789648576\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 16,
+    "format": "plant",
     "date": "2026-11-02",
     "slug": "mn-phlomis",
     "imageUrls": [
@@ -190,7 +506,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-phlomis  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 16,
+    "format": "quiz",
+    "date": "2026-11-04",
+    "slug": "mn-astragalus",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-17.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 16,
+    "format": "status",
+    "date": "2026-11-06",
+    "slug": "mn-phlomis",
+    "imageUrls": [],
+    "caption": "Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 17,
+    "format": "plant",
     "date": "2026-11-09",
     "slug": "mn-astragalus",
     "imageUrls": [
@@ -201,7 +538,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-astragalus  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 17,
+    "format": "quiz",
+    "date": "2026-11-11",
+    "slug": "mn-cinquefoil",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-18.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 17,
+    "format": "status",
+    "date": "2026-11-13",
+    "slug": "mn-astragalus",
+    "imageUrls": [],
+    "caption": "Мэдэх үү? Хунчир - зарим зүйлийг дорнын анагаахад зүрх, дархлааны тонус болгож хэрэглэдэг.\n\nТа энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 18,
+    "format": "plant",
     "date": "2026-11-16",
     "slug": "mn-cinquefoil",
     "imageUrls": [
@@ -212,7 +570,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-cinquefoil  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 18,
+    "format": "quiz",
+    "date": "2026-11-18",
+    "slug": "mn-plantain",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-19.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 18,
+    "format": "status",
+    "date": "2026-11-20",
+    "slug": "mn-cinquefoil",
+    "imageUrls": [],
+    "caption": "Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 19,
+    "format": "plant",
     "date": "2026-11-23",
     "slug": "mn-plantain",
     "imageUrls": [
@@ -223,7 +602,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-plantain  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 19,
+    "format": "quiz",
+    "date": "2026-11-25",
+    "slug": "mn-ryegrass",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-20-2.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 19,
+    "format": "status",
+    "date": "2026-11-27",
+    "slug": "mn-plantain",
+    "imageUrls": [],
+    "caption": "Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.\n\nApp Store: https://apps.apple.com/app/id6789648576\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 20,
+    "format": "plant",
     "date": "2026-11-30",
     "slug": "mn-ryegrass",
     "imageUrls": [
@@ -235,7 +635,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-ryegrass  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 20,
+    "format": "quiz",
+    "date": "2026-12-02",
+    "slug": "mn-dragonhead",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-21.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 20,
+    "format": "status",
+    "date": "2026-12-04",
+    "slug": "mn-ryegrass",
+    "imageUrls": [],
+    "caption": "Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 21,
+    "format": "plant",
     "date": "2026-12-07",
     "slug": "mn-dragonhead",
     "imageUrls": [
@@ -246,7 +667,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-dragonhead  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 21,
+    "format": "quiz",
+    "date": "2026-12-09",
+    "slug": "mn-guelder-rose",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-22.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 21,
+    "format": "status",
+    "date": "2026-12-11",
+    "slug": "mn-dragonhead",
+    "imageUrls": [],
+    "caption": "Мэдэх үү? Луугийн толгой цэцэг - хандыг тайвшруулах, ханиад, толгой өвдөхөд хэрэглэж байсан; цайнд анхилуун нэмэлт.\n\nТа энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 22,
+    "format": "plant",
     "date": "2026-12-14",
     "slug": "mn-guelder-rose",
     "imageUrls": [
@@ -257,7 +699,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-guelder-rose  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 22,
+    "format": "quiz",
+    "date": "2026-12-16",
+    "slug": "mn-hawksbeard",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-23.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 22,
+    "format": "status",
+    "date": "2026-12-18",
+    "slug": "mn-guelder-rose",
+    "imageUrls": [],
+    "caption": "Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 23,
+    "format": "plant",
     "date": "2026-12-21",
     "slug": "mn-hawksbeard",
     "imageUrls": [
@@ -268,7 +731,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-hawksbeard  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 23,
+    "format": "quiz",
+    "date": "2026-12-23",
+    "slug": "mn-cosmos",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-24.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 23,
+    "format": "status",
+    "date": "2026-12-25",
+    "slug": "mn-hawksbeard",
+    "imageUrls": [],
+    "caption": "Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.\n\nApp Store: https://apps.apple.com/app/id6789648576\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 24,
+    "format": "plant",
     "date": "2026-12-28",
     "slug": "mn-cosmos",
     "imageUrls": [
@@ -279,7 +763,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-cosmos  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 24,
+    "format": "quiz",
+    "date": "2026-12-30",
+    "slug": "mn-fireweed",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-25-3.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 24,
+    "format": "status",
+    "date": "2027-01-01",
+    "slug": "mn-cosmos",
+    "imageUrls": [],
+    "caption": "Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 25,
+    "format": "plant",
     "date": "2027-01-04",
     "slug": "mn-fireweed",
     "imageUrls": [
@@ -292,7 +797,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-fireweed  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 25,
+    "format": "quiz",
+    "date": "2027-01-06",
+    "slug": "mn-thistle",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-26-4.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 25,
+    "format": "status",
+    "date": "2027-01-08",
+    "slug": "mn-fireweed",
+    "imageUrls": [],
+    "caption": "Мэдэх үү? Галт цэцэг - исгэсэн навчнаас ургамлын цай («иван цай») хийдэг; ардын анагаахад үрэвслийн эсрэг, тайвшруулах хандаар хэрэглэж байжээ.\n\nТа энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 26,
+    "format": "plant",
     "date": "2027-01-11",
     "slug": "mn-thistle",
     "imageUrls": [
@@ -306,7 +832,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-thistle  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 26,
+    "format": "quiz",
+    "date": "2027-01-13",
+    "slug": "mn-spurge",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-27-2.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 26,
+    "format": "status",
+    "date": "2027-01-15",
+    "slug": "mn-thistle",
+    "imageUrls": [],
+    "caption": "Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 27,
+    "format": "plant",
     "date": "2027-01-18",
     "slug": "mn-spurge",
     "imageUrls": [
@@ -318,7 +865,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-spurge  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 27,
+    "format": "quiz",
+    "date": "2027-01-20",
+    "slug": "mn-wild-onion",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-28-3.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 27,
+    "format": "status",
+    "date": "2027-01-22",
+    "slug": "mn-spurge",
+    "imageUrls": [],
+    "caption": "Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.\n\nApp Store: https://apps.apple.com/app/id6789648576\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 28,
+    "format": "plant",
     "date": "2027-01-25",
     "slug": "mn-wild-onion",
     "imageUrls": [
@@ -331,7 +899,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-wild-onion  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 28,
+    "format": "quiz",
+    "date": "2027-01-27",
+    "slug": "mn-catchfly",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-29.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 28,
+    "format": "status",
+    "date": "2027-01-29",
+    "slug": "mn-wild-onion",
+    "imageUrls": [],
+    "caption": "Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 29,
+    "format": "plant",
     "date": "2027-02-01",
     "slug": "mn-catchfly",
     "imageUrls": [
@@ -342,7 +931,28 @@
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-catchfly  ·  App Store: https://apps.apple.com/app/id6789648576"
   },
   {
+    "week": 29,
+    "format": "quiz",
+    "date": "2027-02-03",
+    "slug": "mn-sardaana",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/mongolia/full/mongolia-30-2.webp"
+    ],
+    "caption": "Энэ ямар ургамал вэ?\n\nУлаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.\n\n- English -\nGuess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар",
+    "firstComment": null
+  },
+  {
+    "week": 29,
+    "format": "status",
+    "date": "2027-02-05",
+    "slug": "mn-catchfly",
+    "imageUrls": [],
+    "caption": "Мэдэх үү? Мөлхөгч цацраа - silene төрлийн ургамалд сапонин агуулагддаг - чанамалыг заримдаа савангийн оронд хэрэглэдэг байв; эмийн хэрэглээ бага.\n\nТа энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
+  },
+  {
     "week": 30,
+    "format": "plant",
     "date": "2027-02-08",
     "slug": "mn-sardaana",
     "imageUrls": [
@@ -352,5 +962,14 @@
     ],
     "caption": "Сарана цэцэг · Lilium pensylvanicum\n\nЭнэ ургамлын гэрэл зургийг бид Үндэсний цэцэрлэгт хүрээлэнд авсан - тэнд зэрлэгээрээ ургадаг. Тод улаан-улбар шар, дэлбээ нь эргэн муруйсан сараана - саха түмний бэлгэ тэмдгийн цэцэг. Монголын нуга, хээрт мөн ургадаг.\nБулцуу нь идэж болно, хатааж гурил болгодог байсан; ардад тамир тэнхээ сэргээх эмээр хэрэглэж байжээ.\n\n- English -\nSiberian Lily. A vivid orange-red lily with recurved petals - the emblem flower of the Sakha people.\n\nЗөвхөн боловсролын болон соёлын зорилгоор - эмнэлгийн зөвлөгөө биш.\n\n#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #байгаль #Mongolia #Ulaanbaatar #plants #botanicalart",
     "firstComment": "https://ottormastar.aulenor.com/plant/mn-sardaana  ·  App Store: https://apps.apple.com/app/id6789648576"
+  },
+  {
+    "week": 30,
+    "format": "status",
+    "date": "2027-02-12",
+    "slug": "mn-sardaana",
+    "imageUrls": [],
+    "caption": "Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг",
+    "firstComment": null
   }
 ]

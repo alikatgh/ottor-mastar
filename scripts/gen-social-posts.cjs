@@ -136,15 +136,79 @@ function addDays(iso, n) {
   return d.toISOString().slice(0, 10);
 }
 
+// 3 posts a week (Mon/Wed/Fri), varied formats - a page that only reposts one
+// template reads as a bot. Monday tells the week's plant story; Wednesday is a
+// guess-the-plant close-up teasing NEXT Monday's species (its reveal); Friday
+// is a text-only status rotating between folk fact, park question, app tip,
+// and the "where next" ask that feeds the funding narrative.
+function captionQuizMongolia(nextPlant) {
+  return [
+    'Энэ ямар ургамал вэ?',
+    '',
+    'Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэнд авсан зураг. Таамаглалаа коммэнтоор бичээрэй - даваа гарагт бүрэн түүхийг нь хуваалцана.',
+    '',
+    '- English -',
+    'Guess the plant. Photographed in the National Garden Park, Ulaanbaatar. Full story on Monday.',
+    '',
+    '#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #таавар',
+  ].join('\n').replace(/\s*—\s*/g, ' - ');
+}
+
+function captionStatusMongolia(p, weekIdx) {
+  const name = p.names.mn || p.names.en;
+  const folk = firstSentence(p.medicinal?.mn);
+  const variants = [
+    folk
+      ? `Мэдэх үү? ${name} - ${folk.charAt(0).toLowerCase()}${folk.slice(1)}\n\nТа энэ ургамлын талаар өөр юу мэдэх вэ? Коммэнтоор хуваалцаарай.`
+      : `Та ${name}-ийг таньдаг уу? Энэ долоо хоногийн ургамлын түүхийг манай хуудаснаас уншаарай.`,
+    'Та Үндэсний цэцэрлэгт хүрээлэнгээр хамгийн сүүлд хэзээ зугаалсан бэ? Ямар цэцэг, ургамал анзаарагдсан бэ? Коммэнтоор бичээрэй - бид тэр ургамлын түүхийг олж хуваалцъя.',
+    'Оттор Мастар апп интернэтгүйгээр бүрэн ажилладаг. Хээр, ууланд ч ургамлаа таньж болно. Бүх ургамал монгол, англи, латин нэртэй. Үнэгүй, сурталчилгаагүй.\n\nApp Store: https://apps.apple.com/app/id6789648576',
+    'Бид Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, Якутын нэгэн тосгоны замаас эхэлсэн. Дараа нь хаашаа алхах ёстой вэ? Санал болгож буй газраа коммэнтоор бичээрэй.',
+  ];
+  return (variants[weekIdx % variants.length] + '\n\n#Монгол #Улаанбаатар #ургамал #цэцэг')
+    .replace(/\s*—\s*/g, ' - ');
+}
+
 const list = count > 0 ? plants.slice(0, count) : plants;
-const calendar = list.map((p, i) => ({
-  week: i + 1,
-  date: startArg ? addDays(startArg, i * 7) : null,
-  slug: p.slug,
-  imageUrls: p.imageUrls,
-  caption: PRIMARY === 'mn' ? captionMongolia(p) : captionRussian(p),
-  firstComment: `${p.pageUrl}  ·  App Store: https://apps.apple.com/app/id6789648576`,
-}));
+const calendar = [];
+for (let i = 0; i < list.length; i++) {
+  const p = list[i];
+  calendar.push({
+    week: i + 1,
+    format: 'plant',
+    date: startArg ? addDays(startArg, i * 7) : null,
+    slug: p.slug,
+    imageUrls: p.imageUrls,
+    caption: PRIMARY === 'mn' ? captionMongolia(p) : captionRussian(p),
+    firstComment: `${p.pageUrl}  ·  App Store: https://apps.apple.com/app/id6789648576`,
+  });
+  if (PRIMARY === 'mn') {
+    // Wednesday quiz: a DIFFERENT angle (2nd photo frame) of next week's plant.
+    const next = list[i + 1];
+    if (next) {
+      const photos = next.imageUrls.filter((u) => !u.includes('-ill.webp'));
+      calendar.push({
+        week: i + 1,
+        format: 'quiz',
+        date: startArg ? addDays(startArg, i * 7 + 2) : null,
+        slug: next.slug,
+        imageUrls: [photos[photos.length - 1]],
+        caption: captionQuizMongolia(next),
+        firstComment: null,
+      });
+    }
+    // Friday status: text-only, rotating format.
+    calendar.push({
+      week: i + 1,
+      format: 'status',
+      date: startArg ? addDays(startArg, i * 7 + 4) : null,
+      slug: p.slug,
+      imageUrls: [],
+      caption: captionStatusMongolia(p, i),
+      firstComment: null,
+    });
+  }
+}
 
 const outDir = path.join(ROOT, 'docs/social');
 fs.mkdirSync(outDir, { recursive: true });
@@ -154,8 +218,8 @@ fs.writeFileSync(path.join(outDir, `calendar${suffix}.json`), JSON.stringify(cal
 const md = [`# Plant-of-the-week calendar${countryArg ? ` - ${countryArg}` : ''}\n`,
   `_Generated from shared/plants.json - ${calendar.length} posts, ${PRIMARY.toUpperCase()} first._\n`];
 for (const e of calendar) {
-  md.push(`## Week ${e.week}${e.date ? ` · ${e.date}` : ''} - ${e.slug}`);
-  md.push(`**Images (photos first, plate last):** ${e.imageUrls.join('  ·  ')}\n`);
+  md.push(`## Week ${e.week} · ${e.format}${e.date ? ` · ${e.date}` : ''} - ${e.slug}`);
+  if (e.imageUrls.length) md.push(`**Images:** ${e.imageUrls.join('  ·  ')}\n`);
   md.push('```\n' + e.caption + '\n```');
   md.push(`**First comment:** ${e.firstComment}\n`);
 }
