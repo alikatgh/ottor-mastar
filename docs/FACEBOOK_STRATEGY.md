@@ -19,6 +19,35 @@ non-commercial — is the whole marketing advantage. Lean into it.
      Every such post carries a one-line disclaimer. Never encourage readers to
      gather, identify, or consume a plant from a post.
 
+## Mongolia targeting campaign ⭐ (the current growth push)
+
+The near-term goal is **users in Mongolia**, so the Mongolia plants run as their
+own campaign — not an afterthought bolted onto the Sakha page. The plan:
+
+- **Mongolian first, English below.** Every Mongolia post leads with a Mongolian
+  caption (the story), then a short English block under an `— English —` rule for
+  reach and for the diaspora. Never machine-dump five languages into one caption.
+- **Geo-target Ulaanbaatar.** When boosting, target **Ulaanbaatar + interest:
+  gardening/botany/nature**, not the whole country — the audience is city people
+  who walk past these flowers, not remote herders.
+- **The Central Park hook.** ~7 of the Mongolia species are ornamentals actually
+  planted in **Ulaanbaatar's Central Park / city flowerbeds** (marigold, pansy,
+  ornamental kale, dusty miller, rugosa rose, dahlia, blue spruce, cosmos…).
+  Their posts open with *"walking through Central Park you often pass this
+  flower"* — instant local recognition, the thing that makes a passer-by stop,
+  read, and share. Wild steppe plants (cornflower, yarrow, alfalfa, bedstraw…)
+  **never** get that line — the caption must never claim a steppe plant grows in
+  the park. This is enforced in the generator (`isParkPlant` keys off the plant's
+  own habitat text), so the honesty rule can't drift.
+- **Stories, not labels.** The Mongolian lead is a small, interesting fact — where
+  you'd meet it, what it looks like, a folk note — not a dry species card. People
+  share stories about the flower they walked past this morning; they scroll past
+  taxonomy.
+- **How it's generated:** `node scripts/gen-social-posts.cjs 2026-07-27 12 --country
+  mongolia` → `docs/social/calendar-mongolia.{json,md}`, ready for the Meta poster.
+  The Yakutia/Russian calendar is the same script without `--country` (or
+  `--country yakutia`).
+
 ## Content pillars (rotate these)
 
 1. **Plant of the week** ⭐ (the anchor, ~1×/week)
@@ -52,12 +81,16 @@ non-commercial — is the whole marketing advantage. Lean into it.
 
 ## Localization
 
-- Primary page language: **Russian + Sakha** (the core audience), English in the
-  caption for reach. For Mongolia growth, cross-post the Mongolia plants in
-  **Mongolian**.
-- Practical: bilingual captions (Sakha/Russian first line, English second), or a
-  separate lightweight Mongolian page if Mongolia traffic grows. Don't machine-
-  dump five languages into one caption — it reads as spam.
+- **Two audiences, two lead languages** — run them as two content streams:
+  - **Mongolia stream** → **Mongolian first**, English below (see the Mongolia
+    targeting campaign above). Geo-boost Ulaanbaatar.
+  - **Yakutia stream** → **Russian + Sakha first**, English below. Geo-boost the
+    Sakha Republic.
+- Practical: two calendars from one generator (`--country mongolia` /
+  `--country yakutia`). Start on a single Page with the two streams tagged by
+  language; split into a dedicated Mongolian Page only once Mongolia traffic
+  justifies it. Don't machine-dump five languages into one caption — it reads as
+  spam.
 
 ## Audience & where to find them
 
