@@ -7,9 +7,12 @@ non-commercial — is the whole marketing advantage. Lean into it.
 
 ## Positioning & voice
 
-- **What we are:** a living herbarium of the Sakha land (and now Mongolia) —
+- **What we are:** a living herbarium that began in exactly two places — a
+  remote village road in Yakutia and Ulaanbaatar's National Garden Park —
   botanical plates, field photos, and the plant's names in Sakha, Russian,
-  English, Mongolian, Latin, plus notes on folk tradition.
+  English, Mongolian, Latin, plus notes on folk tradition. We say so plainly:
+  two documented transects, growing place by place. The modesty is the story —
+  and the scaling pitch.
 - **Voice:** warm, unhurried, reverent of the land and language. Not salesy. A
   quiet museum, not a startup. Post in the reader's language (see Localization).
 - **Two honesty rules that protect the brand** (carry them from the app):
@@ -44,17 +47,43 @@ own campaign — not an afterthought bolted onto the Sakha page. The plan:
     lawns hide a whole steppe flora most visitors never notice.
   Neither variant overstates; the split is enforced in the generator so the
   honesty rule can't drift.
-- **Partner with the park itself.** The park's administration runs an active
-  news site (park.ub.gov.mn → Мэдээ) and posts about its own flower plantings —
-  literally our content. Tag their page in park-hook posts, and pitch a
-  collaboration: Ottor Mastar as *"the field guide to the National Garden
-  Park's flora"* — every species photographed on their grounds, free, offline,
-  in Mongolian. One share from the park's official page reaches exactly the
-  park-goer audience we're targeting.
 - **The provenance story is a post of its own.** "Every photo in the Mongolia
   collection was taken in the National Garden Park, on morning walks and runs" —
   a behind-the-herbarium post that makes the whole collection feel local and
   personal, and invites followers to spot the plants themselves.
+
+## Funding & scaling narrative (why we're building the audience)
+
+We are **not partnering with anyone.** The page exists to build the traction
+that gets the project **funded**, so it can grow beyond its two starting points.
+
+- **The origin story IS the pitch.** Ottor Mastar started from exactly two
+  places: **Ulaanbaatar's National Garden Park** (30 species, every one
+  photographed on walks and runs) and **a remote village road in Yakutia**.
+  Not "the flora of two countries" — two transects, documented completely,
+  by one person with a phone and a botanical illustrator's eye. That honesty
+  is the strength: the method is proven and cheap, and every new place is
+  just another walk. *"This is what one park and one road look like. Imagine
+  every park, every road."*
+- **What funders need to see on the page** (build these deliberately):
+  1. **Traction** — followers, shares, App Store/Play downloads (UTM-tag every
+     link so the numbers are provable).
+  2. **Method** — behind-the-herbarium posts showing the pipeline: field photo
+     → identification → vintage plate → five languages → free offline app.
+     A repeatable, documented process reads as *fundable infrastructure*, not
+     a hobby.
+  3. **Demand** — comments asking "when is my region?" Screenshot-worthy proof
+     that people want their own places documented. Prompt it: end posts with
+     *"What place should we walk next?"*
+- **Where to apply once the numbers exist:** biodiversity / citizen-science
+  grants, indigenous-language and cultural-heritage funds (the Sakha naming is
+  a genuine language-preservation artifact), digital-culture programs, and
+  small climate/eco funds active in Mongolia and Siberia. The FB page + the
+  apps + this repo are the portfolio.
+- **Scaling roadmap to name publicly** (a roadmap post also signals ambition):
+  finish the Yakutia route → a second Ulaanbaatar park or a steppe transect →
+  new regions as funding lands. Every completed place becomes a new local
+  audience and a new proof point.
 - **Stories, not labels.** The Mongolian lead is a small, interesting fact — where
   you'd meet it, what it looks like, a folk note — not a dry species card. People
   share stories about the flower they walked past this morning; they scroll past
@@ -114,10 +143,10 @@ own campaign — not an afterthought bolted onto the Sakha page. The plan:
   Plant-of-the-week into: Sakha/Yakutia community groups, Mongolian nature &
   steppe groups, plant-identification groups, botanical-art groups, foraging/
   herbalism groups (respecting their rules + the disclaimer).
-- **Partners to tag / collaborate with:** North-Eastern Federal University
-  (Yakutsk) botany dept, regional botanical gardens & museums, Sakha cultural
-  organizations, indigenous-language initiatives. A single share from an
-  institutional page outperforms weeks of organic posts.
+- **No partnerships.** We grow on our own content and our own audience; the
+  goal of the page is traction we can show funders (see Funding & scaling
+  narrative above), not co-branding. If an institution shares a post
+  organically, great — but we don't pitch, tag-beg, or co-publish.
 - **Hashtags** (a few, not a wall): `#Саха #Якутия #Sakha #Yakutia #Mongolia
   #этноботаника #botanicalart #herbarium #wildflowers #ургамал`.
 
@@ -139,7 +168,8 @@ own campaign — not an afterthought bolted onto the Sakha page. The plan:
 - **Shares** — the true signal for this content; a shared plate reaches a new
   network. Track which pillar/species gets shared most and make more of it.
 - **App Store link clicks** (UTM-tag the links) — the real conversion.
-- **Group-referral traffic** and **follower growth from institutional shares.**
+- **Group-referral traffic** and **"do my region next" comments** — the demand
+  evidence the funding pitch is built on. Screenshot and archive them.
 - Review monthly; double down on the 2–3 post types that actually travel.
 
 ## First-30-days checklist
@@ -152,8 +182,12 @@ own campaign — not an afterthought bolted onto the Sakha page. The plan:
 4. Write **3 heritage posts** (sardaana, a Sakha plant name's meaning, a season).
 5. Join 8–10 relevant Groups; introduce the project once, respectfully, then
    contribute value (not just links).
-6. Reach out to **2 institutional partners** for a share/collaboration.
+6. Post the **origin story** (two starting points: the National Garden Park +
+   a village road in Yakutia) and the **roadmap** ("what place next?") — the
+   two posts the funding narrative is anchored on.
 7. After 2 weeks, boost the single best organic post ($10, geo+interest).
+8. Start a `docs/funding/` traction log: monthly followers, shares, UTM link
+   clicks, downloads, and screenshots of "do my region" comments.
 
 ## Ready-to-adapt starter posts
 
