@@ -15,6 +15,7 @@ const CatalogPage = lazy(() => import('./pages/CatalogPage'));
 const PlantDetailPage = lazy(() => import('./pages/PlantDetailPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
+const NewsPage = lazy(() => import('./pages/NewsPage'));
 const LegalPage = lazy(() => import('./pages/LegalPage'));
 const HelpPage = lazy(() => import('./pages/HelpPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
@@ -66,6 +67,7 @@ function AppRoutes() {
           <Route path="/plant/:slug" element={<PlantDetailPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/news" element={<NewsPage />} />
           <Route path="/legal" element={<LegalPage />} />
           {/* Dedicated privacy-policy URL for App Store / Play Store listings —
               same trilingual Legal & Privacy content. */}

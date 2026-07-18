@@ -1,11 +1,12 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Images, BookOpen, Search, Info } from 'lucide-react';
+import { Images, BookOpen, Search, Newspaper, Info } from 'lucide-react';
 
 const NAV_ITEMS = [
   { path: '/', icon: Images, labelKey: 'nav.gallery' },
   { path: '/catalog', icon: BookOpen, labelKey: 'nav.catalog' },
   { path: '/search', icon: Search, labelKey: 'nav.search' },
+  { path: '/news', icon: Newspaper, labelKey: 'nav.news' },
   { path: '/about', icon: Info, labelKey: 'nav.about' },
 ];
 

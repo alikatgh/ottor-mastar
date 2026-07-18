@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { path: '/', labelKey: 'nav.gallery' },
   { path: '/catalog', labelKey: 'nav.catalog' },
   { path: '/search', labelKey: 'nav.search' },
+  { path: '/news', labelKey: 'nav.news' },
   { path: '/about', labelKey: 'nav.about' },
 ];
 

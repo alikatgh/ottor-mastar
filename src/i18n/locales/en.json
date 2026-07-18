@@ -10,7 +10,8 @@
     "gallery": "Gallery",
     "catalog": "Catalog",
     "search": "Search",
-    "about": "About"
+    "about": "About",
+    "news": "News"
   },
   "gallery": {
     "title": "Plant Gallery",
@@ -153,5 +154,9 @@
     "safetyBody": "Everything here is for education only — never gather or use plants based on this app.",
     "safetyLink": "Read the full disclaimer",
     "appBodyNative": "Everything in this app — every plant, picture and text — works without an internet connection."
+  },
+  "news": {
+    "title": "News",
+    "empty": "No news yet."
   }
 }

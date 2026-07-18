@@ -10,7 +10,8 @@
     "gallery": "图库",
     "catalog": "目录",
     "search": "搜索",
-    "about": "关于"
+    "about": "关于",
+    "news": "新闻"
   },
   "gallery": {
     "title": "植物图库",
@@ -153,5 +154,9 @@
     "safetyBody": "此处所有内容仅供教育参考——切勿依据本应用采集或使用植物。",
     "safetyLink": "阅读完整免责声明",
     "appBodyNative": "本应用中的所有内容——植物、图片和文字——均可在无网络连接时使用。"
+  },
+  "news": {
+    "title": "新闻",
+    "empty": "暂无新闻。"
   }
 }
