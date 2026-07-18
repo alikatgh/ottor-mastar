@@ -71,14 +71,20 @@ async function graph(pathPart, body) {
 }
 
 (async () => {
-  // 1) Publish the plate photo + caption.
-  const photo = await graph(`${FB_PAGE_ID}/photos`, {
-    url: entry.imageUrl,
-    caption: entry.caption,
-    published: true,
+  // 1) Upload every frame unpublished (real photos first, plate last - the
+  //    voice rule), then publish one multi-photo feed post with the caption.
+  const urls = entry.imageUrls || [entry.imageUrl];
+  const media = [];
+  for (const url of urls) {
+    const up = await graph(`${FB_PAGE_ID}/photos`, { url, published: false });
+    media.push({ media_fbid: up.id });
+  }
+  const feed = await graph(`${FB_PAGE_ID}/feed`, {
+    message: entry.caption,
+    attached_media: media,
   });
-  const postId = photo.post_id || photo.id;
-  console.log(`Posted ${entry.slug} → ${postId}`);
+  const postId = feed.id;
+  console.log(`Posted ${entry.slug} (${media.length} photos) → ${postId}`);
 
   // 2) Link as the first comment.
   if (postId && entry.firstComment) {
