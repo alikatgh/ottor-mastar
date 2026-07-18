@@ -1945,6 +1945,47 @@
             "medicinal"
           ],
           "color": "#E3AEC4"
+        },
+        {
+          "id": "mn-sardaana",
+          "slug": "mn-sardaana",
+          "imageId": "mongolia-30",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Сардаана",
+            "ru": "Лилия пенсильванская",
+            "en": "Siberian Lily",
+            "latin": "Lilium pensylvanicum",
+            "mn": "Сарана цэцэг",
+            "zh": "毛百合"
+          },
+          "description": {
+            "sah": "Чаҕылхай кыһыл-оранжевай, тоҥсуллубут лепестактаах лилия — саха дьонун бэлиэ сибэккитэ. Монголия ходуһаларыгар, хонууларыгар эмиэ көстөр.",
+            "ru": "Ярко-оранжево-красная лилия с отогнутыми лепестками — символ земли саха. Растёт также на лугах и в степи Монголии.",
+            "en": "A vivid orange-red lily with recurved petals — the emblem flower of the Sakha people. It also grows wild on the meadows and steppe of Mongolia.",
+            "mn": "Тод улаан-улбар шар, дэлбээ нь эргэн муруйсан сараана — саха түмний бэлгэ тэмдгийн цэцэг. Монголын нуга, хээрт мөн ургадаг.",
+            "zh": "橙红色、花瓣反卷的百合——萨哈人的象征之花。也生长在蒙古的草甸和草原上。"
+          },
+          "medicinalUses": {
+            "sah": "Луковицата сиэнэр, хатарыллан бурдук оҥоһуллара; норуокка эти-хааны бөҕөргөтөр эмп быһыытынан туттуллара.",
+            "ru": "Луковицы съедобны, их сушили и мололи в муку; в народе использовались как общеукрепляющее средство.",
+            "en": "The bulbs are edible — dried and ground into flour — and were used as a strengthening tonic.",
+            "mn": "Булцуу нь идэж болно, хатааж гурил болгодог байсан; ардад тамир тэнхээ сэргээх эмээр хэрэглэж байжээ.",
+            "zh": "鳞茎可食，晒干后磨成面粉；民间用作强壮补益之物。"
+          },
+          "habitat": {
+            "sah": "Ходуһа, хонуу, ойуур кытыыта",
+            "ru": "Луга, степь, опушки леса",
+            "en": "Meadows, steppe, forest edges",
+            "mn": "Нуга, хээр, ойн захын газар",
+            "zh": "草甸、草原、林缘"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "edible",
+            "ornamental"
+          ],
+          "color": "#E8491D"
         }
       ]
     }

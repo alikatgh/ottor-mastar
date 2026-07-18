@@ -844,6 +844,28 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     categories: [CATEGORIES.MEDICINAL],
     color: '#E3AEC4',
   },
+
+  {
+    id: 'mn-sardaana',
+    slug: 'mn-sardaana',
+    imageId: 'mongolia-30',
+    gallery: ['mongolia-30-2'],
+    names: { sah: 'Сардаана', ru: 'Лилия пенсильванская', en: 'Siberian Lily', latin: 'Lilium pensylvanicum' },
+    description: {
+      sah: 'Чаҕылхай кыһыл-оранжевай, тоҥсуллубут лепестактаах лилия — саха дьонун бэлиэ сибэккитэ. Монголия ходуһаларыгар, хонууларыгар эмиэ көстөр.',
+      ru: 'Ярко-оранжево-красная лилия с отогнутыми лепестками — символ земли саха. Растёт также на лугах и в степи Монголии.',
+      en: 'A vivid orange-red lily with recurved petals — the emblem flower of the Sakha people. It also grows wild on the meadows and steppe of Mongolia.',
+    },
+    medicinalUses: {
+      sah: 'Луковицата сиэнэр, хатарыллан бурдук оҥоһуллара; норуокка эти-хааны бөҕөргөтөр эмп быһыытынан туттуллара.',
+      ru: 'Луковицы съедобны, их сушили и мололи в муку; в народе использовались как общеукрепляющее средство.',
+      en: 'The bulbs are edible — dried and ground into flour — and were used as a strengthening tonic.',
+    },
+    habitat: { sah: 'Ходуһа, хонуу, ойуур кытыыта', ru: 'Луга, степь, опушки леса', en: 'Meadows, steppe, forest edges' },
+    bloomingSeason: 'june-july',
+    categories: [CATEGORIES.EDIBLE, CATEGORIES.ORNAMENTAL],
+    color: '#E8491D',
+  },
 ];
 
 /**

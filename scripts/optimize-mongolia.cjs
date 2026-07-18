@@ -74,6 +74,8 @@ const IMAGE_MAP = {
   'mongolia-26-3': '20260712_135322.jpg', // Thistle — flowerhead
   'mongolia-26-4': '20260712_135331.jpg', // Thistle — flowerhead close
   'mongolia-28-3': '20260711_132804.jpg', // Wild onion — umbel close
+  'mongolia-30': '20260712_135408.jpg',   // Lilium pensylvanicum — Sardaana lily
+  'mongolia-30-2': '20260712_135402.jpg', // Sardaana — second bloom
 };
 
 const INPUT_DIR = path.join(__dirname, '../_src_originals/mongolia');

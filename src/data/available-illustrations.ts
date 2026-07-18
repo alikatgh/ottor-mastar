@@ -31,6 +31,7 @@ export const AVAILABLE_ILLUSTRATIONS: string[] = [
   "mongolia-27-ill",
   "mongolia-28-ill",
   "mongolia-29-ill",
+  "mongolia-30-ill",
   "plant-01-ill",
   "plant-02-ill",
   "plant-03-ill",
