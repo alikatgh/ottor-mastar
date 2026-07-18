@@ -85,7 +85,7 @@ function captionMongolia(p) {
     DISCLAIMER.mn,
     '',
     HASHTAGS.mongolia,
-  ].join('\n').replace(/\n{3,}/g, '\n\n');
+  ].join('\n').replace(/\n{3,}/g, '\n\n').replace(/\s*—\s*/g, ' - ');
 }
 
 function captionRussian(p) {
@@ -99,7 +99,7 @@ function captionRussian(p) {
     DISCLAIMER.ru,
     '',
     HASHTAGS.yakutia,
-  ].join('\n').replace(/\n{3,}/g, '\n\n');
+  ].join('\n').replace(/\n{3,}/g, '\n\n').replace(/\s*—\s*/g, ' - ');
 }
 
 // Flatten (optionally filtered by country). Image order is the voice rule:
