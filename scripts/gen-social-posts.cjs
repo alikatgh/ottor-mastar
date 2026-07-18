@@ -7,9 +7,11 @@
  *
  * Targeting (see docs/FACEBOOK_STRATEGY.md):
  *   --country mongolia  → Mongolia species, MONGOLIAN caption first, English
- *                         below. Park-grown species get an Ulaanbaatar Central
- *                         Park hook ("the flower you walked past") — the geo
- *                         relevance that makes locals stop and share.
+ *                         below. Every post carries a National Garden Park
+ *                         (Үндэсний цэцэрлэгт хүрээлэн) hook — planted
+ *                         ornamentals get "you pass it strolling the park",
+ *                         wild species get "we photographed it growing wild
+ *                         there" (all field photos were shot in that park).
  *   --country yakutia   → Yakutia species, Russian caption first, English below.
  *   (no --country)      → everything, Russian first.
  *
@@ -38,16 +40,24 @@ const count = parseInt(positional[1] || '0', 10);
 const PRIMARY = countryArg === 'mongolia' ? 'mn' : 'ru';
 
 const firstSentence = (s) => (s ? String(s).split(/(?<=[.!?])\s/)[0] : '');
-const isParkPlant = (p) => /park|цэцэрлэг/i.test(`${p.habitat?.en || ''} ${p.habitat?.mn || ''}`);
 
-// Mongolian "you walked past it in Central Park" hook — only for species that
-// actually grow there, so it never lies about a steppe plant.
-const parkHookMN = () =>
-  'Улаанбаатарын Төв цэцэрлэгт хүрээлэнгээр зугаалахад энэ цэцэг олонтаа тохиолддог. 🌳';
+// Every Mongolia field photo was shot in Ulaanbaatar's National Garden Park
+// (Үндэсний цэцэрлэгт хүрээлэн, park.ub.gov.mn), so every species truthfully
+// gets a park hook — in one of two variants that never overstate:
+//   planted ornamentals → "you often pass it strolling the park"
+//   wild species        → "we photographed it growing wild in the park"
+const isPlanted = (p) =>
+  /park|flowerbed|ornamental|цэцэрлэг|мандал|чимэглэл/i.test(
+    `${p.habitat?.en || ''} ${p.habitat?.mn || ''}`,
+  );
+const parkHookMN = (p) =>
+  isPlanted(p)
+    ? 'Үндэсний цэцэрлэгт хүрээлэнгээр зугаалахад энэ ургамал олонтаа тохиолддог. 🌳'
+    : 'Энэ ургамлын гэрэл зургийг бид Үндэсний цэцэрлэгт хүрээлэнд авсан — тэнд зэрлэгээрээ ургадаг. 🌿';
 
 const HASHTAGS = {
   mongolia:
-    '#Монгол #Улаанбаатар #Төвцэцэрлэгтхүрээлэн #ургамал #цэцэг #байгаль #Mongolia #Ulaanbaatar #plants #botanicalart',
+    '#Монгол #Улаанбаатар #Үндэснийцэцэрлэгтхүрээлэн #ургамал #цэцэг #байгаль #Mongolia #Ulaanbaatar #plants #botanicalart',
   yakutia:
     '#Саха #Якутия #Sakha #Yakutia #этноботаника #botanicalart #herbarium #wildflowers',
 };
@@ -58,13 +68,11 @@ const DISCLAIMER = {
 
 function captionMongolia(p) {
   const name = p.names.mn || p.names.en;
-  const lead = isParkPlant(p) ? parkHookMN() : (p.description?.mn || '');
-  const extra = isParkPlant(p) ? (p.description?.mn || '') : '';
   const folk = firstSentence(p.medicinal?.mn);
   return [
     `🌸 ${name} · ${p.names.latin}`,
     '',
-    [lead, extra].filter(Boolean).join(' '),
+    [parkHookMN(p), p.description?.mn || ''].filter(Boolean).join(' '),
     folk,
     '',
     `— English —`,

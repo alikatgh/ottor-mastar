@@ -30,15 +30,31 @@ own campaign — not an afterthought bolted onto the Sakha page. The plan:
 - **Geo-target Ulaanbaatar.** When boosting, target **Ulaanbaatar + interest:
   gardening/botany/nature**, not the whole country — the audience is city people
   who walk past these flowers, not remote herders.
-- **The Central Park hook.** ~7 of the Mongolia species are ornamentals actually
-  planted in **Ulaanbaatar's Central Park / city flowerbeds** (marigold, pansy,
-  ornamental kale, dusty miller, rugosa rose, dahlia, blue spruce, cosmos…).
-  Their posts open with *"walking through Central Park you often pass this
-  flower"* — instant local recognition, the thing that makes a passer-by stop,
-  read, and share. Wild steppe plants (cornflower, yarrow, alfalfa, bedstraw…)
-  **never** get that line — the caption must never claim a steppe plant grows in
-  the park. This is enforced in the generator (`isParkPlant` keys off the plant's
-  own habitat text), so the honesty rule can't drift.
+- **The National Garden Park hook.** Every Mongolia field photo was shot inside
+  **Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн** (the National Garden Park,
+  park.ub.gov.mn) — so *every* post carries a park hook, in one of two honest
+  variants the generator picks from the plant's own habitat data:
+  - **Planted ornamentals** (marigold, petunia, pansy, kale, dusty miller,
+    roses, dahlia, cosmos, blue spruce — 10 species): *"strolling the National
+    Garden Park you often pass this plant"* — instant recognition for anyone
+    who walks or runs there.
+  - **Wild species** (yarrow, cornflower, dandelion, sardaana… — 20 species):
+    *"we photographed this plant growing wild in the National Garden Park"* —
+    true (that's where the photos were taken) and a stronger story: the park's
+    lawns hide a whole steppe flora most visitors never notice.
+  Neither variant overstates; the split is enforced in the generator so the
+  honesty rule can't drift.
+- **Partner with the park itself.** The park's administration runs an active
+  news site (park.ub.gov.mn → Мэдээ) and posts about its own flower plantings —
+  literally our content. Tag their page in park-hook posts, and pitch a
+  collaboration: Ottor Mastar as *"the field guide to the National Garden
+  Park's flora"* — every species photographed on their grounds, free, offline,
+  in Mongolian. One share from the park's official page reaches exactly the
+  park-goer audience we're targeting.
+- **The provenance story is a post of its own.** "Every photo in the Mongolia
+  collection was taken in the National Garden Park, on morning walks and runs" —
+  a behind-the-herbarium post that makes the whole collection feel local and
+  personal, and invites followers to spot the plants themselves.
 - **Stories, not labels.** The Mongolian lead is a small, interesting fact — where
   you'd meet it, what it looks like, a folk note — not a dry species card. People
   share stories about the flower they walked past this morning; they scroll past
