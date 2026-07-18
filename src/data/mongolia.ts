@@ -36,6 +36,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-marigold',
     slug: 'mn-marigold',
     imageId: 'mongolia-01',
+    gallery: ['mongolia-01-2', 'mongolia-01-3'],
     names: {
       sah: 'Бархаат сибэкки',
       ru: 'Бархатцы прямостоячие',
@@ -65,6 +66,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-cornflower',
     slug: 'mn-cornflower',
     imageId: 'mongolia-02',
+    gallery: ['mongolia-02-2'],
     names: {
       sah: 'Күөх туллук сибэкки',
       ru: 'Василёк синий',
@@ -124,6 +126,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-pansy',
     slug: 'mn-pansy',
     imageId: 'mongolia-04',
+    gallery: ['mongolia-04-2', 'mongolia-04-3'],
     names: {
       sah: 'Анюта хараҕа',
       ru: 'Виола (Анютины глазки)',
@@ -153,7 +156,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-ornamental-kale',
     slug: 'mn-ornamental-kale',
     imageId: 'mongolia-05',
-    gallery: ['mongolia-05-2'],
+    gallery: ['mongolia-05-2', 'mongolia-05-3'],
     names: {
       sah: 'Киэргэл хаппыста',
       ru: 'Декоративная капуста',
@@ -212,6 +215,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-bedstraw',
     slug: 'mn-bedstraw',
     imageId: 'mongolia-07',
+    gallery: ['mongolia-07-2'],
     names: {
       sah: 'Саһархай сарбынньах',
       ru: 'Подмаренник настоящий',
@@ -417,6 +421,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-dandelion',
     slug: 'mn-dandelion',
     imageId: 'mongolia-14',
+    gallery: ['mongolia-14-2'],
     names: {
       sah: 'Саһархай туллук (одуванчик)',
       ru: 'Одуванчик лекарственный',
@@ -739,7 +744,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-fireweed',
     slug: 'mn-fireweed',
     imageId: 'mongolia-25',
-    gallery: ['mongolia-25-2'],
+    gallery: ['mongolia-25-2', 'mongolia-25-3'],
     names: { sah: 'Уот от', ru: 'Иван-чай узколистный', en: 'Fireweed', latin: 'Chamerion angustifolium' },
     description: {
       sah: 'Үрдүк, кытархай-пурпурнай сибэккилээх боруона үүнээйи. Сиэбит сиргэ, суол кытыытыгар уонна өрүс кытылыгар үүнэр.',
@@ -760,7 +765,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-thistle',
     slug: 'mn-thistle',
     imageId: 'mongolia-26',
-    gallery: ['mongolia-26-2'],
+    gallery: ['mongolia-26-3', 'mongolia-26-4', 'mongolia-26-2'],
     names: { sah: 'Мутугур от', ru: 'Бодяк полевой', en: 'Creeping Thistle', latin: 'Cirsium arvense' },
     description: {
       sah: 'Мутуктаах, дьабдьаҥ-күлүмүрдэс тоҕойдоох боруона үүнээйи. Бааһынаҕа, кураанах сиргэ уонна суол кытыытыгар кэҥник тарҕанар.',
@@ -802,7 +807,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-wild-onion',
     slug: 'mn-wild-onion',
     imageId: 'mongolia-28',
-    gallery: ['mongolia-28-2'],
+    gallery: ['mongolia-28-2', 'mongolia-28-3'],
     names: { sah: 'Ыраас луук', ru: 'Лук стареющий', en: 'Wild Onion', latin: 'Allium senescens' },
     description: {
       sah: 'Оттуҥу сэбирдэхтээх, сырдык-кытархай сулус курдук тоҕойдоох луук. Кураанах ходуһаҕа уонна таастаах хайаларга үүнэр.',

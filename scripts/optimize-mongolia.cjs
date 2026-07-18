@@ -62,6 +62,18 @@ const IMAGE_MAP = {
   'mongolia-28': '20260711_132759.jpg',   // Allium senescens — wild onion
   'mongolia-28-2': '20260711_132753.jpg', // wild onion — wider
   'mongolia-29': '20260712_140601.jpg',   // Silene repens — creeping catchfly
+  'mongolia-01-2': '20260706_133452.jpg', // Marigold — mixed bed
+  'mongolia-01-3': '20260706_131303.jpg', // Marigold — mass planting
+  'mongolia-02-2': '20260706_130651.jpg', // Cornflower — bloom
+  'mongolia-04-2': '20260706_131317.jpg', // Pansy — orange form
+  'mongolia-04-3': '20260706_133141.jpg', // Pansy — purple form
+  'mongolia-05-3': '20260706_131217.jpg', // Ornamental kale — white head
+  'mongolia-07-2': '20260706_133303.jpg', // Lady's bedstraw — flowering mass
+  'mongolia-14-2': '20260706_130943.jpg', // Dandelion — seed heads
+  'mongolia-25-3': '20260711_131820.jpg', // Fireweed — close flowers
+  'mongolia-26-3': '20260712_135322.jpg', // Thistle — flowerhead
+  'mongolia-26-4': '20260712_135331.jpg', // Thistle — flowerhead close
+  'mongolia-28-3': '20260711_132804.jpg', // Wild onion — umbel close
 };
 
 const INPUT_DIR = path.join(__dirname, '../_src_originals/mongolia');
