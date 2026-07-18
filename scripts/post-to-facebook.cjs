@@ -39,6 +39,14 @@ const calendar = JSON.parse(
 );
 
 const today = new Date().toISOString().slice(0, 10);
+
+// Everything before FB_AUTOPILOT_FROM was scheduled by hand in the Planner -
+// skip it so adding the token early can never double-post.
+const from = process.env.FB_AUTOPILOT_FROM;
+if (from && today < from) {
+  console.log(`Before autopilot start ${from} (manually scheduled window). Nothing to do.`);
+  process.exit(0);
+}
 const entry = weekArg
   ? calendar.find((e) => e.week === weekArg)
   : calendar.find((e) => e.date === today);
