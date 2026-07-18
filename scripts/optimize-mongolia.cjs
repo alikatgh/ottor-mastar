@@ -50,6 +50,18 @@ const IMAGE_MAP = {
   'mongolia-12-2': '20260706_130524.jpg', // Blue spruce — branch detail
   'mongolia-16-2': '20260706_133334.jpg', // Jerusalem sage — second spike
   'mongolia-20-2': '20260706_132931.jpg', // Chinese ryegrass — tuft
+
+  // New species (Jul 2026 shoot) — primary is the closest frame, `-2` the wider
+  // (close→far). Each verified by eye and matched to its generated plate.
+  'mongolia-25': '20260711_131816.jpg',   // Chamerion angustifolium — fireweed
+  'mongolia-25-2': '20260711_131804.jpg', // fireweed — wider spray
+  'mongolia-26': '20260712_135335.jpg',   // Cirsium arvense — creeping thistle
+  'mongolia-26-2': '20260712_135308.jpg', // thistle — wider stand
+  'mongolia-27': '20260711_134113.jpg',   // Euphorbia esula — leafy spurge
+  'mongolia-27-2': '20260711_134109.jpg', // spurge — wider mat
+  'mongolia-28': '20260711_132759.jpg',   // Allium senescens — wild onion
+  'mongolia-28-2': '20260711_132753.jpg', // wild onion — wider
+  'mongolia-29': '20260712_140601.jpg',   // Silene repens — creeping catchfly
 };
 
 const INPUT_DIR = path.join(__dirname, '../_src_originals/mongolia');
