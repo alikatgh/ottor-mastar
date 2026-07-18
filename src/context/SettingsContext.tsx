@@ -4,6 +4,7 @@ import { MotionConfig } from 'framer-motion';
 import i18n from '../i18n';
 import { Plant, Language } from '../types';
 import { COUNTRIES, COUNTRY_IDS, DEFAULT_COUNTRY, isCountryAvailable, CountryId } from '../data/countries';
+import { detectGeoDefault } from '../utils/geoDefault';
 
 /**
  * All user settings live here as one typed object persisted to localStorage.
@@ -89,7 +90,15 @@ function validateSettings(input: unknown): Settings {
 function loadSettings(): Settings {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return DEFAULT_SETTINGS;
+    // First launch (nothing stored): pick the collection from the device's own
+    // region/timezone — Mongolia → Mongolia, Russia/rest → Yakutia — so a visitor
+    // in Ulaanbaatar lands on the Mongolia page instead of the Yakut one. Offline,
+    // no tracking. Once the user has any stored settings, their choice wins.
+    if (!raw) {
+      const geo = detectGeoDefault();
+      const country = isCountryAvailable(geo.country) ? geo.country : DEFAULT_COUNTRY;
+      return { ...DEFAULT_SETTINGS, country };
+    }
     return validateSettings(JSON.parse(raw));
   } catch {
     return DEFAULT_SETTINGS;

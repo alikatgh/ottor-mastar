@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { detectGeoDefault } from './../utils/geoDefault';
 
 import sah from './locales/sah.json';
 import ru from './locales/ru.json';
@@ -18,12 +19,12 @@ export const LANGUAGES = [
   { code: 'zh', label: '中文', shortLabel: '中' },
 ];
 
-// Sakha-first: new visitors default to Sakha (Yakut). Returning visitors keep
-// their stored choice; the browser language is intentionally NOT used as the
-// default. `fallbackLng` (English) still governs missing-key fallback — this
-// only sets the initial language when nothing is stored.
+// Location-aware first launch: a new visitor's initial language comes from the
+// device (offline) — Mongolia→mn, Russia→sah, rest→en (see utils/geoDefault).
+// Returning visitors keep their stored choice; `fallbackLng` (English) still
+// governs missing-key fallback. This only sets the language when none is stored.
 const languageDetector = new LanguageDetector();
-languageDetector.addDetector({ name: 'sahDefault', lookup: () => 'sah' });
+languageDetector.addDetector({ name: 'geoDefault', lookup: () => detectGeoDefault().language });
 
 i18n
   .use(languageDetector)
@@ -49,7 +50,7 @@ i18n
       escapeValue: false,
     },
     detection: {
-      order: ['localStorage', 'sahDefault'],
+      order: ['localStorage', 'geoDefault'],
       caches: ['localStorage'],
       // Strip region suffix so 'en-US' → 'en', 'ru-RU' → 'ru'. This makes
       // i18n.language exactly match the data keys used for plant.xxx[lang].
