@@ -1,4 +1,26 @@
-# Facebook launch — do-this-now checklist
+# Facebook launch - status + remaining steps
+
+**Done (2026-07-18):** Page live (facebook.com/ottormastar, id 61591550684511)
+with profile, cover, and bio set; origin-story post and app-launch post
+published (Mongolian interface screenshots); weeks 1-4 of the plant calendar
+scheduled in the Planner for Mon 17:00 (Jul 20 marigold, Jul 27 cornflower,
+Aug 3 petunia, Aug 10 pansy) - each with real field photos first and the
+plate last.
+
+**Remaining - two things:**
+
+1. Add the FB_PAGE_ID secret (public id, no credential):
+   `gh secret set FB_PAGE_ID --body "61591550684511" -R alikatgh/ottor-mastar`
+2. Mint FB_PAGE_TOKEN (section 2 below) and add it as a secret BEFORE Mon
+   Aug 17 - the cron then posts week 5 onward automatically (it picks the
+   calendar entry dated that Monday, so there is no double-posting with the
+   4 manually scheduled weeks). The cron also adds the link-in-first-comment;
+   for the 4 manual weeks, drop the plant-page link as a comment yourself
+   after each publishes (links in docs/social/calendar-mongolia.md).
+
+---
+
+# Original checklist (reference)
 
 Everything on the code side is ready: 30 Mongolia posts scheduled weekly from
 **Monday 2026-07-20**, and the GitHub Action posts automatically every Monday
