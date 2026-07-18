@@ -2,7 +2,7 @@
 
 _Generated from shared/plants.json — 30 posts, MN first._
 
-## Week 1 · 2026-07-27 — mn-marigold
+## Week 1 · 2026-07-20 — mn-marigold
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-01-ill.webp
 
 ```
@@ -20,7 +20,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-marigold  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 2 · 2026-08-03 — mn-cornflower
+## Week 2 · 2026-07-27 — mn-cornflower
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-02-ill.webp
 
 ```
@@ -38,7 +38,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-cornflower  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 3 · 2026-08-10 — mn-petunia
+## Week 3 · 2026-08-03 — mn-petunia
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-03-ill.webp
 
 ```
@@ -56,7 +56,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-petunia  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 4 · 2026-08-17 — mn-pansy
+## Week 4 · 2026-08-10 — mn-pansy
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-04-ill.webp
 
 ```
@@ -74,7 +74,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-pansy  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 5 · 2026-08-24 — mn-ornamental-kale
+## Week 5 · 2026-08-17 — mn-ornamental-kale
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-05-ill.webp
 
 ```
@@ -92,7 +92,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-ornamental-kale  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 6 · 2026-08-31 — mn-dusty-miller
+## Week 6 · 2026-08-24 — mn-dusty-miller
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-06-ill.webp
 
 ```
@@ -110,7 +110,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-dusty-miller  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 7 · 2026-09-07 — mn-bedstraw
+## Week 7 · 2026-08-31 — mn-bedstraw
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-07-ill.webp
 
 ```
@@ -128,7 +128,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-bedstraw  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 8 · 2026-09-14 — mn-alfalfa
+## Week 8 · 2026-09-07 — mn-alfalfa
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-08-ill.webp
 
 ```
@@ -146,7 +146,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-alfalfa  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 9 · 2026-09-21 — mn-rugosa-rose
+## Week 9 · 2026-09-14 — mn-rugosa-rose
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-09-ill.webp
 
 ```
@@ -164,7 +164,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-rugosa-rose  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 10 · 2026-09-28 — mn-yarrow
+## Week 10 · 2026-09-21 — mn-yarrow
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-10-ill.webp
 
 ```
@@ -182,7 +182,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-yarrow  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 11 · 2026-10-05 — mn-dahlia
+## Week 11 · 2026-09-28 — mn-dahlia
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-11-ill.webp
 
 ```
@@ -200,7 +200,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-dahlia  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 12 · 2026-10-12 — mn-blue-spruce
+## Week 12 · 2026-10-05 — mn-blue-spruce
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-12-ill.webp
 
 ```
@@ -218,7 +218,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-blue-spruce  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 13 · 2026-10-19 — mn-willow
+## Week 13 · 2026-10-12 — mn-willow
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-13-ill.webp
 
 ```
@@ -236,7 +236,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-willow  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 14 · 2026-10-26 — mn-dandelion
+## Week 14 · 2026-10-19 — mn-dandelion
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-14-ill.webp
 
 ```
@@ -254,7 +254,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-dandelion  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 15 · 2026-11-02 — mn-wormwood
+## Week 15 · 2026-10-26 — mn-wormwood
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-15-ill.webp
 
 ```
@@ -272,7 +272,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-wormwood  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 16 · 2026-11-09 — mn-phlomis
+## Week 16 · 2026-11-02 — mn-phlomis
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-16-ill.webp
 
 ```
@@ -290,7 +290,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-phlomis  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 17 · 2026-11-16 — mn-astragalus
+## Week 17 · 2026-11-09 — mn-astragalus
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-17-ill.webp
 
 ```
@@ -308,7 +308,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-astragalus  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 18 · 2026-11-23 — mn-cinquefoil
+## Week 18 · 2026-11-16 — mn-cinquefoil
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-18-ill.webp
 
 ```
@@ -326,7 +326,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-cinquefoil  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 19 · 2026-11-30 — mn-plantain
+## Week 19 · 2026-11-23 — mn-plantain
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-19-ill.webp
 
 ```
@@ -344,7 +344,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-plantain  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 20 · 2026-12-07 — mn-ryegrass
+## Week 20 · 2026-11-30 — mn-ryegrass
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-20-ill.webp
 
 ```
@@ -362,7 +362,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-ryegrass  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 21 · 2026-12-14 — mn-dragonhead
+## Week 21 · 2026-12-07 — mn-dragonhead
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-21-ill.webp
 
 ```
@@ -380,7 +380,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-dragonhead  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 22 · 2026-12-21 — mn-guelder-rose
+## Week 22 · 2026-12-14 — mn-guelder-rose
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-22-ill.webp
 
 ```
@@ -398,7 +398,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-guelder-rose  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 23 · 2026-12-28 — mn-hawksbeard
+## Week 23 · 2026-12-21 — mn-hawksbeard
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-23-ill.webp
 
 ```
@@ -416,7 +416,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-hawksbeard  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 24 · 2027-01-04 — mn-cosmos
+## Week 24 · 2026-12-28 — mn-cosmos
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-24-ill.webp
 
 ```
@@ -434,7 +434,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-cosmos  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 25 · 2027-01-11 — mn-fireweed
+## Week 25 · 2027-01-04 — mn-fireweed
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-25-ill.webp
 
 ```
@@ -452,7 +452,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-fireweed  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 26 · 2027-01-18 — mn-thistle
+## Week 26 · 2027-01-11 — mn-thistle
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-26-ill.webp
 
 ```
@@ -470,7 +470,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-thistle  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 27 · 2027-01-25 — mn-spurge
+## Week 27 · 2027-01-18 — mn-spurge
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-27-ill.webp
 
 ```
@@ -488,7 +488,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-spurge  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 28 · 2027-02-01 — mn-wild-onion
+## Week 28 · 2027-01-25 — mn-wild-onion
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-28-ill.webp
 
 ```
@@ -506,7 +506,7 @@ _Generated from shared/plants.json — 30 posts, MN first._
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-wild-onion  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 29 · 2027-02-08 — mn-catchfly
+## Week 29 · 2027-02-01 — mn-catchfly
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-29-ill.webp
 
 ```
@@ -524,7 +524,7 @@ Silene төрлийн ургамалд сапонин агуулагддаг —
 ```
 **First comment:** 👉 https://ottormastar.aulenor.com/plant/mn-catchfly  ·  App Store: https://apps.apple.com/app/id6789648576
 
-## Week 30 · 2027-02-15 — mn-sardaana
+## Week 30 · 2027-02-08 — mn-sardaana
 **Image:** https://ottormastar.aulenor.com/mongolia/full/mongolia-30-ill.webp
 
 ```

@@ -10,8 +10,9 @@ name: Plant of the Week → Facebook
 #   FB_PAGE_TOKEN  — a long-lived Page access token (pages_manage_posts scope)
 #
 # The poster picks the calendar entry whose date == today, so keep the calendar
-# dates on Mondays. Regenerate/extend it any time with:
-#   node scripts/gen-social-posts.cjs 2026-07-27 30
+# dates on Mondays. The active campaign is the Mongolia calendar
+# (docs/social/calendar-mongolia.json). Regenerate/extend it any time with:
+#   node scripts/gen-social-posts.cjs 2026-07-20 --country mongolia
 
 on:
   schedule:
@@ -36,7 +37,7 @@ jobs:
           FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
         run: |
           if [ -n "${{ inputs.week }}" ]; then
-            node scripts/post-to-facebook.cjs --week ${{ inputs.week }}
+            node scripts/post-to-facebook.cjs --calendar mongolia --week ${{ inputs.week }}
           else
-            node scripts/post-to-facebook.cjs
+            node scripts/post-to-facebook.cjs --calendar mongolia
           fi

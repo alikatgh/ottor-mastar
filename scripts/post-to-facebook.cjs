@@ -5,9 +5,11 @@
  * app/App-Store link as the first comment (Facebook ranks link-in-comment
  * higher than link-in-caption — see docs/FACEBOOK_STRATEGY.md).
  *
- * Reads docs/social/calendar.json (from gen-social-posts.cjs). Which entry it
- * posts:
+ * Reads docs/social/calendar[-<country>].json (from gen-social-posts.cjs).
+ * Which entry it posts:
  *   - default: the entry whose `date` == today (UTC), so a weekly cron just works.
+ *   - `--calendar mongolia`: use calendar-mongolia.json (the active campaign;
+ *     omit for the base calendar.json).
  *   - `--week N`: force a specific week (manual / testing).
  *   - `--dry-run`: print what it WOULD post, call nothing.
  *
@@ -27,9 +29,13 @@ const weekArg = (() => {
   const i = args.indexOf('--week');
   return i >= 0 ? parseInt(args[i + 1], 10) : null;
 })();
+const calendarArg = (() => {
+  const i = args.indexOf('--calendar');
+  return i >= 0 ? `-${args[i + 1]}` : '';
+})();
 
 const calendar = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '..', 'docs/social/calendar.json'), 'utf8'),
+  fs.readFileSync(path.join(__dirname, '..', `docs/social/calendar${calendarArg}.json`), 'utf8'),
 );
 
 const today = new Date().toISOString().slice(0, 10);
