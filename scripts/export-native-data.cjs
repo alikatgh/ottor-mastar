@@ -59,6 +59,23 @@ for (const lang of ['sah', 'ru', 'en', 'mn', 'zh']) {
   }
 }
 
+// 4b. Community news — bundle the current public/news.json as each app's
+// offline fallback (the apps also fetch the hosted copy over the air).
+{
+  const src = path.join(ROOT, 'public', 'news.json');
+  if (fs.existsSync(src)) {
+    for (const destRel of [
+      'ios/OttorMastar/Resources/news.json',
+      'android/app/src/main/assets/news.json',
+    ]) {
+      const dest = path.join(ROOT, destRel);
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.copyFileSync(src, dest);
+      console.log(`wrote ${destRel}`);
+    }
+  }
+}
+
 // 5. Bundle thumb + medium images (~16 MB) so the apps are fully offline —
 //    this is a field guide; assume no signal. `full` stays remote-only
 //    (28 MB) and lights up for deep zoom once the site is deployed.
