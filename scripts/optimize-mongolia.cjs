@@ -38,6 +38,18 @@ const IMAGE_MAP = {
   'mongolia-22': '20260706_130602.jpg', // Viburnum opulus — guelder rose
   'mongolia-23': '20260706_132431.jpg', // Crepis — hawksbeard
   'mongolia-24': '20260706_130635.jpg', // Cosmos sulphureus — sulphur cosmos
+
+  // Gallery frames (extra photos of the SAME plant, ordered close→far after the
+  // primary). Each `<id>-N` is verified by eye to match its species — the raw
+  // camera bursts interleave different flowerbed plants, so these are curated,
+  // not taken whole. Referenced by the `gallery` array in src/data/mongolia.ts.
+  'mongolia-03-2': '20260706_131224.jpg', // Petunia — purple cluster
+  'mongolia-03-3': '20260706_131220.jpg', // Petunia — wider bed
+  'mongolia-05-2': '20260706_133131.jpg', // Ornamental kale — purple-centre head
+  'mongolia-08-2': '20260706_133414.jpg', // Alfalfa — flower spike detail
+  'mongolia-12-2': '20260706_130524.jpg', // Blue spruce — branch detail
+  'mongolia-16-2': '20260706_133334.jpg', // Jerusalem sage — second spike
+  'mongolia-20-2': '20260706_132931.jpg', // Chinese ryegrass — tuft
 };
 
 const INPUT_DIR = path.join(__dirname, '../_src_originals/mongolia');

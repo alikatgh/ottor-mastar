@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ZoomIn, Info, HelpCircle, ExternalLink, ArrowUpRight } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
-import { getImagePath, getIllustrationPath, getWikipediaUrl } from '../data/plants';
+import { getGalleryPaths, getIllustrationPath, getWikipediaUrl } from '../data/plants';
 import { findPlantBySlug, COUNTRIES } from '../data/countries';
 
 // Vernacular name-row label per language, for the country-aware names table.
@@ -102,18 +102,20 @@ export default function PlantDetailPage() {
     );
   }
 
-  const imageSrc = getImagePath(plant, 'medium');
   const illSrc = getIllustrationPath(plant, 'medium');
 
   // Illustration-forward by default: a genuine botanical plate leads with the
-  // photo as the secondary swipe. The "lead image" setting flips the order;
-  // plants without a plate simply show the photo.
+  // photo(s) as the secondary swipe. The "lead image" setting flips the order;
+  // plants without a plate simply show the photos. A plant with a gallery adds
+  // one photo swipe per frame, ordered close→far (getGalleryPaths).
   const plateSlide = illSrc ? [{ kind: 'plate' as const, src: illSrc }] : [];
-  const photoSlide = [{ kind: 'photo' as const, src: imageSrc }];
+  const photoSlides = getGalleryPaths(plant, 'medium').map(
+    (src) => ({ kind: 'photo' as const, src }),
+  );
   const slides: { kind: 'plate' | 'photo'; src: string }[] =
     settings.leadImage === 'photo'
-      ? [...photoSlide, ...plateSlide]
-      : [...plateSlide, ...photoSlide];
+      ? [...photoSlides, ...plateSlide]
+      : [...plateSlide, ...photoSlides];
 
   // Full-resolution items for the zoom viewer, in the same order as the slides.
   const fullIll = getIllustrationPath(plant, 'full');
@@ -128,18 +130,18 @@ export default function PlantDetailPage() {
         href: wikipediaHref,
       }]
     : [];
-  const photoItem: ViewerItem[] = [{
-    src: getImagePath(plant, 'full'),
+  const photoItems: ViewerItem[] = getGalleryPaths(plant, 'full').map((src) => ({
+    src,
     title: loc(plant.names, lang),
     subtitle: plant.names.latin,
     kind: t('plant.photograph'),
     badges: plant.categories,
     href: wikipediaHref,
-  }];
+  }));
   const viewerItems: ViewerItem[] =
     settings.leadImage === 'photo'
-      ? [...photoItem, ...plateItem]
-      : [...plateItem, ...photoItem];
+      ? [...photoItems, ...plateItem]
+      : [...plateItem, ...photoItems];
 
   const handleScroll = () => {
     if (scrollRef.current) {

@@ -94,6 +94,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-petunia',
     slug: 'mn-petunia',
     imageId: 'mongolia-03',
+    gallery: ['mongolia-03-2', 'mongolia-03-3'],
     names: {
       sah: 'Петуния сибэкки',
       ru: 'Петуния',
@@ -152,6 +153,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-ornamental-kale',
     slug: 'mn-ornamental-kale',
     imageId: 'mongolia-05',
+    gallery: ['mongolia-05-2'],
     names: {
       sah: 'Киэргэл хаппыста',
       ru: 'Декоративная капуста',
@@ -239,6 +241,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-alfalfa',
     slug: 'mn-alfalfa',
     imageId: 'mongolia-08',
+    gallery: ['mongolia-08-2'],
     names: {
       sah: 'Люцерна',
       ru: 'Люцерна посевная',
@@ -355,6 +358,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-blue-spruce',
     slug: 'mn-blue-spruce',
     imageId: 'mongolia-12',
+    gallery: ['mongolia-12-2'],
     names: {
       sah: 'Күөх-көмүс тыт (ель)',
       ru: 'Ель колючая (голубая)',
@@ -471,6 +475,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-phlomis',
     slug: 'mn-phlomis',
     imageId: 'mongolia-16',
+    gallery: ['mongolia-16-2'],
     names: {
       sah: 'Күлүмэх эргиэлэс сибэкки',
       ru: 'Зопник клубненосный',
@@ -587,6 +592,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-ryegrass',
     slug: 'mn-ryegrass',
     imageId: 'mongolia-20',
+    gallery: ['mongolia-20-2'],
     names: {
       sah: 'Күөх-көмүс от (вострец)',
       ru: 'Востре́ц китайский',
