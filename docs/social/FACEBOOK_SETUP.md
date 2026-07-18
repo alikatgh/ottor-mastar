@@ -1,22 +1,35 @@
 # Facebook launch - status + remaining steps
 
-**Done (2026-07-18):** Page live (facebook.com/ottormastar, id 61591550684511)
-with profile, cover, and bio set; origin-story post and app-launch post
-published (Mongolian interface screenshots); weeks 1-4 of the plant calendar
-scheduled in the Planner for Mon 17:00 (Jul 20 marigold, Jul 27 cornflower,
-Aug 3 petunia, Aug 10 pansy) - each with real field photos first and the
-plate last.
+**Done (2026-07-18/19):** Page live (facebook.com/ottormastar, id
+61591550684511) with profile, cover, and bio set; origin-story + app-launch
+posts published. Then hand-scheduled in the Meta Planner (these fire via
+Facebook's own scheduler - no token needed), Mon/Wed/Fri 17:00 Ulaanbaatar:
+
+| Week | Mon (plant) | Wed (guess-the-plant) | Fri (status) |
+|------|-------------|-----------------------|--------------|
+| 1 | Jul 20 marigold ✓ | Jul 22 cornflower ✓ | Jul 24 ✓ |
+| 2 | Jul 27 cornflower ✓ | Jul 29 petunia ✓ | Jul 31 ✓ |
+| 3 | Aug 3 petunia ✓ | Aug 5 pansy ✓ | Aug 7 - via cron |
+| 4 | Aug 10 pansy ✓ | Aug 12 - via cron | Aug 14 - via cron |
+
+So **weeks 1-2 are fully hand-scheduled (3 posts each)**, plus week 3 Mon+Wed
+and week 4 Mon. The three remaining near-term slots (Fri Aug 7, Wed Aug 12,
+Fri Aug 14) and everything from Aug 17 on are handled by the cron once the
+token is added.
 
 **Remaining - two things:**
 
 1. Add the FB_PAGE_ID secret (public id, no credential):
    `gh secret set FB_PAGE_ID --body "61591550684511" -R alikatgh/ottor-mastar`
-2. Mint FB_PAGE_TOKEN (section 2 below) and add it as a secret BEFORE Mon
-   Aug 17 - the cron then posts week 5 onward automatically (it picks the
-   calendar entry dated that Monday, so there is no double-posting with the
-   4 manually scheduled weeks). The cron also adds the link-in-first-comment;
-   for the 4 manual weeks, drop the plant-page link as a comment yourself
-   after each publishes (links in docs/social/calendar-mongolia.md).
+2. Mint FB_PAGE_TOKEN (section 2 below) and add it as a secret **before Fri
+   Aug 7** to get the full 3-posts/week with zero gaps. The cron fires
+   Mon/Wed/Fri and, from `FB_AUTOPILOT_FROM=2026-08-07`, posts Aug 7, Aug 12,
+   Aug 14 and onward - it automatically **skips Aug 10** (already hand-placed)
+   so nothing double-posts. If you add the token later, weeks 1-2 still post on
+   their own; you just lose the individual slots before the token goes live.
+   The cron also drops the app link as the first comment; for the hand-placed
+   posts, add that comment yourself after each publishes (links in
+   docs/social/calendar-mongolia.md).
 
 ---
 

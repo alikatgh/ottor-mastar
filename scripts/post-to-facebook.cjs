@@ -40,12 +40,25 @@ const calendar = JSON.parse(
 
 const today = new Date().toISOString().slice(0, 10);
 
-// Everything before FB_AUTOPILOT_FROM was scheduled by hand in the Planner -
-// skip it so adding the token early can never double-post.
+// Two guards keep the cron from ever double-posting the posts that were
+// scheduled by hand in the Meta Planner (those fire via Facebook's own
+// scheduler, independent of this cron):
+//   1. FB_AUTOPILOT_FROM  - skip any calendar date before this day entirely.
+//   2. MANUAL_DONE        - explicit dates already hand-scheduled that fall ON
+//      or AFTER the autopilot day, so they'd otherwise collide. Weeks 1-2 and
+//      Aug 3/5/10 were placed by hand; autopilot starts 2026-08-07 to fill the
+//      Fri Aug 7 gap, so only the Aug 10 Monday needs excluding.
+const MANUAL_DONE = new Set(['2026-08-10']);
 const from = process.env.FB_AUTOPILOT_FROM;
-if (from && today < from) {
-  console.log(`Before autopilot start ${from} (manually scheduled window). Nothing to do.`);
-  process.exit(0);
+if (!weekArg) {
+  if (from && today < from) {
+    console.log(`Before autopilot start ${from} (hand-scheduled window). Nothing to do.`);
+    process.exit(0);
+  }
+  if (MANUAL_DONE.has(today)) {
+    console.log(`${today} was hand-scheduled in the Planner. Skipping to avoid a double-post.`);
+    process.exit(0);
+  }
 }
 const entry = weekArg
   ? calendar.find((e) => e.week === weekArg)
