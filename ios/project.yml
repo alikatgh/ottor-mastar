@@ -38,6 +38,7 @@ targets:
       - path: OttorMastar/Resources/locale-mn.json
         buildPhase: resources
       - path: OttorMastar/Resources/locale-zh.json
+      - path: OttorMastar/Resources/news.json
         buildPhase: resources
       # App icon asset catalog (single 1024² universal icon).
       - path: OttorMastar/Resources/Assets.xcassets
