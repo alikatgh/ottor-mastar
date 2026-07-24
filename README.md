@@ -260,3 +260,15 @@ against the Page token (`me/feed`) and is idempotent with the hand-scheduled
 launch window via `FB_AUTOPILOT_FROM` + a `MANUAL_DONE` skip-set, so the cron
 and Facebook's own scheduler never double-post. Full setup:
 [`docs/social/FACEBOOK_SETUP.md`](docs/social/FACEBOOK_SETUP.md).
+
+---
+
+### 🧭 Also building in the open
+
+**[Quenderin — offline AI chat](https://quenderin.org)** is a sister project from
+the same maker: a private AI assistant that runs entirely on your phone, no
+account, no cloud. Likewise free and built in public, and **in open testing now**:
+
+- 🌐 Website — https://quenderin.org
+- ▶️ Google Play — https://play.google.com/store/apps/details?id=ai.quenderin.app
+- 🧪 Join the test — https://play.google.com/apps/testing/ai.quenderin.app
