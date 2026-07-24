@@ -22,6 +22,10 @@ on:
       week:
         description: 'Force a specific week number (optional)'
         required: false
+      calendar:
+        description: 'Calendar to post from (mongolia | announcement | ...)'
+        required: false
+        default: 'mongolia'
 
 jobs:
   post:
@@ -38,8 +42,9 @@ jobs:
           # Posts before this date were scheduled by hand in the FB Planner.
           FB_AUTOPILOT_FROM: '2026-08-07'
         run: |
+          CAL="${{ inputs.calendar }}"; CAL="${CAL:-mongolia}"
           if [ -n "${{ inputs.week }}" ]; then
-            node scripts/post-to-facebook.cjs --calendar mongolia --week ${{ inputs.week }}
+            node scripts/post-to-facebook.cjs --calendar "$CAL" --week ${{ inputs.week }}
           else
-            node scripts/post-to-facebook.cjs --calendar mongolia
+            node scripts/post-to-facebook.cjs --calendar "$CAL"
           fi

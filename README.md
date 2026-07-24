@@ -1,10 +1,57 @@
 # Ottor Mastar (Оттор Мастар) 🌿
 
-> A digital encyclopedia of Yakutian flora. Built for speed, beauty, and multilingual accessibility.
+> A living herbarium, built in the open — real plants photographed where they
+> grow, drawn as vintage botanical plates, named in five languages, free and
+> offline.
 
-**Ottor Mastar** ("Forest Trees/Plants" in Yakut) is a modern, highly optimized web application cataloging the plants of the Sakha Republic (Yakutia). It features a native iOS-like gallery experience, vintage botanical illustrations, and full trilingual support (Yakut, Russian, English).
+**Ottor Mastar** ("herbs and trees" in Sakha) began in exactly two places: a
+remote **village road in Yakutia (Sakha)** and the **National Garden Park in
+Ulaanbaatar, Mongolia** — every plant photographed on foot, on walks and runs.
+Not "the flora of two countries," but two transects documented completely, by
+one person, growing place by place. That honesty is the whole idea: the method
+is cheap, proven, and repeatable — every new place is just another walk.
 
-![Ottor Mastar Preview](./public/favicon.svg)
+- 🌍 **Website:** https://ottormastar.aulenor.com
+- 📱 **iOS / macOS:** [App Store](https://apps.apple.com/app/id6789648576) · Android on the way
+- 📘 **Facebook:** [facebook.com/ottormastar](https://www.facebook.com/ottormastar) — a plant story three times a week
+- 🌱 Trilingual+ content (Sakha, Russian, English, Mongolian, Latin), fully offline, no ads, no tracking
+
+### Building in public
+
+This repo is public on purpose. Ottor Mastar is not chasing partnerships — it's
+building an open, provable track record (traction, a documented method, real
+community demand) to earn **funding** and scale to new places. If you're a
+botanist, a funder, a translator, or someone who wants their own region
+documented, you're in the right place. See what's next in
+[`docs/PLACES_ROADMAP.md`](docs/PLACES_ROADMAP.md) and the outreach plan in
+[`docs/FACEBOOK_STRATEGY.md`](docs/FACEBOOK_STRATEGY.md).
+
+**Two honesty rules carried everywhere** (site, apps, social):
+1. The plates are **illustrations in a 19th-century botanical style**, not scans
+   of archival originals.
+2. Folk-medicine notes are **cultural/historical only, never medical advice.**
+
+### Status
+
+| Surface | State |
+|---------|-------|
+| Web (Cloudflare Pages) | ✅ live, auto-deploys on push to `main` |
+| iOS + macOS | ✅ live on the App Store |
+| Android | 🔜 signed build ready, Play listing in progress |
+| Facebook | ✅ live — 3 posts/week (Mon plant · Wed guess-the-plant · Fri status), auto-posted from this repo |
+| Collections | Yakutia (village-road transect) + Mongolia (National Garden Park, 30 species) |
+
+### How to help / follow along
+
+- **Suggest a place** to document next (open an issue, or comment "do my region" on Facebook).
+- **Improve a translation** or a folk-knowledge note (PRs welcome — see *Adding New Plants*).
+- **Spot a misidentification** — botanical accuracy is the point; open an issue with the plate/photo.
+- **Fund or amplify** — biodiversity, citizen-science, indigenous-language, and digital-culture programs are the target; a share from the right place is worth weeks of organic reach.
+
+> **License / reuse:** the code here is open to read, learn from, and build on.
+> The botanical plates and field photographs are the creators' own work — please
+> ask before reusing the imagery. A formal license file is coming; until then,
+> treat the art as all-rights-reserved and the code as reference.
 
 ---
 
@@ -188,3 +235,33 @@ Design notes: both apps implement the herbarium tokens from `src/index.css`
 section labels, serif headings with full Cyrillic for Sakha). Settings mirror
 the web policy — language, country, Latin names, reset; Yakutia is always the
 default collection.
+
+## 🤖 Automation (deploy + social)
+
+Two GitHub Actions run the public-facing side of the project straight from this
+repo — no dashboards, everything in version control:
+
+- **Auto-deploy** (`.github/workflows/deploy.yml`) — every push to `main` builds
+  the site and ships it to Cloudflare Pages (`ottormastar.aulenor.com`). Needs
+  `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` secrets.
+- **Plant of the Week → Facebook** (`.github/workflows/social-post.yml`) — a
+  Mon/Wed/Fri cron posts to the Facebook Page from a calendar generated out of
+  the app's own data. Needs a `FB_PAGE_TOKEN` secret.
+
+The social calendar is **generated from `shared/plants.json`**, so the page can
+never drift from the app:
+
+```bash
+# 3 posts/week (plant story · guess-the-plant · text status), Mongolian-first
+node scripts/gen-social-posts.cjs 2026-07-20 --country mongolia
+# preview what would post, calling nothing
+node scripts/post-to-facebook.cjs --calendar mongolia --dry-run
+```
+
+Voice rules live in the generator (`docs/FACEBOOK_STRATEGY.md`): real field
+photos first and the vintage plate last, no emoji, plain hyphens, story-first
+captions with an Ulaanbaatar National Garden Park hook. The poster publishes
+against the Page token (`me/feed`) and is idempotent with the hand-scheduled
+launch window via `FB_AUTOPILOT_FROM` + a `MANUAL_DONE` skip-set, so the cron
+and Facebook's own scheduler never double-post. Full setup:
+[`docs/social/FACEBOOK_SETUP.md`](docs/social/FACEBOOK_SETUP.md).

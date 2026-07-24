@@ -1,0 +1,13 @@
+[
+  {
+    "week": 1,
+    "format": "announcement",
+    "date": null,
+    "slug": "open-source-launch",
+    "imageUrls": [
+      "https://ottormastar.aulenor.com/social/fb-cover.jpg"
+    ],
+    "caption": "Оттор Мастар нээлттэй боллоо.\n\nЭнэ төслийн бүх зүйл - код, өгөгдөл, ургамлын түүх бүхэн - олон нийтэд нээлттэй боллоо. Бид ил тод, нээлттэйгээр бүтээж байна. Ургамал бүрийг ургаж буй газарт нь гэрэл зургаар баримтжуулж, эртний ботаникийн хэв маягаар зурж, таван хэлээр нэрлэдэг. Үнэгүй, офлайн, сурталчилгаагүй.\n\nБид хоёр газраас эхэлсэн: Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн, мөн Якутын нэгэн тосгоны зам. Дараа нь хаашаа явах вэ? Та санал болгоорой.\n\nВэб: https://ottormastar.aulenor.com\n\n- English -\nOttor Mastar is now fully open. The whole project - code, data, every plant story - is public, and we are building it in the open. Every plant is photographed where it grows, drawn as a vintage botanical plate, and named in five languages. Free, offline, no ads.\n\nWe started in two places: Ulaanbaatar's National Garden Park and a village road in Yakutia. Where should we walk next? Tell us.\n\n#Монгол #Улаанбаатар #ургамал #цэцэг #Mongolia #plants #opensource",
+    "firstComment": "Код & төсөл / Open source: https://github.com/alikatgh/ottor-mastar  ·  App Store: https://apps.apple.com/app/id6789648576"
+  }
+]
