@@ -13,11 +13,12 @@
  *   - `--week N`: force a specific week (manual / testing).
  *   - `--dry-run`: print what it WOULD post, call nothing.
  *
- * Requires env (GitHub Actions secrets):
- *   FB_PAGE_ID     — the Page's numeric id
- *   FB_PAGE_TOKEN  — a long-lived Page access token with pages_manage_posts
+ * Requires env (GitHub Actions secret):
+ *   FB_PAGE_TOKEN  — a long-lived Page access token with pages_manage_posts.
+ *                    Posts publish against `me` (the token's own Page), so no
+ *                    page id is needed. FB_PAGE_ID is kept as a harmless extra.
  *
- * Nothing posts without both env vars — safe to run in CI before they're set.
+ * Nothing posts without the token — safe to run in CI before it is set.
  */
 const fs = require('fs');
 const path = require('path');
@@ -69,11 +70,17 @@ if (!entry) {
   process.exit(0);
 }
 
-const { FB_PAGE_ID, FB_PAGE_TOKEN } = process.env;
+const { FB_PAGE_TOKEN } = process.env;
 
-if (dryRun || !FB_PAGE_ID || !FB_PAGE_TOKEN) {
-  console.log(dryRun ? '[dry-run]' : '[no FB_PAGE_ID/FB_PAGE_TOKEN — skipping publish]');
-  console.log('Would post:', entry.slug, '→', entry.imageUrl);
+// Publish against `me`, not the numeric page id: a Page access token resolves
+// `me` to its own Page, and posting to /{page-id}/photos with that token is
+// rejected as "(#100) global id not allowed". So FB_PAGE_ID is not needed for
+// posting - the token already scopes us to the right Page.
+const TARGET = 'me';
+
+if (dryRun || !FB_PAGE_TOKEN) {
+  console.log(dryRun ? '[dry-run]' : '[no FB_PAGE_TOKEN — skipping publish]');
+  console.log('Would post:', entry.slug, '→', (entry.imageUrls || [entry.imageUrl])[0]);
   console.log('---\n' + entry.caption + '\n---\ncomment:', entry.firstComment);
   process.exit(0);
 }
@@ -98,12 +105,12 @@ async function graph(pathPart, body) {
   const urls = (entry.imageUrls || [entry.imageUrl]).filter(Boolean);
   const media = [];
   for (const url of urls) {
-    const up = await graph(`${FB_PAGE_ID}/photos`, { url, published: false });
+    const up = await graph(`${TARGET}/photos`, { url, published: false });
     media.push({ media_fbid: up.id });
   }
   const body = { message: entry.caption };
   if (media.length) body.attached_media = media;
-  const feed = await graph(`${FB_PAGE_ID}/feed`, body);
+  const feed = await graph(`${TARGET}/feed`, body);
   const postId = feed.id;
   console.log(`Posted ${entry.slug} [${entry.format || 'plant'}] (${media.length} photos) → ${postId}`);
 
