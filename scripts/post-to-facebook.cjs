@@ -114,10 +114,21 @@ async function graph(pathPart, body) {
   const postId = feed.id;
   console.log(`Posted ${entry.slug} [${entry.format || 'plant'}] (${media.length} photos) → ${postId}`);
 
-  // 2) Link as the first comment.
+  // 2) Link as the first comment - best-effort. Commenting via the API needs
+  //    pages_manage_engagement (posting only needs pages_manage_posts), so if
+  //    the token lacks it we log the link and move on rather than fail the run.
+  //    The post itself - the thing that matters - is already published.
   if (postId && entry.firstComment) {
-    await graph(`${postId}/comments`, { message: entry.firstComment });
-    console.log('Added link comment.');
+    try {
+      await graph(`${postId}/comments`, { message: entry.firstComment });
+      console.log('Added link comment.');
+    } catch (e) {
+      console.warn(
+        `Note: could not add the link comment (${e.message}). ` +
+          `Post published fine. To enable auto-comments, grant the token ` +
+          `pages_manage_engagement. Link for manual comment: ${entry.firstComment}`,
+      );
+    }
   }
 })().catch((e) => {
   console.error('Publish failed:', e.message);
