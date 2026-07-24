@@ -4,11 +4,11 @@ name: Deploy to Cloudflare Pages
 # it to the "ottormastar" Cloudflare Pages project (apex ottormastar.aulenor.com).
 #
 # The Pages project is a DIRECT-UPLOAD project (no Git integration), so this
-# workflow is what makes pushes go live. One-time setup — add two repo secrets
-# (Settings → Secrets and variables → Actions):
-#   CLOUDFLARE_API_TOKEN   — a token with the "Cloudflare Pages: Edit" permission
-#   CLOUDFLARE_ACCOUNT_ID  — 4c1e57b6972105286a7aeb46b2b89c78 (not secret, but kept here for parity)
-# After that, every push to main deploys automatically — no local wrangler needed.
+# workflow is what makes pushes go live. It stays a green no-op until two repo
+# secrets exist (Settings -> Secrets and variables -> Actions):
+#   CLOUDFLARE_API_TOKEN   - a token with the "Cloudflare Pages: Edit" permission
+#   CLOUDFLARE_ACCOUNT_ID  - your Cloudflare account id (not a credential)
+# After that, every push to main deploys automatically - no local wrangler needed.
 
 on:
   push:
@@ -21,18 +21,35 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    env:
+      CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
+      - name: Check Cloudflare config
+        id: cfg
+        run: |
+          if [ -n "$CF_TOKEN" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::CLOUDFLARE_API_TOKEN not set - skipping deploy (no-op). Add the secret to enable auto-deploy."
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.cfg.outputs.ready == 'true'
 
       - uses: actions/setup-node@v4
+        if: steps.cfg.outputs.ready == 'true'
         with:
           node-version: 20
           cache: npm
 
       - run: npm ci
+        if: steps.cfg.outputs.ready == 'true'
       - run: npm run build
+        if: steps.cfg.outputs.ready == 'true'
 
       - name: Publish to Cloudflare Pages
+        if: steps.cfg.outputs.ready == 'true'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
