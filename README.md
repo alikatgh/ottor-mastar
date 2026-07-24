@@ -1,4 +1,8 @@
-# Ottor Mastar (Оттор Мастар) 🌿
+<div align="center">
+  <img src="public/icon-512.png" width="132" alt="Ottor Mastar app icon" />
+</div>
+
+<h1 align="center">Ottor Mastar · Оттор Мастар</h1>
 
 > A living herbarium, built in the open — real plants photographed where they
 > grow, drawn as vintage botanical plates, named in five languages, free and
@@ -12,7 +16,8 @@ one person, growing place by place. That honesty is the whole idea: the method
 is cheap, proven, and repeatable — every new place is just another walk.
 
 - 🌍 **Website:** https://ottormastar.aulenor.com
-- 📱 **iOS / macOS:** [App Store](https://apps.apple.com/app/id6789648576) · Android on the way
+- 🍎 **iOS &amp; macOS:** **[Download on the App Store](https://apps.apple.com/app/id6789648576)** — live now
+- 🤖 **Android:** **in closed testing** — [help us test it](#apps) (we're looking for testers!)
 - 📘 **Facebook:** [facebook.com/ottormastar](https://www.facebook.com/ottormastar) — a plant story three times a week
 - 🌱 Trilingual+ content (Sakha, Russian, English, Mongolian, Latin), fully offline, no ads, no tracking
 
@@ -36,8 +41,8 @@ documented, you're in the right place. See what's next in
 | Surface | State |
 |---------|-------|
 | Web (Cloudflare Pages) | ✅ live, auto-deploys on push to `main` |
-| iOS + macOS | ✅ live on the App Store |
-| Android | 🔜 signed build ready, Play listing in progress |
+| iOS + macOS | ✅ live on the [App Store](https://apps.apple.com/app/id6789648576) |
+| Android | 🧪 in **closed testing** — [sign up to test](#apps) |
 | Facebook | ✅ live — 3 posts/week (Mon plant · Wed guess-the-plant · Fri status), auto-posted from this repo |
 | Collections | Yakutia (village-road transect) + Mongolia (National Garden Park, 30 species) |
 
@@ -199,42 +204,32 @@ This project is configured for seamless deployment to Cloudflare Pages.
 
 The repository includes a `public/_redirects` file that contains `/* /index.html 200`. This ensures that Cloudflare Pages correctly routes all traffic to the React SPA router, preventing 404 errors on direct links.
 
-## 📱 Native apps (iOS + Android)
+<a id="apps"></a>
 
-Both native apps live in this repo and bundle the same trilingual dataset as
-the web app — fully offline (thumb + medium images ship in the binary; the
-remote `full` size lights up for deep zoom once the site is deployed).
+## 📱 Apps
 
-**Shared data pipeline** — after ANY edit to `src/data/*` or `src/i18n/locales/*`:
+The same herbarium, native and **fully offline** — every plant's photos, plates,
+and five-language names travel in the app, no signal needed in the field.
 
-```bash
-node scripts/export-native-data.cjs
-```
+### 🍎 iOS &amp; macOS — live
 
-This regenerates `shared/plants.json` (with `hasIllustration` baked in) plus
-each app's bundled copy and images. All three outputs are gitignored.
+**[Download on the App Store →](https://apps.apple.com/app/id6789648576)**
+One universal app for iPhone, iPad, and Mac. Free, offline, no ads, no tracking.
 
-**iOS** (`ios/` — SwiftUI, iOS 17+, XcodeGen):
+### 🤖 Android — in closed testing (looking for testers!)
 
-```bash
-node scripts/export-native-data.cjs   # once, or after data changes
-cd ios && xcodegen                    # generates OttorMastar.xcodeproj from project.yml
-xcodebuild -project OttorMastar.xcodeproj -scheme OttorMastar \
-  -destination 'platform=iOS Simulator,name=iPhone 17' build
-```
+The Android app is built and running — we're in **closed testing** before the
+public Play Store launch, and we'd love your help shaping it. Testers get the
+app early and their feedback goes straight into the release.
 
-**Android** (`android/` — Kotlin, Jetpack Compose Material 3, minSdk 26):
+**Want in?** Comment on the [Facebook page](https://www.facebook.com/ottormastar)
+or [open an issue](https://github.com/alikatgh/ottor-mastar/issues/new) and we'll
+send you the join link. *(Self-serve sign-up link coming soon.)*
 
-```bash
-node scripts/export-native-data.cjs
-cd android && JAVA_HOME=/opt/homebrew/opt/openjdk@17 ./gradlew :app:assembleDebug
-```
-
-Design notes: both apps implement the herbarium tokens from `src/index.css`
-(cream canvas, parchment plates, hairline rules, one forest accent, overline
-section labels, serif headings with full Cyrillic for Sakha). Settings mirror
-the web policy — language, country, Latin names, reset; Yakutia is always the
-default collection.
+The apps carry the herbarium's visual language (cream canvas, parchment plates,
+hairline rules, one forest accent, serif headings with full Cyrillic for Sakha)
+and mirror the web settings — language, place, Latin names. Both apps stay in
+sync with the site because all three read the same generated dataset.
 
 ## 🤖 Automation (deploy + social)
 
