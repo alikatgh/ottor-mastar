@@ -1,0 +1,7 @@
+Ottor Mastar 1.1 build 3 is a native SwiftUI educational herbarium for iPhone and iPad. The bundled catalog contains 53 plant entries across Yakutia (23) and Mongolia (30), with offline photos, illustrations, descriptions, and localized text. No account is needed. There are no ads or tracking SDKs.
+
+The app can fetch updated public catalog data and project news over HTTPS. Bundled content remains available offline. Please use About > Settings to switch the collection and language. Yakutia offers Sakha, Russian, and English; Mongolia offers Mongolian, Chinese, and English. The first-launch default is Sakha.
+
+Traditional-use notes are cultural/historical, not medical advice, and are accompanied by disclaimers. The Legal section explains this further. Botanical plates are contemporary illustrations in a historical style, not archival scans.
+
+This build adds the current catalog and News section to the previously uploaded iOS build. Screenshots show the current native iOS 26 interface on iPhone and iPad.
