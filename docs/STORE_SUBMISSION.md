@@ -9,11 +9,11 @@ Privacy-policy URL for both stores: **https://ottormastar.aulenor.com/legal**
 
 ## Android beta update — 2026-09-27
 
-- Signed Android 1.0.1 (version code 3), compile/target SDK 36, minimum SDK 26.
+- Signed latest Android 1.1.0 (version code 4), compile/target SDK 36, minimum SDK 26. It includes current main catalog (53 plants), new branding and community News.
 - Android presents botanical reference content; medicinal sections, filters, badges, search content and introduction copy are disabled. Shared web and iOS content is unchanged.
-- Release lint, APK and AAB builds passed. The signed APK installed and launched on qa_pixel; catalog navigation was checked on the emulator.
-- Google Play internal release is available to the dedicated internal tester list. The closed Alpha release uses build 3 and the dedicated Ottor Mastar Google Group; countries and store metadata are prepared for review.
-- IARC rating, privacy URL, no-ads/no-financial/no-health declarations, no-data-collected form, Russian listing and genuine native phone screenshots have been completed in Play Console. AI-generated botanical illustrations are disclosed in store assets.
+- Latest release lint, APK and AAB builds passed; lint has zero errors and 31 warnings. APK/AAB signatures verified. There are no release unit-test sources. The signed APK installed and launched on qa_pixel; the 30-plant Mongolia catalog, botanical detail and News were checked, and four genuine screenshots captured.
+- Google Play internal build 4 is available at 12:07 local time on September 27. Closed Alpha build 3 and the initial listing were approved earlier that day. The latest build 4 and four listing changes are submitted as the next closed-beta update: automatic quick checks have passed and Publishing overview states Your changes are now in review. The dedicated Google Group uses user-approved public joining, with member emails restricted to owners/managers.
+- IARC rating, privacy URL, no-ads/no-financial/no-health declarations, no-data-collected form, Russian 53-plant listing, current brand icon/feature graphic and four genuine native phone screenshots have been completed in Play Console. AI-generated botanical illustrations are disclosed in store assets.
 - Public production access still requires Google's closed-test eligibility and review. Internal availability is not production approval.
 - Signing keys, keystore properties, generated bundles and screenshots remain outside Git.
 

@@ -46,7 +46,7 @@ f_sub = ImageFont.truetype(SERIF, 30)
 f_tag = ImageFont.truetype(SERIF, 22)
 
 # overline (letter-spaced)
-over = "Г Е Р Б А Р И Й   З Е М Л И   С А Х А"
+over = "Б О Т А Н И Ч Е С К И Й   А Т Л А С"
 d.text((x, 150), over, font=f_over, fill=GREEN)
 
 # wordmark
@@ -54,10 +54,10 @@ d.text((x, 182), "Оттор", font=f_word, fill=GREEN)
 d.text((x, 268), "Мастар", font=f_word, fill=GREEN)
 
 # subtitle
-d.text((x, 372), "Дикорастущие растения Якутии", font=f_sub, fill=INK)
+d.text((x, 372), "Растения Якутии и Монголии", font=f_sub, fill=INK)
 
 # tagline
-d.text((x, 418), "23 вида · офлайн · без рекламы", font=f_tag, fill=MUTED)
+d.text((x, 418), "53 растения · 5 языков · без рекламы", font=f_tag, fill=MUTED)
 
 os.makedirs("appstore/play", exist_ok=True)
 out = "appstore/play/feature-graphic-1024x500.png"
