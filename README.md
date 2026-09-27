@@ -17,7 +17,7 @@ is cheap, proven, and repeatable — every new place is just another walk.
 
 - 🌍 **Website:** https://ottormastar.aulenor.com
 - 🍎 **iOS &amp; macOS:** **[Download on the App Store](https://apps.apple.com/app/id6789648576)** — live now
-- 🤖 **Android:** **closed beta submitted for review** — [join the tester group](#apps)
+- 🤖 **Android:** **closed beta available; latest update in review** — [join the tester group](#apps)
 - 📘 **Facebook:** [facebook.com/ottormastar](https://www.facebook.com/ottormastar) — a plant story three times a week
 - 🌱 Trilingual+ content (Sakha, Russian, English, Mongolian, Latin), fully offline, no ads, no tracking
 
@@ -42,7 +42,7 @@ documented, you're in the right place. See what's next in
 |---------|-------|
 | Web (Cloudflare Pages) | ✅ live; deployment is verified separately from Git pushes |
 | iOS + macOS | ✅ live on the [App Store](https://apps.apple.com/app/id6789648576) |
-| Android | 🧪 closed beta **in Google Play review** — [tester enrollment](#apps) |
+| Android | 🧪 closed beta available; **1.1.0 in review** — [tester enrollment](#apps) |
 | Facebook | ✅ Page live; release announcements are published manually while scheduled automation needs repair |
 | Collections | Yakutia (village-road transect) + Mongolia (National Garden Park, 30 species) |
 
@@ -216,15 +216,16 @@ and five-language names travel in the app, no signal needed in the field.
 **[Download on the App Store →](https://apps.apple.com/app/id6789648576)**
 One universal app for iPhone, iPad, and Mac. Free, offline, no ads, no tracking.
 
-### 🤖 Android — closed beta in Google Play review
+### 🤖 Android — join the closed beta
 
-The Android beta has been submitted for review. Tester enrollment uses a Google
-Group; this is a **closed test**, not an unrestricted open-testing release.
-Installation becomes available when Google approves the release.
+The initial Android beta is available to enrolled testers. The latest update,
+1.1.0 with the matching iOS lily logo, is in Google Play review. Tester enrollment
+uses a Google Group; this is a **closed test**, not an unrestricted open-testing
+release.
 
 1. [Join the tester group](https://groups.google.com/g/ottormastar-android-testers)
    with the Google account you use on your Android phone.
-2. After approval, [opt in on Google Play](https://play.google.com/apps/testing/com.aulenor.ottormastar)
+2. [Opt in on Google Play](https://play.google.com/apps/testing/com.aulenor.ottormastar)
    using the same account, then install the app.
 3. Try search, favorites, reading settings and the catalog without internet.
    Send feedback to [our Facebook Page](https://www.facebook.com/ottormastar)
