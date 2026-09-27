@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Ottor Mastar — Get the app</title>
-  <meta name="description" content="Get Ottor Mastar on the App Store — an illustrated herbarium of Yakutia, free and fully offline." />
+  <meta name="description" content="Get Ottor Mastar on iPhone, iPad and Mac, or enroll in the Android closed beta. An illustrated herbarium of Yakutia and Mongolia." />
   <meta name="theme-color" content="#2C5A2E" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <style>
@@ -36,11 +36,19 @@
     .feats .dot { flex:none; width:7px; height:7px; border-radius:50%; background:var(--forest); margin-top:.5rem; }
     .foot { margin-top:2rem; font-size:.8rem; }
     .foot a { color:var(--forest); text-decoration:none; }
+    .beta { text-align:left; margin-top:2rem; padding:1.25rem; border:1px solid var(--hair); border-radius:16px; }
+    .beta h2 { font-size:1.1rem; margin-bottom:.65rem; }
+    .beta p,.beta li { font-size:.9rem; line-height:1.5; }
+    .beta ol { padding-left:1.25rem; margin:1rem 0; }
+    .beta li + li { margin-top:.75rem; }
+    .beta a { color:var(--forest); text-underline-offset:3px; }
+    .beta .status { color:var(--ink-muted); font-size:.8rem; }
+    a:focus-visible { outline:2px solid var(--forest); outline-offset:4px; }
   </style>
 </head>
 <body>
   <main class="card">
-    <img class="icon" alt="Ottor Mastar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232C5A2E'/%3E%3Cpath d='M16 6C16 6 10 12 10 18C10 22 12.5 26 16 26C19.5 26 22 22 22 18C22 12 16 6 16 6Z' fill='%234A8C3F' opacity='.7'/%3E%3Cpath d='M16 8C16 8 12 13 12 18C12 21 13.5 24 16 24C18.5 24 20 21 20 18C20 13 16 8 16 8Z' fill='%236BAF5E'/%3E%3Cline x1='16' y1='14' x2='16' y2='24' stroke='%232C5A2E' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <img class="icon" alt="Ottor Mastar Sardaana lily logo" src="/icon-512.png" />
     <p class="overline" data-i="over"></p>
     <h1>Ottor Mastar</h1>
     <p class="meta" data-i="meta"></p>
@@ -50,7 +58,16 @@
       <span class="txt"><small data-i="badgeSmall"></small><strong>App Store</strong></span>
     </a>
 
-    <!-- Android ships via Google Play only; drop its badge here once the listing is live. -->
+    <section class="beta" aria-labelledby="beta-title">
+      <h2 id="beta-title" data-i="betaTitle"></h2>
+      <p data-i="betaIntro"></p>
+      <ol>
+        <li><a href="https://groups.google.com/g/ottormastar-android-testers" data-i="joinGroup"></a><span data-i="sameAccount"></span></li>
+        <li><a href="https://play.google.com/apps/testing/com.aulenor.ottormastar" data-i="joinPlay"></a><span data-i="afterApproval"></span></li>
+      </ol>
+      <p class="status" data-i="betaStatus"></p>
+      <p style="margin-top:.75rem"><a href="https://www.facebook.com/ottormastar" data-i="feedback"></a> · <a href="/news" data-i="news"></a></p>
+    </section>
 
     <ul class="feats">
       <li><span class="dot"></span><span data-i="f1"></span></li>
@@ -62,22 +79,47 @@
   </main>
 
   <script>
-    // Lightweight localization — Russian for ru* browsers, else English.
+    // Lightweight localization for the app download hub.
     var STR = {
-      en: { over:"iPhone · iPad · Mac", meta:"Free · Works fully offline",
+      en: { over:"iPhone · iPad · Mac · Android beta", meta:"Free · Offline catalog",
         badgeSmall:"Download on the",
-        f1:"23 species of Yakutia, illustrated plate by plate",
-        f2:"Names in four languages, with Sakha folk tradition",
-        f3:"Every plant, picture and text works offline",
+        betaTitle:"Help test the Android app",
+        betaIntro:"Our closed beta is awaiting Google Play review. Enroll through the tester group before the public launch.",
+        joinGroup:"Join the tester group", sameAccount:" with the Google account you use on Android.",
+        joinPlay:"Opt in on Google Play", afterApproval:" after Google approves the release, then install.",
+        betaStatus:"This is a closed test, not an unrestricted open test. If Play says the app is unavailable during review, check back after approval. Stay opted in for 14 continuous days; Google requires 12 testers before we can apply for production access. Group membership alone does not count as Play opt-in.",
+        feedback:"Send feedback on Facebook", news:"Read the latest news",
+        f1:"53 species from Yakutia and Mongolia, illustrated plate by plate",
+        f2:"Names and content in Sakha, Russian, English, Mongolian and Chinese",
+        f3:"Bundled catalog works offline; full-resolution images and external resources need internet",
         web:"← Open the website instead" },
-      ru: { over:"iPhone · iPad · Mac", meta:"Бесплатно · полностью офлайн",
+      ru: { over:"iPhone · iPad · Mac · Android-бета", meta:"Бесплатно · каталог офлайн",
         badgeSmall:"Загрузите в",
-        f1:"23 растения Якутии, каждое с ботанической иллюстрацией",
-        f2:"Названия на четырёх языках, с якутской традицией",
-        f3:"Все растения, изображения и тексты работают офлайн",
-        web:"← Открыть сайт вместо этого" }
+        betaTitle:"Помогите протестировать Android",
+        betaIntro:"Закрытая бета ожидает проверки Google Play. Присоединяйтесь через группу тестировщиков до публичного запуска.",
+        joinGroup:"Вступите в группу", sameAccount:" с аккаунтом Google, который используете на Android.",
+        joinPlay:"Присоединитесь к тесту в Play", afterApproval:" после одобрения Google, затем установите приложение.",
+        betaStatus:"Это закрытый, а не неограниченный открытый тест. Если приложение недоступно во время проверки, попробуйте после одобрения. Оставайтесь в тесте 14 дней подряд: Google требует 12 тестировщиков перед запросом публичного запуска. Вступление в группу не заменяет участие в тесте через Play.",
+        feedback:"Оставить отзыв в Facebook", news:"Последние новости",
+        f1:"53 растения Якутии и Монголии с ботаническими иллюстрациями",
+        f2:"Названия и материалы на якутском, русском, английском, монгольском и китайском",
+        f3:"Встроенный каталог работает офлайн; полные изображения и внешние материалы требуют интернета",
+        web:"← Открыть сайт вместо этого" },
+      mn: { over:"iPhone · iPad · Mac · Android бета", meta:"Үнэгүй · офлайн каталог",
+        badgeSmall:"Татаж авах",
+        betaTitle:"Android хувилбарыг хамт туршъя",
+        betaIntro:"Хаалттай бета хувилбар Google Play-ийн хяналтад байна. Нийтэд гарахаас өмнө туршигчдын бүлгээр элсээрэй.",
+        joinGroup:"Бүлэгт элсэх", sameAccount:" — Android дээрээ ашигладаг Google бүртгэлээрээ.",
+        joinPlay:"Play дээр туршилтад нэгдэх", afterApproval:" — Google зөвшөөрсний дараа аппыг суулгана.",
+        betaStatus:"Энэ нь хаалттай туршилт. Хяналтын үед апп нээгдэхгүй бол зөвшөөрөл гарсны дараа дахин шалгаарай. Туршилтад 14 өдөр дараалан бүртгэлтэй байгаарай: нийтэд гаргах эрх хүсэхийн өмнө Google 12 туршигч шаарддаг. Бүлэгт элсэх нь Play дээр нэгдэхийг орлохгүй.",
+        feedback:"Facebook-д санал хүсэлт өгөх", news:"Сүүлийн мэдээ",
+        f1:"Якут, Монголын 53 зүйл ургамал, ботаникийн зурагтай",
+        f2:"Саха, орос, англи, монгол, хятад хэлээр",
+        f3:"Каталог офлайн ажиллана; өндөр нягтралтай зураг болон гадаад материалд интернет хэрэгтэй",
+        web:"← Вэбсайтыг нээх" }
     };
-    var lang = (navigator.language || "en").toLowerCase().indexOf("ru") === 0 ? "ru" : "en";
+    var preferred = (navigator.language || "en").toLowerCase().split("-")[0];
+    var lang = STR[preferred] ? preferred : "en";
     document.documentElement.lang = lang;
     var d = STR[lang];
     document.querySelectorAll("[data-i]").forEach(function(el){ el.textContent = d[el.getAttribute("data-i")] || ""; });

@@ -17,7 +17,7 @@ is cheap, proven, and repeatable — every new place is just another walk.
 
 - 🌍 **Website:** https://ottormastar.aulenor.com
 - 🍎 **iOS &amp; macOS:** **[Download on the App Store](https://apps.apple.com/app/id6789648576)** — live now
-- 🤖 **Android:** **in closed testing** — [help us test it](#apps) (we're looking for testers!)
+- 🤖 **Android:** **closed beta submitted for review** — [join the tester group](#apps)
 - 📘 **Facebook:** [facebook.com/ottormastar](https://www.facebook.com/ottormastar) — a plant story three times a week
 - 🌱 Trilingual+ content (Sakha, Russian, English, Mongolian, Latin), fully offline, no ads, no tracking
 
@@ -40,10 +40,10 @@ documented, you're in the right place. See what's next in
 
 | Surface | State |
 |---------|-------|
-| Web (Cloudflare Pages) | ✅ live, auto-deploys on push to `main` |
+| Web (Cloudflare Pages) | ✅ live; deployment is verified separately from Git pushes |
 | iOS + macOS | ✅ live on the [App Store](https://apps.apple.com/app/id6789648576) |
-| Android | 🧪 in **closed testing** — [sign up to test](#apps) |
-| Facebook | ✅ live — 3 posts/week (Mon plant · Wed guess-the-plant · Fri status), auto-posted from this repo |
+| Android | 🧪 closed beta **in Google Play review** — [tester enrollment](#apps) |
+| Facebook | ✅ Page live; release announcements are published manually while scheduled automation needs repair |
 | Collections | Yakutia (village-road transect) + Mongolia (National Garden Park, 30 species) |
 
 ### How to help / follow along
@@ -216,15 +216,28 @@ and five-language names travel in the app, no signal needed in the field.
 **[Download on the App Store →](https://apps.apple.com/app/id6789648576)**
 One universal app for iPhone, iPad, and Mac. Free, offline, no ads, no tracking.
 
-### 🤖 Android — in closed testing (looking for testers!)
+### 🤖 Android — closed beta in Google Play review
 
-The Android app is built and running — we're in **closed testing** before the
-public Play Store launch, and we'd love your help shaping it. Testers get the
-app early and their feedback goes straight into the release.
+The Android beta has been submitted for review. Tester enrollment uses a Google
+Group; this is a **closed test**, not an unrestricted open-testing release.
+Installation becomes available when Google approves the release.
 
-**Want in?** Comment on the [Facebook page](https://www.facebook.com/ottormastar)
-or [open an issue](https://github.com/alikatgh/ottor-mastar/issues/new) and we'll
-send you the join link. *(Self-serve sign-up link coming soon.)*
+1. [Join the tester group](https://groups.google.com/g/ottormastar-android-testers)
+   with the Google account you use on your Android phone.
+2. After approval, [opt in on Google Play](https://play.google.com/apps/testing/com.aulenor.ottormastar)
+   using the same account, then install the app.
+3. Try search, favorites, reading settings and the catalog without internet.
+   Send feedback to [our Facebook Page](https://www.facebook.com/ottormastar)
+   or [open an issue](https://github.com/alikatgh/ottor-mastar/issues/new).
+
+Stay opted in for at least 14 continuous days. Google requires at least 12
+continuously opted-in testers before we can apply for production access. Group
+membership alone does not count as Play opt-in. If Play says the app is unavailable
+while review is pending, check back after approval.
+
+The bundled catalog works offline; full-resolution images and external resources
+need internet. Read the [release news](https://ottormastar.aulenor.com/news) and
+[CHANGELOG.md](CHANGELOG.md) for what changed.
 
 The apps carry the herbarium's visual language (cream canvas, parchment plates,
 hairline rules, one forest accent, serif headings with full Cyrillic for Sakha)
