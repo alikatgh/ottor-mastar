@@ -47,7 +47,7 @@ import com.aulenor.ottormastar.data.Plant
 
 /**
  * Web-parity search tab: a big autofocused field that searches deeper than
- * the catalog — names and Latin plus descriptions and medicinal uses in the
+ * the catalog — names and Latin plus botanical descriptions in the
  * current language. Empty state shows the browse prompt.
  */
 @Composable
@@ -69,7 +69,7 @@ fun SearchScreen(onOpenPlant: (Plant) -> Unit) {
             // Optional Mongolian/Chinese names, so a Mongolia plant is findable
             // by its mn/zh name too, not just sah/ru/en/latin.
             plant.names.mn ?: "", plant.names.zh ?: "",
-            plant.description[lang], plant.medicinalUses[lang],
+            plant.description[lang],
         ).any { it.foldDiacritics().contains(qFolded) }
     }
 

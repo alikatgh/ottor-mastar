@@ -73,7 +73,7 @@ import kotlin.math.roundToInt
  * Web-parity plant page: swipeable image panel on parchment (plate ↔ photo,
  * order follows the "lead image" setting) with frosted paging dots and a zoom
  * affordance, then a white info sheet that rises with a spring — grabber,
- * serif title, badges, description, names table, medicinal uses with the (?)
+ * serif title, badges, description, names table, habitat and flowering with the
  * legal note, habitat, blooming season, further reading (Wikipedia), and the
  * amber disclaimer linking to Legal.
  */
@@ -295,7 +295,6 @@ fun DetailScreen(
                 )
 
                 NamesTable(plant, loc.t("plant.names"))
-                MedicinalSection(plant, lang)
                 Section(loc.t("plant.habitat")) {
                     Text(
                         plant.habitat[lang],
@@ -397,77 +396,6 @@ private fun NameRow(label: String, value: String, italic: Boolean = false) {
             ),
             color = Ink,
             textAlign = TextAlign.End,
-        )
-    }
-}
-
-/** Medicinal uses with the (?) affordance that reveals the legal note. */
-@Composable
-private fun MedicinalSection(plant: Plant, lang: Language) {
-    val settings = LocalSettings.current
-    val loc = rememberL10n()
-    var tipOpen by remember { mutableStateOf(false) }
-
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Column {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                Text(
-                    loc.t("plant.medicinalUses").uppercase(),
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        fontWeight = FontWeight.SemiBold, letterSpacing = 1.6.sp),
-                    color = InkMuted,
-                )
-                // 16dp visual, 40dp touch target — small icons must never be
-                // their own hit area.
-                Box(
-                    Modifier
-                        .size(40.dp)
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = null,
-                        ) { tipOpen = !tipOpen },
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Text(
-                        "?",
-                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                        color = if (tipOpen) Forest else InkMuted,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .size(16.dp)
-                            .border(1.dp, if (tipOpen) Forest else InkMuted.copy(alpha = 0.5f), CircleShape),
-                    )
-                }
-            }
-            Spacer(Modifier.height(8.dp))
-            Box(Modifier.fillMaxWidth().height(1.dp).background(Hairline))
-        }
-
-        AnimatedVisibility(
-            visible = tipOpen,
-            enter = if (settings.reduceMotion) fadeIn() else fadeIn() + expandVertically(),
-            exit = if (settings.reduceMotion) fadeOut() else fadeOut() + shrinkVertically(),
-        ) {
-            Text(
-                loc.t("plant.medicinalDisclaimer"),
-                style = MaterialTheme.typography.bodySmall.copy(lineHeight = 17.sp),
-                color = InkLight,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(Card)
-                    .border(1.dp, Hairline, RoundedCornerShape(12.dp))
-                    .padding(12.dp),
-            )
-        }
-
-        Text(
-            plant.medicinalUses[lang],
-            style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 23.sp),
-            color = InkLight,
         )
     }
 }

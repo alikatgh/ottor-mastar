@@ -11,7 +11,16 @@ import kotlinx.serialization.json.JsonPrimitive
  */
 class L10n private constructor(val language: Language, private val table: Map<String, String>) {
 
-    fun t(key: String): String = table[key] ?: key
+    // The Android beta is botanical reference only; shared web/iOS copy remains unchanged.
+    fun t(key: String): String = if (key == "app.description") {
+        when (language) {
+            Language.SAH -> "Саха сирин үүнээйилэрэ уонна отторо-мастара — сибэккилэр."
+            Language.RU -> "Растения Якутии — цветы, травы и деревья."
+            Language.EN -> "Plants of Yakutia — flowers, herbs and trees."
+            Language.MN -> "Монголын ургамал — цэцэг, өвс, мод."
+            Language.ZH -> "蒙古的植物——花卉、草本和树木。"
+        }
+    } else table[key] ?: key
 
     /**
      * i18next-style plural lookup: key_one / key_few / key_many / key_other,

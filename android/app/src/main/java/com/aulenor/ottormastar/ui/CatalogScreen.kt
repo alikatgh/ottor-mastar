@@ -52,7 +52,7 @@ import com.aulenor.ottormastar.data.plateNumeral
 import java.text.Collator
 import java.util.Locale
 
-private val CATEGORY_FILTERS = listOf("all", "medicinal", "edible", "ornamental", "poisonous")
+private val CATEGORY_FILTERS = listOf("all", "edible", "ornamental", "poisonous")
 
 /**
  * Web-parity catalog: count in the header, search field, category filter

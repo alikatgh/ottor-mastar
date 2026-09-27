@@ -54,18 +54,15 @@ fun AboutScreen(
     val lang = settings.language
     val plants = settings.country.plants
 
-    val medicinal = plants.count { it.categories.contains("medicinal") }
     // Localized stat labels (present in all five locales) — proper mn/zh copy.
-    val statLabels = Triple(
+    val statLabels = Pair(
         loc.t("about.statPlants"),
-        loc.t("about.statMedicinal"),
         loc.t("about.statLanguages"),
     )
     val stats = listOf(
         "${plants.size}" to statLabels.first,
-        "$medicinal" to statLabels.second,
         // Real per-country language count, not a hardcoded "3".
-        "${settings.country.languages.size}" to statLabels.third,
+        "${settings.country.languages.size}" to statLabels.second,
     )
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
