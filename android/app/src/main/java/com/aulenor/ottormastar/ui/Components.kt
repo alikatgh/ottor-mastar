@@ -275,7 +275,7 @@ fun BadgeRow(categories: List<String>, onDark: Boolean = false, modifier: Modifi
         verticalArrangement = Arrangement.spacedBy(6.dp),
         modifier = modifier,
     ) {
-        for (cat in categories) CategoryBadge(cat, onDark = onDark)
+        for (cat in categories.filterNot { it == "medicinal" }) CategoryBadge(cat, onDark = onDark)
     }
 }
 
