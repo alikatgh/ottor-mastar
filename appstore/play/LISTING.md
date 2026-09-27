@@ -1,4 +1,12 @@
-# Google Play listing — Ottor Mastar (v1.0, versionCode 1)
+# Google Play Android beta listing — 1.1.0 (4)
+
+The Android beta is a botanical reference with 53 plants: 23 from Yakutia and 30 from Mongolia. Medicinal-use sections, categories and search content are disabled on Android. The shared website and iOS retain their own content.
+
+Category: Education. No ads, accounts, tracking or financial features. Target audience 13+. IARC questionnaire completed in Play Console: Everyone / PEGI 3. App content declares no health features and no data collected or shared. Android 4 bundles the catalog and community news, with optional public catalog/news updates and full-resolution images from the app's own site.
+
+The live Russian listing is maintained in Play Console; illustrations are identified as AI-generated and are not medical guidance or a reliable basis for consuming wild plants. Genuine emulator screenshots are used for Android. Production access is separate from beta approval.
+
+# Historical first-build listing (superseded)
 
 Paste-ready for Play Console. Package `com.aulenor.ottormastar` (matches iOS bundle).
 Free, no ads, no IAP. Category: **Education**.
