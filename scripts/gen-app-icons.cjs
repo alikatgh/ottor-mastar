@@ -50,20 +50,21 @@ const FRAME = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
 </svg>`;
 
 async function renderIcon(outFile) {
-  if (fs.existsSync(MASTER)) {
-    await sharp(MASTER)
-      .resize(1024, 1024)
-      .flatten({ background: '#F4EDDC' })
-      .png()
-      .toFile(outFile);
-    return;
-  }
-  await sharp(PLATE)
-    .extract(CROP)
-    .resize(1024, 1024)
-    .modulate({ saturation: 1.14, brightness: 1.03 })
-    .composite([{ input: Buffer.from(FRAME) }])
+  const composed = fs.existsSync(MASTER)
+    ? await sharp(MASTER).resize(1024, 1024).png().toBuffer()
+    : await sharp(PLATE)
+        .extract(CROP)
+        .resize(1024, 1024)
+        .modulate({ saturation: 1.14, brightness: 1.03 })
+        .composite([{ input: Buffer.from(FRAME) }])
+        .png()
+        .toBuffer();
+  // Second pass on a fresh instance: sharp runs `composite` late in its fixed
+  // pipeline (after flatten/removeAlpha), so alpha must be stripped here.
+  // App Store Connect rejects app icons that carry an alpha channel.
+  await sharp(composed)
     .flatten({ background: '#F4EDDC' })
+    .removeAlpha()
     .png()
     .toFile(outFile);
 }
@@ -72,8 +73,17 @@ async function main() {
   // ---- iOS (and Mac Catalyst): single 1024² app icon ----
   const iosDir = path.join(ROOT, 'ios/OttorMastar/Resources/Assets.xcassets/AppIcon.appiconset');
   fs.mkdirSync(iosDir, { recursive: true });
-  await renderIcon(path.join(iosDir, 'icon-1024.png'));
+  const iosIcon = path.join(iosDir, 'icon-1024.png');
+  await renderIcon(iosIcon);
   console.log('iOS: wrote AppIcon.appiconset/icon-1024.png');
+
+  // ---- Google Play store icon: 512², opaque (downscaled from the flattened
+  // iOS 1024 so it stays 1:1 with the app icon and carries no alpha). ----
+  const playIcon = path.join(ROOT, 'appstore/play/icon-512.png');
+  if (fs.existsSync(path.dirname(playIcon))) {
+    await sharp(iosIcon).resize(512, 512).png().toFile(playIcon);
+    console.log('Play: wrote appstore/play/icon-512.png');
+  }
 
   // ---- Desktop (Electron / electron-builder): build/icon.png ----
   const desktopDir = path.join(ROOT, 'desktop/build');

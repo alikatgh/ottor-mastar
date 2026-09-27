@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Forest background, matching the iOS/macOS/web/desktop icon. -->
-    <background android:drawable="@color/forest" />
-    <foreground android:drawable="@drawable/ic_launcher_foreground" />
-    <monochrome android:drawable="@drawable/ic_launcher_foreground" />
+    <!-- Cream parchment field, matching the iOS/web/desktop lily icon. The
+         foreground is full-bleed cream, so this only shows if a launcher masks
+         beyond the foreground. -->
+    <background android:drawable="@color/cream" />
+    <!-- Sardaana lily on parchment — the brand master (scripts/gen-brand-master.cjs),
+         rasterised into the mipmap-*dpi buckets with a 19% safe margin. No
+         monochrome layer: a photographic bloom has no single-colour silhouette. -->
+    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
 </adaptive-icon>

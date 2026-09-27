@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Ottor Mastar — Android app</title>
-  <meta name="description" content="Download the Ottor Mastar Android app." />
+  <title>Ottor Mastar — Get the app</title>
+  <meta name="description" content="Get Ottor Mastar on the App Store — an illustrated herbarium of Yakutia, free and fully offline." />
   <meta name="theme-color" content="#2C5A2E" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <style>
@@ -20,23 +20,22 @@
     .overline { font-size:.72rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-muted); }
     h1 { font-family:Georgia,"Playfair Display",serif; font-size:2.2rem; font-weight:700; margin:.35rem 0 .3rem; }
     .meta { color:var(--ink-muted); font-size:.95rem; margin-bottom:1.7rem; }
-    .btn { display:flex; align-items:center; justify-content:center; gap:.6rem;
-      width:100%; padding:1rem 1.25rem; border-radius:14px; background:var(--forest); color:#fff;
-      font-size:1.05rem; font-weight:600; text-decoration:none; border:none;
-      box-shadow:0 6px 18px rgba(44,90,46,.28); transition:background .15s, transform .05s; }
-    .btn:active { transform:scale(.99); background:var(--forest-dark); }
-    .btn svg { width:22px; height:22px; }
-    .note { margin-top:1rem; font-size:.85rem; color:var(--ink-muted); line-height:1.5; }
-    .steps { margin:2rem 0 0; text-align:left; }
-    .steps h2 { font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:.9rem; }
-    .step { display:flex; gap:.8rem; align-items:flex-start; padding:.55rem 0; border-top:1px solid var(--hair); }
-    .step:first-of-type { border-top:none; }
-    .num { flex:none; width:26px; height:26px; border-radius:50%; background:rgba(44,90,46,.1); color:var(--forest);
-      font-weight:700; font-size:.9rem; display:flex; align-items:center; justify-content:center; }
-    .step p { font-size:.95rem; line-height:1.45; padding-top:2px; }
+    /* Official "Download on the App Store" badge, built to Apple's black variant. */
+    .badge { display:inline-flex; align-items:center; gap:.6rem;
+      padding:.7rem 1.15rem; border-radius:14px; background:#000; color:#fff;
+      text-decoration:none; box-shadow:0 6px 18px rgba(0,0,0,.22);
+      transition:transform .05s, box-shadow .15s; }
+    .badge:active { transform:scale(.985); }
+    .badge svg { width:26px; height:26px; fill:#fff; flex:none; }
+    .badge .txt { display:flex; flex-direction:column; line-height:1; text-align:left; }
+    .badge .txt small { font-size:.6rem; font-weight:500; letter-spacing:.02em; opacity:.9; }
+    .badge .txt strong { font-size:1.25rem; font-weight:600; letter-spacing:-.01em; margin-top:2px; }
+    .feats { list-style:none; margin:2rem auto 0; max-width:20rem; text-align:left; }
+    .feats li { display:flex; gap:.7rem; align-items:flex-start; padding:.6rem 0; border-top:1px solid var(--hair); font-size:.95rem; line-height:1.4; }
+    .feats li:first-child { border-top:none; }
+    .feats .dot { flex:none; width:7px; height:7px; border-radius:50%; background:var(--forest); margin-top:.5rem; }
     .foot { margin-top:2rem; font-size:.8rem; }
     .foot a { color:var(--forest); text-decoration:none; }
-    .hide { display:none !important; }
   </style>
 </head>
 <body>
@@ -46,18 +45,18 @@
     <h1>Ottor Mastar</h1>
     <p class="meta" data-i="meta"></p>
 
-    <a id="dl" class="btn" href="https://dl.ottormastar.aulenor.com/OttorMastar.apk" download>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
-      <span data-i="btn"></span>
+    <a class="badge" href="https://apps.apple.com/app/id6789648576">
+      <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      <span class="txt"><small data-i="badgeSmall"></small><strong>App Store</strong></span>
     </a>
-    <p id="notAndroid" class="note hide" data-i="notAndroid"></p>
 
-    <section class="steps">
-      <h2 data-i="howto"></h2>
-      <div class="step"><span class="num">1</span><p data-i="s1"></p></div>
-      <div class="step"><span class="num">2</span><p data-i="s2"></p></div>
-      <div class="step"><span class="num">3</span><p data-i="s3"></p></div>
-    </section>
+    <!-- Android ships via Google Play only; drop its badge here once the listing is live. -->
+
+    <ul class="feats">
+      <li><span class="dot"></span><span data-i="f1"></span></li>
+      <li><span class="dot"></span><span data-i="f2"></span></li>
+      <li><span class="dot"></span><span data-i="f3"></span></li>
+    </ul>
 
     <p class="foot"><a href="/" data-i="web"></a></p>
   </main>
@@ -65,25 +64,23 @@
   <script>
     // Lightweight localization — Russian for ru* browsers, else English.
     var STR = {
-      en: { over:"Android app", meta:"Version 1.0 · ~27 MB", btn:"Download for Android",
-        notAndroid:"This is an Android app. Open this page on your Android phone to install it.",
-        howto:"How to install", s1:"Tap “Download for Android” above.",
-        s2:"Open the downloaded file (check your Downloads or the notification).",
-        s3:"If your phone asks, allow installing from this source, then tap Install.",
+      en: { over:"iPhone · iPad · Mac", meta:"Free · Works fully offline",
+        badgeSmall:"Download on the",
+        f1:"23 species of Yakutia, illustrated plate by plate",
+        f2:"Names in four languages, with Sakha folk tradition",
+        f3:"Every plant, picture and text works offline",
         web:"← Open the website instead" },
-      ru: { over:"Приложение для Android", meta:"Версия 1.0 · ~27 МБ", btn:"Скачать для Android",
-        notAndroid:"Это приложение для Android. Откройте эту страницу на телефоне Android, чтобы установить.",
-        howto:"Как установить", s1:"Нажмите «Скачать для Android» выше.",
-        s2:"Откройте загруженный файл (в «Загрузках» или в уведомлении).",
-        s3:"Если телефон спросит — разрешите установку из этого источника и нажмите «Установить».",
+      ru: { over:"iPhone · iPad · Mac", meta:"Бесплатно · полностью офлайн",
+        badgeSmall:"Загрузите в",
+        f1:"23 растения Якутии, каждое с ботанической иллюстрацией",
+        f2:"Названия на четырёх языках, с якутской традицией",
+        f3:"Все растения, изображения и тексты работают офлайн",
         web:"← Открыть сайт вместо этого" }
     };
     var lang = (navigator.language || "en").toLowerCase().indexOf("ru") === 0 ? "ru" : "en";
     document.documentElement.lang = lang;
     var d = STR[lang];
     document.querySelectorAll("[data-i]").forEach(function(el){ el.textContent = d[el.getAttribute("data-i")] || ""; });
-    // Gentle nudge if opened on a non-Android device (button still works).
-    if (!/android/i.test(navigator.userAgent)) document.getElementById("notAndroid").classList.remove("hide");
   </script>
 </body>
 </html>

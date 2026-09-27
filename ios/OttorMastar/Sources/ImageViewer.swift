@@ -68,15 +68,18 @@ struct ImageViewer: View {
                 } else {
                     pager
                 }
-                chrome
             } else {
                 // Defensive: never present the viewer with no images.
                 Color.black.ignoresSafeArea()
             }
         }
+        // Chrome rides as an overlay pinned to the container's bounds — as a
+        // plain ZStack sibling it silently failed to render on regular width
+        // (the iPad viewer shipped with no close button).
+        .overlay {
+            if item != nil { chrome }
+        }
         .statusBarHidden()
-        // Soft tick when paging between items — Photos-style tactility.
-        .sensoryFeedback(.impact(weight: .light), trigger: index)
         .opacity(appeared || reduceMotion ? 1 : 0)
         .onAppear {
             guard item != nil else { dismiss(); return }
@@ -87,6 +90,14 @@ struct ImageViewer: View {
         // Paging to another image resets any pinch-zoom, so the swipe-down
         // dismiss gesture re-arms on the fresh page.
         .onChange(of: index) { zoomed = false }
+        // Zooming mid-drag must never strand a half-dismissed layout: the
+        // drag gesture stays attached (it self-guards), and any leftover
+        // offset springs home the moment zoom starts.
+        .onChange(of: zoomed) {
+            if zoomed, dragY != 0 {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) { dragY = 0 }
+            }
+        }
         // Photos-style paging tick.
         .sensoryFeedback(.impact(weight: .light), trigger: index)
     }
@@ -95,14 +106,21 @@ struct ImageViewer: View {
 
     private var backdrop: some View {
         ZStack {
+            // The blurred fill hangs off an .overlay of the Color so its
+            // scaledToFill size can NEVER inflate this ZStack's layout —
+            // an unclipped fill here grew the whole viewer past the screen
+            // bounds on iPad, shoving the top chrome (close button) offscreen.
             Color(white: 0.04)
-            if let item {
-                BundledPlantImage(item: item, size: .medium)
-                    .scaledToFill()
-                    .scaleEffect(1.25)
-                    .blur(radius: 60)
-                    .opacity(0.6)
-            }
+                .overlay {
+                    if let item {
+                        BundledPlantImage(item: item, size: .medium)
+                            .scaledToFill()
+                            .scaleEffect(1.25)
+                            .blur(radius: 60)
+                            .opacity(0.6)
+                    }
+                }
+                .clipped()
             LinearGradient(
                 stops: [
                     .init(color: .black.opacity(0.45), location: 0),
@@ -146,7 +164,7 @@ struct ImageViewer: View {
         }
         .offset(y: dragY)
         .scaleEffect(dragScale)
-        .simultaneousGesture(zoomed ? nil : dismissDrag)
+        .simultaneousGesture(dismissDrag)
         .ignoresSafeArea()
         #else
         TabView(selection: $index) {
@@ -171,7 +189,7 @@ struct ImageViewer: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .offset(y: dragY)
         .scaleEffect(dragScale)
-        .simultaneousGesture(zoomed ? nil : dismissDrag)
+        .simultaneousGesture(dismissDrag)
         .ignoresSafeArea()
         #endif
     }
@@ -189,9 +207,12 @@ struct ImageViewer: View {
         .padding(.horizontal, 16)
     }
 
+    /// Always attached (never swapped out mid-flight — detaching a live
+    /// gesture skips onEnded and strands dragY); guards on `zoomed` inside.
     private var dismissDrag: some Gesture {
         DragGesture(minimumDistance: 18, coordinateSpace: .global)
             .onChanged { value in
+                guard !zoomed else { return }
                 // Vertical intent only; horizontal swipes belong to the pager.
                 let dy = value.translation.height
                 let dx = value.translation.width
@@ -199,9 +220,9 @@ struct ImageViewer: View {
                 dragY = max(0, dy * (dy > 0 ? 1 : 0.08))
             }
             .onEnded { value in
-                if dragY > 110 || value.predictedEndTranslation.height > 320 {
+                if !zoomed, dragY > 110 || value.predictedEndTranslation.height > 320 {
                     close(flung: true)
-                } else {
+                } else if dragY != 0 {
                     withAnimation(.spring(response: 0.32, dampingFraction: 0.82)) { dragY = 0 }
                 }
             }
@@ -223,7 +244,10 @@ struct ImageViewer: View {
 
     private var chrome: some View {
         VStack {
-            GlassGroup(spacing: 12) {
+            // Plain HStack, deliberately not a GlassEffectContainer: the
+            // counter and close sit at opposite screen edges (nothing to
+            // morph), and the container collapsed the bar on regular width —
+            // the iPad viewer shipped with NO close button.
             HStack {
                 // Wide mode carries the counter in the placard, so the top bar
                 // stays clean with just the close button (matches web desktop).
@@ -252,17 +276,18 @@ struct ImageViewer: View {
             }
             .padding(.horizontal, 14)
             .padding(.top, 8)
-            }
 
             Spacer()
 
             if !isWide {
                 // Filmstrip + caption share one gradient scrim so the strip
-                // reads against busy photos instead of floating bare.
+                // reads against busy photos instead of floating bare. Identity
+                // swaps with the item so text never frame-morphs across pages.
                 VStack(spacing: 2) {
                     if items.count > 1 { filmstrip }
                     caption
                 }
+                .id(item?.id)
                 // Top inset gives the scrim room to ramp up before the
                 // filmstrip, so thumbs never melt into a bright photo.
                 .padding(.top, 28)
@@ -279,7 +304,11 @@ struct ImageViewer: View {
                 )
             }
         }
-        .opacity(chromeOpacity)
+        // Zoomed = immersive: all chrome yields to the image (Photos rule);
+        // drag-to-dismiss fades it proportionally otherwise.
+        .opacity(zoomed ? 0 : chromeOpacity)
+        .animation(.easeOut(duration: 0.2), value: zoomed)
+        .allowsHitTesting(!zoomed)
     }
 
     /// Photos-style thumbnail scrubber: tap to jump, auto-centers on the
@@ -388,9 +417,10 @@ struct ImageViewer: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 16)
-                .padding(.bottom, 36)
+                // Generous floor clearance — badges were grazing the screen
+                // edge whenever the title or badge row wrapped to two lines.
+                .padding(.bottom, 48)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .animation(.easeOut(duration: 0.2), value: index)
             }
         }
     }

@@ -753,6 +753,14 @@ export function getImagePath(plant: Plant, size = 'medium') {
   return `${plant.imageBase ?? '/plants'}/${size}/${plant.imageId}.webp`;
 }
 
+/** Every photo for a plant: primary first, then its gallery frames (close→far). */
+export function getGalleryPaths(plant: Plant, size = 'medium'): string[] {
+  const base = plant.imageBase ?? '/plants';
+  return [plant.imageId, ...(plant.gallery ?? [])].map(
+    (id) => `${base}/${size}/${id}.webp`,
+  );
+}
+
 /** Canonical plate slug for a plant, e.g. plant-01 → plant-01-ill. */
 function illustrationSlug(plant: Plant): string {
   return `${plant.imageId}-ill`;

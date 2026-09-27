@@ -6,6 +6,7 @@ import { getImagePath, getIllustrationPath, hasIllustration } from '../data/plan
 import { usePlants, useSettings } from '../context/SettingsContext';
 import { getHeroPlant } from '../data/countries';
 import GalleryGrid from '../components/Gallery/GalleryGrid';
+import AppStoreBadge from '../components/common/AppStoreBadge';
 import Footer from '../components/Layout/Footer';
 import { Language } from '../types';
 
@@ -84,6 +85,15 @@ export default function HomePage() {
                     ? t('home.plateCount', { count: PLATED.length })
                     : t('gallery.photoCount', { count: plants.length })}
                 </span>
+              </div>
+
+              {/* Now on the App Store — the badge inverts with the theme (black
+                  on light, white on dark). Android arrives via Google Play. */}
+              <div className="mt-7 pt-7 border-t border-hairline">
+                <AppStoreBadge />
+                <p className="mt-2.5 text-xs text-ink-muted">
+                  {t('home.appStoreNote')} · iPhone · iPad
+                </p>
               </div>
             </div>
           </div>

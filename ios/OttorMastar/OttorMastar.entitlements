@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Mac App Store distribution requires the App Sandbox (Catalyst builds
+	     only — project.yml applies this file via [sdk=macosx*], so iOS signing
+	     is untouched). -->
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<!-- Outbound HTTPS: the launch-time catalog.json OTA sync and opening
+	     Wikipedia "further reading" links. No other network use. -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+</dict>
+</plist>

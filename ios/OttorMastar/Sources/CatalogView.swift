@@ -180,14 +180,9 @@ struct CatalogRow: View {
             .frame(width: 112)
             .clipped()
 
-            VStack(alignment: .leading, spacing: 3) {
-                Text(plateNumeral(index))
-                    .font(.footnote.monospacedDigit())
-                    .foregroundStyle(.inkMuted)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-
-                Spacer(minLength: 0)
-
+            // Text cluster optically centered in the card; the index lives as
+            // a corner stamp overlay so it never pushes the cluster down.
+            VStack(alignment: .leading, spacing: 4) {
                 Text(plant.names[settings.language])
                     .font(.title3.weight(.semibold))
                     .foregroundStyle(.ink)
@@ -199,15 +194,22 @@ struct CatalogRow: View {
                         .foregroundStyle(.inkMuted)
                         .lineLimit(1)
                 }
-
-                Spacer(minLength: 0)
-
                 BadgeRow(categories: plant.categories)
+                    .padding(.top, 9)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.leading, 16)
+            .padding(.trailing, 44)
+            .padding(.vertical, 14)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }
         .frame(height: 124)
+        .overlay(alignment: .topTrailing) {
+            Text(plateNumeral(index))
+                .font(.footnote.monospacedDigit())
+                .foregroundStyle(.inkMuted)
+                .padding(.top, 12)
+                .padding(.trailing, 14)
+        }
         .contentShape(Rectangle())
     }
 }

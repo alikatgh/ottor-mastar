@@ -100,16 +100,24 @@ struct PlantDetailView: View {
 
     private var wideBody: some View {
         GeometryReader { geo in
-            HStack(spacing: 0) {
+            ZStack(alignment: .topLeading) {
+                // Image column runs edge-to-edge behind the status/tab bars…
+                HStack(spacing: 0) {
+                    Color.clear
+                        .frame(width: geo.size.width * 0.55)
+                    imagePanel(fixedHeight: nil)
+                        .frame(width: geo.size.width * 0.45)
+                }
+                .ignoresSafeArea()
+
+                // …while the info column respects the top safe area, so the
+                // title never collides with iPadOS's top-mounted tab bar.
                 ScrollView {
                     infoSheet(wide: true)
                 }
                 .frame(width: geo.size.width * 0.55)
-                imagePanel(fixedHeight: nil)
-                    .frame(width: geo.size.width * 0.45)
             }
         }
-        .ignoresSafeArea(edges: .top)
     }
 
     // MARK: Image panel — swipeable plate/photo pager
@@ -124,13 +132,14 @@ struct PlantDetailView: View {
                                 country: country, plant: plant, size: .medium,
                                 kind: .plate, contentMode: .fit
                             )
+                            // Shadow belongs to the paper sheet only; flat
+                            // parchment behind — ambient casts read as stains
+                            // on light surfaces.
+                            .shadow(color: .black.opacity(0.14), radius: 9, y: 4)
                             .padding(.horizontal, 16)
                             .padding(.top, 60)
                             .padding(.bottom, 56)
-                            .background(
-                                AmbientImageFill(country: country, plant: plant, kind: .plate)
-                            )
-                            .shadow(color: .black.opacity(0.15), radius: 10, y: 5)
+                            .background(Color.parchment)
                         } else {
                             PlantImageView(country: country, plant: plant, size: .medium)
                                 .clipped()
@@ -234,7 +243,9 @@ struct PlantDetailView: View {
                     )
             }
             .padding(.horizontal, wide ? 40 : 24)
-            .padding(.top, wide ? 76 : 26)
+            // Wide top inset is modest — the column already respects the top
+            // safe area (iPadOS top tab bar) in wideBody.
+            .padding(.top, wide ? 32 : 26)
             .padding(.bottom, 40)
         }
         .frame(maxWidth: .infinity)

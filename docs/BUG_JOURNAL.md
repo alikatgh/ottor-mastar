@@ -32,6 +32,19 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
   (`bg-gradient-to-t from-black/80 … to-transparent`).
 - **Assets can be silent duplicates.** Before trusting a generated asset set,
   `md5` them — 6 of 23 "illustrations" were byte-for-byte copies of others.
+- **Fixed-height cards/rows clip once i18n labels wrap.** Sakha/Russian labels
+  run far longer than English; a fixed `h-*` on a card that stacks a wrapping
+  badge/label row clips the title. Use `min-h-*` + grid `items-stretch` so the
+  row grows to fit and stays uniform (keep the image panel `h-full`). Always
+  verify localized layouts at the LONGEST language, not English.
+- **Offline-first OTA content: key the cache by app BUILD version, not a
+  timestamp.** For "fetch a hosted catalog, cache, fall back to bundled," the
+  hard case is "app updated → newer bundle vs older cached remote." A content
+  timestamp orders them but churns the committed JSON every export. Instead
+  store the cache under the current build number: a new binary's fresh bundle
+  always wins (cache key mismatches → ignored), and remote sync repopulates on
+  the next launch. Data needs no timestamp; the SCHEMA `version` stays separate
+  (structural compat only). Always keep the bundled baseline as the fallback.
 
 ## Patterns to scan for FIRST (native/Compose)
 
@@ -49,6 +62,35 @@ Newest first. 5 lines max per entry: symptom / cause / fix / lesson + file:line.
   route→tab map; iOS: per-tab `NavigationPath` + re-tap pops to root).
 
 ## Chronological log
+
+### 2026-07-12 — Over-the-air catalog sync (hosted catalog.json + versioned cache, bundled fallback)
+- Change: apps can now get new plants WITHOUT an app-store release. `public/catalog.json` is emitted from the typed src/data by `scripts/gen-catalog-json.cjs` (wired into `prebuild`) and is byte-identical to the bundled `plants.json` — both come from the shared `scripts/lib/build-catalog.cjs`, so they can't drift. iOS `PlantStore` (Models.swift) + Android `PlantStore` (Models.kt) load cached-catalog-or-bundled at startup and `refresh()` in the background.
+- Freshness rule: the disk cache is keyed by the app BUILD version (iOS CFBundleVersion / Android longVersionCode), so after an app update the new binary's fresh bundle always wins; remote sync repopulates the cache for the next launch. Schema `version` (==1) gates structural compat; any fetch/decode failure silently keeps bundled data.
+- Scope/limitation: this syncs DATA only. New plants not in the binary render with a parchment placeholder for images until remote thumb/medium image fetch+cache is added (PlantImage.swift deliberately never networks for thumb/medium today) — that's the next step.
+- Verified: catalog.json served 200/application/json (v1, 47 plants); byte-identical to plants.json; iOS builds + launches (bundled fallback, since prod catalog.json is 404 until deployed); Android compiles.
+
+### 2026-07-12 — Web catalog/search rows → iOS "leading-image panel"; fixed height clipped wrapped labels
+- Change: web CatalogPage/SearchPage rows rebuilt to match the iOS CatalogRow — full-bleed leading plate/photo (flush to the card's left edge, clipped by its corners), plate number as a top-right corner stamp, text cluster vertically centered. CatalogPage.tsx, SearchPage.tsx.
+- Bug caught in browser verify: first pass used a fixed `h-[120px]`; cards whose long Sakha category labels wrapped to two badge lines (e.g. "Көннөрү бастыҥа") clipped the title at the top.
+- Fix: `min-h-[120px]` + grid `items-stretch` — rows grow to fit and stay uniform per row; the leading image is `h-full` so the full-bleed is preserved. Verified desktop 3-col + mobile 1-col, light theme, no console errors.
+- Lesson (generalizes): see the new top-section pattern — a fixed-height row clips the moment localized labels wrap; min-height + grid equalization, and verify at the longest language.
+
+### 2026-07-12 — Mongolia botanical plates regenerated (photo-anchored, 24/24 correct)
+- Context: the 2026-07-06 audit deleted all 11 original Mongolia plates (each depicted an unrelated species under a fabricated "A. Petrov 1892" caption; 0/11 correct), leaving 22 species photo-only. This completes that audit's "Follow-up (not done)".
+- Fix: regenerated plates for all 24 species, ANCHORING each generation to the plant's own field photo (`public/mongolia/full/mongolia-NN.webp`) + per-species morphology, text-free. `_src_originals/illustrations/mongolia-*-ill.png` → `npm run optimize:illustrations` (manifest 25→47 slugs) → `npm run data:export`. Verified 24/24 by pairing each plate against its photo.
+- Lesson (generalizes): for AI species/botanical art the existing verified PHOTO is the ground-truth anchor — "generate from a name" invents plausible-but-wrong species (the 0/11 failure), "generate to match THIS photo" + a self-audit against it flips to 24/24. Never bake Latin captions into a generated image (misspellings read as fabrication) — render the name in-app.
+
+### 2026-07-11 — iPad viewer shipped with NO close button (chrome laid out OFFSCREEN on regular width)
+- Symptom: full-screen viewer on iPad had no close button/counter; fine on iPhone. Chrome's `onAppear` fired with opacity=1 — mounted, invisible.
+- Cause: backdrop's `BundledPlantImage().scaledToFill()` had no clip/frame — a fill REPORTS its inflated size to layout, growing the whole viewer ZStack past the screen on iPad's 4:3 (tall plates), so the chrome overlay pinned to inflated bounds sat above the physical screen. iPhone's aspect ≈ plate aspect → overflow ≈ 0 → "iPad-only". ImageViewer.swift:107.
+- Fix: hang the fill off `Color.overlay { … }.clipped()` — overlay content can never inflate layout. (Earlier suspects — ZStack-sibling vs .overlay chrome, GlassGroup — were red herrings; kept the .overlay + plain HStack anyway.) Also PlantDetailView wideBody: info column respects the top safe area so the title clears iPadOS's top tab bar.
+- Lesson (generalizes): `scaledToFill` without `.frame`+`.clipped()` (or hung off an `.overlay`) silently inflates the parent's LAYOUT bounds, not just paint — anything edge-pinned in that container lands offscreen. If onAppear fires but nothing paints, suspect geometry before opacity/z-order. And verify fixes ON THE AFFECTED SIZE CLASS before committing — the first "fix" here shipped unverified and was wrong.
+
+### 2026-07-10 — Viewer stranded in half-dismissed limbo (photo offset, chrome half-faded, caption clipped)
+- Symptom: viewer frozen mid-state — image pushed down + scaled, top chrome invisible, caption fragments.
+- Cause: dismiss gesture attached as `zoomed ? nil : dismissDrag` — when zoom flips mid-drag the gesture DETACHES without onEnded, so `dragY` freezes at its last value. ImageViewer.swift.
+- Fix: gesture always attached, guards on `zoomed` inside; `onChange(of: zoomed)` springs any leftover dragY home. Plus Photos rule: chrome fully hides while zoomed; caption gets `.id(item)` so text never frame-morphs across pages.
+- Lesson (generalizes): NEVER conditionally detach a gesture that owns transient state — a live gesture removed mid-flight skips onEnded and strands its state. Guard inside the closures instead.
 
 ### 2026-07-10 — Android motion pass (shared elements, staggered entrances, animated lists)
 - Change: a "motion kit" in Components.kt — `sharedPlantImage()` (SharedTransitionLayout tile→detail hero morph, keys namespaced by ORIGIN: hero-/shelf-/tile-/catalog-/search-{slug}, detail picks its key from a `?src=` nav arg), `riseIn(index)` staggered entrances, `scaledClickable()` spring press (no ripples — design language). Plus: catalog/search rows `animateItem()` glide on filter/sort, tweened filter chips & Settings segments, sliding PillToggle thumb, pager-dot pill stretch, nav-icon selection bounce. All no-op under Reduce motion.

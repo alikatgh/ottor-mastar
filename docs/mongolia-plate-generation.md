@@ -53,3 +53,35 @@ rebuild every platform, and redeploy the web.
 
 Any image model works (the originals were Gemini-generated). Generate at a
 portrait resolution (e.g. 1024×1365) so the `full` webp stays crisp.
+
+---
+
+## Round 2 — plates for the NEW species (Jul 2026 field photos)
+
+New Mongolia species identified from the Jul 11–12 field shoot. **Two reuse an
+existing Yakutia plate** (same species, no generation needed) — the rest need a
+new plate. Same drop-in pipeline as above (save `<imageId>-ill.png` →
+`npm run optimize:illustrations` → `export-native-data.cjs`).
+
+> ♻️ **Reuse, do NOT generate:** Sardaana lily (*Lilium pensylvanicum*) reuses
+> the Yakutia `plant-01` plate; oxeye daisy (*Leucanthemum vulgare*) reuses the
+> Yakutia `plant-05` plate. I wire these in code — no Gemini step.
+
+> ⚠️ **Confirm the species before generating** the medium/low-confidence ones —
+> exact species in these genera vary; a wrong binomial = a wrong plate. The
+> genus is solid; the species is my best guess from the photo.
+
+Each prompt = the **Shared style** prefix (above) + the suffix below.
+
+| imageId | Confidence | Prompt suffix (append to the shared style) |
+|---------|-----------|--------------------------------------------|
+| `mongolia-25-ill.png` — Fireweed | high | *Chamerion angustifolium* (Fireweed): tall erect stem, lance-shaped willow-like leaves with a pale midrib, a long terminal raceme of four-petalled rose-magenta flowers opening from the bottom up, with slender curved seed-pods; small detail studies of one flower and a splitting pod. Caption "CHAMERION ANGUSTIFOLIUM · Fireweed". |
+| `mongolia-26-ill.png` — Thistle | medium (confirm sp.) | *Cirsium arvense* (Creeping Thistle): erect spiny stem, deeply lobed spine-tipped green leaves, several rounded lilac-purple tufted flowerheads on spiny involucres; detail study of one flowerhead and a feathery seed. Caption "CIRSIUM ARVENSE · Creeping Thistle". |
+| `mongolia-27-ill.png` — Spurge | medium (confirm sp.) | *Euphorbia esula* (Leafy Spurge): erect stem with narrow blue-green leaves, a flat-topped umbel of paired yellow-green heart-shaped bracts enclosing tiny cyathia; detail study of a single cyathium. Caption "EUPHORBIA ESULA · Leafy Spurge". |
+| `mongolia-28-ill.png` — Wild onion | medium (confirm sp.) | *Allium senescens* (wild onion): grassy basal leaves, a leafless stalk topped by a rounded umbel of small pale-pink-to-white star flowers; detail study of a single flower and the papery bulb. Caption "ALLIUM SENESCENS · Wild Onion". |
+| `mongolia-29-ill.png` — Campion | medium (confirm sp.) | *Silene repens* (Creeping Catchfly): slender stems, narrow opposite leaves, a nodding tubular calyx with fine longitudinal stripes opening to five notched pale-pink petals; detail study of one flower and its striped calyx. Caption "SILENE REPENS · Creeping Catchfly". |
+
+Lower-confidence candidates still to confirm before writing prompts: magenta
+double rose (#63 — rugosa vs a garden rose), red-berried shrub (#65 — currant
+vs cotoneaster), pale-pink shrub (#50 — Daphne vs honeysuckle). Tell me the
+species and I'll add them here.

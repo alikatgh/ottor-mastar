@@ -38,6 +38,44 @@ const IMAGE_MAP = {
   'mongolia-22': '20260706_130602.jpg', // Viburnum opulus — guelder rose
   'mongolia-23': '20260706_132431.jpg', // Crepis — hawksbeard
   'mongolia-24': '20260706_130635.jpg', // Cosmos sulphureus — sulphur cosmos
+
+  // Gallery frames (extra photos of the SAME plant, ordered close→far after the
+  // primary). Each `<id>-N` is verified by eye to match its species — the raw
+  // camera bursts interleave different flowerbed plants, so these are curated,
+  // not taken whole. Referenced by the `gallery` array in src/data/mongolia.ts.
+  'mongolia-03-2': '20260706_131224.jpg', // Petunia — purple cluster
+  'mongolia-03-3': '20260706_131220.jpg', // Petunia — wider bed
+  'mongolia-05-2': '20260706_133131.jpg', // Ornamental kale — purple-centre head
+  'mongolia-08-2': '20260706_133414.jpg', // Alfalfa — flower spike detail
+  'mongolia-12-2': '20260706_130524.jpg', // Blue spruce — branch detail
+  'mongolia-16-2': '20260706_133334.jpg', // Jerusalem sage — second spike
+  'mongolia-20-2': '20260706_132931.jpg', // Chinese ryegrass — tuft
+
+  // New species (Jul 2026 shoot) — primary is the closest frame, `-2` the wider
+  // (close→far). Each verified by eye and matched to its generated plate.
+  'mongolia-25': '20260711_131816.jpg',   // Chamerion angustifolium — fireweed
+  'mongolia-25-2': '20260711_131804.jpg', // fireweed — wider spray
+  'mongolia-26': '20260712_135335.jpg',   // Cirsium arvense — creeping thistle
+  'mongolia-26-2': '20260712_135308.jpg', // thistle — wider stand
+  'mongolia-27': '20260711_134113.jpg',   // Euphorbia esula — leafy spurge
+  'mongolia-27-2': '20260711_134109.jpg', // spurge — wider mat
+  'mongolia-28': '20260711_132759.jpg',   // Allium senescens — wild onion
+  'mongolia-28-2': '20260711_132753.jpg', // wild onion — wider
+  'mongolia-29': '20260712_140601.jpg',   // Silene repens — creeping catchfly
+  'mongolia-01-2': '20260706_133452.jpg', // Marigold — mixed bed
+  'mongolia-01-3': '20260706_131303.jpg', // Marigold — mass planting
+  'mongolia-02-2': '20260706_130651.jpg', // Cornflower — bloom
+  'mongolia-04-2': '20260706_131317.jpg', // Pansy — orange form
+  'mongolia-04-3': '20260706_133141.jpg', // Pansy — purple form
+  'mongolia-05-3': '20260706_131217.jpg', // Ornamental kale — white head
+  'mongolia-07-2': '20260706_133303.jpg', // Lady's bedstraw — flowering mass
+  'mongolia-14-2': '20260706_130943.jpg', // Dandelion — seed heads
+  'mongolia-25-3': '20260711_131820.jpg', // Fireweed — close flowers
+  'mongolia-26-3': '20260712_135322.jpg', // Thistle — flowerhead
+  'mongolia-26-4': '20260712_135331.jpg', // Thistle — flowerhead close
+  'mongolia-28-3': '20260711_132804.jpg', // Wild onion — umbel close
+  'mongolia-30': '20260712_135408.jpg',   // Lilium pensylvanicum — Sardaana lily
+  'mongolia-30-2': '20260712_135402.jpg', // Sardaana — second bloom
 };
 
 const INPUT_DIR = path.join(__dirname, '../_src_originals/mongolia');

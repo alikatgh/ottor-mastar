@@ -1,36 +1,43 @@
 /**
- * gen-icons.cjs — generate social + app icons for deployment.
+ * gen-icons.cjs — generate social + web app icons for deployment.
  *
+ *  - public/apple-touch-icon.png 180x180  full-bleed lily mark (iOS masks it)
+ *  - public/icon-192.png / icon-512.png   PWA manifest icons (icon-512 doubles
+ *                                         as the maskable icon — 13% safe margin)
+ *  - public/favicon.svg                   rounded lily tile (embedded raster)
  *  - public/og-image.jpg        1200x630  social share card (from the Sardaana
  *                                         lily hero photo, smart-cropped)
- *  - public/apple-touch-icon.png 180x180  full-bleed leaf mark (iOS masks it)
- *  - public/icon-192.png / icon-512.png   PWA manifest icons
  *
- * Re-runnable: node scripts/gen-icons.cjs
+ * The app icons all derive from the brand master (design/app-icon-1024.png,
+ * produced by gen-brand-master.cjs). Re-runnable: node scripts/gen-icons.cjs
  */
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
 const PUB = path.join(__dirname, '../public');
-
-// Full-bleed leaf mark (no corner radius — iOS/Android apply their own mask).
-const ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#2C5A2E"/>
-  <path d="M16 6 C16 6 10 12 10 18 C10 22 12.5 26 16 26 C19.5 26 22 22 22 18 C22 12 16 6 16 6Z" fill="#4A8C3F" opacity="0.7"/>
-  <path d="M16 8 C16 8 12 13 12 18 C12 21 13.5 24 16 24 C18.5 24 20 21 20 18 C20 13 16 8 16 8Z" fill="#6BAF5E"/>
-  <line x1="16" y1="14" x2="16" y2="24" stroke="#2C5A2E" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M16 18 C14 16.5 12.5 17 12 18" stroke="#2C5A2E" stroke-width="1" fill="none" stroke-linecap="round"/>
-  <path d="M16 20 C18 18.5 19.5 19 20 20" stroke="#2C5A2E" stroke-width="1" fill="none" stroke-linecap="round"/>
-</svg>`;
+const MASTER = path.join(__dirname, '../design/app-icon-1024.png');
 
 async function main() {
-  const iconBuf = Buffer.from(ICON_SVG);
+  if (!fs.existsSync(MASTER)) {
+    throw new Error(`missing brand master ${MASTER} — run: node scripts/gen-brand-master.cjs`);
+  }
+  // PWA + apple-touch icons — flattened opaque (no alpha) from the master.
   for (const size of [180, 192, 512]) {
     const name = size === 180 ? 'apple-touch-icon.png' : `icon-${size}.png`;
-    await sharp(iconBuf, { density: 400 }).resize(size, size).png().toFile(path.join(PUB, name));
+    await sharp(MASTER).resize(size, size).flatten({ background: '#FAEFDD' }).png().toFile(path.join(PUB, name));
     console.log(`✓ ${name}`);
   }
+
+  // favicon.svg — a rounded lily tile with the icon embedded as a raster (the
+  // art is photographic, so no vector mark). index.html keeps its SVG <link>.
+  const favPng = await sharp(MASTER).resize(96, 96).flatten({ background: '#FAEFDD' }).png().toBuffer();
+  const favSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <defs><clipPath id="r"><rect width="96" height="96" rx="20"/></clipPath></defs>
+  <image href="data:image/png;base64,${favPng.toString('base64')}" width="96" height="96" clip-path="url(#r)"/>
+</svg>`;
+  fs.writeFileSync(path.join(PUB, 'favicon.svg'), favSvg);
+  console.log('✓ favicon.svg (rounded lily tile)');
 
   // Branded social card: the hero lily meadow (cropped low to show the
   // Sardaana blooms) under a scrim, with the wordmark — mirrors the homepage hero.

@@ -28,6 +28,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Photo
+import androidx.compose.material.icons.outlined.Newspaper
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -81,6 +82,7 @@ import com.aulenor.ottormastar.ui.LegalScreen
 import com.aulenor.ottormastar.ui.LocalNavAnimation
 import com.aulenor.ottormastar.ui.LocalSharedTransition
 import com.aulenor.ottormastar.ui.OttorMastarTheme
+import com.aulenor.ottormastar.ui.NewsScreen
 import com.aulenor.ottormastar.ui.SearchScreen
 import com.aulenor.ottormastar.ui.SettingsScreen
 import com.aulenor.ottormastar.ui.ViewerItem
@@ -91,6 +93,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PlantStore.load(applicationContext)
+        // Best-effort over-the-air content sync: fetch the hosted catalog in the
+        // background and cache it for the NEXT launch (see PlantStore.refresh).
+        // The bundled/cached snapshot already rendered, so this never blocks UI.
+        PlantStore.refresh(applicationContext)
         enableEdgeToEdge()
         setContent {
             val context = LocalContext.current
@@ -131,6 +137,7 @@ private fun AppRoot() {
         Tab("home", "nav.gallery", Icons.Outlined.Photo),
         Tab("catalog", "nav.catalog", Icons.AutoMirrored.Outlined.MenuBook),
         Tab("search", "nav.search", Icons.Outlined.Search),
+        Tab("news", "nav.news", Icons.Outlined.Newspaper),
         Tab("about", "nav.about", Icons.Outlined.Info),
     )
 
@@ -141,7 +148,7 @@ private fun AppRoot() {
     // them `currentRoute == tab.route` is false for every tab and the bar
     // would show NO selection. Remember which tab we're "inside" so its icon
     // stays lit on children too.
-    val tabRoutes = remember { setOf("home", "catalog", "search", "about") }
+    val tabRoutes = remember { setOf("home", "catalog", "search", "news", "about") }
     var lastTabRoute by rememberSaveable { mutableStateOf("home") }
     LaunchedEffect(currentRoute) {
         if (currentRoute in tabRoutes) lastTabRoute = currentRoute!!
@@ -287,6 +294,7 @@ private fun AppRoot() {
                     SearchScreen(onOpenPlant = { openPlant(it, "search") })
                 }
             }
+            composable("news") { NewsScreen() }
             composable("about") {
                 AboutScreen(
                     onOpenSettings = { nav.navigate("settings") { launchSingleTop = true } },

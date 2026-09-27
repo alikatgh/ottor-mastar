@@ -4,6 +4,13 @@ import SwiftUI
 struct OttorMastarApp: App {
     @StateObject private var settings = AppSettings()
 
+    init() {
+        // Best-effort over-the-air content sync: fetch the hosted catalog in the
+        // background and cache it for the NEXT launch (see PlantStore.refresh).
+        // The bundled snapshot renders this launch, so this never blocks startup.
+        PlantStore.refresh()
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()
@@ -22,7 +29,7 @@ struct OttorMastarApp: App {
 /// About (Settings and Legal are pushed from About / footers). On the Mac,
 /// Settings additionally gets its own dedicated tab in the window toolbar.
 enum RootTab: Hashable {
-    case gallery, catalog, search, about, settings
+    case gallery, catalog, search, news, about, settings
 }
 
 struct RootView: View {
@@ -36,6 +43,7 @@ struct RootView: View {
     @State private var galleryPath = NavigationPath()
     @State private var catalogPath = NavigationPath()
     @State private var searchPath = NavigationPath()
+    @State private var newsPath = NavigationPath()
     @State private var aboutPath = NavigationPath()
     @State private var settingsPath = NavigationPath()
 
@@ -54,6 +62,7 @@ struct RootView: View {
         case .gallery: galleryPath = NavigationPath()
         case .catalog: catalogPath = NavigationPath()
         case .search: searchPath = NavigationPath()
+        case .news: newsPath = NavigationPath()
         case .about: aboutPath = NavigationPath()
         case .settings: settingsPath = NavigationPath()
         }
@@ -106,6 +115,9 @@ struct RootView: View {
             Tab(settings.loc.t("nav.catalog"), systemImage: "book", value: RootTab.catalog) {
                 NavigationStack(path: $catalogPath) { CatalogView() }
             }
+            Tab(settings.loc.t("nav.news"), systemImage: "newspaper", value: RootTab.news) {
+                NavigationStack(path: $newsPath) { NewsView() }
+            }
             Tab(settings.loc.t("nav.about"), systemImage: "info.circle", value: RootTab.about) {
                 NavigationStack(path: $aboutPath) { AboutView() }
             }
@@ -132,6 +144,9 @@ struct RootView: View {
             NavigationStack(path: $searchPath) { SearchView() }
                 .tabItem { Label(settings.loc.t("nav.search"), systemImage: "magnifyingglass") }
                 .tag(RootTab.search)
+            NavigationStack(path: $newsPath) { NewsView() }
+                .tabItem { Label(settings.loc.t("nav.news"), systemImage: "newspaper") }
+                .tag(RootTab.news)
             NavigationStack(path: $aboutPath) { AboutView() }
                 .tabItem { Label(settings.loc.t("nav.about"), systemImage: "info.circle") }
                 .tag(RootTab.about)

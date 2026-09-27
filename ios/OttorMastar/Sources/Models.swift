@@ -134,10 +134,23 @@ struct PlantData: Decodable {
     let countries: [Country]
 }
 
-/// Loads the bundled dataset once. The JSON ships in the app bundle, so a
-/// decode failure is a build error, not a runtime condition — crash loudly.
+/// The plant dataset, loaded ONCE at startup from the best available source:
+/// a catalog previously cached from the website (by this same app build), else
+/// the snapshot bundled in the binary. The bundle is the authoritative baseline
+/// so a fresh, fully-offline first launch always works; the cache is an
+/// offline-first overlay. New content published to the site is fetched in the
+/// background by `refresh()` and applied on the NEXT launch — the running
+/// session is never mutated.
 enum PlantStore {
-    static let data: PlantData = {
+    /// Schema version this build understands. A hosted catalog with a different
+    /// `version` is refused — an older app must never decode a newer shape.
+    static let schemaVersion = 1
+
+    static let data: PlantData = loadCachedCatalog() ?? loadBundled()
+
+    /// The snapshot compiled into the app bundle. A decode failure here is a
+    /// build error, not a runtime condition — crash loudly.
+    private static func loadBundled() -> PlantData {
         guard
             let url = Bundle.main.url(forResource: "plants", withExtension: "json"),
             let raw = try? Data(contentsOf: url),
@@ -146,7 +159,48 @@ enum PlantStore {
             fatalError("Bundled plants.json missing or malformed — run scripts/export-native-data.cjs")
         }
         return decoded
-    }()
+    }
+
+    /// A previously-fetched catalog is trusted only if it was cached by THIS app
+    /// build (so a new binary's fresh bundle always wins after an update) and its
+    /// schema matches. Any miss/decode failure → nil → fall back to bundled.
+    private static func loadCachedCatalog() -> PlantData? {
+        guard
+            UserDefaults.standard.string(forKey: cacheBuildKey) == appBuild,
+            let url = cacheURL,
+            let raw = try? Data(contentsOf: url),
+            let decoded = try? JSONDecoder().decode(PlantData.self, from: raw),
+            decoded.version == schemaVersion
+        else { return nil }
+        return decoded
+    }
+
+    /// Best-effort over-the-air sync: fetch the hosted catalog and, if valid and
+    /// schema-compatible, cache it for the next launch. Never touches the running
+    /// session, never surfaces errors. Call once at app launch.
+    static func refresh() {
+        guard let catalogURL = URL(string: data.imageHost)?.appendingPathComponent("catalog.json") else { return }
+        Task.detached(priority: .background) {
+            guard
+                let (raw, response) = try? await URLSession.shared.data(from: catalogURL),
+                (response as? HTTPURLResponse)?.statusCode == 200,
+                let decoded = try? JSONDecoder().decode(PlantData.self, from: raw),
+                decoded.version == schemaVersion,
+                let url = cacheURL
+            else { return }
+            try? raw.write(to: url, options: .atomic)
+            UserDefaults.standard.set(appBuild, forKey: cacheBuildKey)
+        }
+    }
+
+    private static let cacheBuildKey = "catalogCacheAppBuild"
+    private static var appBuild: String {
+        (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "0"
+    }
+    private static var cacheURL: URL? {
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
+            .first?.appendingPathComponent("catalog.json")
+    }
 
     static func country(_ id: String) -> Country {
         data.countries.first { $0.id == id }

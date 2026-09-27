@@ -286,24 +286,20 @@ struct ProminentPillButtonStyle: ButtonStyle {
     }
 }
 
-/// Catalog filter chip background: forest-tinted Liquid Glass when active,
-/// clear interactive glass when idle (26+); forest fill / hairline outline
-/// below. Selection changes tint only — never geometry.
+/// Catalog filter chip background: forest fill when active, hairline outline
+/// idle. Deliberately NOT Liquid Glass — glass lives over content (viewer
+/// photos); on the flat cream canvas its refraction rim reads as dirty
+/// shadows, and the design system forbids shadows on the canvas layer.
 struct FilterChipBackground: ViewModifier {
     let active: Bool
 
     func body(content: Content) -> some View {
-        if #available(iOS 26.0, *) {
-            content.glassEffect(
-                .chrome(tint: active ? .forest : nil, interactive: true), in: Capsule())
-        } else {
-            content
-                .background(active ? Color.forest : .clear, in: Capsule())
-                .overlay(
-                    Capsule().strokeBorder(
-                        active ? Color.forest : Color.hairline, lineWidth: 1)
-                )
-        }
+        content
+            .background(active ? Color.forest : .clear, in: Capsule())
+            .overlay(
+                Capsule().strokeBorder(
+                    active ? Color.forest : Color.hairline, lineWidth: 1)
+            )
     }
 }
 

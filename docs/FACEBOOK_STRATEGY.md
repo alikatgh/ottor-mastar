@@ -1,0 +1,218 @@
+# Ottor Mastar — Facebook strategy
+
+A practical plan for growing a community around the herbarium. Ottor Mastar is a
+free, offline, no-ads illustrated guide to the wild plants of **Yakutia (Sakha)**
+and **Mongolia**, in five languages. That identity — cultural, beautiful,
+non-commercial — is the whole marketing advantage. Lean into it.
+
+## Positioning & voice
+
+- **What we are:** a living herbarium that began in exactly two places — a
+  remote village road in Yakutia and Ulaanbaatar's National Garden Park —
+  botanical plates, field photos, and the plant's names in Sakha, Russian,
+  English, Mongolian, Latin, plus notes on folk tradition. We say so plainly:
+  two documented transects, growing place by place. The modesty is the story —
+  and the scaling pitch.
+- **Voice:** warm, unhurried, reverent of the land and language. Not salesy. A
+  quiet museum, not a startup. Post in the reader's language (see Localization).
+- **Two honesty rules that protect the brand** (carry them from the app):
+  1. The plates are **illustrations in a 19th-century botanical style**, not
+     scans of historical works — never imply they're archival originals.
+  2. Folk-medicine notes are **cultural/historical only, not medical advice.**
+     Every such post carries a one-line disclaimer. Never encourage readers to
+     gather, identify, or consume a plant from a post.
+
+## Mongolia targeting campaign ⭐ (the current growth push)
+
+The near-term goal is **users in Mongolia**, so the Mongolia plants run as their
+own campaign — not an afterthought bolted onto the Sakha page. The plan:
+
+- **Mongolian first, English below.** Every Mongolia post leads with a Mongolian
+  caption (the story), then a short English block under an `— English —` rule for
+  reach and for the diaspora. Never machine-dump five languages into one caption.
+- **Geo-target Ulaanbaatar.** When boosting, target **Ulaanbaatar + interest:
+  gardening/botany/nature**, not the whole country — the audience is city people
+  who walk past these flowers, not remote herders.
+- **The National Garden Park hook.** Every Mongolia field photo was shot inside
+  **Улаанбаатарын Үндэсний цэцэрлэгт хүрээлэн** (the National Garden Park,
+  park.ub.gov.mn) — so *every* post carries a park hook, in one of two honest
+  variants the generator picks from the plant's own habitat data:
+  - **Planted ornamentals** (marigold, petunia, pansy, kale, dusty miller,
+    roses, dahlia, cosmos, blue spruce — 10 species): *"strolling the National
+    Garden Park you often pass this plant"* — instant recognition for anyone
+    who walks or runs there.
+  - **Wild species** (yarrow, cornflower, dandelion, sardaana… — 20 species):
+    *"we photographed this plant growing wild in the National Garden Park"* —
+    true (that's where the photos were taken) and a stronger story: the park's
+    lawns hide a whole steppe flora most visitors never notice.
+  Neither variant overstates; the split is enforced in the generator so the
+  honesty rule can't drift.
+- **The provenance story is a post of its own.** "Every photo in the Mongolia
+  collection was taken in the National Garden Park, on morning walks and runs" —
+  a behind-the-herbarium post that makes the whole collection feel local and
+  personal, and invites followers to spot the plants themselves.
+
+## Funding & scaling narrative (why we're building the audience)
+
+We are **not partnering with anyone.** The page exists to build the traction
+that gets the project **funded**, so it can grow beyond its two starting points.
+
+- **The origin story IS the pitch.** Ottor Mastar started from exactly two
+  places: **Ulaanbaatar's National Garden Park** (30 species, every one
+  photographed on walks and runs) and **a remote village road in Yakutia**.
+  Not "the flora of two countries" — two transects, documented completely,
+  by one person with a phone and a botanical illustrator's eye. That honesty
+  is the strength: the method is proven and cheap, and every new place is
+  just another walk. *"This is what one park and one road look like. Imagine
+  every park, every road."*
+- **What funders need to see on the page** (build these deliberately):
+  1. **Traction** — followers, shares, App Store/Play downloads (UTM-tag every
+     link so the numbers are provable).
+  2. **Method** — behind-the-herbarium posts showing the pipeline: field photo
+     → identification → vintage plate → five languages → free offline app.
+     A repeatable, documented process reads as *fundable infrastructure*, not
+     a hobby.
+  3. **Demand** — comments asking "when is my region?" Screenshot-worthy proof
+     that people want their own places documented. Prompt it: end posts with
+     *"What place should we walk next?"*
+- **Where to apply once the numbers exist:** biodiversity / citizen-science
+  grants, indigenous-language and cultural-heritage funds (the Sakha naming is
+  a genuine language-preservation artifact), digital-culture programs, and
+  small climate/eco funds active in Mongolia and Siberia. The FB page + the
+  apps + this repo are the portfolio.
+- **Scaling roadmap to name publicly** (a roadmap post also signals ambition):
+  finish the Yakutia route → a second Ulaanbaatar park or a steppe transect →
+  new regions as funding lands. Every completed place becomes a new local
+  audience and a new proof point.
+- **Stories, not labels.** The Mongolian lead is a small, interesting fact — where
+  you'd meet it, what it looks like, a folk note — not a dry species card. People
+  share stories about the flower they walked past this morning; they scroll past
+  taxonomy.
+- **How it's generated:** `node scripts/gen-social-posts.cjs 2026-07-27 12 --country
+  mongolia` → `docs/social/calendar-mongolia.{json,md}`, ready for the Meta poster.
+  The Yakutia/Russian calendar is the same script without `--country` (or
+  `--country yakutia`).
+
+## Content pillars (rotate these)
+
+1. **Plant of the week** ⭐ (the anchor, ~1×/week)
+   One species: the botanical plate + the best field photo, its names in all
+   languages, one line of habitat, one line of folk/cultural note. This is the
+   most shareable unit — it shows off the app's actual content and travels well
+   in plant/heritage groups.
+2. **Language & heritage** (~1×/week)
+   The Sakha name and its meaning; a saying; a seasonal note (e.g. *sardaana*
+   lily blooming = midsummer in Yakutia). Ties plants to culture and language
+   revitalization — a strong emotional hook for the Sakha diaspora.
+3. **Behind the herbarium** (~2×/month)
+   Field photography, "we added 6 new species this week," how the offline app is
+   built. **Mirror the in-app News section** — every News post is a Facebook post.
+4. **Seasonal / useful** (~2×/month)
+   What's flowering now; how to use the app with no signal on the tundra; the
+   trilingual naming as a bridge between communities.
+5. **Community** (ongoing)
+   Ask followers for a plant's local name; repost (with credit + permission)
+   good user photos; answer ID questions — always with the "not for foraging"
+   caveat.
+
+## Cadence
+
+- **3 posts / week** is realistic and sustainable for a small team. Better
+  consistent-and-few than a burst then silence.
+- Suggested rhythm: **Mon** Plant of the week · **Wed** Heritage/language ·
+  **Fri** Seasonal / behind-the-scenes / community.
+- Batch a month of Plant-of-the-week posts in one sitting (the app already has
+  all the assets) and schedule them via Meta Business Suite.
+
+## Localization
+
+- **Two audiences, two lead languages** — run them as two content streams:
+  - **Mongolia stream** → **Mongolian first**, English below (see the Mongolia
+    targeting campaign above). Geo-boost Ulaanbaatar.
+  - **Yakutia stream** → **Russian + Sakha first**, English below. Geo-boost the
+    Sakha Republic.
+- Practical: two calendars from one generator (`--country mongolia` /
+  `--country yakutia`). Start on a single Page with the two streams tagged by
+  language; split into a dedicated Mongolian Page only once Mongolia traffic
+  justifies it. Don't machine-dump five languages into one caption — it reads as
+  spam.
+
+## Audience & where to find them
+
+- **Facebook Groups are the growth engine** for a niche like this — post the
+  Plant-of-the-week into: Sakha/Yakutia community groups, Mongolian nature &
+  steppe groups, plant-identification groups, botanical-art groups, foraging/
+  herbalism groups (respecting their rules + the disclaimer).
+- **No partnerships.** We grow on our own content and our own audience; the
+  goal of the page is traction we can show funders (see Funding & scaling
+  narrative above), not co-branding. If an institution shares a post
+  organically, great — but we don't pitch, tag-beg, or co-publish.
+- **Hashtags** (a few, not a wall): `#Саха #Якутия #Sakha #Yakutia #Mongolia
+  #этноботаника #botanicalart #herbarium #wildflowers #ургамал`.
+
+## Growth tactics
+
+- **Every post links to the app** — App Store now, "Mac & Android soon" (and
+  update when they ship). Put the link in the first comment, not the caption
+  (Facebook throttles outbound-link posts; a comment link ranks better).
+- **The plates are the ad.** They're genuinely beautiful — that's rare organic
+  reach. Post the plate as the image, not a screenshot of the app UI.
+- **Boost the best organic performer**, not a cold post: let a Plant-of-the-week
+  run 48h, then put a small budget behind the one with the highest share rate,
+  geo-targeted to Sakha Republic + Mongolia + interest:botany. $5–10 goes far.
+- **Cross-post to Instagram** from the same Meta account — same visual content,
+  a younger audience, near-zero extra effort.
+
+## Metrics that matter (ignore vanity likes)
+
+- **Shares** — the true signal for this content; a shared plate reaches a new
+  network. Track which pillar/species gets shared most and make more of it.
+- **App Store link clicks** (UTM-tag the links) — the real conversion.
+- **Group-referral traffic** and **"do my region next" comments** — the demand
+  evidence the funding pitch is built on. Screenshot and archive them.
+- Review monthly; double down on the 2–3 post types that actually travel.
+
+## First-30-days checklist
+
+1. Create the Page — name, the leaf/lily icon as the profile image, a botanical
+   plate as the cover, bio in Ru/Sah/En with the App Store link + website.
+2. Link the Instagram account (Meta Business Suite) and the website.
+3. Batch + schedule **8 Plant-of-the-week** posts (covers 2 months of the anchor
+   slot). Assets are already in the app.
+4. Write **3 heritage posts** (sardaana, a Sakha plant name's meaning, a season).
+5. Join 8–10 relevant Groups; introduce the project once, respectfully, then
+   contribute value (not just links).
+6. Post the **origin story** (two starting points: the National Garden Park +
+   a village road in Yakutia) and the **roadmap** ("what place next?") — the
+   two posts the funding narrative is anchored on.
+7. After 2 weeks, boost the single best organic post ($10, geo+interest).
+8. Start a `docs/funding/` traction log: monthly followers, shares, UTM link
+   clicks, downloads, and screenshots of "do my region" comments.
+
+## Ready-to-adapt starter posts
+
+**Plant of the week — Sardaana**
+> 🌸 Сардаана · *Lilium pensylvanicum* · Siberian Lily
+> The emblem flower of the Sakha land — a flame-orange lily that opens across
+> the meadows at the height of summer. In Sakha tradition its bulb was dried and
+> ground for flour. Now blooming in our herbarium — and, we found this year, on
+> the Mongolian steppe too.
+> _Illustration in vintage botanical style. Cultural note only — not medical or
+> foraging advice._
+> 👉 (link in first comment)
+
+**Behind the herbarium — new species**
+> This week the Mongolia collection grew to 30 plants — fireweed, thistle, wild
+> onion, spurge, and the sardaana lily, each with new field photos. All offline,
+> all free. What should we document next? Tell us the plant and its local name. 👇
+
+**Heritage — a name's meaning**
+> "Оттор мастар" means *herbs and trees* — the growing things of the land. Every
+> plant in the guide carries its name in Sakha, Russian, English and Latin,
+> because a name is the first thing we lose and the first thing worth keeping.
+
+---
+
+_Note: creating the Page and publishing posts are actions for the owner — this
+doc is the plan and the drafts. Ask and I'll write a full month's post calendar
+with per-species captions pulled straight from the app's data._

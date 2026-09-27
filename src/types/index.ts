@@ -24,6 +24,9 @@ export interface Plant {
   id: string;
   slug: string;
   imageId: string;
+  /** Extra photo imageIds beyond the primary, ordered close→far (macro first,
+   *  habitat last). The detail carousel appends one swipe per entry. */
+  gallery?: string[];
   illustrationId?: string;
   names: LocalizedStringWithLatin;
   description: LocalizedString;

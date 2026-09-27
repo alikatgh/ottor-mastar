@@ -10,7 +10,8 @@
     "gallery": "Gallery",
     "catalog": "Catalog",
     "search": "Search",
-    "about": "About"
+    "about": "About",
+    "news": "News"
   },
   "gallery": {
     "title": "Plant Gallery",
@@ -24,7 +25,8 @@
     "plateCount_one": "{{count}} plate",
     "plateCount_other": "{{count}} plates",
     "photosTitle": "Field photographs",
-    "swipeHint": "Swipe"
+    "swipeHint": "Swipe",
+    "appStoreNote": "Free · Works offline"
   },
   "settings": {
     "title": "Settings",
@@ -146,11 +148,15 @@
     "langTitle": "Languages & collections",
     "langBody": "Switch the interface language with the buttons in the header. In Settings you can also switch the collection (country); each collection offers its own languages.",
     "appTitle": "Using the app offline",
-    "appBody": "In the Android app every plant, picture and text works without an internet connection.",
-    "appLink": "Get the Android app",
+    "appBody": "The Ottor Mastar app for iPhone and iPad keeps every plant, picture and text available offline — free on the App Store.",
+    "appLink": "Get the app",
     "safetyTitle": "Safety",
     "safetyBody": "Everything here is for education only — never gather or use plants based on this app.",
     "safetyLink": "Read the full disclaimer",
     "appBodyNative": "Everything in this app — every plant, picture and text — works without an internet connection."
+  },
+  "news": {
+    "title": "News",
+    "empty": "No news yet."
   }
 }

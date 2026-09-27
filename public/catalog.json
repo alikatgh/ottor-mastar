@@ -1,0 +1,1993 @@
+{
+  "version": 1,
+  "generatedFrom": "src/data (scripts/export-native-data.cjs)",
+  "imageHost": "https://ottormastar.aulenor.com",
+  "defaultCountry": "yakutia",
+  "countries": [
+    {
+      "id": "yakutia",
+      "imageBase": "/plants",
+      "heroSlug": "daylily",
+      "languages": [
+        "sah",
+        "ru",
+        "en"
+      ],
+      "defaultLanguage": "sah",
+      "plants": [
+        {
+          "id": "yarrow",
+          "slug": "yarrow",
+          "imageId": "plant-01",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Хаан тохтотор от",
+            "ru": "Тысячелистник обыкновенный",
+            "en": "Common Yarrow",
+            "latin": "Achillea millefolium"
+          },
+          "description": {
+            "sah": "Үрдүк кыыл үүнээйи, элбэх үрүҥ сибэккилээх. Саха сирин алаастарыгар, хонууларыгар киэҥник тарҕанан үүнэр.",
+            "ru": "Многолетнее травянистое растение с мелкими белыми цветками, собранными в щитковидные соцветия. Широко распространено на лугах Якутии.",
+            "en": "A perennial herb with small white flowers in flat-topped clusters. Widely distributed across Yakutian meadows."
+          },
+          "medicinalUses": {
+            "sah": "Саха дьоно былыр-былыргыттан хаан тохтоторго, иһиини эмтииргэ уонна тымныыга туттар этилэр.",
+            "ru": "Применяется при кровотечениях, воспалениях, простудных заболеваниях. Настой используют для улучшения пищеварения.",
+            "en": "Used for bleeding, inflammation, and colds. Infusion aids digestion."
+          },
+          "habitat": {
+            "sah": "Алаас, хонуу, суол кытыла",
+            "ru": "Луга, поляны, обочины дорог",
+            "en": "Meadows, clearings, roadsides"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#FFFFFF"
+        },
+        {
+          "id": "flax",
+          "slug": "flax",
+          "imageId": "plant-02",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Күөх сибэкки",
+            "ru": "Лён сибирский",
+            "en": "Siberian Flax",
+            "latin": "Linum sibiricum"
+          },
+          "description": {
+            "sah": "Нарын, кэрэ көрүҥнээх уонна сырдык күөх сибэккилээх от. Күннээх хонууларга уонна сыырдарга көстөр.",
+            "ru": "Нежное растение с голубыми цветками. Растёт на солнечных лугах и склонах.",
+            "en": "A delicate plant with pale blue flowers. Grows on sunny meadows and slopes."
+          },
+          "medicinalUses": {
+            "sah": "Сиэмэтэ куртах ыарыытын уоскутар эминэн туттуллар.",
+            "ru": "Семена используют как обволакивающее средство при заболеваниях ЖКТ.",
+            "en": "Seeds used as a soothing agent for digestive issues."
+          },
+          "habitat": {
+            "sah": "Күннээх хонуу, сэдэх тыа",
+            "ru": "Солнечные луга, разреженные леса",
+            "en": "Sunny meadows, open forests"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "medicinal",
+            "ornamental"
+          ],
+          "color": "#B0C4DE"
+        },
+        {
+          "id": "bedstraw",
+          "slug": "bedstraw",
+          "imageId": "plant-03",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Кэйигэс уга",
+            "ru": "Подмаренник настоящий",
+            "en": "Lady's Bedstraw",
+            "latin": "Galium verum"
+          },
+          "description": {
+            "sah": "Саһархай сибэккилээх, хонууга киэҥник үүнэр элбэх сыллаах от. Ураты минньигэс мүөт сыттаах.",
+            "ru": "Многолетник с ярко-жёлтыми мелкими цветками, собранными в густые метёлки. Издаёт медовый аромат.",
+            "en": "A perennial with bright yellow tiny flowers in dense panicles. Emits a honey-like fragrance."
+          },
+          "medicinalUses": {
+            "sah": "Тирии бааһын оһордорго уонна иһиини намтатарга туһалаах.",
+            "ru": "Используют при кожных заболеваниях, как мочегонное и противовоспалительное средство.",
+            "en": "Used for skin conditions, as a diuretic and anti-inflammatory."
+          },
+          "habitat": {
+            "sah": "Хонуу, алаас, кураанах сирдэр",
+            "ru": "Луга, поляны, пустыри",
+            "en": "Meadows, clearings, wastelands"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#FFD700"
+        },
+        {
+          "id": "bellflower-clustered",
+          "slug": "bellflower-clustered",
+          "imageId": "plant-04",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Чуораан от",
+            "ru": "Колокольчик скученный",
+            "en": "Clustered Bellflower",
+            "latin": "Campanula glomerata"
+          },
+          "description": {
+            "sah": "Хараҥа күөх, чуораан курдук быһыылаах сибэккилэрдээх элбэх сыллаах үүнээйи.",
+            "ru": "Многолетнее растение с тёмно-фиолетовыми цветками, собранными в плотные головчатые соцветия.",
+            "en": "A perennial with deep purple flowers clustered in dense heads atop the stem."
+          },
+          "medicinalUses": {
+            "sah": "Норуот эминэн тымныыга уонна төбө ыарыытыгар үрүҥэ тураллар.",
+            "ru": "Народное средство при простуде и головной боли.",
+            "en": "Folk remedy for colds and headaches."
+          },
+          "habitat": {
+            "sah": "Хонуу, тыа саҕата",
+            "ru": "Луга, лесные опушки",
+            "en": "Meadows, forest edges"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "ornamental",
+            "medicinal"
+          ],
+          "color": "#7B2D8E"
+        },
+        {
+          "id": "bellflower-deep",
+          "slug": "bellflower-deep",
+          "imageId": "plant-05",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Хараҥа чуораан от",
+            "ru": "Колокольчик скученный (тёмный)",
+            "en": "Dark Clustered Bellflower",
+            "latin": "Campanula glomerata"
+          },
+          "description": {
+            "sah": "Бу чуораан от көрүҥэ ордук хараҥа уонна хойуу сибэккилэрдээх. Хонууга олус кэрэтик көстөр.",
+            "ru": "Тот же вид колокольчика скученного, но с более густыми и тёмными соцветиями.",
+            "en": "Same species of clustered bellflower, with denser and darker flower heads."
+          },
+          "medicinalUses": {
+            "sah": "Иһиини утарар эминэн туттуллар.",
+            "ru": "Применяют как противовоспалительное средство.",
+            "en": "Used as an anti-inflammatory remedy."
+          },
+          "habitat": {
+            "sah": "Хонуу, алаас",
+            "ru": "Луга, поляны",
+            "en": "Meadows, clearings"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#5B2C6F"
+        },
+        {
+          "id": "speedwell",
+          "slug": "speedwell",
+          "imageId": "plant-06",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Уһун күөх сибэкки",
+            "ru": "Вероника длиннолистная",
+            "en": "Long-leaved Speedwell",
+            "latin": "Veronica longifolia"
+          },
+          "description": {
+            "sah": "Үрдүк элбэх сыллаах от, уһун күөх-фиолетовай сибэккилэрдээх. Өрүс кытылыгар таптаан үүнэр.",
+            "ru": "Высокое многолетнее растение с длинными кистями сине-фиолетовых цветков.",
+            "en": "A tall perennial with long racemes of blue-violet flowers."
+          },
+          "medicinalUses": {
+            "sah": "Тыыннаах уорганнар уонна куртах ыарыыларыгар уоскутар эминэн туттуллар.",
+            "ru": "Применяют при заболеваниях дыхательных путей и желудочно-кишечного тракта.",
+            "en": "Used for respiratory and digestive ailments."
+          },
+          "habitat": {
+            "sah": "Сииктээх хонуу, өрүс кытыла",
+            "ru": "Влажные луга, берега рек",
+            "en": "Wet meadows, riverbanks"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "medicinal",
+            "ornamental"
+          ],
+          "color": "#6A5ACD"
+        },
+        {
+          "id": "wildflower-meadow",
+          "slug": "wildflower-meadow",
+          "imageId": "plant-07",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Хонуу сибэккилэрэ",
+            "ru": "Разнотравный луг",
+            "en": "Yakutian Wildflower Meadow",
+            "latin": "Pratum mixtum"
+          },
+          "description": {
+            "sah": "Саха сирин хонуутун дьиҥнээх айылҕатын көстүүтэ — араас өҥнөөх сибэккилэр уонна эмтээх оттор.",
+            "ru": "Типичная картина якутского разнотравного луга — смесь льна, клевера, колокольчиков и других полевых цветов.",
+            "en": "A quintessential Yakutian wildflower meadow with flax, clover, bellflowers, and other wild blooms."
+          },
+          "medicinalUses": {
+            "sah": "Айылҕа эминэн баай — элбэх эмтээх оттор бииргэ үүнэллэр.",
+            "ru": "Сочетание множества лекарственных трав в одном месте.",
+            "en": "A natural pharmacy — many medicinal herbs growing together."
+          },
+          "habitat": {
+            "sah": "Аһаҕас хонуу, алаас",
+            "ru": "Открытые луга и поляны",
+            "en": "Open meadows and clearings"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#90EE90"
+        },
+        {
+          "id": "buttercup",
+          "slug": "buttercup",
+          "imageId": "plant-08",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Алтан от",
+            "ru": "Лютик едкий",
+            "en": "Meadow Buttercup",
+            "latin": "Ranunculus acris"
+          },
+          "description": {
+            "sah": "Чаҕылхай саһархай сибэккилээх элбэх сыллаах үүнээйи. Хонууга дэлэччи үүнэр. Кэрэтин иһин улахан сэрэхтээх.",
+            "ru": "Многолетнее растение с мелкими ярко-жёлтыми глянцевыми цветками. Очень распространён на лугах.",
+            "en": "A perennial with small, bright yellow glossy flowers. Very common in meadows."
+          },
+          "medicinalUses": {
+            "sah": "Дьааттаах үүнээйи! Таска эрэ, сүһүөх ыарыытыгар уонна бааска сэрэнэн туттуллар.",
+            "ru": "Ядовит! Наружно применяют при болях в суставах и ревматизме.",
+            "en": "Poisonous! Externally used for joint pain and rheumatism."
+          },
+          "habitat": {
+            "sah": "Хонуу, алаас, сииктээх сир",
+            "ru": "Луга, поляны, влажные места",
+            "en": "Meadows, clearings, wet areas"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "poisonous"
+          ],
+          "color": "#FFD700"
+        },
+        {
+          "id": "anemone",
+          "slug": "anemone",
+          "imageId": "plant-09",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Тыа ньургуһуна",
+            "ru": "Ветреница лесная",
+            "en": "Snowdrop Anemone",
+            "latin": "Anemone sylvestris"
+          },
+          "description": {
+            "sah": "Үрүҥ биэс эминньэхтээх нарын сибэкки. Тыа саҕатыгар уонна алааска саас эрдэ үүнэр.",
+            "ru": "Нежное растение с белыми пятилепестковыми цветками. Растёт на лесных опушках и полянах.",
+            "en": "A graceful plant with white five-petaled flowers. Grows on forest edges and clearings."
+          },
+          "medicinalUses": {
+            "sah": "Норуот эминэн төбө ыарыытыгар уонна харах мөлтөөһүнүгэр туттуллар. Дьааттаах, олус сэрэнэн туттуллуохтаах.",
+            "ru": "В народной медицине — при головных болях и нарушениях зрения. Растение ядовито, применять осторожно.",
+            "en": "In folk medicine — for headaches and vision issues. Plant is toxic, use with care."
+          },
+          "habitat": {
+            "sah": "Тыа саҕата, алаас",
+            "ru": "Лесные опушки, поляны",
+            "en": "Forest edges, clearings"
+          },
+          "bloomingSeason": "may-june",
+          "categories": [
+            "ornamental",
+            "poisonous"
+          ],
+          "color": "#FFFFFF"
+        },
+        {
+          "id": "filipendula",
+          "slug": "filipendula",
+          "imageId": "plant-10",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Минньигэс сыттаах от",
+            "ru": "Лабазник вязолистный",
+            "en": "Meadowsweet",
+            "latin": "Filipendula ulmaria"
+          },
+          "description": {
+            "sah": "Үрдүк от, пушистай курдук кыһыл-үрүҥ сибэккилээх. Ураты минньигэс сыттаах, хонууга биллэр.",
+            "ru": "Высокое растение с пушистыми розовыми соцветиями и характерным сладким ароматом.",
+            "en": "A tall plant with fluffy pink flower clusters and a distinctive sweet fragrance."
+          },
+          "medicinalUses": {
+            "sah": "Айылҕа аспирина — салициловай кислоталаах. Төбө ыарыытыгар, иһиигэ уонна тымныыга улахан көмөлөөх.",
+            "ru": "Природный аспирин — содержит салициловую кислоту. Применяют при головной боли, воспалениях, простуде.",
+            "en": "Nature's aspirin — contains salicylic acid. Used for headaches, inflammation, and colds."
+          },
+          "habitat": {
+            "sah": "Сииктээх хонуу, үрэх уонна өрүс кытыла",
+            "ru": "Влажные луга, берега рек и ручьёв",
+            "en": "Wet meadows, riverbanks and stream sides"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#FFB6C1"
+        },
+        {
+          "id": "vetch",
+          "slug": "vetch",
+          "imageId": "plant-11",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Кутуйах гороҕа",
+            "ru": "Горошек мышиный",
+            "en": "Tufted Vetch",
+            "latin": "Vicia cracca"
+          },
+          "description": {
+            "sah": "Кыра фиолетовай сибэккилээх, атын отторго эриллэн үүнэр бытархай от.",
+            "ru": "Вьющееся растение с мелкими фиолетовыми цветками, цепляющееся усиками за соседние травы.",
+            "en": "A climbing plant with small purple flowers, clinging to neighboring plants with tendrils."
+          },
+          "medicinalUses": {
+            "sah": "Баас оһордорго уонна хаан тохтоторго былыр-былыргыттан туттуллар.",
+            "ru": "Применяют как ранозаживляющее и кровоостанавливающее средство.",
+            "en": "Used for wound healing and to stop bleeding."
+          },
+          "habitat": {
+            "sah": "Хонуу, суол кытыла",
+            "ru": "Луга, обочины дорог",
+            "en": "Meadows, roadsides"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#9370DB"
+        },
+        {
+          "id": "chamomile",
+          "slug": "chamomile",
+          "imageId": "plant-12",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Көннөрү бастыҥа",
+            "ru": "Ромашка (нивяник обыкновенный)",
+            "en": "Oxeye Daisy",
+            "latin": "Leucanthemum vulgare"
+          },
+          "description": {
+            "sah": "Үрүҥ эминньэхтээх уонна саһархай ортолоох элбэх сыллаах от. Айылҕаҕа олус кэрэтик көстөр.",
+            "ru": "Многолетник с характерными белыми «ромашковыми» цветками и жёлтой серединкой.",
+            "en": "A perennial with classic white daisy-like flowers and yellow centers."
+          },
+          "medicinalUses": {
+            "sah": "Иһиигэ, уоскутар уонна искэни утарар эминэн туттуллар.",
+            "ru": "Применяют при воспалениях, как успокаивающее и противовоспалительное средство.",
+            "en": "Used for inflammation, as a calming and anti-inflammatory agent."
+          },
+          "habitat": {
+            "sah": "Хонуу, алаас, суол кытыла",
+            "ru": "Луга, поляны, обочины",
+            "en": "Meadows, clearings, roadsides"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal",
+            "ornamental"
+          ],
+          "color": "#FFFFFF"
+        },
+        {
+          "id": "aconite",
+          "slug": "aconite",
+          "imageId": "plant-13",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Үөр ото",
+            "ru": "Живокость высокая",
+            "en": "Tall Larkspur",
+            "latin": "Delphinium elatum"
+          },
+          "description": {
+            "sah": "Үрдүк уһун умнастаах, сырдык күөх-фиолетовай сибэккилээх дьааттаах от.",
+            "ru": "Высокое растение с яркими сине-фиолетовыми цветками на длинном стебле.",
+            "en": "A tall plant with vivid blue-purple flowers on a long stem."
+          },
+          "medicinalUses": {
+            "sah": "Сэрэхтээх дьааттаах үүнээйи! Норуот эминэн таска паразиттары утары эрэ туттуллара.",
+            "ru": "Ядовитое растение! В народной медицине применяли наружно при паразитарных заболеваниях.",
+            "en": "Poisonous! In folk medicine, used externally for parasitic conditions."
+          },
+          "habitat": {
+            "sah": "Тыа саҕата, алаас, сииктээх хонуу",
+            "ru": "Лесные опушки, поляны, влажные луга",
+            "en": "Forest edges, clearings, wet meadows"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "ornamental",
+            "poisonous"
+          ],
+          "color": "#4169E1"
+        },
+        {
+          "id": "lupine",
+          "slug": "lupine",
+          "imageId": "plant-14",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Бөрө гороҕа",
+            "ru": "Люпин многолистный",
+            "en": "Wild Lupine",
+            "latin": "Lupinus polyphyllus"
+          },
+          "description": {
+            "sah": "Тарбахтыы сэбирдэхтээх уонна күөх сибэккилээх, хонууга ураты көстүүлээх үүнээйи.",
+            "ru": "Растение с пальчатыми листьями и кистями синих цветков.",
+            "en": "A plant with palmate leaves and spikes of blue flowers."
+          },
+          "medicinalUses": {
+            "sah": "Буору азотунан байытар. Эмкэ олус дэҥҥэ, сэрэнэн туттуллар.",
+            "ru": "Обогащает почву азотом. В лечебных целях используется ограниченно.",
+            "en": "Enriches soil with nitrogen. Limited medicinal use."
+          },
+          "habitat": {
+            "sah": "Хонуу, суол кытыла, сыырдар",
+            "ru": "Луга, обочины, склоны",
+            "en": "Meadows, roadsides, slopes"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#483D8B"
+        },
+        {
+          "id": "carnation",
+          "slug": "carnation",
+          "imageId": "plant-15",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Хатыҥ чэчигэ",
+            "ru": "Гвоздика травянка",
+            "en": "Maiden Pink",
+            "latin": "Dianthus deltoides"
+          },
+          "description": {
+            "sah": "Намыһах үүнээйи, сырдык кыһыл биирдии сибэккилэрдээх. Хонууга кэрэтик үүнэр.",
+            "ru": "Невысокое растение с яркими малиновыми одиночными цветками.",
+            "en": "A low-growing plant with bright magenta solitary flowers."
+          },
+          "medicinalUses": {
+            "sah": "Хаан тохтоторго уонна ис ыарыытыгар туһалаах эминэн ааҕыллар.",
+            "ru": "Применяют при маточных кровотечениях и болях в животе.",
+            "en": "Used for uterine bleeding and abdominal pain."
+          },
+          "habitat": {
+            "sah": "Кураанах хонуу, тыа саҕата",
+            "ru": "Сухие луга, опушки",
+            "en": "Dry meadows, forest edges"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal",
+            "ornamental"
+          ],
+          "color": "#FF1493"
+        },
+        {
+          "id": "geranium-pratense",
+          "slug": "geranium-pratense",
+          "imageId": "plant-16",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Кытыылыкай",
+            "ru": "Герань луговая",
+            "en": "Meadow Cranesbill",
+            "latin": "Geranium pratense"
+          },
+          "description": {
+            "sah": "Элбэх сыллаах от, улахан күөх-фиолетовай сибэккилээх уонна салаалаах сэбирдэхтээх.",
+            "ru": "Многолетник с крупными сине-фиолетовыми цветками и пальчато-рассечёнными листьями.",
+            "en": "A perennial with large blue-violet flowers and deeply divided palmate leaves."
+          },
+          "medicinalUses": {
+            "sah": "Хаан тохтотор, баас оһордор эминэн туттуллар. Диареяҕа эмиэ көмөлөһөр.",
+            "ru": "Кровоостанавливающее, вяжущее средство. Применяют при диарее и ранах.",
+            "en": "Hemostatic and astringent. Used for diarrhea and wound healing."
+          },
+          "habitat": {
+            "sah": "Хонуу, тыа саҕата, суол кытыла",
+            "ru": "Луга, опушки, обочины",
+            "en": "Meadows, forest edges, roadsides"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "medicinal",
+            "ornamental"
+          ],
+          "color": "#6A5ACD"
+        },
+        {
+          "id": "wild-strawberry",
+          "slug": "wild-strawberry",
+          "imageId": "plant-17",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Дьэдьэн",
+            "ru": "Земляника лесная",
+            "en": "Wild Strawberry",
+            "latin": "Fragaria vesca"
+          },
+          "description": {
+            "sah": "Намыһах үүнээйи, үрүҥ сибэккилээх уонна минньигэс сыттаах отонноох. Саха дьонун биир саамай таптыыр отоно.",
+            "ru": "Невысокое растение с белыми цветками и мелкими ароматными ягодами. Одна из любимых ягод якутян.",
+            "en": "A low plant with white flowers and small fragrant berries. One of the favorite berries in Yakutia."
+          },
+          "medicinalUses": {
+            "sah": "Сэбирдэх чэйэ витаминнаах. Отонноро уонна сэбирдэхтэрэ витамин тиийбэтигэр уонна куртах ыарыытыгар олус туһалаахтар.",
+            "ru": "Чай из листьев богат витаминами. Ягоды и листья применяют при авитаминозе и проблемах ЖКТ.",
+            "en": "Leaf tea is rich in vitamins. Berries and leaves used for vitamin deficiency and digestive issues."
+          },
+          "habitat": {
+            "sah": "Тыа, тыа саҕата, алаас",
+            "ru": "Леса, опушки, поляны",
+            "en": "Forests, forest edges, clearings"
+          },
+          "bloomingSeason": "may-june",
+          "categories": [
+            "edible",
+            "medicinal"
+          ],
+          "color": "#FFFFFF"
+        },
+        {
+          "id": "vetch-pea",
+          "slug": "vetch-pea",
+          "imageId": "plant-18",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Эриллэр от",
+            "ru": "Чина луговая",
+            "en": "Meadow Vetchling",
+            "latin": "Lathyrus pratensis"
+          },
+          "description": {
+            "sah": "Атын отторго эриллэн үүнэр элбэх сыллаах от, чаҕылхай фиолетовай сибэккилээх.",
+            "ru": "Вьющееся многолетнее растение с ярко-фиолетовыми цветками.",
+            "en": "A climbing perennial with bright purple-pink flowers."
+          },
+          "medicinalUses": {
+            "sah": "Тымныыга уонна сөтөлгө туттуллар уоскутар эм.",
+            "ru": "Применяют при простуде и как отхаркивающее средство.",
+            "en": "Used for colds and as an expectorant."
+          },
+          "habitat": {
+            "sah": "Хонуу, тыа саҕата",
+            "ru": "Луга, лесные опушки",
+            "en": "Meadows, forest edges"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#DA70D6"
+        },
+        {
+          "id": "astragalus",
+          "slug": "astragalus",
+          "imageId": "plant-19",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Тэбиэн от",
+            "ru": "Остролодочник якутский",
+            "en": "Yakut Oxytropis",
+            "latin": "Oxytropis jacutica"
+          },
+          "description": {
+            "sah": "Элбэх сыллаах от, розово-фиолетовай сибэккилээх уонна түүлээх сэбирдэхтээх. Саха сиригэр эрэ үүнэр ураты үүнээйи.",
+            "ru": "Многолетнее растение с розово-фиолетовыми цветками и перистыми листьями. Эндемик Якутии.",
+            "en": "A perennial with pink-purple flowers and pinnate leaves. Endemic to Yakutia."
+          },
+          "medicinalUses": {
+            "sah": "Норуот эминэн күүс-уох киллэрэргэ уонна чэбдигирдэргэ туттуллар.",
+            "ru": "В традиционной медицине — тонизирующее средство.",
+            "en": "In traditional medicine — used as a tonic."
+          },
+          "habitat": {
+            "sah": "Кураанах хонуу, аһаҕас сыырдар",
+            "ru": "Сухие луга, открытые склоны",
+            "en": "Dry meadows, open slopes"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#BA55D3"
+        },
+        {
+          "id": "ranunculus",
+          "slug": "ranunculus",
+          "imageId": "plant-20",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Көмүс алтан от",
+            "ru": "Лютик золотистый",
+            "en": "Goldilocks Buttercup",
+            "latin": "Ranunculus auricomus"
+          },
+          "description": {
+            "sah": "Элбэх сыллаах от, чаҕылхай кыһыл-көмүс саһархай сибэккилээх. Оттор ортолоругар элбэхтик көстөр.",
+            "ru": "Многолетник с яркими золотисто-жёлтыми цветками. Часто встречается среди разнотравья.",
+            "en": "A perennial with bright golden-yellow flowers, commonly found among mixed grasses."
+          },
+          "medicinalUses": {
+            "sah": "Дьааттаах! Таска эрэ, сүһүөх ыарыытыгар уонна бааска сэрэнэн туттуллар.",
+            "ru": "Ядовит! Наружно применяют при болях в суставах.",
+            "en": "Poisonous! Externally used for joint pain."
+          },
+          "habitat": {
+            "sah": "Хонуу, тыа саҕата",
+            "ru": "Луга, лесные опушки",
+            "en": "Meadows, forest edges"
+          },
+          "bloomingSeason": "may-july",
+          "categories": [
+            "poisonous"
+          ],
+          "color": "#FFD700"
+        },
+        {
+          "id": "geranium-sibiricum",
+          "slug": "geranium-sibiricum",
+          "imageId": "plant-21",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Сибиир кытыылыкайа",
+            "ru": "Герань сибирская",
+            "en": "Siberian Geranium",
+            "latin": "Geranium sibiricum"
+          },
+          "description": {
+            "sah": "Кытыылыкай кыра көрүҥэ, кыһыл-үрүҥ сибэккилээх уонна салаалаах сэбирдэхтээх.",
+            "ru": "Более мелкий вид герани с розовыми цветками и рассечёнными листьями.",
+            "en": "A smaller geranium species with pink flowers and dissected leaves."
+          },
+          "medicinalUses": {
+            "sah": "Иһиини тохтотор уонна куртах ыарыытын эмтиир от.",
+            "ru": "Вяжущее средство при расстройствах кишечника.",
+            "en": "Astringent for intestinal disorders."
+          },
+          "habitat": {
+            "sah": "Тыа, тыа саҕата",
+            "ru": "Леса, опушки",
+            "en": "Forests, forest edges"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#FFB6C1"
+        },
+        {
+          "id": "valerian",
+          "slug": "valerian",
+          "imageId": "plant-22",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Кэтэх от",
+            "ru": "Валериана лекарственная",
+            "en": "Valerian",
+            "latin": "Valeriana officinalis"
+          },
+          "description": {
+            "sah": "Үрдүк от, зонтик курдук үрүҥ сибэккилээх уонна ураты сыттаах силистээх.",
+            "ru": "Высокое растение с зонтиковидными белыми соцветиями и характерным запахом корней.",
+            "en": "A tall plant with umbrella-like white flower clusters and distinctively scented roots."
+          },
+          "medicinalUses": {
+            "sah": "Биллиилээх уоскутар эм. Силиһин утуйбат буолууга, ньиэрбэ ыарыытыгар уонна сүрэх тэбиитигэр тутталлар.",
+            "ru": "Знаменитое успокаивающее средство. Корни применяют при бессоннице, нервозности, сердцебиении.",
+            "en": "Famous sedative. Roots used for insomnia, anxiety, and heart palpitations."
+          },
+          "habitat": {
+            "sah": "Сииктээх хонуу, өрүс кытыла, тыа саҕата",
+            "ru": "Влажные луга, берега рек, опушки",
+            "en": "Wet meadows, riverbanks, forest edges"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#FFFFFF"
+        },
+        {
+          "id": "daylily",
+          "slug": "daylily",
+          "imageId": "plant-23",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Сардаана",
+            "ru": "Саранка (лилия кудреватая)",
+            "en": "Siberian Lily",
+            "latin": "Lilium pensylvanicum"
+          },
+          "description": {
+            "sah": "Саха сирин айылҕатын бэлиэтэ — уот-саһархай сибэккилэр тиит тыаҕа үүнэллэр. Саха сирин биир саамай кэрэ үүнээйитэ.",
+            "ru": "Символ якутской природы — огненно-оранжевые лилии среди лиственничного леса. Одно из красивейших растений Якутии.",
+            "en": "Symbol of Yakutian nature — fiery orange lilies among the larch forest. One of the most beautiful plants in Yakutia."
+          },
+          "medicinalUses": {
+            "sah": "Төрдүн бааска уонна куртах ыарыытыгар тутталлара. Бу үүнээйи Саха сиригэр харыстанар, мээнэ үргээбэттэр.",
+            "ru": "Луковицы применяли при ранах и болезнях желудка. Растение охраняется в Якутии.",
+            "en": "Bulbs were used for wounds and stomach ailments. The plant is protected in Yakutia."
+          },
+          "habitat": {
+            "sah": "Тиит тыа, хонуу, алаас",
+            "ru": "Лиственничные леса, луга, поляны",
+            "en": "Larch forests, meadows, clearings"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#FF6347"
+        }
+      ]
+    },
+    {
+      "id": "mongolia",
+      "imageBase": "/mongolia",
+      "heroSlug": "mn-marigold",
+      "languages": [
+        "mn",
+        "zh",
+        "en"
+      ],
+      "defaultLanguage": "mn",
+      "plants": [
+        {
+          "id": "mn-marigold",
+          "slug": "mn-marigold",
+          "imageId": "mongolia-01",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Бархаат сибэкки",
+            "ru": "Бархатцы прямостоячие",
+            "en": "African Marigold",
+            "latin": "Tagetes erecta",
+            "mn": "Хилэнцэр цэцэг",
+            "zh": "万寿菊"
+          },
+          "description": {
+            "sah": "Улахан оранжевай-саһархай сибэккилээх киэргэл үүнээйи. Монголия куораттарын паркаларыгар киэҥник олордуллар.",
+            "ru": "Декоративное однолетнее растение с крупными оранжево-жёлтыми махровыми соцветиями. Массово высаживается в парках и на клумбах городов Монголии.",
+            "en": "An ornamental annual with large, ball-shaped orange-yellow blooms. Planted in great numbers in the parks and flowerbeds of Mongolian cities.",
+            "mn": "Том, бөмбөрцөг хэлбэрийн улбар шар цэцэгтэй чимэглэлийн нэг наст ургамал. Монголын хотуудын цэцэрлэг, цэцгийн мандалд олноор тарьдаг.",
+            "zh": "一年生观赏植物，花大而呈球状，橙黄色。在蒙古各城市的公园和花坛中大量栽种。"
+          },
+          "medicinalUses": {
+            "sah": "Норуот эмчитигэр өйдөбүлгэ киллэриллэр; сибэккитэ буһаҕаска сыаналанар. Сүрүннээн киэргэл туһугар олордуллар.",
+            "ru": "В народной медицине настой цветков применяли при простуде и как противовоспалительное; выращивается главным образом как декоративное.",
+            "en": "Folk use records the flowers as an anti-inflammatory and cold remedy; grown chiefly as an ornamental.",
+            "mn": "Ардын анагаахад цэцгийг ханиад болон үрэвслийн эсрэг хэрэглэж байсан; голдуу чимэглэлээр ургуулдаг.",
+            "zh": "民间将其花用作抗炎和治感冒之物；主要作为观赏花卉栽培。"
+          },
+          "habitat": {
+            "sah": "Куорат парката, клумба, ааҕар сир",
+            "ru": "Городские парки, клумбы, цветники",
+            "en": "City parks, flowerbeds, planted borders",
+            "mn": "Хотын цэцэрлэг, цэцгийн мандал, тарьсан зах",
+            "zh": "城市公园、花坛、栽种花境"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#F5A623"
+        },
+        {
+          "id": "mn-cornflower",
+          "slug": "mn-cornflower",
+          "imageId": "mongolia-02",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Күөх туллук сибэкки",
+            "ru": "Василёк синий",
+            "en": "Cornflower",
+            "latin": "Centaurea cyanus",
+            "mn": "Хөх ортууз цэцэг",
+            "zh": "矢车菊"
+          },
+          "description": {
+            "sah": "Чаҕылхай күөх сибэккилээх, нарын үүнээйи. Бааһынаҕа, суол кытыытыгар уонна клумбаҕа көстөр.",
+            "ru": "Изящное растение с ярко-синими корзинками соцветий. Встречается на полях, обочинах и в цветниках.",
+            "en": "A slender plant with vivid blue flower-heads. Found in fields, along roadsides, and in planted beds.",
+            "mn": "Тод хөх сагс хэлбэрийн цэцэгтэй нарийхан ургамал. Тариалангийн талбай, замын хажуу, цэцгийн мандалд ургана.",
+            "zh": "植株纤细，头状花序呈鲜蓝色。见于农田、路旁和花圃。"
+          },
+          "medicinalUses": {
+            "sah": "Сибэккитин настойун харах ыарыытыгар уонна сүөл ыарыытыгар туттар этилэр.",
+            "ru": "Настой краевых цветков традиционно применяли при воспалениях глаз и как лёгкое мочегонное.",
+            "en": "An infusion of the ray florets was traditionally used for eye inflammation and as a mild diuretic.",
+            "mn": "Захын цэцгийн хандыг нүдний үрэвсэлд болон зөөлөн шээс хөөх эмээр уламжлалт ёсоор хэрэглэж байжээ.",
+            "zh": "传统上以其边花的浸剂治眼部炎症，并作温和的利尿剂。"
+          },
+          "habitat": {
+            "sah": "Бааһына, хонуу, суол кытыла",
+            "ru": "Поля, луга, обочины дорог",
+            "en": "Fields, meadows, roadsides",
+            "mn": "Тариалан, нуга, замын хажуу",
+            "zh": "农田、草地、路旁"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal",
+            "edible"
+          ],
+          "color": "#4A6FE3"
+        },
+        {
+          "id": "mn-petunia",
+          "slug": "mn-petunia",
+          "imageId": "mongolia-03",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Петуния сибэкки",
+            "ru": "Петуния",
+            "en": "Petunia",
+            "latin": "Petunia × atkinsiana",
+            "mn": "Петуни цэцэг",
+            "zh": "矮牵牛"
+          },
+          "description": {
+            "sah": "Хонуор-күлүмүрдээх сибэккилээх киэргэл үүнээйи. Куорат клумбаларыгар, вазаларга элбэхтик олордуллар.",
+            "ru": "Декоративное растение с крупными воронковидными цветками разных оттенков. Широко используется в городском озеленении.",
+            "en": "An ornamental with large trumpet-shaped flowers in many colours. A mainstay of city planters and beds.",
+            "mn": "Олон өнгийн том, бүрээ хэлбэрийн цэцэгтэй чимэглэлийн ургамал. Хотын цэцгийн сав, мандлын гол чимэг.",
+            "zh": "观赏植物，花大呈喇叭状，色彩繁多。是城市花箱与花坛的主角。"
+          },
+          "medicinalUses": {
+            "sah": "Эмкэ туттуллуута биллибэт — киэргэл эрэ туһугар олордуллар.",
+            "ru": "Лекарственного применения не имеет — исключительно декоративное растение.",
+            "en": "No medicinal use — grown purely as an ornamental.",
+            "mn": "Эмийн хэрэглээгүй — зөвхөн чимэглэлээр ургуулдаг.",
+            "zh": "无药用价值——纯作观赏栽培。"
+          },
+          "habitat": {
+            "sah": "Куорат клумбата, вазалар",
+            "ru": "Городские клумбы, кашпо",
+            "en": "City flowerbeds and containers",
+            "mn": "Хотын цэцгийн мандал, сав",
+            "zh": "城市花坛与容器"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#7E57C2"
+        },
+        {
+          "id": "mn-pansy",
+          "slug": "mn-pansy",
+          "imageId": "mongolia-04",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Анюта хараҕа",
+            "ru": "Виола (Анютины глазки)",
+            "en": "Garden Pansy",
+            "latin": "Viola × wittrockiana",
+            "mn": "Гурван өнгийн виола",
+            "zh": "三色堇"
+          },
+          "description": {
+            "sah": "Намыһах, элбэх өҥнөөх сибэккилээх үүнээйи. Тымныыны тулуйар, саас эрдэ сибэккилиир.",
+            "ru": "Невысокое растение с многоцветными «глазастыми» цветками. Холодостойкое, зацветает рано весной.",
+            "en": "A low plant with multicoloured “faced” flowers. Cold-hardy and among the first to bloom in spring.",
+            "mn": "Олон өнгийн \"нүдтэй\" цэцэгтэй намхан ургамал. Хүйтэнд тэсвэртэй, хавар хамгийн эрт цэцэглэдэг.",
+            "zh": "植株低矮，花朵多彩且带\"脸\"状斑纹。耐寒，是春天最早开花的植物之一。"
+          },
+          "medicinalUses": {
+            "sah": "Аймах көрүҥэ (Viola tricolor) норуот эмигэр тириигэ туһаныллар; сибэккитэ сиэнэр.",
+            "ru": "Близкий вид (Viola tricolor) в народной медицине применяли при кожных болезнях; цветки съедобны.",
+            "en": "A close relative (Viola tricolor) was used in folk medicine for skin conditions; the flowers are edible.",
+            "mn": "Ойрын төрөл (Viola tricolor)-ийг ардын анагаахад арьсны өвчинд хэрэглэж байсан; цэцэг нь идэшний.",
+            "zh": "近缘种（三色堇 Viola tricolor）在民间用于皮肤病；花可食用。"
+          },
+          "habitat": {
+            "sah": "Клумба, парк, ааҕар сир",
+            "ru": "Клумбы, парки, бордюры",
+            "en": "Beds, parks, borders",
+            "mn": "Цэцгийн мандал, цэцэрлэг, зах",
+            "zh": "花坛、公园、花境"
+          },
+          "bloomingSeason": "may-july",
+          "categories": [
+            "ornamental",
+            "edible"
+          ],
+          "color": "#5C4B9E"
+        },
+        {
+          "id": "mn-ornamental-kale",
+          "slug": "mn-ornamental-kale",
+          "imageId": "mongolia-05",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Киэргэл хаппыста",
+            "ru": "Декоративная капуста",
+            "en": "Ornamental Kale",
+            "latin": "Brassica oleracea",
+            "mn": "Чимэглэлийн байцаа",
+            "zh": "羽衣甘蓝"
+          },
+          "description": {
+            "sah": "Кудрявай, үрүҥ-күөх эбэтэр кыһыл-күлүмэх сэбирдэхтээх хаппыста. Күһүҥҥү клумбаны киэргэтэр.",
+            "ru": "Капуста с кудрявыми бело-зелёными или пурпурными листьями, собранными в розетку. Украшает осенние клумбы.",
+            "en": "A kale with frilled white-green or purple leaves in a rosette. A staple of autumn flowerbeds.",
+            "mn": "Буржгар цагаан-ногоон эсвэл ягаан навчаа сарнай хэлбэрээр дэлгэсэн байцаа. Намрын цэцгийн мандлын чимэг.",
+            "zh": "叶片皱缩，呈白绿或紫色，聚成莲座状的甘蓝。是秋季花坛的常见植物。"
+          },
+          "medicinalUses": {
+            "sah": "Киэргэл көрүҥэ сиэниллибэт; аймах хаппыстата сиэнэр уонна битэмииннээх.",
+            "ru": "Декоративная форма в пищу не идёт; съедобные сорта того же вида богаты витаминами.",
+            "en": "The ornamental form is not eaten; edible cultivars of the same species are rich in vitamins.",
+            "mn": "Чимэглэлийн хэлбэрийг иддэггүй; мөн зүйлийн идэшний сортууд витаминаар баялаг.",
+            "zh": "观赏品种不供食用；同种的食用品种富含维生素。"
+          },
+          "habitat": {
+            "sah": "Куорат клумбата, парк",
+            "ru": "Городские клумбы, парки",
+            "en": "City beds, parks",
+            "mn": "Хотын цэцгийн мандал, цэцэрлэг",
+            "zh": "城市花坛、公园"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "ornamental",
+            "edible"
+          ],
+          "color": "#C8D6B9"
+        },
+        {
+          "id": "mn-dusty-miller",
+          "slug": "mn-dusty-miller",
+          "imageId": "mongolia-06",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Үрүҥ-көмүс сэбирдэх",
+            "ru": "Цинерария приморская",
+            "en": "Dusty Miller",
+            "latin": "Jacobaea maritima",
+            "mn": "Мөнгөлөг навчит цэцэг",
+            "zh": "银叶菊"
+          },
+          "description": {
+            "sah": "Көмүс-үрүҥ, туулаах сэбирдэхтээх киэргэл үүнээйи. Өҥүнэн атын сибэккилэри тэҥнээн көрдөрөр.",
+            "ru": "Декоративное растение с серебристо-белыми опушёнными листьями. Служит контрастным фоном для ярких цветов.",
+            "en": "An ornamental grown for its silvery, felted foliage. Used as a pale foil for brighter flowers.",
+            "mn": "Мөнгөлөг цагаан, зөөлөн үстэй навчаараа ургуулдаг чимэглэлийн ургамал. Тод цэцгүүдийн цайвар дэвсгэр болдог.",
+            "zh": "因其银白色、被绒毛的叶片而栽培的观赏植物。常作鲜艳花卉的淡色衬底。"
+          },
+          "medicinalUses": {
+            "sah": "Эмкэ туттуллубат — киэргэл эрэ туһугар. Сэбирдэҕэ сиэнэн буолбат.",
+            "ru": "В лечебных целях не применяется — только декоративное; растение несъедобно.",
+            "en": "Not used medicinally — purely ornamental; the plant is inedible.",
+            "mn": "Эмийн хэрэглээгүй — зөвхөн чимэглэлийн; ургамал нь идэшгүй.",
+            "zh": "不作药用——纯观赏；植株不可食。"
+          },
+          "habitat": {
+            "sah": "Клумба, ааҕар сир, парк",
+            "ru": "Клумбы, бордюры, парки",
+            "en": "Beds, borders, parks",
+            "mn": "Цэцгийн мандал, зах, цэцэрлэг",
+            "zh": "花坛、花境、公园"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#B9C0C7"
+        },
+        {
+          "id": "mn-bedstraw",
+          "slug": "mn-bedstraw",
+          "imageId": "mongolia-07",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Саһархай сарбынньах",
+            "ru": "Подмаренник настоящий",
+            "en": "Lady's Bedstraw",
+            "latin": "Galium verum",
+            "mn": "Шаргал ивлаг (өлөнгө)",
+            "zh": "蓬子菜"
+          },
+          "description": {
+            "sah": "Минньигэс сыттаах, саһархай вак сибэккилээх үүнээйи. Монголия хонууларыгар киэҥник үүнэр.",
+            "ru": "Растение со множеством мелких ярко-жёлтых душистых цветков. Обычно на степных лугах Монголии.",
+            "en": "A plant with clouds of tiny, fragrant yellow flowers. Common on the meadow-steppe of Mongolia.",
+            "mn": "Олон жижиг, анхилуун үнэртэй шар цэцэгтэй ургамал. Монголын хээрийн нугад түгээмэл.",
+            "zh": "植株缀满细小、芳香的黄色花朵。常见于蒙古的草甸草原。"
+          },
+          "medicinalUses": {
+            "sah": "Настойун тириигэ, бүөргэ уонна нерваҕа туһаныллар этилэр; өҥнөөх кыраасканы биэрэр.",
+            "ru": "Настой применяли при кожных и почечных недугах, как успокаивающее; даёт жёлтую и красную краску.",
+            "en": "An infusion was used for skin and kidney complaints and as a sedative; also yields yellow and red dye.",
+            "mn": "Хандыг арьс, бөөрний өвчинд болон тайвшруулах эмээр хэрэглэж байсан; шар, улаан будаг гаргадаг.",
+            "zh": "其浸剂曾用于皮肤和肾脏疾病并作镇静剂；还可提取黄色和红色染料。"
+          },
+          "habitat": {
+            "sah": "Хонуу, ходуһа, суол кытыла",
+            "ru": "Луга, степь, обочины",
+            "en": "Meadows, steppe, roadsides",
+            "mn": "Нуга, хээр, замын хажуу",
+            "zh": "草甸、草原、路旁"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#EEC900"
+        },
+        {
+          "id": "mn-alfalfa",
+          "slug": "mn-alfalfa",
+          "imageId": "mongolia-08",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Люцерна",
+            "ru": "Люцерна посевная",
+            "en": "Alfalfa",
+            "latin": "Medicago sativa",
+            "mn": "Царгас",
+            "zh": "紫花苜蓿"
+          },
+          "description": {
+            "sah": "Күлүмэх-күөх сибэккилээх бобовай үүнээйи. Сүөһү аһылыгар олордуллар, айылҕаҕа да үүнэр.",
+            "ru": "Бобовое растение с сине-фиолетовыми соцветиями. Возделывается как кормовое, встречается и одичавшим.",
+            "en": "A legume with blue-violet flower spikes. Grown as fodder and also found running wild.",
+            "mn": "Хөх-ягаан баглаа цэцэгтэй буурцагт ургамал. Тэжээлийн зориулалтаар тариалдаг ба зэрлэгээр ч ургадаг.",
+            "zh": "豆科植物，花序蓝紫色。作牧草栽培，也常野生逸生。"
+          },
+          "medicinalUses": {
+            "sah": "Битэмииннэ уонна минералга баай; настойун сут-мэлдьи туругун тупсарарга туттар этилэр.",
+            "ru": "Богата витаминами и минералами; настой применяли как общеукрепляющее и при упадке сил.",
+            "en": "Rich in vitamins and minerals; the infusion was used as a general tonic for fatigue.",
+            "mn": "Витамин, эрдэс бодисоор баялаг; хандыг ерөнхий тонус, ядаргаанд хэрэглэж байсан.",
+            "zh": "富含维生素和矿物质；其浸剂曾用作缓解疲劳的滋补品。"
+          },
+          "habitat": {
+            "sah": "Бааһына, хонуу, суол кытыла",
+            "ru": "Поля, луга, обочины",
+            "en": "Fields, meadows, roadsides",
+            "mn": "Тариалан, нуга, замын хажуу",
+            "zh": "农田、草地、路旁"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal",
+            "edible"
+          ],
+          "color": "#6A5ACD"
+        },
+        {
+          "id": "mn-rugosa-rose",
+          "slug": "mn-rugosa-rose",
+          "imageId": "mongolia-09",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Кыһыл ньургуһун (роза)",
+            "ru": "Роза морщинистая",
+            "en": "Rugosa Rose",
+            "latin": "Rosa rugosa",
+            "mn": "Үрчийсэн сарнай",
+            "zh": "玫瑰"
+          },
+          "description": {
+            "sah": "Күлүмэх-кыһыл сибэккилээх, сытыы иннэлээх куустаах күөх мас. Парктарга уонна кыраныыссаҕа олордуллар.",
+            "ru": "Колючий кустарник с крупными розово-пурпурными цветками и морщинистыми листьями. Часто в парках и живых изгородях.",
+            "en": "A thorny shrub with large pink-purple flowers and wrinkled leaves. Common in parks and hedges.",
+            "mn": "Том ягаан-нил цэцэгтэй, үрчийсэн навчтай өргөстэй бут. Цэцэрлэг, хашаанд түгээмэл.",
+            "zh": "多刺灌木，花大呈粉紫色，叶片皱褶。常见于公园和绿篱。"
+          },
+          "medicinalUses": {
+            "sah": "Отоҥноро (плод) С битэмиинигэ олус баай; чэйгэ, вареньеҕэ туттуллар.",
+            "ru": "Плоды (шиповник) исключительно богаты витамином C; используют для чая, отваров и варенья.",
+            "en": "The hips are exceptionally rich in vitamin C; used for tea, decoctions, and preserves.",
+            "mn": "Жимс (сарнайн жимс) нь С витаминаар онцгой баялаг; цай, чанамал хийдэг.",
+            "zh": "果实（玫瑰果）维生素C极为丰富；用于泡茶、煎汤和制果酱。"
+          },
+          "habitat": {
+            "sah": "Парк, кыраныысса, күөл кытыла",
+            "ru": "Парки, изгороди, берега",
+            "en": "Parks, hedges, shorelines",
+            "mn": "Цэцэрлэг, хашаа, эргийн зурвас",
+            "zh": "公园、绿篱、水岸"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal",
+            "edible",
+            "ornamental"
+          ],
+          "color": "#D6488B"
+        },
+        {
+          "id": "mn-yarrow",
+          "slug": "mn-yarrow",
+          "imageId": "mongolia-10",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Хаан тохтотор от",
+            "ru": "Тысячелистник обыкновенный",
+            "en": "Yarrow",
+            "latin": "Achillea millefolium",
+            "mn": "Түмэн навчит өвс",
+            "zh": "蓍草"
+          },
+          "description": {
+            "sah": "Үрүҥ сибэккилээх, нарын сэбирдэхтээх от. Монголия хонууларыгар, суол кытыытыгар киэҥник тарҕанар.",
+            "ru": "Растение с белыми щитковидными соцветиями и перистыми листьями. Обычно на лугах и обочинах Монголии.",
+            "en": "A herb with flat white flower-clusters and feathery leaves. Widespread on Mongolian meadows and roadsides.",
+            "mn": "Хавтгай цагаан баглаа цэцэгтэй, өдлөг навчтай өвс. Монголын нуга, замын хажууд өргөн тархсан.",
+            "zh": "草本植物，白色花簇平顶，叶羽状细裂。广布于蒙古的草甸和路旁。"
+          },
+          "medicinalUses": {
+            "sah": "Хаан тохтоторго, иһиини эмтииргэ уонна тымныыга былыргыттан туттуллар.",
+            "ru": "Издавна применяется при кровотечениях, воспалениях и простуде; настой улучшает пищеварение.",
+            "en": "Long used for bleeding, inflammation, and colds; the infusion aids digestion.",
+            "mn": "Цус тогтоох, үрэвсэл, ханиадад эртнээс хэрэглэдэг; хандаа боловсролтод тустай.",
+            "zh": "自古用于止血、消炎和治感冒；其浸剂有助消化。"
+          },
+          "habitat": {
+            "sah": "Хонуу, ходуһа, суол кытыла",
+            "ru": "Луга, степь, обочины",
+            "en": "Meadows, steppe, roadsides",
+            "mn": "Нуга, хээр, замын хажуу",
+            "zh": "草甸、草原、路旁"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#FFFFFF"
+        },
+        {
+          "id": "mn-dahlia",
+          "slug": "mn-dahlia",
+          "imageId": "mongolia-11",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Георгин сибэкки",
+            "ru": "Георгина",
+            "en": "Dahlia",
+            "latin": "Dahlia pinnata",
+            "mn": "Далия цэцэг",
+            "zh": "大丽花"
+          },
+          "description": {
+            "sah": "Улахан, элбэх өҥнөөх сибэккилээх киэргэл үүнээйи. Сайын бүтүүтэ, күһүн саҕаланыытыгар сибэккилиир.",
+            "ru": "Декоративное растение с крупными махровыми соцветиями разных цветов. Цветёт с конца лета до осени.",
+            "en": "An ornamental with large, full blooms in many colours. Flowers from late summer into autumn.",
+            "mn": "Олон өнгийн том, дэлбээ ихтэй цэцэгтэй чимэглэлийн ургамал. Зуны сүүлээс намар хүртэл цэцэглэнэ.",
+            "zh": "观赏植物，花大而重瓣，色彩丰富。从夏末开到秋季。"
+          },
+          "medicinalUses": {
+            "sah": "Эмкэ туттуллубат — киэргэл эрэ туһугар олордуллар.",
+            "ru": "В медицине не применяется — только декоративное растение.",
+            "en": "Not used medicinally — grown as an ornamental.",
+            "mn": "Эмийн хэрэглээгүй — чимэглэлээр ургуулдаг.",
+            "zh": "不作药用——作观赏栽培。"
+          },
+          "habitat": {
+            "sah": "Куорат парката, клумба",
+            "ru": "Городские парки, клумбы",
+            "en": "City parks, flowerbeds",
+            "mn": "Хотын цэцэрлэг, цэцгийн мандал",
+            "zh": "城市公园、花坛"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#EBD96B"
+        },
+        {
+          "id": "mn-blue-spruce",
+          "slug": "mn-blue-spruce",
+          "imageId": "mongolia-12",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Күөх-көмүс тыт (ель)",
+            "ru": "Ель колючая (голубая)",
+            "en": "Blue Spruce",
+            "latin": "Picea pungens",
+            "mn": "Хөх гацуур",
+            "zh": "蓝云杉"
+          },
+          "description": {
+            "sah": "Күөх-көмүс иннэлээх, кэрэ хонуор мас. Монголия куораттарын уулуссаларыгар, парктарыгар олордуллар.",
+            "ru": "Хвойное дерево с колючей голубовато-серебристой хвоей. Высаживают вдоль улиц и в парках городов Монголии.",
+            "en": "A conifer with stiff, silvery-blue needles. Planted along streets and in the parks of Mongolian cities.",
+            "mn": "Хатуу, мөнгөлөг хөх шилмүүстэй шилмүүст мод. Монголын хотуудын гудамж, цэцэрлэгт тарьдаг.",
+            "zh": "针叶树，针叶坚硬、呈银蓝色。栽种于蒙古城市的街道和公园。"
+          },
+          "medicinalUses": {
+            "sah": "Сымнаҕас иннэтэ С битэмииннээх; хвоя ыһыгынан тыҥаны, тымныыны эмтииргэ туһаныллар.",
+            "ru": "Молодая хвоя содержит витамин C; хвойные отвары применяли при простуде и для дезинфекции.",
+            "en": "Young needles carry vitamin C; needle decoctions were used for colds and as a disinfectant.",
+            "mn": "Залуу шилмүүс С витамин агуулдаг; шилмүүсний ханд ханиадад болон ариутгалд хэрэглэж байсан.",
+            "zh": "嫩针叶含维生素C；针叶煎汤曾用于治感冒和消毒。"
+          },
+          "habitat": {
+            "sah": "Уулусса, парк, олордуллубут ойуур",
+            "ru": "Улицы, парки, посадки",
+            "en": "Streets, parks, plantings",
+            "mn": "Гудамж, цэцэрлэг, тарьц",
+            "zh": "街道、公园、人工林"
+          },
+          "bloomingSeason": "may-june",
+          "categories": [
+            "ornamental",
+            "medicinal"
+          ],
+          "color": "#6E8B9E"
+        },
+        {
+          "id": "mn-willow",
+          "slug": "mn-willow",
+          "imageId": "mongolia-13",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Талах",
+            "ru": "Ива",
+            "en": "Willow",
+            "latin": "Salix",
+            "mn": "Бургас",
+            "zh": "柳树"
+          },
+          "description": {
+            "sah": "Уу кытыытыгар үүнэр, синньигэс сэбирдэхтээх мас. Монголия үрэхтэрин, күөллэрин кытыытыгар элбэх.",
+            "ru": "Дерево или кустарник с узкими листьями, растущее у воды. Обычно по берегам рек и озёр Монголии.",
+            "en": "A tree or shrub with narrow leaves, growing by water. Common along Mongolian riverbanks and lakeshores.",
+            "mn": "Усны хөвөөнд ургадаг, нарийн навчтай мод буюу бут. Монголын гол, нуурын эрэгт түгээмэл.",
+            "zh": "生于水边、叶片狭长的乔木或灌木。常见于蒙古的河岸和湖畔。"
+          },
+          "medicinalUses": {
+            "sah": "Хатырыгар салицин баар — сылырҕаны, ыарыыны намтатарга былыр туттуллар этэ (аспирин төрдө).",
+            "ru": "Кора содержит салицин — исстари применялась как жаропонижающее и обезболивающее (прообраз аспирина).",
+            "en": "The bark contains salicin — long used to lower fever and ease pain (the forerunner of aspirin).",
+            "mn": "Холтос нь салицин агуулдаг — эртнээс халуун бууруулах, өвчин намдаах (аспириний угшил) эмээр хэрэглэдэг.",
+            "zh": "树皮含水杨苷——自古用于退烧和止痛（阿司匹林的前身）。"
+          },
+          "habitat": {
+            "sah": "Үрэх, күөл кытыла, дьэдьэннээх сир",
+            "ru": "Берега рек и озёр, влажные места",
+            "en": "Riverbanks, lakeshores, wet ground",
+            "mn": "Голын эрэг, нуурын хөвөө, чийглэг газар",
+            "zh": "河岸、湖畔、湿地"
+          },
+          "bloomingSeason": "may-june",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#8FA05A"
+        },
+        {
+          "id": "mn-dandelion",
+          "slug": "mn-dandelion",
+          "imageId": "mongolia-14",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Саһархай туллук (одуванчик)",
+            "ru": "Одуванчик лекарственный",
+            "en": "Dandelion",
+            "latin": "Taraxacum officinale",
+            "mn": "Багваахай",
+            "zh": "蒲公英"
+          },
+          "description": {
+            "sah": "Саһархай сибэккилээх, сэлээппэлээх сиэмэлээх киэҥник биллэр от. Хонуоҕа, суол кытыытыгар үүнэр.",
+            "ru": "Всем известное растение с жёлтыми корзинками и пушистыми семенами-парашютиками. Растёт на лугах и обочинах.",
+            "en": "The familiar plant with yellow heads and downy parachute seeds. Grows on meadows and roadsides.",
+            "mn": "Шар сагс цэцэгтэй, сэвсгэр шүхэр үртэй бүгдэд танил өвс. Нуга, замын хажууд ургана.",
+            "zh": "人人熟知的植物，头状花黄色，种子带绒毛降落伞。生于草甸和路旁。"
+          },
+          "medicinalUses": {
+            "sah": "Силиитэ, сэбирдэҕэ тыынга, быарга туһалаах; илин сибэккитэ сиэнэр, вареньеҕэ туттуллар.",
+            "ru": "Корни и листья применяли для аппетита и печени; молодые листья и цветки съедобны.",
+            "en": "Roots and leaves were used for appetite and the liver; young leaves and flowers are edible.",
+            "mn": "Үндэс, навчийг хоолны дуршил, элэгэнд хэрэглэж байсан; залуу навч, цэцэг нь идэшний.",
+            "zh": "根和叶曾用于开胃和护肝；嫩叶与花可食用。"
+          },
+          "habitat": {
+            "sah": "Хонуу, ходуһа, суол кытыла",
+            "ru": "Луга, степь, обочины",
+            "en": "Meadows, steppe, roadsides",
+            "mn": "Нуга, хээр, замын хажуу",
+            "zh": "草甸、草原、路旁"
+          },
+          "bloomingSeason": "may-july",
+          "categories": [
+            "medicinal",
+            "edible"
+          ],
+          "color": "#F2C200"
+        },
+        {
+          "id": "mn-wormwood",
+          "slug": "mn-wormwood",
+          "imageId": "mongolia-15",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Эрбэһин (полынь)",
+            "ru": "Полынь",
+            "en": "Wormwood",
+            "latin": "Artemisia",
+            "mn": "Шарилж",
+            "zh": "蒿"
+          },
+          "description": {
+            "sah": "Аһыы сыттаах, көмүс-күөх сэбирдэхтээх от. Монголия хонуутун симэлитэр — тыаһа-ууһа сүрдээх.",
+            "ru": "Ароматное растение с серебристо-зелёными рассечёнными листьями и горьким запахом. Один из символов монгольской степи.",
+            "en": "An aromatic herb with silvery, dissected leaves and a bitter scent. One of the signatures of the Mongolian steppe.",
+            "mn": "Анхилуун, мөнгөлөг ногоон салаалсан навчтай, гашуун үнэртэй өвс. Монгол хээрийн бэлгэ тэмдгүүдийн нэг.",
+            "zh": "芳香草本，叶银灰色而深裂，气味苦。是蒙古草原的标志植物之一。"
+          },
+          "medicinalUses": {
+            "sah": "Аһыы настойун сут-мэлдьини аһарарга, паразиты үүрэргэ туттар этилэр. Дозаны кэһии дьааттаах.",
+            "ru": "Горький настой применяли для аппетита и от паразитов. Передозировка опасна — растение сильнодействующее.",
+            "en": "The bitter infusion was used for appetite and against parasites. Overdose is dangerous — a potent plant.",
+            "mn": "Гашуун хандыг хоолны дуршил, шимэгчийн эсрэг хэрэглэж байсан. Хэтрүүлбэл аюултай — хүчтэй үйлчилгээтэй.",
+            "zh": "苦味浸剂曾用于开胃和驱虫。过量有危险——药性强烈。"
+          },
+          "habitat": {
+            "sah": "Ходуһа, кураанах сир, суол кытыла",
+            "ru": "Степь, сухие склоны, обочины",
+            "en": "Steppe, dry slopes, roadsides",
+            "mn": "Хээр, хуурай энгэр, замын хажуу",
+            "zh": "草原、干坡、路旁"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#9CA986"
+        },
+        {
+          "id": "mn-phlomis",
+          "slug": "mn-phlomis",
+          "imageId": "mongolia-16",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Күлүмэх эргиэлэс сибэкки",
+            "ru": "Зопник клубненосный",
+            "en": "Tuberous Jerusalem Sage",
+            "latin": "Phlomoides tuberosa",
+            "mn": "Булцуут ширүүн өвс",
+            "zh": "块根糙苏"
+          },
+          "description": {
+            "sah": "Үрдүк умнаһыгар күлүмэх-кыһыл сибэккитэ эргиэнэн тэлгэнэр степной от. Монголия хонуутугар киэҥник көстөр.",
+            "ru": "Степное растение с пурпурно-розовыми цветками, собранными мутовками по высокому стеблю. Обычно в монгольской степи.",
+            "en": "A steppe plant with pink-purple flowers set in whorls up a tall stem. Common across the Mongolian steppe.",
+            "mn": "Өндөр ишээ дагуу цагирган цэцэгтэй, ягаан-нил цэцэгтэй хээрийн ургамал. Монгол хээрт түгээмэл.",
+            "zh": "草原植物，粉紫色花沿高茎轮生。常见于蒙古草原。"
+          },
+          "medicinalUses": {
+            "sah": "Силиин клубенэ аһылыкка сыаналанар; настойун ис ыарыытыгар туттар этилэр.",
+            "ru": "Клубеньки на корнях съедобны; настой применяли при желудочных расстройствах и как укрепляющее.",
+            "en": "The small root tubers are edible; an infusion was used for stomach ailments and as a tonic.",
+            "mn": "Үндэсний жижиг булцуу идэшний; хандыг ходоодны өвчинд болон тонус болгож хэрэглэж байжээ.",
+            "zh": "根部小块茎可食；其浸剂曾用于胃病和作滋补品。"
+          },
+          "habitat": {
+            "sah": "Ходуһа, кураанах хонуу",
+            "ru": "Степь, сухие луга",
+            "en": "Steppe, dry meadows",
+            "mn": "Хээр, хуурай нуга",
+            "zh": "草原、干草甸"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal",
+            "edible"
+          ],
+          "color": "#C97AAE"
+        },
+        {
+          "id": "mn-astragalus",
+          "slug": "mn-astragalus",
+          "imageId": "mongolia-17",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Астрагал",
+            "ru": "Астрагал",
+            "en": "Milkvetch",
+            "latin": "Astragalus",
+            "mn": "Хунчир",
+            "zh": "黄芪"
+          },
+          "description": {
+            "sah": "Күлүмэх сибэккилээх бобовай от. Монголия хонуутугар бу ууһугар сүүһүнэн көрүҥ баар.",
+            "ru": "Бобовое растение с фиолетовыми соцветиями-кистями. В монгольской степи насчитываются сотни видов этого рода.",
+            "en": "A legume with purple flower-clusters. Hundreds of species of this genus grow across the Mongolian steppe.",
+            "mn": "Ягаан баглаа цэцэгтэй буурцагт өвс. Монгол хээрт энэ төрлийн олон зуун зүйл ургадаг.",
+            "zh": "豆科草本，花簇紫色。此属在蒙古草原有数百种。"
+          },
+          "medicinalUses": {
+            "sah": "Сорох көрүҥэ восточнай эмгэ сүрэххэ, иммунитеккэ туһаныллар. Сорох көрүҥэ дьааттаах — сэрэнэн.",
+            "ru": "Некоторые виды в восточной медицине применяют как тонизирующее для сердца и иммунитета. Ряд видов ядовит — будьте осторожны.",
+            "en": "Some species are used in Eastern medicine as a heart and immune tonic. Several species are toxic — take care.",
+            "mn": "Зарим зүйлийг дорнын анагаахад зүрх, дархлааны тонус болгож хэрэглэдэг. Хэд хэдэн зүйл нь хортой — болгоомжтой.",
+            "zh": "部分种在东方医学中用作强心、增强免疫的滋补品。有些种有毒——须谨慎。"
+          },
+          "habitat": {
+            "sah": "Ходуһа, кураанах хонуу",
+            "ru": "Степь, сухие луга",
+            "en": "Steppe, dry meadows",
+            "mn": "Хээр, хуурай нуга",
+            "zh": "草原、干草甸"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#7B5EA7"
+        },
+        {
+          "id": "mn-cinquefoil",
+          "slug": "mn-cinquefoil",
+          "imageId": "mongolia-18",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Биэс сэбирдэх (лапчатка)",
+            "ru": "Лапчатка",
+            "en": "Cinquefoil",
+            "latin": "Potentilla",
+            "mn": "Гичгэнэ",
+            "zh": "委陵菜"
+          },
+          "description": {
+            "sah": "Саһархай биэс лэппиэстээх сибэккилээх от. Монголия хонуутун саһархайынан симиир.",
+            "ru": "Растение с ярко-жёлтыми пятилепестковыми цветками. Массово окрашивает монгольские луга в жёлтый.",
+            "en": "A plant with bright yellow five-petalled flowers. Colours whole stretches of Mongolian grassland yellow.",
+            "mn": "Тав дэлбээт тод шар цэцэгтэй өвс. Монгол хээрийн нугыг шараар будна.",
+            "zh": "草本植物，花鲜黄色、五瓣。将大片蒙古草地染成黄色。"
+          },
+          "medicinalUses": {
+            "sah": "Настойун иһиини эмтииргэ, тыл-уос сытыырҕааһыныгар туттар этилэр.",
+            "ru": "Настой применяли при воспалениях и расстройстве желудка, для полоскания горла.",
+            "en": "An infusion was used for inflammation and upset stomach, and as a gargle.",
+            "mn": "Хандыг үрэвсэл, ходоод муудахад болон хоолойгоо зайлахад хэрэглэж байсан.",
+            "zh": "其浸剂曾用于炎症、肠胃不适并作漱口之用。"
+          },
+          "habitat": {
+            "sah": "Хонуу, ходуһа, суол кытыла",
+            "ru": "Луга, степь, обочины",
+            "en": "Meadows, steppe, roadsides",
+            "mn": "Нуга, хээр, замын хажуу",
+            "zh": "草甸、草原、路旁"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#F5C518"
+        },
+        {
+          "id": "mn-plantain",
+          "slug": "mn-plantain",
+          "imageId": "mongolia-19",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Ыт тыла (подорожник)",
+            "ru": "Подорожник большой",
+            "en": "Broadleaf Plantain",
+            "latin": "Plantago major",
+            "mn": "Тансаг өвс (замын)",
+            "zh": "大车前"
+          },
+          "description": {
+            "sah": "Кэтит сэбирдэхтээх, синньигэс умнастаах от. Суол кытыытыгар, аайы сиргэ үүнэр.",
+            "ru": "Растение с широкими листьями в розетке и узкими колосками. Растёт у дорог и на вытоптанных местах.",
+            "en": "A plant with broad rosette leaves and slender flower-spikes. Grows along paths and on trodden ground.",
+            "mn": "Өргөн навчаа сарнай хэлбэрээр дэлгэсэн, нарийн түрүүтэй өвс. Зам, гишгэгдсэн газарт ургана.",
+            "zh": "叶宽阔呈莲座状、花穗细长的植物。生于小径和踩踏过的地面。"
+          },
+          "medicinalUses": {
+            "sah": "Сэбирдэҕин баас, кэһии үрдүгэр ууруллар — эмтиир, хаан тохтотор аналлаах.",
+            "ru": "Свежий лист прикладывают к ранам и порезам — заживляющее и кровоостанавливающее средство.",
+            "en": "A fresh leaf is applied to wounds and cuts — a wound-healing, blood-staunching remedy.",
+            "mn": "Шинэ навчийг шарх, зүслэг дээр тавьдаг — эдгээх, цус тогтоох эм.",
+            "zh": "新鲜叶片敷于伤口和割伤——有愈合伤口、止血之效。"
+          },
+          "habitat": {
+            "sah": "Суол кытыла, аайы сир, ааҕар сир",
+            "ru": "Обочины, тропы, вытоптанные места",
+            "en": "Roadsides, paths, trodden ground",
+            "mn": "Замын хажуу, жимийн зам, гишгэгдсэн газар",
+            "zh": "路旁、小径、踩踏地"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal",
+            "edible"
+          ],
+          "color": "#7FA05A"
+        },
+        {
+          "id": "mn-ryegrass",
+          "slug": "mn-ryegrass",
+          "imageId": "mongolia-20",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Күөх-көмүс от (вострец)",
+            "ru": "Востре́ц китайский",
+            "en": "Chinese Ryegrass",
+            "latin": "Leymus chinensis",
+            "mn": "Хиаг",
+            "zh": "羊草"
+          },
+          "description": {
+            "sah": "Күөх-көмүс өҥнөөх, бөҕө силистээх степной от. Монголия хонуутун сүрүн аһылыга — сүөһүгэ туһалаах.",
+            "ru": "Дерновинный злак сизо-зелёного оттенка. Основа монгольских пастбищ — ценный корм для скота.",
+            "en": "A blue-green sod-forming grass. A backbone of Mongolian pasture and a valued forage for livestock.",
+            "mn": "Хөх-ногоон өнгөтэй, бат үндэстэй хээрийн үетэн. Монгол бэлчээрийн гол тулгуур — малын үнэт тэжээл.",
+            "zh": "青绿色、成丛的禾草。是蒙古牧场的支柱，牲畜的优质牧草。"
+          },
+          "medicinalUses": {
+            "sah": "Эмкэ туттуллубат — сүөһү аһылыга. Хонууну хатааһынтан харыстыыр.",
+            "ru": "В медицине не применяется — кормовое растение; закрепляет почву степи.",
+            "en": "Not used medicinally — a forage grass; it also binds and protects steppe soil.",
+            "mn": "Эмийн хэрэглээгүй — тэжээлийн өвс; хээрийн хөрсийг бэхжүүлж хамгаалдаг.",
+            "zh": "不作药用——牧草；也能固结和保护草原土壤。"
+          },
+          "habitat": {
+            "sah": "Ходуһа, хонуу, мэччирэҥ",
+            "ru": "Степь, луга, пастбища",
+            "en": "Steppe, meadows, pasture",
+            "mn": "Хээр, нуга, бэлчээр",
+            "zh": "草原、草甸、牧场"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "edible"
+          ],
+          "color": "#9DB08A"
+        },
+        {
+          "id": "mn-dragonhead",
+          "slug": "mn-dragonhead",
+          "imageId": "mongolia-21",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Дракон бас (змееголовник)",
+            "ru": "Змееголовник",
+            "en": "Dragonhead",
+            "latin": "Dracocephalum",
+            "mn": "Луугийн толгой цэцэг",
+            "zh": "青兰"
+          },
+          "description": {
+            "sah": "Күлүмэх-күөх сибэккилээх, минньигэс сыттаах степной от. Монголия хонуутугар киэҥник тарҕанар.",
+            "ru": "Ароматное степное растение с сине-фиолетовыми цветками. Широко распространено в монгольской степи.",
+            "en": "An aromatic steppe herb with blue-violet flowers. Widespread across the Mongolian steppe.",
+            "mn": "Хөх-нил цэцэгтэй, анхилуун үнэртэй хээрийн өвс. Монгол хээрт өргөн тархсан.",
+            "zh": "芳香的草原草本，花蓝紫色。广布于蒙古草原。"
+          },
+          "medicinalUses": {
+            "sah": "Настойун сүрэххэ, нерваҕа, тымныыга туһаныллар; чэйгэ минньигэс сыттаах эбии.",
+            "ru": "Настой применяли как успокаивающее, при простуде и головной боли; душистая добавка к чаю.",
+            "en": "An infusion was used as a sedative and for colds and headache; a fragrant addition to tea.",
+            "mn": "Хандыг тайвшруулах, ханиад, толгой өвдөхөд хэрэглэж байсан; цайнд анхилуун нэмэлт.",
+            "zh": "其浸剂曾用作镇静剂并治感冒、头痛；亦为茶中芳香之添加。"
+          },
+          "habitat": {
+            "sah": "Ходуһа, кураанах хонуу, тас өттө",
+            "ru": "Степь, сухие луга, склоны",
+            "en": "Steppe, dry meadows, slopes",
+            "mn": "Хээр, хуурай нуга, энгэр",
+            "zh": "草原、干草甸、山坡"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#5E6FC0"
+        },
+        {
+          "id": "mn-guelder-rose",
+          "slug": "mn-guelder-rose",
+          "imageId": "mongolia-22",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Отон мас (калина)",
+            "ru": "Калина обыкновенная",
+            "en": "Guelder Rose",
+            "latin": "Viburnum opulus",
+            "mn": "Балиус (тэхийн шээг)",
+            "zh": "欧洲荚蒾"
+          },
+          "description": {
+            "sah": "Үрүҥ сибэккилээх, күһүн кыһыл отоннолор күөх мас. Уу кытыытыгар, ойуур кытыытыгар үүнэр.",
+            "ru": "Кустарник с белыми соцветиями и красными ягодами осенью. Растёт у воды и по опушкам.",
+            "en": "A shrub with white flower-clusters and red berries in autumn. Grows by water and along woodland edges.",
+            "mn": "Цагаан баглаа цэцэгтэй, намартаа улаан жимстэй бут. Усны хөвөө, ойн захад ургана.",
+            "zh": "灌木，花簇白色，秋季结红色浆果。生于水边和林缘。"
+          },
+          "medicinalUses": {
+            "sah": "Отоно хаан баттааһынын намтатарга, тымныыга туһаныллар; хатырыга хаан тохтотор.",
+            "ru": "Ягоды применяли при повышенном давлении и простуде; кора — кровоостанавливающее средство.",
+            "en": "The berries were used for high blood pressure and colds; the bark as a blood-staunching remedy.",
+            "mn": "Жимсийг цусны даралт ихсэх, ханиадад хэрэглэж байсан; холтос нь цус тогтоох эм.",
+            "zh": "果实曾用于高血压和感冒；树皮作止血之用。"
+          },
+          "habitat": {
+            "sah": "Уу кытыла, ойуур кытыла, парк",
+            "ru": "Берега, опушки, парки",
+            "en": "Watersides, woodland edges, parks",
+            "mn": "Усны хөвөө, ойн зах, цэцэрлэг",
+            "zh": "水岸、林缘、公园"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "medicinal",
+            "edible"
+          ],
+          "color": "#E8E4DA"
+        },
+        {
+          "id": "mn-hawksbeard",
+          "slug": "mn-hawksbeard",
+          "imageId": "mongolia-23",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Саһархай от (скерда)",
+            "ru": "Скерда",
+            "en": "Hawksbeard",
+            "latin": "Crepis",
+            "mn": "Шар багваахан (скерда)",
+            "zh": "还阳参"
+          },
+          "description": {
+            "sah": "Саһархай, одуванчикка майгынныыр сибэккилээх от. Кураанах хонууга, суол кытыытыгар үүнэр.",
+            "ru": "Растение с жёлтыми, похожими на одуванчик соцветиями. Растёт на сухих лугах и обочинах.",
+            "en": "A plant with yellow, dandelion-like flower-heads. Grows on dry meadows and roadsides.",
+            "mn": "Багваахай мэт шар цэцэгтэй өвс. Хуурай нуга, замын хажууд ургана.",
+            "zh": "草本植物，头状花黄色、似蒲公英。生于干草甸和路旁。"
+          },
+          "medicinalUses": {
+            "sah": "Эдэр сэбирдэҕэ сиэнэр; норуот эмигэр сэдэхтик туттуллар.",
+            "ru": "Молодые листья съедобны; в народной медицине применяется редко.",
+            "en": "Young leaves are edible; little used in folk medicine.",
+            "mn": "Залуу навч нь идэшний; ардын анагаахад ховор хэрэглэдэг.",
+            "zh": "嫩叶可食；民间医学中少用。"
+          },
+          "habitat": {
+            "sah": "Кураанах хонуу, суол кытыла",
+            "ru": "Сухие луга, обочины",
+            "en": "Dry meadows, roadsides",
+            "mn": "Хуурай нуга, замын хажуу",
+            "zh": "干草甸、路旁"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "edible"
+          ],
+          "color": "#F3C218"
+        },
+        {
+          "id": "mn-cosmos",
+          "slug": "mn-cosmos",
+          "imageId": "mongolia-24",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Оранжевай космея",
+            "ru": "Космея серно-жёлтая",
+            "en": "Sulphur Cosmos",
+            "latin": "Cosmos sulphureus",
+            "mn": "Улбар шар космос",
+            "zh": "硫华菊"
+          },
+          "description": {
+            "sah": "Оранжевай-саһархай сибэккилээх, синньигэс сэбирдэхтээх киэргэл үүнээйи. Куорат клумбаларыгар олордуллар.",
+            "ru": "Декоративное растение с оранжево-жёлтыми цветками и ажурными листьями. Высаживается на городских клумбах.",
+            "en": "An ornamental with orange-yellow flowers and finely cut leaves. Planted in city flowerbeds.",
+            "mn": "Улбар шар цэцэгтэй, нарийн зүсэгдсэн навчтай чимэглэлийн ургамал. Хотын цэцгийн мандалд тарьдаг.",
+            "zh": "观赏植物，花橙黄色，叶细裂。栽种于城市花坛。"
+          },
+          "medicinalUses": {
+            "sah": "Эмкэ туттуллубат — киэргэл эрэ туһугар олордуллар.",
+            "ru": "В медицине не применяется — только декоративное растение.",
+            "en": "Not used medicinally — grown as an ornamental.",
+            "mn": "Эмийн хэрэглээгүй — чимэглэлээр ургуулдаг.",
+            "zh": "不作药用——作观赏栽培。"
+          },
+          "habitat": {
+            "sah": "Куорат клумбата, парк",
+            "ru": "Городские клумбы, парки",
+            "en": "City flowerbeds, parks",
+            "mn": "Хотын цэцгийн мандал, цэцэрлэг",
+            "zh": "城市花坛、公园"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "ornamental"
+          ],
+          "color": "#F07B1D"
+        },
+        {
+          "id": "mn-fireweed",
+          "slug": "mn-fireweed",
+          "imageId": "mongolia-25",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Уот от",
+            "ru": "Иван-чай узколистный",
+            "en": "Fireweed",
+            "latin": "Chamerion angustifolium",
+            "mn": "Галт цэцэг",
+            "zh": "柳兰"
+          },
+          "description": {
+            "sah": "Үрдүк, кытархай-пурпурнай сибэккилээх боруона үүнээйи. Сиэбит сиргэ, суол кытыытыгар уонна өрүс кытылыгар үүнэр.",
+            "ru": "Высокий многолетник с кистью розово-пурпурных цветков, раскрывающихся снизу вверх. Растёт на вырубках, гарях, обочинах и берегах рек.",
+            "en": "A tall perennial with a spike of rose-magenta flowers that open from the bottom up. Grows on clearings, burned ground, roadsides, and riverbanks.",
+            "mn": "Өндөр, ягаан-нил ягаан цэцгийн түрүүтэй олон наст ургамал; цэцэг доороосоо дээш нээгддэг. Огтолсон газар, түймэрт өртсөн газар, замын хажуу, голын эрэгт ургана.",
+            "zh": "多年生高草，穗状花序玫瑰紫色，自下而上开放。生于采伐迹地、火烧地、路旁和河岸。"
+          },
+          "medicinalUses": {
+            "sah": "Сэбирдэҕиттэн ферментациялаах чэй («иван-чай») оҥороллор; норуот эмчитигэр иҥэн ыарыыны намыратарга туттуллара.",
+            "ru": "Из ферментированных листьев готовят травяной чай («иван-чай»); в народной медицине настой применяли как противовоспалительное и успокаивающее средство.",
+            "en": "The fermented leaves make a herbal tea (\"Ivan-chai\"); folk medicine used the infusion as an anti-inflammatory and calmative.",
+            "mn": "Исгэсэн навчнаас ургамлын цай («иван цай») хийдэг; ардын анагаахад үрэвслийн эсрэг, тайвшруулах хандаар хэрэглэж байжээ.",
+            "zh": "将发酵后的叶片制成草本茶（\"伊万茶\"）；民间用其浸剂消炎、安神。"
+          },
+          "habitat": {
+            "sah": "Сиэбит сир, ойуур арыыта, суол кытыыта, өрүс кытыла",
+            "ru": "Вырубки, гари, обочины дорог, берега рек",
+            "en": "Clearings, burned ground, roadsides, riverbanks",
+            "mn": "Огтолсон газар, түймрийн ул мөр, замын хажуу, голын эрэг",
+            "zh": "采伐迹地、火烧地、路旁、河岸"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "medicinal",
+            "edible"
+          ],
+          "color": "#C2458B"
+        },
+        {
+          "id": "mn-thistle",
+          "slug": "mn-thistle",
+          "imageId": "mongolia-26",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Мутугур от",
+            "ru": "Бодяк полевой",
+            "en": "Creeping Thistle",
+            "latin": "Cirsium arvense",
+            "mn": "Азгана",
+            "zh": "刺儿菜"
+          },
+          "description": {
+            "sah": "Мутуктаах, дьабдьаҥ-күлүмүрдэс тоҕойдоох боруона үүнээйи. Бааһынаҕа, кураанах сиргэ уонна суол кытыытыгар кэҥник тарҕанар.",
+            "ru": "Колючий многолетник с округлыми лилово-пурпурными корзинками. Широко разрастается на полях, пустырях и обочинах.",
+            "en": "A spiny perennial with rounded lilac-purple flowerheads. Spreads widely on fields, waste ground, and roadsides.",
+            "mn": "Өргөстэй олон наст ургамал, бөөрөнхий нил ягаан баг цэцэгтэй. Тариалангийн талбай, эзгүй газар, замын хажуугаар өргөн тархдаг.",
+            "zh": "多年生带刺植物，头状花序圆形、淡紫色。广泛蔓生于农田、荒地和路旁。"
+          },
+          "medicinalUses": {
+            "sah": "Норуот эмчитигэр баас, хааны тохтотор туһунан туттуллара; сүрүннээн от буруйдаах үүнээйинэн ааҕыллар.",
+            "ru": "В народной медицине применяли при ранах и как кровоостанавливающее; в основном считается сорным растением.",
+            "en": "Folk medicine used it for wounds and to staunch bleeding; it is chiefly regarded as a weed.",
+            "mn": "Ардын анагаахад шарх, цус тогтооход хэрэглэж байсан; голдуу хог ургамалд тооцогддог.",
+            "zh": "民间用于外伤和止血；一般视为杂草。"
+          },
+          "habitat": {
+            "sah": "Бааһына, кураанах сир, суол кытыыта",
+            "ru": "Поля, пустыри, обочины дорог",
+            "en": "Fields, waste ground, roadsides",
+            "mn": "Тариалангийн талбай, эзгүй газар, замын хажуу",
+            "zh": "农田、荒地、路旁"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#9B6FB0"
+        },
+        {
+          "id": "mn-spurge",
+          "slug": "mn-spurge",
+          "imageId": "mongolia-27",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Үүт от",
+            "ru": "Молочай острый",
+            "en": "Leafy Spurge",
+            "latin": "Euphorbia esula",
+            "mn": "Сүүт өвс",
+            "zh": "乳浆大戟"
+          },
+          "description": {
+            "sah": "Көнө умнаһыннаах, саһархай-күөх тоҕойдоох үүнээйи. Быстарбытыгар аҕ үүт курдук сүмэ тахсар. Кураанах ходуһаҕа уонна суол кытыытыгар үүнэр.",
+            "ru": "Прямостоячий многолетник с жёлто-зелёными соцветиями; на изломе выделяет едкий млечный сок. Растёт на сухих лугах и обочинах.",
+            "en": "An erect perennial with yellow-green flower clusters that bleeds an acrid milky sap when broken. Grows on dry meadows and roadsides.",
+            "mn": "Босоо иштэй, шар-ногоон баг цэцэгтэй олон наст ургамал; хугарахад цагаан сүү мэт шүүс гардаг. Хуурай нуга, замын хажууд ургана.",
+            "zh": "直立多年生植物，花序黄绿色；折断时流出白色乳汁。生于干草地和路旁。"
+          },
+          "medicinalUses": {
+            "sah": "Сүмэтэ уматар — таһырдьа сэрэхтээхтик эрэ туттуллара. Сэрэх: сүмэтэ дьаттаах, иһигэр туттуллуо суохтаах.",
+            "ru": "Млечный сок жгучий — в народной медицине использовали только наружно и с осторожностью. Внимание: сок ядовит, внутрь не применять.",
+            "en": "The milky sap is caustic — folk use was external and cautious only. Caution: the sap is toxic and must not be taken internally.",
+            "mn": "Шүүс нь идэмхий — ардын анагаахад зөвхөн гадуур, болгоомжтой хэрэглэдэг байв. Анхаар: шүүс хортой, дотор хэрэглэж болохгүй.",
+            "zh": "乳汁有腐蚀性——民间仅外用且需谨慎。注意：汁液有毒，不可内服。"
+          },
+          "habitat": {
+            "sah": "Кураанах ходуһа, суол кытыыта, кураанах сир",
+            "ru": "Сухие луга, обочины, пустоши",
+            "en": "Dry meadows, roadsides, waste ground",
+            "mn": "Хуурай нуга, замын хажуу, эзгүй газар",
+            "zh": "干草地、路旁、荒地"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "poisonous"
+          ],
+          "color": "#A8BE2E"
+        },
+        {
+          "id": "mn-wild-onion",
+          "slug": "mn-wild-onion",
+          "imageId": "mongolia-28",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Ыраас луук",
+            "ru": "Лук стареющий",
+            "en": "Wild Onion",
+            "latin": "Allium senescens",
+            "mn": "Зэрлэг сонгино",
+            "zh": "山韭"
+          },
+          "description": {
+            "sah": "Оттуҥу сэбирдэхтээх, сырдык-кытархай сулус курдук тоҕойдоох луук. Кураанах ходуһаҕа уонна таастаах хайаларга үүнэр.",
+            "ru": "Луковичное растение с травянистыми листьями и шаровидным зонтиком светло-розовых звёздчатых цветков. Растёт в сухой степи и на каменистых склонах.",
+            "en": "A grassy-leaved onion with a rounded umbel of pale-pink star flowers. Grows on dry steppe and rocky slopes.",
+            "mn": "Өвслөг навчтай, цайвар ягаан од хэлбэрийн шүхэр цэцэгтэй сонгино. Хуурай хээр, чулуурхаг энгэрт ургана.",
+            "zh": "叶似草，伞形花序具淡粉色星状花的葱属植物。生于干草原和多石山坡。"
+          },
+          "medicinalUses": {
+            "sah": "Луга — сиэнэр; сэбирдэҕэ уонна лугата витаминнаах, норуокка аһылык уонна эти-хааны бөҕөргөтөр эмп быһыытынан туттуллар.",
+            "ru": "Съедобный дикий лук; листья и луковицы богаты витаминами, традиционно используются в пищу и как общеукрепляющее.",
+            "en": "An edible wild onion; the leaves and bulbs are vitamin-rich and traditionally eaten and taken as a tonic.",
+            "mn": "Идэж болох зэрлэг сонгино; навч, булцуу нь витаминаар баялаг, уламжлалт хоол хүнс болон тамир тэнхээ сэргээхэд хэрэглэдэг.",
+            "zh": "可食的野葱；叶与鳞茎富含维生素，传统上食用并作强壮之用。"
+          },
+          "habitat": {
+            "sah": "Кураанах ходуһа, таастаах хайа",
+            "ru": "Сухая степь, каменистые склоны",
+            "en": "Dry steppe, rocky slopes",
+            "mn": "Хуурай хээр, чулуурхаг энгэр",
+            "zh": "干草原、多石山坡"
+          },
+          "bloomingSeason": "july-august",
+          "categories": [
+            "edible",
+            "medicinal"
+          ],
+          "color": "#D49AC0"
+        },
+        {
+          "id": "mn-catchfly",
+          "slug": "mn-catchfly",
+          "imageId": "mongolia-29",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Сымнаҕас от",
+            "ru": "Смолёвка ползучая",
+            "en": "Creeping Catchfly",
+            "latin": "Silene repens",
+            "mn": "Мөлхөгч цацраа",
+            "zh": "蔓茎蝇子草"
+          },
+          "description": {
+            "sah": "Нарын умнаһыннаах үүнээйи, тардыылаах хатырыктаах, биэс өттүлээх сырдык-кытархай сибэккилээх. Ходуһаҕа уонна кумахтаах сиргэ үүнэр.",
+            "ru": "Изящное растение с полосатой вздутой чашечкой и пятью бледно-розовыми лепестками с выемкой. Растёт в степи, на песчаных склонах и берегах.",
+            "en": "A slender plant with a striped inflated calyx and five notched pale-pink petals. Grows on steppe, sandy slopes, and riverbanks.",
+            "mn": "Нарийхан ургамал, судалтай хөөмойтой, тавласан цайвар ягаан таван дэлбээтэй. Хээр, элсэрхэг энгэр, голын эрэгт ургана.",
+            "zh": "植株纤细，花萼带条纹而膨大，五枚淡粉色花瓣先端凹缺。生于草原、沙质山坡和河岸。"
+          },
+          "medicinalUses": {
+            "sah": "Silene аймах үүнээйилэрэ сапониннаахтар — сорохтор миинэлэрин сабын оннугар туттубуттара; эмтээх туттуута кыра.",
+            "ru": "Растения рода Silene содержат сапонины — отвар иногда применяли вместо мыла; лекарственное применение незначительно.",
+            "en": "Silene species contain saponins — a decoction was sometimes used in place of soap; medicinal use is slight.",
+            "mn": "Silene төрлийн ургамалд сапонин агуулагддаг — чанамалыг заримдаа савангийн оронд хэрэглэдэг байв; эмийн хэрэглээ бага.",
+            "zh": "蝇子草属植物含皂苷——其煎液有时用作肥皂替代；药用价值不大。"
+          },
+          "habitat": {
+            "sah": "Ходуһа, кумахтаах хайа, өрүс кытыла",
+            "ru": "Степь, песчаные склоны, берега рек",
+            "en": "Steppe, sandy slopes, riverbanks",
+            "mn": "Хээр, элсэрхэг энгэр, голын эрэг",
+            "zh": "草原、沙质山坡、河岸"
+          },
+          "bloomingSeason": "june-august",
+          "categories": [
+            "medicinal"
+          ],
+          "color": "#E3AEC4"
+        },
+        {
+          "id": "mn-sardaana",
+          "slug": "mn-sardaana",
+          "imageId": "mongolia-30",
+          "hasIllustration": true,
+          "names": {
+            "sah": "Сардаана",
+            "ru": "Лилия пенсильванская",
+            "en": "Siberian Lily",
+            "latin": "Lilium pensylvanicum",
+            "mn": "Сарана цэцэг",
+            "zh": "毛百合"
+          },
+          "description": {
+            "sah": "Чаҕылхай кыһыл-оранжевай, тоҥсуллубут лепестактаах лилия — саха дьонун бэлиэ сибэккитэ. Монголия ходуһаларыгар, хонууларыгар эмиэ көстөр.",
+            "ru": "Ярко-оранжево-красная лилия с отогнутыми лепестками — символ земли саха. Растёт также на лугах и в степи Монголии.",
+            "en": "A vivid orange-red lily with recurved petals — the emblem flower of the Sakha people. It also grows wild on the meadows and steppe of Mongolia.",
+            "mn": "Тод улаан-улбар шар, дэлбээ нь эргэн муруйсан сараана — саха түмний бэлгэ тэмдгийн цэцэг. Монголын нуга, хээрт мөн ургадаг.",
+            "zh": "橙红色、花瓣反卷的百合——萨哈人的象征之花。也生长在蒙古的草甸和草原上。"
+          },
+          "medicinalUses": {
+            "sah": "Луковицата сиэнэр, хатарыллан бурдук оҥоһуллара; норуокка эти-хааны бөҕөргөтөр эмп быһыытынан туттуллара.",
+            "ru": "Луковицы съедобны, их сушили и мололи в муку; в народе использовались как общеукрепляющее средство.",
+            "en": "The bulbs are edible — dried and ground into flour — and were used as a strengthening tonic.",
+            "mn": "Булцуу нь идэж болно, хатааж гурил болгодог байсан; ардад тамир тэнхээ сэргээх эмээр хэрэглэж байжээ.",
+            "zh": "鳞茎可食，晒干后磨成面粉；民间用作强壮补益之物。"
+          },
+          "habitat": {
+            "sah": "Ходуһа, хонуу, ойуур кытыыта",
+            "ru": "Луга, степь, опушки леса",
+            "en": "Meadows, steppe, forest edges",
+            "mn": "Нуга, хээр, ойн захын газар",
+            "zh": "草甸、草原、林缘"
+          },
+          "bloomingSeason": "june-july",
+          "categories": [
+            "edible",
+            "ornamental"
+          ],
+          "color": "#E8491D"
+        }
+      ]
+    }
+  ]
+}

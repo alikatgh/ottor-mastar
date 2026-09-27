@@ -9,8 +9,10 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.9"
-    MARKETING_VERSION: "1.0"
-    CURRENT_PROJECT_VERSION: "1"
+    # 1.1: Sardaana-lily brand icon + OTA catalog sync; first macOS (Catalyst)
+    # release. ASC build numbers are per-platform, so both upload as 1.1 (2).
+    MARKETING_VERSION: "1.1"
+    CURRENT_PROJECT_VERSION: "2"
     DEVELOPMENT_LANGUAGE: en
 targets:
   OttorMastar:
@@ -36,6 +38,7 @@ targets:
       - path: OttorMastar/Resources/locale-mn.json
         buildPhase: resources
       - path: OttorMastar/Resources/locale-zh.json
+      - path: OttorMastar/Resources/news.json
         buildPhase: resources
       # App icon asset catalog (single 1024² universal icon).
       - path: OttorMastar/Resources/Assets.xcassets
@@ -46,6 +49,10 @@ targets:
       path: OttorMastar/Info.plist
       properties:
         CFBundleDisplayName: Ottor Mastar
+        # Bind to the build settings above — xcodegen preserves stale literal
+        # values otherwise, and the shipped version silently stops matching.
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
@@ -55,9 +62,12 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
         ITSAppUsesNonExemptEncryption: false
+        # Mac App Store upload validation rejects archives without a category.
+        LSApplicationCategoryType: public.app-category.education
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.aulenor.ottormastar
+        DEVELOPMENT_TEAM: 9M2B2P4KSA
         # 6 = Mac (Catalyst "Optimize for Mac" idiom): 100% scale, crisp text,
         # native control metrics — instead of the blurry scaled-iPad rendering.
         TARGETED_DEVICE_FAMILY: "1,2,6"
@@ -67,4 +77,10 @@ targets:
         # macOS port: the same SwiftUI app runs as a native Mac app via
         # Mac Catalyst (build with -destination 'generic/platform=macOS,variant=Mac Catalyst').
         SUPPORTS_MACCATALYST: YES
-        DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER: YES
+        # SAME bundle id on the Mac — the Catalyst build must land on the
+        # existing ASC app record (6789648576) as a universal purchase; the
+        # derived "maccatalyst." prefix would demand a separate app record.
+        DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER: NO
+        # Mac App Store requires the App Sandbox — Catalyst builds only
+        # (iOS profiles reject the sandbox entitlement, so scope by sdk).
+        CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: OttorMastar/OttorMastar.entitlements

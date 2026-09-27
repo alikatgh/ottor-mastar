@@ -36,6 +36,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-marigold',
     slug: 'mn-marigold',
     imageId: 'mongolia-01',
+    gallery: ['mongolia-01-2', 'mongolia-01-3'],
     names: {
       sah: 'Бархаат сибэкки',
       ru: 'Бархатцы прямостоячие',
@@ -65,6 +66,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-cornflower',
     slug: 'mn-cornflower',
     imageId: 'mongolia-02',
+    gallery: ['mongolia-02-2'],
     names: {
       sah: 'Күөх туллук сибэкки',
       ru: 'Василёк синий',
@@ -94,6 +96,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-petunia',
     slug: 'mn-petunia',
     imageId: 'mongolia-03',
+    gallery: ['mongolia-03-2', 'mongolia-03-3'],
     names: {
       sah: 'Петуния сибэкки',
       ru: 'Петуния',
@@ -123,6 +126,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-pansy',
     slug: 'mn-pansy',
     imageId: 'mongolia-04',
+    gallery: ['mongolia-04-2', 'mongolia-04-3'],
     names: {
       sah: 'Анюта хараҕа',
       ru: 'Виола (Анютины глазки)',
@@ -152,6 +156,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-ornamental-kale',
     slug: 'mn-ornamental-kale',
     imageId: 'mongolia-05',
+    gallery: ['mongolia-05-2', 'mongolia-05-3'],
     names: {
       sah: 'Киэргэл хаппыста',
       ru: 'Декоративная капуста',
@@ -210,6 +215,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-bedstraw',
     slug: 'mn-bedstraw',
     imageId: 'mongolia-07',
+    gallery: ['mongolia-07-2'],
     names: {
       sah: 'Саһархай сарбынньах',
       ru: 'Подмаренник настоящий',
@@ -239,6 +245,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-alfalfa',
     slug: 'mn-alfalfa',
     imageId: 'mongolia-08',
+    gallery: ['mongolia-08-2'],
     names: {
       sah: 'Люцерна',
       ru: 'Люцерна посевная',
@@ -355,6 +362,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-blue-spruce',
     slug: 'mn-blue-spruce',
     imageId: 'mongolia-12',
+    gallery: ['mongolia-12-2'],
     names: {
       sah: 'Күөх-көмүс тыт (ель)',
       ru: 'Ель колючая (голубая)',
@@ -413,6 +421,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-dandelion',
     slug: 'mn-dandelion',
     imageId: 'mongolia-14',
+    gallery: ['mongolia-14-2'],
     names: {
       sah: 'Саһархай туллук (одуванчик)',
       ru: 'Одуванчик лекарственный',
@@ -471,6 +480,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-phlomis',
     slug: 'mn-phlomis',
     imageId: 'mongolia-16',
+    gallery: ['mongolia-16-2'],
     names: {
       sah: 'Күлүмэх эргиэлэс сибэкки',
       ru: 'Зопник клубненосный',
@@ -587,6 +597,7 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     id: 'mn-ryegrass',
     slug: 'mn-ryegrass',
     imageId: 'mongolia-20',
+    gallery: ['mongolia-20-2'],
     names: {
       sah: 'Күөх-көмүс от (вострец)',
       ru: 'Востре́ц китайский',
@@ -727,6 +738,133 @@ const RAW: Omit<Plant, 'imageBase'>[] = [
     bloomingSeason: 'july-august',
     categories: [CATEGORIES.ORNAMENTAL],
     color: '#F07B1D',
+  },
+
+  {
+    id: 'mn-fireweed',
+    slug: 'mn-fireweed',
+    imageId: 'mongolia-25',
+    gallery: ['mongolia-25-2', 'mongolia-25-3'],
+    names: { sah: 'Уот от', ru: 'Иван-чай узколистный', en: 'Fireweed', latin: 'Chamerion angustifolium' },
+    description: {
+      sah: 'Үрдүк, кытархай-пурпурнай сибэккилээх боруона үүнээйи. Сиэбит сиргэ, суол кытыытыгар уонна өрүс кытылыгар үүнэр.',
+      ru: 'Высокий многолетник с кистью розово-пурпурных цветков, раскрывающихся снизу вверх. Растёт на вырубках, гарях, обочинах и берегах рек.',
+      en: 'A tall perennial with a spike of rose-magenta flowers that open from the bottom up. Grows on clearings, burned ground, roadsides, and riverbanks.',
+    },
+    medicinalUses: {
+      sah: 'Сэбирдэҕиттэн ферментациялаах чэй («иван-чай») оҥороллор; норуот эмчитигэр иҥэн ыарыыны намыратарга туттуллара.',
+      ru: 'Из ферментированных листьев готовят травяной чай («иван-чай»); в народной медицине настой применяли как противовоспалительное и успокаивающее средство.',
+      en: 'The fermented leaves make a herbal tea ("Ivan-chai"); folk medicine used the infusion as an anti-inflammatory and calmative.',
+    },
+    habitat: { sah: 'Сиэбит сир, ойуур арыыта, суол кытыыта, өрүс кытыла', ru: 'Вырубки, гари, обочины дорог, берега рек', en: 'Clearings, burned ground, roadsides, riverbanks' },
+    bloomingSeason: 'july-august',
+    categories: [CATEGORIES.MEDICINAL, CATEGORIES.EDIBLE],
+    color: '#C2458B',
+  },
+  {
+    id: 'mn-thistle',
+    slug: 'mn-thistle',
+    imageId: 'mongolia-26',
+    gallery: ['mongolia-26-3', 'mongolia-26-4', 'mongolia-26-2'],
+    names: { sah: 'Мутугур от', ru: 'Бодяк полевой', en: 'Creeping Thistle', latin: 'Cirsium arvense' },
+    description: {
+      sah: 'Мутуктаах, дьабдьаҥ-күлүмүрдэс тоҕойдоох боруона үүнээйи. Бааһынаҕа, кураанах сиргэ уонна суол кытыытыгар кэҥник тарҕанар.',
+      ru: 'Колючий многолетник с округлыми лилово-пурпурными корзинками. Широко разрастается на полях, пустырях и обочинах.',
+      en: 'A spiny perennial with rounded lilac-purple flowerheads. Spreads widely on fields, waste ground, and roadsides.',
+    },
+    medicinalUses: {
+      sah: 'Норуот эмчитигэр баас, хааны тохтотор туһунан туттуллара; сүрүннээн от буруйдаах үүнээйинэн ааҕыллар.',
+      ru: 'В народной медицине применяли при ранах и как кровоостанавливающее; в основном считается сорным растением.',
+      en: 'Folk medicine used it for wounds and to staunch bleeding; it is chiefly regarded as a weed.',
+    },
+    habitat: { sah: 'Бааһына, кураанах сир, суол кытыыта', ru: 'Поля, пустыри, обочины дорог', en: 'Fields, waste ground, roadsides' },
+    bloomingSeason: 'july-august',
+    categories: [CATEGORIES.MEDICINAL],
+    color: '#9B6FB0',
+  },
+  {
+    id: 'mn-spurge',
+    slug: 'mn-spurge',
+    imageId: 'mongolia-27',
+    gallery: ['mongolia-27-2'],
+    names: { sah: 'Үүт от', ru: 'Молочай острый', en: 'Leafy Spurge', latin: 'Euphorbia esula' },
+    description: {
+      sah: 'Көнө умнаһыннаах, саһархай-күөх тоҕойдоох үүнээйи. Быстарбытыгар аҕ үүт курдук сүмэ тахсар. Кураанах ходуһаҕа уонна суол кытыытыгар үүнэр.',
+      ru: 'Прямостоячий многолетник с жёлто-зелёными соцветиями; на изломе выделяет едкий млечный сок. Растёт на сухих лугах и обочинах.',
+      en: 'An erect perennial with yellow-green flower clusters that bleeds an acrid milky sap when broken. Grows on dry meadows and roadsides.',
+    },
+    medicinalUses: {
+      sah: 'Сүмэтэ уматар — таһырдьа сэрэхтээхтик эрэ туттуллара. Сэрэх: сүмэтэ дьаттаах, иһигэр туттуллуо суохтаах.',
+      ru: 'Млечный сок жгучий — в народной медицине использовали только наружно и с осторожностью. Внимание: сок ядовит, внутрь не применять.',
+      en: 'The milky sap is caustic — folk use was external and cautious only. Caution: the sap is toxic and must not be taken internally.',
+    },
+    habitat: { sah: 'Кураанах ходуһа, суол кытыыта, кураанах сир', ru: 'Сухие луга, обочины, пустоши', en: 'Dry meadows, roadsides, waste ground' },
+    bloomingSeason: 'june-july',
+    categories: [CATEGORIES.POISONOUS],
+    color: '#A8BE2E',
+  },
+  {
+    id: 'mn-wild-onion',
+    slug: 'mn-wild-onion',
+    imageId: 'mongolia-28',
+    gallery: ['mongolia-28-2', 'mongolia-28-3'],
+    names: { sah: 'Ыраас луук', ru: 'Лук стареющий', en: 'Wild Onion', latin: 'Allium senescens' },
+    description: {
+      sah: 'Оттуҥу сэбирдэхтээх, сырдык-кытархай сулус курдук тоҕойдоох луук. Кураанах ходуһаҕа уонна таастаах хайаларга үүнэр.',
+      ru: 'Луковичное растение с травянистыми листьями и шаровидным зонтиком светло-розовых звёздчатых цветков. Растёт в сухой степи и на каменистых склонах.',
+      en: 'A grassy-leaved onion with a rounded umbel of pale-pink star flowers. Grows on dry steppe and rocky slopes.',
+    },
+    medicinalUses: {
+      sah: 'Луга — сиэнэр; сэбирдэҕэ уонна лугата витаминнаах, норуокка аһылык уонна эти-хааны бөҕөргөтөр эмп быһыытынан туттуллар.',
+      ru: 'Съедобный дикий лук; листья и луковицы богаты витаминами, традиционно используются в пищу и как общеукрепляющее.',
+      en: 'An edible wild onion; the leaves and bulbs are vitamin-rich and traditionally eaten and taken as a tonic.',
+    },
+    habitat: { sah: 'Кураанах ходуһа, таастаах хайа', ru: 'Сухая степь, каменистые склоны', en: 'Dry steppe, rocky slopes' },
+    bloomingSeason: 'july-august',
+    categories: [CATEGORIES.EDIBLE, CATEGORIES.MEDICINAL],
+    color: '#D49AC0',
+  },
+  {
+    id: 'mn-catchfly',
+    slug: 'mn-catchfly',
+    imageId: 'mongolia-29',
+    names: { sah: 'Сымнаҕас от', ru: 'Смолёвка ползучая', en: 'Creeping Catchfly', latin: 'Silene repens' },
+    description: {
+      sah: 'Нарын умнаһыннаах үүнээйи, тардыылаах хатырыктаах, биэс өттүлээх сырдык-кытархай сибэккилээх. Ходуһаҕа уонна кумахтаах сиргэ үүнэр.',
+      ru: 'Изящное растение с полосатой вздутой чашечкой и пятью бледно-розовыми лепестками с выемкой. Растёт в степи, на песчаных склонах и берегах.',
+      en: 'A slender plant with a striped inflated calyx and five notched pale-pink petals. Grows on steppe, sandy slopes, and riverbanks.',
+    },
+    medicinalUses: {
+      sah: 'Silene аймах үүнээйилэрэ сапониннаахтар — сорохтор миинэлэрин сабын оннугар туттубуттара; эмтээх туттуута кыра.',
+      ru: 'Растения рода Silene содержат сапонины — отвар иногда применяли вместо мыла; лекарственное применение незначительно.',
+      en: 'Silene species contain saponins — a decoction was sometimes used in place of soap; medicinal use is slight.',
+    },
+    habitat: { sah: 'Ходуһа, кумахтаах хайа, өрүс кытыла', ru: 'Степь, песчаные склоны, берега рек', en: 'Steppe, sandy slopes, riverbanks' },
+    bloomingSeason: 'june-august',
+    categories: [CATEGORIES.MEDICINAL],
+    color: '#E3AEC4',
+  },
+
+  {
+    id: 'mn-sardaana',
+    slug: 'mn-sardaana',
+    imageId: 'mongolia-30',
+    gallery: ['mongolia-30-2'],
+    names: { sah: 'Сардаана', ru: 'Лилия пенсильванская', en: 'Siberian Lily', latin: 'Lilium pensylvanicum' },
+    description: {
+      sah: 'Чаҕылхай кыһыл-оранжевай, тоҥсуллубут лепестактаах лилия — саха дьонун бэлиэ сибэккитэ. Монголия ходуһаларыгар, хонууларыгар эмиэ көстөр.',
+      ru: 'Ярко-оранжево-красная лилия с отогнутыми лепестками — символ земли саха. Растёт также на лугах и в степи Монголии.',
+      en: 'A vivid orange-red lily with recurved petals — the emblem flower of the Sakha people. It also grows wild on the meadows and steppe of Mongolia.',
+    },
+    medicinalUses: {
+      sah: 'Луковицата сиэнэр, хатарыллан бурдук оҥоһуллара; норуокка эти-хааны бөҕөргөтөр эмп быһыытынан туттуллара.',
+      ru: 'Луковицы съедобны, их сушили и мололи в муку; в народе использовались как общеукрепляющее средство.',
+      en: 'The bulbs are edible — dried and ground into flour — and were used as a strengthening tonic.',
+    },
+    habitat: { sah: 'Ходуһа, хонуу, ойуур кытыыта', ru: 'Луга, степь, опушки леса', en: 'Meadows, steppe, forest edges' },
+    bloomingSeason: 'june-july',
+    categories: [CATEGORIES.EDIBLE, CATEGORIES.ORNAMENTAL],
+    color: '#E8491D',
   },
 ];
 
