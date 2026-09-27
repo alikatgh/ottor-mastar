@@ -47,6 +47,21 @@ export default function NewsPage() {
               <p className="text-[15px] leading-relaxed text-ink-muted whitespace-pre-line">
                 {loc(item.body, lang)}
               </p>
+              {item.links && (
+                <div className="mt-5 flex flex-col items-start gap-3">
+                  {item.links.filter((link) => link.href.startsWith('https://')).map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-forest underline underline-offset-4 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4"
+                    >
+                      {loc(link.label, lang)}
+                    </a>
+                  ))}
+                </div>
+              )}
             </article>
           ))}
         </div>
