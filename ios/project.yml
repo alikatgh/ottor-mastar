@@ -9,10 +9,9 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.9"
-    # 1.1: Sardaana-lily brand icon + OTA catalog sync; first macOS (Catalyst)
-    # release. ASC build numbers are per-platform, so both upload as 1.1 (2).
+    # 1.1 (3): current catalog, News, and native iOS 26 presentation.
     MARKETING_VERSION: "1.1"
-    CURRENT_PROJECT_VERSION: "2"
+    CURRENT_PROJECT_VERSION: "3"
     DEVELOPMENT_LANGUAGE: en
 targets:
   OttorMastar:
@@ -84,3 +83,23 @@ targets:
         # Mac App Store requires the App Sandbox — Catalyst builds only
         # (iOS profiles reject the sandbox entitlement, so scope by sdk).
         CODE_SIGN_ENTITLEMENTS[sdk=macosx*]: OttorMastar/OttorMastar.entitlements
+  OttorMastarStoreTests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [StoreTests]
+    dependencies:
+      - target: OttorMastar
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aulenor.ottormastar.storetests
+        GENERATE_INFOPLIST_FILE: YES
+        DEVELOPMENT_TEAM: 9M2B2P4KSA
+        TARGETED_DEVICE_FAMILY: "1,2"
+schemes:
+  OttorMastarStoreScreenshots:
+    build:
+      targets:
+        OttorMastar: all
+        OttorMastarStoreTests: [test]
+    test:
+      targets: [OttorMastarStoreTests]
