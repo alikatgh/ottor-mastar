@@ -44,3 +44,9 @@ ios/OttorMastar/Info.plist
 builds/
 # Xcode derived data from CLI builds (xcodebuild -derivedDataPath build)
 ios/build/
+
+# Secrets — never commit (templates are fine)
+.env
+.env.*
+!.env.example
+!.env.schema
